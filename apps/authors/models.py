@@ -2,49 +2,19 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
-class AcademicDegree(models.Model):
-    DEGREE_CHOICES = [
-        ('PHD_ECON', _('(PhD), Economics')),
-        ('PHD_PED', _('(PhD), Pedagogy')),
-        ('PHD_TECH', _('(PhD), Technical Sciences')),
-        ('DSC_ECON', _('(DSc), Economics')),
-        ('DSC_PED', _('(DSc), Pedagogy')),
-        ('DSC_TECH', _('(DSc), Technical Sciences')),
-    ]
+DEGREE_CHOICES = [
+    ('PHD_ECON', _('(PhD), Economics')),
+    ('PHD_PED', _('(PhD), Pedagogy')),
+    ('PHD_TECH', _('(PhD), Technical Sciences')),
+    ('DSC_ECON', _('(DSc), Economics')),
+    ('DSC_PED', _('(DSc), Pedagogy')),
+    ('DSC_TECH', _('(DSc), Technical Sciences')),
+]
 
-    name = models.CharField(
-        max_length=20,
-        choices=DEGREE_CHOICES,
-        verbose_name=_("Academic Degree")
-    )
-
-    class Meta:
-        verbose_name = _("Academic Degree")
-        verbose_name_plural = _("Academic Degrees")
-
-    def __str__(self):
-        return self.get_name_display()
-
-
-class AcademicTitle(models.Model):
-    TITLE_CHOICES = [
-        ('DOCENT', _('Docent')),
-        ('PROFESSOR', _('Professor')),
-    ]
-
-    name = models.CharField(
-        max_length=20,
-        choices=TITLE_CHOICES,
-        verbose_name=_("Academic Title")
-    )
-
-    class Meta:
-        verbose_name = _("Academic Title")
-        verbose_name_plural = _("Academic Titles")
-
-    def __str__(self):
-        return self.get_name_display()
-
+ACADEMIC_TITLE_CHOICES = [
+    ('DOCENT', _('Docent')),
+    ('PROFESSOR', _('Professor')),
+]
 
 class Author(models.Model):
     first_name = models.CharField(max_length=100, verbose_name=_("First Name"))
@@ -59,19 +29,15 @@ class Author(models.Model):
         verbose_name=_("Telegram/WhatsApp Contact"),
         help_text=_("Telegram username or WhatsApp number")
     )
-    academic_degree = models.ForeignKey(
-        AcademicDegree,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+    academic_degree = models.CharField(
+        max_length=20,
+        choices=DEGREE_CHOICES,
         verbose_name=_("Academic Degree")
     )
-    academic_title = models.ForeignKey(
-        AcademicTitle,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        verbose_name=_("Academic Title")
+    academic_title = models.CharField(
+        max_length = 20,
+        choices = ACADEMIC_TITLE_CHOICES,
+        verbose_name = _("Academic Title")
     )
     orcid = models.CharField(
         max_length=20,
