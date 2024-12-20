@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a654224-74cf-4045-bd97-974ce721288f" name="Changes" comment="Author, Category and Article admins">
+    <list default="true" id="8a654224-74cf-4045-bd97-974ce721288f" name="Changes" comment="add translation.py and compile messages">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/articles/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/articles/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/categories/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/categories/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apps/journals/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/journals/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,7 +108,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734698553248</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add translation.py and compile messages">
+      <option name="closed" value="true" />
+      <created>1734701224054</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1734701224054</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -117,6 +124,7 @@
     <MESSAGE value="Journal, Volume and Issue models" />
     <MESSAGE value="Author, Category and Article models" />
     <MESSAGE value="Author, Category and Article admins" />
-    <option name="LAST_COMMIT_MESSAGE" value="Author, Category and Article admins" />
+    <MESSAGE value="add translation.py and compile messages" />
+    <option name="LAST_COMMIT_MESSAGE" value="add translation.py and compile messages" />
   </component>
 </project>
