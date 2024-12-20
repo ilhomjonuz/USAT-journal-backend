@@ -6,8 +6,28 @@ from apps.journals.models import JournalIssue
 from apps.journals.serializers import JournalIssueSerializer
 
 
+class LatestJournalIssueListView(generics.ListAPIView):
+    queryset = JournalIssue.objects.filter(is_published=True).order_by('-publication_date')[:4]
+    serializer_class = JournalIssueSerializer
+
+    @swagger_auto_schema(
+        operation_description="Get the latest published journal issue",
+        manual_parameters=[
+            openapi.Parameter(
+                'Accept-Language',
+                openapi.IN_HEADER,
+                description="Language code (uz, ru, or en)",
+                type=openapi.TYPE_STRING,
+                enum=['uz', 'ru', 'en']
+            )
+        ]
+    )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
+
 class JournalIssueListView(generics.ListAPIView):
-    queryset = JournalIssue.objects.filter(is_published=True)
+    queryset = JournalIssue.objects.filter(is_published=True).order_by('-publication_date')
     serializer_class = JournalIssueSerializer
 
     @swagger_auto_schema(

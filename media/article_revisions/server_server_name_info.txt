@@ -1,0 +1,38 @@
+server {
+    server_name info.ekobakban.uz;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        alias /home/ecosystem/infobot/staticfiles/;
+    }
+
+    location /media/ {
+        alias /home/ecosystem/infobot/media/;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/run/gunicorn_infobot.sock;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/info.ekobakban.uz/fullchain.pem; # managed by Certb>
+    ssl_certificate_key /etc/letsencrypt/live/info.ekobakban.uz/privkey.pem; # managed by Cer>
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = info.ekobakban.uz) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name info.ekobakban.uz;
+    return 404; # managed by Certbot
+
+
+}
+
