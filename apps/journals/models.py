@@ -34,7 +34,6 @@ class JournalVolume(models.Model):
 
 
 class JournalIssue(models.Model):
-    number = models.PositiveIntegerField(verbose_name=_("Number"))
     volume = models.ForeignKey(JournalVolume, on_delete=models.CASCADE, related_name='issues', verbose_name=_("Volume"))
     issue_number = models.PositiveIntegerField(verbose_name=_("Issue Number"))
     image = models.ImageField(upload_to='journal_issues/', null=True, blank=True, verbose_name=_("Cover Image"))

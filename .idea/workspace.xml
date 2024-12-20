@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a654224-74cf-4045-bd97-974ce721288f" name="Changes" comment="add translation.py and compile messages">
+    <list default="true" id="8a654224-74cf-4045-bd97-974ce721288f" name="Changes" comment="drf-yasg install and configuration">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/journals/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/apps/journals/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/journals/views.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/core/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/core/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
@@ -58,6 +60,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/apps/journals" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/core/utils" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -116,7 +121,15 @@
       <option name="project" value="LOCAL" />
       <updated>1734701224054</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="drf-yasg install and configuration">
+      <option name="closed" value="true" />
+      <created>1734702022140</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1734702022140</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -125,6 +138,7 @@
     <MESSAGE value="Author, Category and Article models" />
     <MESSAGE value="Author, Category and Article admins" />
     <MESSAGE value="add translation.py and compile messages" />
-    <option name="LAST_COMMIT_MESSAGE" value="add translation.py and compile messages" />
+    <MESSAGE value="drf-yasg install and configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="drf-yasg install and configuration" />
   </component>
 </project>
