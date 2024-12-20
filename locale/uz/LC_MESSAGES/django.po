@@ -1,0 +1,431 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE’S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-20 17:48+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: apps/accounts/apps.py:8
+msgid "Account"
+msgstr "Hisob"
+
+#: apps/accounts/apps.py:9
+msgid "Accounts"
+msgstr "Hisoblar"
+
+#: apps/accounts/models.py:9 apps/authors/apps.py:8 apps/authors/models.py:51
+msgid "Author"
+msgstr "Muallif"
+
+#: apps/accounts/models.py:10
+msgid "Editor"
+msgstr "Muharrir"
+
+#: apps/accounts/models.py:11
+msgid "Reviewer"
+msgstr "Taqrizchi"
+
+#: apps/accounts/models.py:12
+msgid "Secretary"
+msgstr "Kotib"
+
+#: apps/accounts/models.py:13
+msgid "Deputy Editor"
+msgstr "Muharrir o‘rinbosari"
+
+#: apps/accounts/models.py:14
+msgid "Admin"
+msgstr "Admin"
+
+#: apps/accounts/models.py:22
+msgid "User"
+msgstr "Foydalanuvchi"
+
+#: apps/accounts/models.py:23
+msgid "Users"
+msgstr "Foydalanuvchilar"
+
+#: apps/archive/apps.py:8
+msgid "Archive"
+msgstr "Arxiv"
+
+#: apps/archive/apps.py:9
+msgid "Archives"
+msgstr "Arxivlar"
+
+#: apps/articles/admin.py:12
+msgid "Article Information"
+msgstr "Maqola ma’lumotlari"
+
+#: apps/articles/admin.py:15 apps/journals/admin.py:47
+msgid "Files"
+msgstr "Fayllar"
+
+#: apps/articles/admin.py:18 apps/journals/admin.py:50
+msgid "Page Information"
+msgstr "Sahifa ma’lumotlari"
+
+#: apps/articles/admin.py:21 apps/journals/admin.py:53
+msgid "Statistics"
+msgstr "Statistika"
+
+#: apps/articles/admin.py:24
+msgid "Status and Dates"
+msgstr "Holat va sanalar"
+
+#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:13
+#: apps/journals/models.py:21
+msgid "Journal"
+msgstr "Jurnal"
+
+#: apps/articles/admin.py:35 apps/articles/models.py:13
+msgid "Published"
+msgstr "Nashr etilgan"
+
+#: apps/articles/apps.py:8 apps/articles/models.py:121
+msgid "Article"
+msgstr "Maqola"
+
+#: apps/articles/apps.py:9 apps/articles/models.py:122
+msgid "Articles"
+msgstr "Maqolalar"
+
+#: apps/articles/models.py:9
+msgid "Submitted"
+msgstr "Topshirilgan"
+
+#: apps/articles/models.py:10
+msgid "Under Review"
+msgstr "Ko‘rib chiqilmoqda"
+
+#: apps/articles/models.py:11
+msgid "Accepted"
+msgstr "Qabul qilingan"
+
+#: apps/articles/models.py:12
+msgid "Rejected"
+msgstr "Rad etilgan"
+
+#: apps/articles/models.py:19 apps/categories/apps.py:8
+#: apps/categories/models.py:11
+msgid "Category"
+msgstr "Kategoriya"
+
+#: apps/articles/models.py:21
+msgid "Title"
+msgstr "Sarlavha"
+
+#: apps/articles/models.py:23
+msgid "Keywords"
+msgstr "Kalit so‘zlar"
+
+#: apps/articles/models.py:24
+msgid "Enter keywords separated by commas"
+msgstr "Kalit so‘zlarni vergul bilan ajratib kiriting"
+
+#: apps/articles/models.py:26
+msgid "Annotation"
+msgstr "Annotatsiya"
+
+#: apps/articles/models.py:30 apps/authors/apps.py:9 apps/authors/models.py:52
+msgid "Authors"
+msgstr "Mualliflar"
+
+#: apps/articles/models.py:35
+msgid "Original Article File"
+msgstr "Asl maqola fayli"
+
+#: apps/articles/models.py:36
+msgid "Accepted file types: .doc, .docx, .odt"
+msgstr "Qabul qilinadigan fayl turlari: .doc, .docx, .odt"
+
+#: apps/articles/models.py:45
+msgid "Revised Article File"
+msgstr "Qayta ko‘rib chiqilgan maqola fayli"
+
+#: apps/articles/models.py:46
+msgid ""
+"Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
+"txt, .rtf"
+msgstr ""
+"Qabul qilinadigan fayl turlari: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
+"txt, .rtf"
+
+#: apps/articles/models.py:52 apps/journals/models.py:49
+msgid "Start Page"
+msgstr "Boshlang‘ich sahifa"
+
+#: apps/articles/models.py:55
+msgid "Starting page in the journal"
+msgstr "Jurnaldagi boshlang‘ich sahifa"
+
+#: apps/articles/models.py:59 apps/journals/models.py:54
+msgid "End Page"
+msgstr "Oxirgi sahifa"
+
+#: apps/articles/models.py:62
+msgid "Ending page in the journal"
+msgstr "Jurnaldagi oxirgi sahifa"
+
+#: apps/articles/models.py:68 apps/journals/models.py:46
+msgid "Views Count"
+msgstr "Ko‘rishlar soni"
+
+#: apps/articles/models.py:69
+msgid "Number of times the article has been viewed"
+msgstr "Maqola necha marta ko‘rilgani"
+
+#: apps/articles/models.py:73
+msgid "Downloads Count"
+msgstr "Yuklab olishlar soni"
+
+#: apps/articles/models.py:74
+msgid "Number of times the article has been downloaded"
+msgstr "Maqola necha marta yuklab olingani"
+
+#: apps/articles/models.py:82
+msgid "Status"
+msgstr "Holat"
+
+#: apps/articles/models.py:86
+msgid "Submission Date"
+msgstr "Topshirish sanasi"
+
+#: apps/articles/models.py:91
+msgid "Review Date"
+msgstr "Ko‘rib chiqish sanasi"
+
+#: apps/articles/models.py:92
+msgid "Date when the article was sent for review"
+msgstr "Maqola ko‘rib chiqishga yuborilgan sana"
+
+#: apps/articles/models.py:97
+msgid "Acceptance Date"
+msgstr "Qabul qilingan sana"
+
+#: apps/articles/models.py:98
+msgid "Date when the article was accepted"
+msgstr "Maqola qabul qilingan sana"
+
+#: apps/articles/models.py:103 apps/journals/models.py:42
+msgid "Publication Date"
+msgstr "Nashr etilgan sana"
+
+#: apps/articles/models.py:104
+msgid "Date when the article was published"
+msgstr "Maqola nashr etilgan sana"
+
+#: apps/articles/models.py:108
+msgid "Last Updated"
+msgstr "Oxirgi yangilanish"
+
+#: apps/articles/models.py:117 apps/journals/models.py:60
+msgid "Journal Issue"
+msgstr "Jurnal soni"
+
+#: apps/authors/admin.py:12
+msgid "Personal Information"
+msgstr "Shaxsiy ma’lumotlar"
+
+#: apps/authors/admin.py:15
+msgid "Contact Information"
+msgstr "Aloqa ma’lumotlari"
+
+#: apps/authors/admin.py:18
+msgid "Academic Information"
+msgstr "Akademik ma’lumotlar"
+
+#: apps/authors/models.py:6
+msgid "(PhD), Economics"
+msgstr "(PhD), Iqtisodiyot"
+
+#: apps/authors/models.py:7
+msgid "(PhD), Pedagogy"
+msgstr "(PhD), Pedagogika"
+
+#: apps/authors/models.py:8
+msgid "(PhD), Technical Sciences"
+msgstr "(PhD), Texnika fanlari"
+
+#: apps/authors/models.py:9
+msgid "(DSc), Economics"
+msgstr "(DSc), Iqtisodiyot"
+
+#: apps/authors/models.py:10
+msgid "(DSc), Pedagogy"
+msgstr "(DSc), Pedagogika"
+
+#: apps/authors/models.py:11
+msgid "(DSc), Technical Sciences"
+msgstr "(DSc), Texnika fanlari"
+
+#: apps/authors/models.py:15
+msgid "Docent"
+msgstr "Dotsent"
+
+#: apps/authors/models.py:16
+msgid "Professor"
+msgstr "Professor"
+
+#: apps/authors/models.py:20
+msgid "First Name"
+msgstr "Ism"
+
+#: apps/authors/models.py:21
+msgid "Last Name"
+msgstr "Familiya"
+
+#: apps/authors/models.py:22
+msgid "Country"
+msgstr "Mamlakat"
+
+#: apps/authors/models.py:23
+msgid "City"
+msgstr "Shahar"
+
+#: apps/authors/models.py:24
+msgid "Workplace"
+msgstr "Ish joyi"
+
+#: apps/authors/models.py:25
+msgid "Email"
+msgstr "Elektron pochta"
+
+#: apps/authors/models.py:26
+msgid "Phone Number"
+msgstr "Telefon raqami"
+
+#: apps/authors/models.py:29
+msgid "Telegram/WhatsApp Contact"
+msgstr "Telegram/WhatsApp kontakti"
+
+#: apps/authors/models.py:30
+msgid "Telegram username or WhatsApp number"
+msgstr "Telegram foydalanuvchi nomi yoki WhatsApp raqami"
+
+#: apps/authors/models.py:35
+msgid "Academic Degree"
+msgstr "Ilmiy daraja"
+
+#: apps/authors/models.py:40
+msgid "Academic Title"
+msgstr "Ilmiy unvon"
+
+#: apps/authors/models.py:44
+msgid "ORCID Number"
+msgstr "ORCID raqami"
+
+#: apps/authors/models.py:46
+msgid "ORCID identifier"
+msgstr "ORCID identifikatori"
+
+#: apps/authors/models.py:48 apps/categories/models.py:8
+#: apps/journals/models.py:9 apps/journals/models.py:24
+#: apps/journals/models.py:44
+msgid "Created At"
+msgstr "Yaratilgan sana"
+
+#: apps/categories/apps.py:9 apps/categories/models.py:12
+msgid "Categories"
+msgstr "Kategoriyalar"
+
+#: apps/categories/models.py:6
+msgid "Category Name"
+msgstr "Kategoriya nomi"
+
+#: apps/categories/models.py:7 apps/journals/models.py:8
+msgid "Description"
+msgstr "Tavsif"
+
+#: apps/journals/admin.py:44
+msgid "Issue Information"
+msgstr "Son haqida ma’lumot"
+
+#: apps/journals/apps.py:9 apps/journals/models.py:14
+msgid "Journals"
+msgstr "Jurnallar"
+
+#: apps/journals/models.py:7
+msgid "Journal Name"
+msgstr "Jurnal nomi"
+
+#: apps/journals/models.py:10
+msgid "Updated At"
+msgstr "Yangilangan sana"
+
+#: apps/journals/models.py:22
+msgid "Volume Number"
+msgstr "Jild raqami"
+
+#: apps/journals/models.py:23
+msgid "Year"
+msgstr "Yil"
+
+#: apps/journals/models.py:29
+msgid "Journal Volume"
+msgstr "Jurnal jildi"
+
+#: apps/journals/models.py:30
+msgid "Journal Volumes"
+msgstr "Jurnal jildlari"
+
+#: apps/journals/models.py:37
+msgid "Number"
+msgstr "Raqam"
+
+#: apps/journals/models.py:38
+msgid "Volume"
+msgstr "Jild"
+
+#: apps/journals/models.py:39
+msgid "Issue Number"
+msgstr "Son raqami"
+
+#: apps/journals/models.py:40
+msgid "Cover Image"
+msgstr "Muqova rasmi"
+
+#: apps/journals/models.py:41
+msgid "Journal File"
+msgstr "Jurnal fayli"
+
+#: apps/journals/models.py:43
+msgid "Is Published"
+msgstr "Nashr etilganmi"
+
+#: apps/journals/models.py:61
+msgid "Journal Issues"
+msgstr "Jurnal sonlari"
+
+#: apps/reviews/apps.py:8
+msgid "Review"
+msgstr "Taqriz"
+
+#: apps/reviews/apps.py:9
+msgid "Reviews"
+msgstr "Taqrizlar"
+
+#: core/settings.py:147
+msgid "o‘zbekcha"
+msgstr "o‘zbekcha"
+
+#: core/settings.py:148
+msgid "Ruscha"
+msgstr "Ruscha"
+
+#: core/settings.py:149
+msgid "English"
+msgstr "Inglizcha"

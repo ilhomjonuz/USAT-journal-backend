@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
+from modeltranslation.admin import TabbedTranslationAdmin
 
 from .models import JournalVolume, JournalIssue, Journal
 from ..articles.models import Article
@@ -9,12 +10,30 @@ class JournalVolumeInline(admin.TabularInline):
     model = JournalVolume
     extra = 1
 
-class JournalAdmin(admin.ModelAdmin):
+@admin.register(Journal)
+class JournalAdmin(TabbedTranslationAdmin):
     list_display = ('name', 'created_at', 'updated_at')
+    list_filter = ('created_at', 'updated_at')
     search_fields = ('name', 'description')
     inlines = [JournalVolumeInline]
+    fieldsets = (
+        (None, {
+            'fields': ('name', 'description'),
+        }),
+        ('Metadata', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',),
+        }),
+    )
+    readonly_fields = ('created_at', 'updated_at')
 
-admin.site.register(Journal, JournalAdmin)
+    def get_fieldsets(self, request, obj=None):
+        fieldsets = super().get_fieldsets(request, obj)
+        if obj:  # editing an existing object
+            fieldsets[0][1]['fields'] = tuple(
+                f'{field}__{lang}' for lang, _ in self.get_language_tabs(request) for field in ('name', 'description')
+            )
+        return fieldsets
 
 class JournalIssueInline(admin.TabularInline):
     model = JournalIssue

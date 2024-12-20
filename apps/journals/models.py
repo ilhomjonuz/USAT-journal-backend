@@ -39,11 +39,6 @@ class JournalIssue(models.Model):
     issue_number = models.PositiveIntegerField(verbose_name=_("Issue Number"))
     image = models.ImageField(upload_to='journal_issues/', null=True, blank=True, verbose_name=_("Cover Image"))
     journal_file = models.FileField(upload_to='journal_issues/', null=True, blank=True, verbose_name=_("Journal File"))
-    publication_date = models.DateField(verbose_name=_("Publication Date"))
-    is_published = models.BooleanField(default=False, verbose_name=_("Is Published"))
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
-
-    views_count = models.PositiveIntegerField(default=0, verbose_name=_("Views Count"))
     start_page = models.PositiveIntegerField(
         validators=[MinValueValidator(1)],
         verbose_name=_("Start Page"),
@@ -53,6 +48,10 @@ class JournalIssue(models.Model):
         validators=[MinValueValidator(1)],
         verbose_name=_("End Page")
     )
+    publication_date = models.DateField(verbose_name=_("Publication Date"))
+    is_published = models.BooleanField(default=False, verbose_name=_("Is Published"))
+    views_count = models.PositiveIntegerField(default=0, verbose_name=_("Views Count"))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
 
     class Meta:
         unique_together = ['volume', 'issue_number']

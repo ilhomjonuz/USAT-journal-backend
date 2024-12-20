@@ -1,0 +1,433 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-20 17:49+0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: apps/accounts/apps.py:8
+msgid "Account"
+msgstr "Аккаунт"
+
+#: apps/accounts/apps.py:9
+msgid "Accounts"
+msgstr "Аккаунты"
+
+#: apps/accounts/models.py:9 apps/authors/apps.py:8 apps/authors/models.py:51
+msgid "Author"
+msgstr "Автор"
+
+#: apps/accounts/models.py:10
+msgid "Editor"
+msgstr "Редактор"
+
+#: apps/accounts/models.py:11
+msgid "Reviewer"
+msgstr "Рецензент"
+
+#: apps/accounts/models.py:12
+msgid "Secretary"
+msgstr "Секретарь"
+
+#: apps/accounts/models.py:13
+msgid "Deputy Editor"
+msgstr "Заместитель редактора"
+
+#: apps/accounts/models.py:14
+msgid "Admin"
+msgstr "Администратор"
+
+#: apps/accounts/models.py:22
+msgid "User"
+msgstr "Пользователь"
+
+#: apps/accounts/models.py:23
+msgid "Users"
+msgstr "Пользователи"
+
+#: apps/archive/apps.py:8
+msgid "Archive"
+msgstr "Архив"
+
+#: apps/archive/apps.py:9
+msgid "Archives"
+msgstr "Архивы"
+
+#: apps/articles/admin.py:12
+msgid "Article Information"
+msgstr "Информация о статье"
+
+#: apps/articles/admin.py:15 apps/journals/admin.py:47
+msgid "Files"
+msgstr "Файлы"
+
+#: apps/articles/admin.py:18 apps/journals/admin.py:50
+msgid "Page Information"
+msgstr "Информация о странице"
+
+#: apps/articles/admin.py:21 apps/journals/admin.py:53
+msgid "Statistics"
+msgstr "Статистика"
+
+#: apps/articles/admin.py:24
+msgid "Status and Dates"
+msgstr "Статус и даты"
+
+#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:13
+#: apps/journals/models.py:21
+msgid "Journal"
+msgstr "Журнал"
+
+#: apps/articles/admin.py:35 apps/articles/models.py:13
+msgid "Published"
+msgstr "Опубликовано"
+
+#: apps/articles/apps.py:8 apps/articles/models.py:121
+msgid "Article"
+msgstr "Статья"
+
+#: apps/articles/apps.py:9 apps/articles/models.py:122
+msgid "Articles"
+msgstr "Статьи"
+
+#: apps/articles/models.py:9
+msgid "Submitted"
+msgstr "Отправлено"
+
+#: apps/articles/models.py:10
+msgid "Under Review"
+msgstr "На рассмотрении"
+
+#: apps/articles/models.py:11
+msgid "Accepted"
+msgstr "Принято"
+
+#: apps/articles/models.py:12
+msgid "Rejected"
+msgstr "Отклонено"
+
+#: apps/articles/models.py:19 apps/categories/apps.py:8
+#: apps/categories/models.py:11
+msgid "Category"
+msgstr "Категория"
+
+#: apps/articles/models.py:21
+msgid "Title"
+msgstr "Заголовок"
+
+#: apps/articles/models.py:23
+msgid "Keywords"
+msgstr "Ключевые слова"
+
+#: apps/articles/models.py:24
+msgid "Enter keywords separated by commas"
+msgstr "Введите ключевые слова, разделенные запятыми"
+
+#: apps/articles/models.py:26
+msgid "Annotation"
+msgstr "Аннотация"
+
+#: apps/articles/models.py:30 apps/authors/apps.py:9 apps/authors/models.py:52
+msgid "Authors"
+msgstr "Авторы"
+
+#: apps/articles/models.py:35
+msgid "Original Article File"
+msgstr "Оригинальный файл статьи"
+
+#: apps/articles/models.py:36
+msgid "Accepted file types: .doc, .docx, .odt"
+msgstr "Принимаемые типы файлов: .doc, .docx, .odt"
+
+#: apps/articles/models.py:45
+msgid "Revised Article File"
+msgstr "Пересмотренный файл статьи"
+
+#: apps/articles/models.py:46
+msgid ""
+"Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
+"txt, .rtf"
+msgstr ""
+"Принимаемые типы файлов: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
+"txt, .rtf"
+
+#: apps/articles/models.py:52 apps/journals/models.py:49
+msgid "Start Page"
+msgstr "Начальная страница"
+
+#: apps/articles/models.py:55
+msgid "Starting page in the journal"
+msgstr "Начальная страница в журнале"
+
+#: apps/articles/models.py:59 apps/journals/models.py:54
+msgid "End Page"
+msgstr "Конечная страница"
+
+#: apps/articles/models.py:62
+msgid "Ending page in the journal"
+msgstr "Конечная страница в журнале"
+
+#: apps/articles/models.py:68 apps/journals/models.py:46
+msgid "Views Count"
+msgstr "Количество просмотров"
+
+#: apps/articles/models.py:69
+msgid "Number of times the article has been viewed"
+msgstr "Количество просмотров статьи"
+
+#: apps/articles/models.py:73
+msgid "Downloads Count"
+msgstr "Количество загрузок"
+
+#: apps/articles/models.py:74
+msgid "Number of times the article has been downloaded"
+msgstr "Количество загрузок статьи"
+
+#: apps/articles/models.py:82
+msgid "Status"
+msgstr "Статус"
+
+#: apps/articles/models.py:86
+msgid "Submission Date"
+msgstr "Дата подачи"
+
+#: apps/articles/models.py:91
+msgid "Review Date"
+msgstr "Дата рецензирования"
+
+#: apps/articles/models.py:92
+msgid "Date when the article was sent for review"
+msgstr "Дата отправки статьи на рецензирование"
+
+#: apps/articles/models.py:97
+msgid "Acceptance Date"
+msgstr "Дата принятия"
+
+#: apps/articles/models.py:98
+msgid "Date when the article was accepted"
+msgstr "Дата принятия статьи"
+
+#: apps/articles/models.py:103 apps/journals/models.py:42
+msgid "Publication Date"
+msgstr "Дата публикации"
+
+#: apps/articles/models.py:104
+msgid "Date when the article was published"
+msgstr "Дата публикации статьи"
+
+#: apps/articles/models.py:108
+msgid "Last Updated"
+msgstr "Последнее обновление"
+
+#: apps/articles/models.py:117 apps/journals/models.py:60
+msgid "Journal Issue"
+msgstr "Выпуск журнала"
+
+#: apps/authors/admin.py:12
+msgid "Personal Information"
+msgstr "Личная информация"
+
+#: apps/authors/admin.py:15
+msgid "Contact Information"
+msgstr "Контактная информация"
+
+#: apps/authors/admin.py:18
+msgid "Academic Information"
+msgstr "Академическая информация"
+
+#: apps/authors/models.py:6
+msgid "(PhD), Economics"
+msgstr "(PhD), Экономика"
+
+#: apps/authors/models.py:7
+msgid "(PhD), Pedagogy"
+msgstr "(PhD), Педагогика"
+
+#: apps/authors/models.py:8
+msgid "(PhD), Technical Sciences"
+msgstr "(PhD), Технические науки"
+
+#: apps/authors/models.py:9
+msgid "(DSc), Economics"
+msgstr "(DSc), Экономика"
+
+#: apps/authors/models.py:10
+msgid "(DSc), Pedagogy"
+msgstr "(DSc), Педагогика"
+
+#: apps/authors/models.py:11
+msgid "(DSc), Technical Sciences"
+msgstr "(DSc), Технические науки"
+
+#: apps/authors/models.py:15
+msgid "Docent"
+msgstr "Доцент"
+
+#: apps/authors/models.py:16
+msgid "Professor"
+msgstr "Профессор"
+
+#: apps/authors/models.py:20
+msgid "First Name"
+msgstr "Имя"
+
+#: apps/authors/models.py:21
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: apps/authors/models.py:22
+msgid "Country"
+msgstr "Страна"
+
+#: apps/authors/models.py:23
+msgid "City"
+msgstr "Город"
+
+#: apps/authors/models.py:24
+msgid "Workplace"
+msgstr "Место работы"
+
+#: apps/authors/models.py:25
+msgid "Email"
+msgstr "Электронная почта"
+
+#: apps/authors/models.py:26
+msgid "Phone Number"
+msgstr "Номер телефона"
+
+#: apps/authors/models.py:29
+msgid "Telegram/WhatsApp Contact"
+msgstr "Контакт Telegram/WhatsApp"
+
+#: apps/authors/models.py:30
+msgid "Telegram username or WhatsApp number"
+msgstr "Имя пользователя Telegram или номер WhatsApp"
+
+#: apps/authors/models.py:35
+msgid "Academic Degree"
+msgstr "Ученая степень"
+
+#: apps/authors/models.py:40
+msgid "Academic Title"
+msgstr "Ученое звание"
+
+#: apps/authors/models.py:44
+msgid "ORCID Number"
+msgstr "Номер ORCID"
+
+#: apps/authors/models.py:46
+msgid "ORCID identifier"
+msgstr "Идентификатор ORCID"
+
+#: apps/authors/models.py:48 apps/categories/models.py:8
+#: apps/journals/models.py:9 apps/journals/models.py:24
+#: apps/journals/models.py:44
+msgid "Created At"
+msgstr "Создано"
+
+#: apps/categories/apps.py:9 apps/categories/models.py:12
+msgid "Categories"
+msgstr "Категории"
+
+#: apps/categories/models.py:6
+msgid "Category Name"
+msgstr "Название категории"
+
+#: apps/categories/models.py:7 apps/journals/models.py:8
+msgid "Description"
+msgstr "Описание"
+
+#: apps/journals/admin.py:44
+msgid "Issue Information"
+msgstr "Информация о выпуске"
+
+#: apps/journals/apps.py:9 apps/journals/models.py:14
+msgid "Journals"
+msgstr "Журналы"
+
+#: apps/journals/models.py:7
+msgid "Journal Name"
+msgstr "Название журнала"
+
+#: apps/journals/models.py:10
+msgid "Updated At"
+msgstr "Обновлено"
+
+#: apps/journals/models.py:22
+msgid "Volume Number"
+msgstr "Номер тома"
+
+#: apps/journals/models.py:23
+msgid "Year"
+msgstr "Год"
+
+#: apps/journals/models.py:29
+msgid "Journal Volume"
+msgstr "Том журнала"
+
+#: apps/journals/models.py:30
+msgid "Journal Volumes"
+msgstr "Тома журнала"
+
+#: apps/journals/models.py:37
+msgid "Number"
+msgstr "Номер"
+
+#: apps/journals/models.py:38
+msgid "Volume"
+msgstr "Том"
+
+#: apps/journals/models.py:39
+msgid "Issue Number"
+msgstr "Номер выпуска"
+
+#: apps/journals/models.py:40
+msgid "Cover Image"
+msgstr "Изображение обложки"
+
+#: apps/journals/models.py:41
+msgid "Journal File"
+msgstr "Файл журнала"
+
+#: apps/journals/models.py:43
+msgid "Is Published"
+msgstr "Опубликовано"
+
+#: apps/journals/models.py:61
+msgid "Journal Issues"
+msgstr "Выпуски журнала"
+
+#: apps/reviews/apps.py:8
+msgid "Review"
+msgstr "Рецензия"
+
+#: apps/reviews/apps.py:9
+msgid "Reviews"
+msgstr "Рецензии"
+
+#: core/settings.py:147
+msgid "O'zbekcha"
+msgstr "Узбекский"
+
+#: core/settings.py:148
+msgid "Ruscha"
+msgstr "Русский"
+
+#: core/settings.py:149
+msgid "English"
+msgstr "Английский"
