@@ -49,7 +49,6 @@ INSTALLED_APPS = [
     'apps.AccountsConfig',
     'apps.ArchiveConfig',
     'apps.ArticlesConfig',
-    'apps.CategoriesConfig',
     'apps.JournalsConfig',
     'apps.ReviewsConfig',
 ]
