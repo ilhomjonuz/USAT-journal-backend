@@ -43,7 +43,7 @@ class ArticleRetrieveSerializer(serializers.ModelSerializer):
             'views_count', 'downloads_count', 'download_url', 'publication_date'
         ]
 
-    def get_journal_issue(self, obj):
+    def get_journal_issue(self, obj) -> dict:
         from ..journals.serializers import ArticleRetrieveJournalIssueSerializer
         serializer = ArticleRetrieveJournalIssueSerializer(obj.journal_issue)
         return serializer.data
