@@ -172,3 +172,4 @@ cython_debug/
 
 staticfiles/
 media/
+server.env

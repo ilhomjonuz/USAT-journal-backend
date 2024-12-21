@@ -1,1 +1,0 @@
-phoneNumber, passport, birthDate, firstName, lastName, middleName, homePhone, gender, photo, region, city, addressLine, citizenship, nationality, pinfl, passportFrontPhoto, passportBackPhoto, nameOTM, nameYonalish, highSchoolDiplomaPhoto, highSchoolDiplomaIlovaPhoto, directionOfEducation, typeOfEducation, languageOfEducation
