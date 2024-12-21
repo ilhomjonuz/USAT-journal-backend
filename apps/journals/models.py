@@ -50,6 +50,7 @@ class JournalIssue(models.Model):
     publication_date = models.DateField(verbose_name=_("Publication Date"))
     is_published = models.BooleanField(default=False, verbose_name=_("Is Published"))
     views_count = models.PositiveIntegerField(default=0, verbose_name=_("Views Count"))
+    downloads_count = models.PositiveIntegerField(default=0, verbose_name=_("Downloads Count"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
 
     class Meta:

@@ -16,7 +16,7 @@ class Article(models.Model):
     category = models.ForeignKey(
         'categories.Category',
         on_delete=models.PROTECT,
-        verbose_name=_("Category")
+        verbose_name=_("Direction")
     )
     title = models.CharField(max_length=500, verbose_name=_("Title"))
     keywords = models.TextField(

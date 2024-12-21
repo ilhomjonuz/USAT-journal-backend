@@ -12,4 +12,4 @@ class ArticleAuthorSerializer(serializers.ModelSerializer):
 class ArticleRetrieveAuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ['id', 'first_name', 'last_name', 'country', 'city', 'workplace', 'academic_degree', 'academic_title']
+        fields = ['id', 'first_name', 'last_name', 'country', 'city', 'workplace', 'academic_degree', 'academic_title', 'orcid']
