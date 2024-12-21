@@ -24,8 +24,11 @@ class ArticleRetrieveAPIView(generics.RetrieveAPIView):
     )
     def get(self, request, *args, **kwargs):
         article = self.get_object()
-
-        # Increment the views_count field
         article.views_count += 1
         article.save(update_fields=['views_count'])
         return super().get(request, *args, **kwargs)
+
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context['request'] = self.request
+        return context

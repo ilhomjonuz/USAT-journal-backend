@@ -1,4 +1,7 @@
+from django.urls import reverse
 from rest_framework import serializers
+from rest_framework.request import Request
+
 from .models import JournalIssue
 from ..categories.models import Category
 from ..categories.serializers import JournalIssueRetrieveCategorySerializer
@@ -38,12 +41,13 @@ class JournalRetrieveSerializer(serializers.ModelSerializer):
     journal = serializers.SerializerMethodField()
     volume_number = serializers.SerializerMethodField()
     directions = serializers.SerializerMethodField()
+    download_url = serializers.SerializerMethodField()
 
     class Meta:
         model = JournalIssue
         fields = [
             'id', 'journal', 'volume_number', 'issue_number', 'image', 'start_page', 'end_page', 'directions',
-            'views_count', 'downloads_count', 'publication_date', 'journal_file'
+            'views_count', 'downloads_count', 'publication_date', 'download_url'
         ]
 
     def get_journal(self, obj):
@@ -53,9 +57,17 @@ class JournalRetrieveSerializer(serializers.ModelSerializer):
         return obj.volume.volume_number
 
     def get_directions(self, obj):
+        request = self.context.get('request')
         categories = Category.objects.filter(
             article__journal_issue=obj,
             article__status='PUBLISHED'
         ).distinct()
-        serializer = JournalIssueRetrieveCategorySerializer(categories, many=True, context={'journal_issue': obj})
+        serializer = JournalIssueRetrieveCategorySerializer(categories, many=True, context={'journal_issue': obj, 'request': request})
         return serializer.data
+
+    def get_download_url(self, obj):
+        request = self.context.get('request')
+        if request is not None and isinstance(request, Request):
+            url = reverse('journal-issue-download', kwargs={'id': obj.id})
+            return request.build_absolute_uri(url)
+        return None

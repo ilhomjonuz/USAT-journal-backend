@@ -14,10 +14,11 @@ class JournalIssueRetrieveCategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'articles']
 
     def get_articles(self, obj):
+        request = self.context.get('request')
         journal_issue = self.context.get('journal_issue')
         articles = Article.objects.filter(
             category=obj,
             journal_issue=journal_issue,
             status='PUBLISHED'
         )
-        return JournalIssueRetrieveArticleSerializer(articles, many=True).data
+        return JournalIssueRetrieveArticleSerializer(articles, many=True, context={'request': request}).data
