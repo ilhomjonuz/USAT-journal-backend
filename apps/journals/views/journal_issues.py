@@ -3,15 +3,15 @@ from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
 from apps.journals.models import JournalIssue
-from apps.journals.serializers import JournalIssueSerializer
+from apps.journals.serializers import JournalIssueListSerializer
 
 
 class LatestJournalIssueListView(generics.ListAPIView):
     queryset = JournalIssue.objects.filter(is_published=True).order_by('-publication_date')[:4]
-    serializer_class = JournalIssueSerializer
+    serializer_class = JournalIssueListSerializer
 
     @swagger_auto_schema(
-        operation_description="Get the latest published journal issue",
+        operation_description="Get the latest published journal issues",
         manual_parameters=[
             openapi.Parameter(
                 'Accept-Language',
@@ -26,9 +26,9 @@ class LatestJournalIssueListView(generics.ListAPIView):
         return super().get(request, *args, **kwargs)
 
 
-class JournalIssueListView(generics.ListAPIView):
+class AllJournalIssueListView(generics.ListAPIView):
     queryset = JournalIssue.objects.filter(is_published=True).order_by('-publication_date')
-    serializer_class = JournalIssueSerializer
+    serializer_class = JournalIssueListSerializer
 
     @swagger_auto_schema(
         operation_description="Get a list of published journal issues",

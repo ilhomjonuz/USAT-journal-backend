@@ -1,6 +1,38 @@
 from rest_framework import serializers
 from .models import JournalIssue, JournalVolume, Journal
 
+
+class JournalIssueListSerializer(serializers.ModelSerializer):
+    journal = serializers.SerializerMethodField('read_journal')
+    volume_number = serializers.SerializerMethodField('read_volume')
+
+    class Meta:
+        model = JournalIssue
+        fields = ['id', 'journal', 'volume_number', 'issue_number', 'image']
+
+    def read_journal(self, obj) -> str:
+        return obj.volume.journal.name
+
+    def read_volume(self, obj) -> str:
+        return obj.volume.volume_number
+
+
+class ArticleRetrieveJournalIssueSerializer(serializers.ModelSerializer):
+    journal = serializers.SerializerMethodField('read_journal')
+    volume_number = serializers.SerializerMethodField('read_volume')
+
+    class Meta:
+        model = JournalIssue
+        fields = ['id', 'journal', 'volume_number', 'issue_number']
+
+    def read_journal(self, obj) -> str:
+        return obj.volume.journal.name
+
+    def read_volume(self, obj) -> str:
+        return obj.volume.volume_number
+
+
+
 class JournalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Journal
