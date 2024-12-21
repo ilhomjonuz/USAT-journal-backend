@@ -39,10 +39,17 @@ class ArticleSubmissionSerializer(serializers.ModelSerializer):
         article = Article.objects.create(**validated_data)
 
         for author_data in authors_data:
-            author, _ = Author.objects.get_or_create(
-                email=author_data['email'],
-                defaults=author_data
+            # Try to get the existing author
+            author, created = Author.objects.get_or_create(
+                email=author_data['email']
             )
+
+            if not created:  # If the author already exists, update their details
+                for key, value in author_data.items():
+                    setattr(author, key, value)
+                author.save()
+
+            # Associate the author with the article
             article.authors.add(author)
 
         return article
