@@ -156,11 +156,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.str('DATABASE_NAME'),  # Databaza nomi
-        'USER': env.str('DATABASE_USER'),  # Foydalanuvchi nomi
-        'PASSWORD': env.str('DATABASE_PASSWORD'),  # Parol
-        'HOST': env.str('DATABASE_HOST'),  # Agar lokal server bo'lsa
-        'PORT': env.int('DATABASE_PORT'),  # PostgreSQL uchun standart port
+        'NAME': env.str('POSTGRES_DB'),  # Databaza nomi
+        'USER': env.str('POSTGRES_USER'),  # Foydalanuvchi nomi
+        'PASSWORD': env.str('POSTGRES_PASSWORD'),  # Parol
+        'HOST': env.str('POSTGRES_HOST'),  # Agar lokal server bo'lsa
+        'PORT': env.int('POSTGRES_PORT'),  # PostgreSQL uchun standart port
     }
 }
 

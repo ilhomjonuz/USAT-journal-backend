@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  django_api:
+    build:
+      context: .
+    container_name: django_api
+    env_file: .env
+    ports:
+      - "8480:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - journal_db
+    command: >
+      sh -c "
+            python manage.py compilemessages &&
+            python manage.py migrate &&
+            python manage.py collectstatic --noinput &&
+            python manage.py createsuperuser --noinput || echo 'Superuser yaratilmadi.' &&
+            gunicorn core.wsgi:application --bind 0.0.0.0:8000"
+
+  journal_db:
+    image: postgres:14-alpine
+    container_name: postgres_db
+    env_file: .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
