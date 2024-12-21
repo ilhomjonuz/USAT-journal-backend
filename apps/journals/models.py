@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator
 
 class Journal(models.Model):
     name = models.CharField(max_length=200, verbose_name=_("Journal Name"))
-    description = models.TextField(verbose_name=_("Description"))
+    description = models.TextField(verbose_name=_("Description"), null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
