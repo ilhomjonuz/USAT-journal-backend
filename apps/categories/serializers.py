@@ -6,6 +6,12 @@ from ..articles.models import Article
 from ..articles.serializers import JournalIssueRetrieveArticleSerializer
 
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name', 'code']
+
+
 class JournalIssueRetrieveCategorySerializer(serializers.ModelSerializer):
     articles = serializers.SerializerMethodField()
 

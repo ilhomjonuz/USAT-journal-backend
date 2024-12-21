@@ -2,8 +2,8 @@ from django.urls import reverse
 from rest_framework import serializers
 from rest_framework.request import Request
 
-from .models import Article
-from ..authors.serializers import ArticleAuthorSerializer, ArticleRetrieveAuthorSerializer
+from apps.articles.models import Article
+from apps.authors.serializers import ArticleAuthorSerializer, ArticleRetrieveAuthorSerializer
 
 
 class LatestArticleListSerializer(serializers.ModelSerializer):
@@ -44,7 +44,7 @@ class ArticleRetrieveSerializer(serializers.ModelSerializer):
         ]
 
     def get_journal_issue(self, obj) -> dict:
-        from ..journals.serializers import ArticleRetrieveJournalIssueSerializer
+        from ...journals.serializers import ArticleRetrieveJournalIssueSerializer
         serializer = ArticleRetrieveJournalIssueSerializer(obj.journal_issue)
         return serializer.data
 

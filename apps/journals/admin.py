@@ -10,6 +10,7 @@ class JournalVolumeInline(admin.TabularInline):
     model = JournalVolume
     extra = 1
 
+
 @admin.register(Journal)
 class JournalAdmin(TabbedTranslationAdmin):
     list_display = ('name', 'created_at', 'updated_at')
@@ -27,17 +28,11 @@ class JournalAdmin(TabbedTranslationAdmin):
     )
     readonly_fields = ('created_at', 'updated_at')
 
-    def get_fieldsets(self, request, obj=None):
-        fieldsets = super().get_fieldsets(request, obj)
-        if obj:  # editing an existing object
-            fieldsets[0][1]['fields'] = tuple(
-                f'{field}__{lang}' for lang, _ in self.get_language_tabs(request) for field in ('name', 'description')
-            )
-        return fieldsets
 
 class JournalIssueInline(admin.TabularInline):
     model = JournalIssue
     extra = 1
+
 
 class JournalVolumeAdmin(admin.ModelAdmin):
     list_display = ('journal', 'volume_number', 'year', 'created_at')
@@ -47,11 +42,13 @@ class JournalVolumeAdmin(admin.ModelAdmin):
 
 admin.site.register(JournalVolume, JournalVolumeAdmin)
 
+
 class ArticleInline(admin.TabularInline):
     model = Article
     extra = 1
     fields = ('title', 'status', 'start_page', 'end_page')
     readonly_fields = ('status',)
+
 
 class JournalIssueAdmin(admin.ModelAdmin):
     list_display = ('volume', 'issue_number', 'publication_date', 'is_published', 'views_count')
