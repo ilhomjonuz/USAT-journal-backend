@@ -29,6 +29,7 @@ urlpatterns = [
 
     path('api/v1/journals/', include('apps.journals.urls')),
     path('api/v1/articles/', include('apps.articles.urls')),
+    path('api/v1/authors/', include('apps.authors.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
