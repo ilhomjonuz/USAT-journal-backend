@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 17:49+0500\n"
+"POT-Creation-Date: 2024-12-21 23:25+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,15 +70,15 @@ msgstr "Archives"
 msgid "Article Information"
 msgstr "Article Information"
 
-#: apps/articles/admin.py:15 apps/journals/admin.py:47
+#: apps/articles/admin.py:15 apps/journals/admin.py:63
 msgid "Files"
 msgstr "Files"
 
-#: apps/articles/admin.py:18 apps/journals/admin.py:50
+#: apps/articles/admin.py:18 apps/journals/admin.py:66
 msgid "Page Information"
 msgstr "Page Information"
 
-#: apps/articles/admin.py:21 apps/journals/admin.py:53
+#: apps/articles/admin.py:21 apps/journals/admin.py:69
 msgid "Statistics"
 msgstr "Statistics"
 
@@ -120,9 +120,9 @@ msgid "Rejected"
 msgstr "Rejected"
 
 #: apps/articles/models.py:19 apps/categories/apps.py:8
-#: apps/categories/models.py:11
-msgid "Category"
-msgstr "Category"
+#: apps/categories/models.py:12
+msgid "Direction"
+msgstr "Direction"
 
 #: apps/articles/models.py:21
 msgid "Title"
@@ -149,8 +149,8 @@ msgid "Original Article File"
 msgstr "Original Article File"
 
 #: apps/articles/models.py:36
-msgid "Accepted file types: .doc, .docx, .odt"
-msgstr "Accepted file types: .doc, .docx, .odt"
+msgid "Accepted file types: .txt, .doc, .docx, .odt"
+msgstr "Accepted file types: .txt, .doc, .docx, .odt"
 
 #: apps/articles/models.py:45
 msgid "Revised Article File"
@@ -164,7 +164,7 @@ msgstr ""
 "Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
 
-#: apps/articles/models.py:52 apps/journals/models.py:49
+#: apps/articles/models.py:52 apps/journals/models.py:43
 msgid "Start Page"
 msgstr "Start Page"
 
@@ -172,7 +172,7 @@ msgstr "Start Page"
 msgid "Starting page in the journal"
 msgstr "Starting page in the journal"
 
-#: apps/articles/models.py:59 apps/journals/models.py:54
+#: apps/articles/models.py:59 apps/journals/models.py:48
 msgid "End Page"
 msgstr "End Page"
 
@@ -180,7 +180,7 @@ msgstr "End Page"
 msgid "Ending page in the journal"
 msgstr "Ending page in the journal"
 
-#: apps/articles/models.py:68 apps/journals/models.py:46
+#: apps/articles/models.py:68 apps/journals/models.py:52
 msgid "Views Count"
 msgstr "Views Count"
 
@@ -188,7 +188,7 @@ msgstr "Views Count"
 msgid "Number of times the article has been viewed"
 msgstr "Number of times the article has been viewed"
 
-#: apps/articles/models.py:73
+#: apps/articles/models.py:73 apps/journals/models.py:53
 msgid "Downloads Count"
 msgstr "Downloads Count"
 
@@ -220,7 +220,7 @@ msgstr "Acceptance Date"
 msgid "Date when the article was accepted"
 msgstr "Date when the article was accepted"
 
-#: apps/articles/models.py:103 apps/journals/models.py:42
+#: apps/articles/models.py:103 apps/journals/models.py:50
 msgid "Publication Date"
 msgstr "Publication Date"
 
@@ -232,9 +232,21 @@ msgstr "Date when the article was published"
 msgid "Last Updated"
 msgstr "Last Updated"
 
-#: apps/articles/models.py:117 apps/journals/models.py:60
+#: apps/articles/models.py:117 apps/journals/models.py:59
 msgid "Journal Issue"
 msgstr "Journal Issue"
+
+#: apps/articles/serializers/article_create.py:47
+msgid "Direction ID is required."
+msgstr "Direction ID is required."
+
+#: apps/articles/serializers/article_create.py:49
+msgid "Direction not found."
+msgstr "Direction not found."
+
+#: apps/articles/views/api_article_create.py:48
+msgid "Article submitted successfully"
+msgstr "Article submitted successfully"
 
 #: apps/authors/admin.py:12
 msgid "Personal Information"
@@ -332,25 +344,29 @@ msgstr "ORCID Number"
 msgid "ORCID identifier"
 msgstr "ORCID identifier"
 
-#: apps/authors/models.py:48 apps/categories/models.py:8
+#: apps/authors/models.py:48 apps/categories/models.py:9
 #: apps/journals/models.py:9 apps/journals/models.py:24
-#: apps/journals/models.py:44
+#: apps/journals/models.py:54
 msgid "Created At"
 msgstr "Created At"
 
-#: apps/categories/apps.py:9 apps/categories/models.py:12
-msgid "Categories"
-msgstr "Categories"
+#: apps/categories/apps.py:9 apps/categories/models.py:13
+msgid "Directions"
+msgstr "Directions"
 
 #: apps/categories/models.py:6
-msgid "Category Name"
-msgstr "Category Name"
+msgid "Direction Name"
+msgstr "Direction Name"
 
-#: apps/categories/models.py:7 apps/journals/models.py:8
+#: apps/categories/models.py:7
+msgid "Direction Code"
+msgstr "Direction Code"
+
+#: apps/categories/models.py:8 apps/journals/models.py:8
 msgid "Description"
 msgstr "Description"
 
-#: apps/journals/admin.py:44
+#: apps/journals/admin.py:60
 msgid "Issue Information"
 msgstr "Issue Information"
 
@@ -382,33 +398,33 @@ msgstr "Journal Volume"
 msgid "Journal Volumes"
 msgstr "Journal Volumes"
 
-#: apps/journals/models.py:37
-msgid "Number"
-msgstr "Number"
-
-#: apps/journals/models.py:38
+#: apps/journals/models.py:33 apps/journals/models.py:37
 msgid "Volume"
 msgstr "Volume"
 
-#: apps/journals/models.py:39
+#: apps/journals/models.py:38
 msgid "Issue Number"
 msgstr "Issue Number"
 
-#: apps/journals/models.py:40
+#: apps/journals/models.py:39
 msgid "Cover Image"
 msgstr "Cover Image"
 
-#: apps/journals/models.py:41
+#: apps/journals/models.py:40
 msgid "Journal File"
 msgstr "Journal File"
 
-#: apps/journals/models.py:43
+#: apps/journals/models.py:51
 msgid "Is Published"
 msgstr "Is Published"
 
-#: apps/journals/models.py:61
+#: apps/journals/models.py:60
 msgid "Journal Issues"
 msgstr "Journal Issues"
+
+#: apps/journals/models.py:63
+msgid "Issue"
+msgstr "Issue"
 
 #: apps/reviews/apps.py:8
 msgid "Review"
@@ -418,14 +434,14 @@ msgstr "Review"
 msgid "Reviews"
 msgstr "Reviews"
 
-#: core/settings.py:147
-msgid "O'zbekcha"
+#: core/settings.py:202
+msgid "O‘zbekcha"
 msgstr "Uzbek"
 
-#: core/settings.py:148
+#: core/settings.py:203
 msgid "Ruscha"
 msgstr "Russian"
 
-#: core/settings.py:149
+#: core/settings.py:204
 msgid "English"
 msgstr "English"

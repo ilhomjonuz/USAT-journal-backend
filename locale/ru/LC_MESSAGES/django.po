@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 17:49+0500\n"
+"POT-Creation-Date: 2024-12-21 23:26+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -72,15 +72,15 @@ msgstr "Архивы"
 msgid "Article Information"
 msgstr "Информация о статье"
 
-#: apps/articles/admin.py:15 apps/journals/admin.py:47
+#: apps/articles/admin.py:15 apps/journals/admin.py:63
 msgid "Files"
 msgstr "Файлы"
 
-#: apps/articles/admin.py:18 apps/journals/admin.py:50
+#: apps/articles/admin.py:18 apps/journals/admin.py:66
 msgid "Page Information"
 msgstr "Информация о странице"
 
-#: apps/articles/admin.py:21 apps/journals/admin.py:53
+#: apps/articles/admin.py:21 apps/journals/admin.py:69
 msgid "Statistics"
 msgstr "Статистика"
 
@@ -122,9 +122,9 @@ msgid "Rejected"
 msgstr "Отклонено"
 
 #: apps/articles/models.py:19 apps/categories/apps.py:8
-#: apps/categories/models.py:11
-msgid "Category"
-msgstr "Категория"
+#: apps/categories/models.py:12
+msgid "Direction"
+msgstr "Направление"
 
 #: apps/articles/models.py:21
 msgid "Title"
@@ -151,8 +151,8 @@ msgid "Original Article File"
 msgstr "Оригинальный файл статьи"
 
 #: apps/articles/models.py:36
-msgid "Accepted file types: .doc, .docx, .odt"
-msgstr "Принимаемые типы файлов: .doc, .docx, .odt"
+msgid "Accepted file types: .txt, .doc, .docx, .odt"
+msgstr "Принимаемые типы файлов: .txt, .doc, .docx, .odt"
 
 #: apps/articles/models.py:45
 msgid "Revised Article File"
@@ -166,7 +166,7 @@ msgstr ""
 "Принимаемые типы файлов: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
 
-#: apps/articles/models.py:52 apps/journals/models.py:49
+#: apps/articles/models.py:52 apps/journals/models.py:43
 msgid "Start Page"
 msgstr "Начальная страница"
 
@@ -174,7 +174,7 @@ msgstr "Начальная страница"
 msgid "Starting page in the journal"
 msgstr "Начальная страница в журнале"
 
-#: apps/articles/models.py:59 apps/journals/models.py:54
+#: apps/articles/models.py:59 apps/journals/models.py:48
 msgid "End Page"
 msgstr "Конечная страница"
 
@@ -182,7 +182,7 @@ msgstr "Конечная страница"
 msgid "Ending page in the journal"
 msgstr "Конечная страница в журнале"
 
-#: apps/articles/models.py:68 apps/journals/models.py:46
+#: apps/articles/models.py:68 apps/journals/models.py:52
 msgid "Views Count"
 msgstr "Количество просмотров"
 
@@ -190,7 +190,7 @@ msgstr "Количество просмотров"
 msgid "Number of times the article has been viewed"
 msgstr "Количество просмотров статьи"
 
-#: apps/articles/models.py:73
+#: apps/articles/models.py:73 apps/journals/models.py:53
 msgid "Downloads Count"
 msgstr "Количество загрузок"
 
@@ -222,7 +222,7 @@ msgstr "Дата принятия"
 msgid "Date when the article was accepted"
 msgstr "Дата принятия статьи"
 
-#: apps/articles/models.py:103 apps/journals/models.py:42
+#: apps/articles/models.py:103 apps/journals/models.py:50
 msgid "Publication Date"
 msgstr "Дата публикации"
 
@@ -234,9 +234,21 @@ msgstr "Дата публикации статьи"
 msgid "Last Updated"
 msgstr "Последнее обновление"
 
-#: apps/articles/models.py:117 apps/journals/models.py:60
+#: apps/articles/models.py:117 apps/journals/models.py:59
 msgid "Journal Issue"
 msgstr "Выпуск журнала"
+
+#: apps/articles/serializers/article_create.py:47
+msgid "Direction ID is required."
+msgstr "Направление ID обязательно."
+
+#: apps/articles/serializers/article_create.py:49
+msgid "Direction not found."
+msgstr "Направление не найдено."
+
+#: apps/articles/views/api_article_create.py:48
+msgid "Article submitted successfully"
+msgstr "Статья успешно отправлена"
 
 #: apps/authors/admin.py:12
 msgid "Personal Information"
@@ -334,25 +346,31 @@ msgstr "Номер ORCID"
 msgid "ORCID identifier"
 msgstr "Идентификатор ORCID"
 
-#: apps/authors/models.py:48 apps/categories/models.py:8
+#: apps/authors/models.py:48 apps/categories/models.py:9
 #: apps/journals/models.py:9 apps/journals/models.py:24
-#: apps/journals/models.py:44
+#: apps/journals/models.py:54
 msgid "Created At"
 msgstr "Создано"
 
-#: apps/categories/apps.py:9 apps/categories/models.py:12
-msgid "Categories"
-msgstr "Категории"
+#: apps/categories/apps.py:9 apps/categories/models.py:13
+msgid "Directions"
+msgstr "Направления"
 
 #: apps/categories/models.py:6
-msgid "Category Name"
-msgstr "Название категории"
+#, fuzzy
+#| msgid "First Name"
+msgid "Direction Name"
+msgstr "Название направления"
 
-#: apps/categories/models.py:7 apps/journals/models.py:8
+#: apps/categories/models.py:7
+msgid "Direction Code"
+msgstr "Код направления"
+
+#: apps/categories/models.py:8 apps/journals/models.py:8
 msgid "Description"
 msgstr "Описание"
 
-#: apps/journals/admin.py:44
+#: apps/journals/admin.py:60
 msgid "Issue Information"
 msgstr "Информация о выпуске"
 
@@ -384,33 +402,33 @@ msgstr "Том журнала"
 msgid "Journal Volumes"
 msgstr "Тома журнала"
 
-#: apps/journals/models.py:37
-msgid "Number"
-msgstr "Номер"
-
-#: apps/journals/models.py:38
+#: apps/journals/models.py:33 apps/journals/models.py:37
 msgid "Volume"
 msgstr "Том"
 
-#: apps/journals/models.py:39
+#: apps/journals/models.py:38
 msgid "Issue Number"
 msgstr "Номер выпуска"
 
-#: apps/journals/models.py:40
+#: apps/journals/models.py:39
 msgid "Cover Image"
 msgstr "Изображение обложки"
 
-#: apps/journals/models.py:41
+#: apps/journals/models.py:40
 msgid "Journal File"
 msgstr "Файл журнала"
 
-#: apps/journals/models.py:43
+#: apps/journals/models.py:51
 msgid "Is Published"
 msgstr "Опубликовано"
 
-#: apps/journals/models.py:61
+#: apps/journals/models.py:60
 msgid "Journal Issues"
 msgstr "Выпуски журнала"
+
+#: apps/journals/models.py:63
+msgid "Issue"
+msgstr "Выпуск"
 
 #: apps/reviews/apps.py:8
 msgid "Review"
@@ -420,14 +438,14 @@ msgstr "Рецензия"
 msgid "Reviews"
 msgstr "Рецензии"
 
-#: core/settings.py:147
-msgid "O'zbekcha"
+#: core/settings.py:202
+msgid "O‘zbekcha"
 msgstr "Узбекский"
 
-#: core/settings.py:148
+#: core/settings.py:203
 msgid "Ruscha"
 msgstr "Русский"
 
-#: core/settings.py:149
+#: core/settings.py:204
 msgid "English"
 msgstr "Английский"

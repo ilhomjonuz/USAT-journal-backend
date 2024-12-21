@@ -30,7 +30,7 @@ class JournalVolume(models.Model):
         verbose_name_plural = _("Journal Volumes")
 
     def __str__(self):
-        return f"{self.journal.name} - Volume {self.volume_number}"
+        return f"{self.journal.name} - " + _("Volume") + f" {self.volume_number}"
 
 
 class JournalIssue(models.Model):
@@ -60,7 +60,7 @@ class JournalIssue(models.Model):
         verbose_name_plural = _("Journal Issues")
 
     def __str__(self):
-        return f"{self.volume} - Issue {self.issue_number}"
+        return f"{self.volume} - " + _("Issue") + f" {self.issue_number}"
 
     @property
     def page_range(self):

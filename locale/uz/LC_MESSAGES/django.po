@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-20 17:48+0500\n"
+"POT-Creation-Date: 2024-12-21 23:26+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -70,15 +70,15 @@ msgstr "Arxivlar"
 msgid "Article Information"
 msgstr "Maqola ma’lumotlari"
 
-#: apps/articles/admin.py:15 apps/journals/admin.py:47
+#: apps/articles/admin.py:15 apps/journals/admin.py:63
 msgid "Files"
 msgstr "Fayllar"
 
-#: apps/articles/admin.py:18 apps/journals/admin.py:50
+#: apps/articles/admin.py:18 apps/journals/admin.py:66
 msgid "Page Information"
 msgstr "Sahifa ma’lumotlari"
 
-#: apps/articles/admin.py:21 apps/journals/admin.py:53
+#: apps/articles/admin.py:21 apps/journals/admin.py:69
 msgid "Statistics"
 msgstr "Statistika"
 
@@ -120,9 +120,9 @@ msgid "Rejected"
 msgstr "Rad etilgan"
 
 #: apps/articles/models.py:19 apps/categories/apps.py:8
-#: apps/categories/models.py:11
-msgid "Category"
-msgstr "Kategoriya"
+#: apps/categories/models.py:12
+msgid "Direction"
+msgstr "Yo‘nalish"
 
 #: apps/articles/models.py:21
 msgid "Title"
@@ -149,8 +149,8 @@ msgid "Original Article File"
 msgstr "Asl maqola fayli"
 
 #: apps/articles/models.py:36
-msgid "Accepted file types: .doc, .docx, .odt"
-msgstr "Qabul qilinadigan fayl turlari: .doc, .docx, .odt"
+msgid "Accepted file types: .txt, .doc, .docx, .odt"
+msgstr "Qabul qilinadigan fayl turlari: .txt, .doc, .docx, .odt"
 
 #: apps/articles/models.py:45
 msgid "Revised Article File"
@@ -161,10 +161,10 @@ msgid ""
 "Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
 msgstr ""
-"Qabul qilinadigan fayl turlari: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
-"txt, .rtf"
+"Qabul qilinadigan fayl turlari: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, ."
+"xlsx, .txt, .rtf"
 
-#: apps/articles/models.py:52 apps/journals/models.py:49
+#: apps/articles/models.py:52 apps/journals/models.py:43
 msgid "Start Page"
 msgstr "Boshlang‘ich sahifa"
 
@@ -172,7 +172,7 @@ msgstr "Boshlang‘ich sahifa"
 msgid "Starting page in the journal"
 msgstr "Jurnaldagi boshlang‘ich sahifa"
 
-#: apps/articles/models.py:59 apps/journals/models.py:54
+#: apps/articles/models.py:59 apps/journals/models.py:48
 msgid "End Page"
 msgstr "Oxirgi sahifa"
 
@@ -180,7 +180,7 @@ msgstr "Oxirgi sahifa"
 msgid "Ending page in the journal"
 msgstr "Jurnaldagi oxirgi sahifa"
 
-#: apps/articles/models.py:68 apps/journals/models.py:46
+#: apps/articles/models.py:68 apps/journals/models.py:52
 msgid "Views Count"
 msgstr "Ko‘rishlar soni"
 
@@ -188,7 +188,7 @@ msgstr "Ko‘rishlar soni"
 msgid "Number of times the article has been viewed"
 msgstr "Maqola necha marta ko‘rilgani"
 
-#: apps/articles/models.py:73
+#: apps/articles/models.py:73 apps/journals/models.py:53
 msgid "Downloads Count"
 msgstr "Yuklab olishlar soni"
 
@@ -220,7 +220,7 @@ msgstr "Qabul qilingan sana"
 msgid "Date when the article was accepted"
 msgstr "Maqola qabul qilingan sana"
 
-#: apps/articles/models.py:103 apps/journals/models.py:42
+#: apps/articles/models.py:103 apps/journals/models.py:50
 msgid "Publication Date"
 msgstr "Nashr etilgan sana"
 
@@ -232,9 +232,21 @@ msgstr "Maqola nashr etilgan sana"
 msgid "Last Updated"
 msgstr "Oxirgi yangilanish"
 
-#: apps/articles/models.py:117 apps/journals/models.py:60
+#: apps/articles/models.py:117 apps/journals/models.py:59
 msgid "Journal Issue"
 msgstr "Jurnal soni"
+
+#: apps/articles/serializers/article_create.py:47
+msgid "Direction ID is required."
+msgstr "Yo‘nalish ID kerak."
+
+#: apps/articles/serializers/article_create.py:49
+msgid "Direction not found."
+msgstr "Yo‘nalish topilmadi."
+
+#: apps/articles/views/api_article_create.py:48
+msgid "Article submitted successfully"
+msgstr "Maqola muvaffaqiyatli yuborildi"
 
 #: apps/authors/admin.py:12
 msgid "Personal Information"
@@ -332,25 +344,29 @@ msgstr "ORCID raqami"
 msgid "ORCID identifier"
 msgstr "ORCID identifikatori"
 
-#: apps/authors/models.py:48 apps/categories/models.py:8
+#: apps/authors/models.py:48 apps/categories/models.py:9
 #: apps/journals/models.py:9 apps/journals/models.py:24
-#: apps/journals/models.py:44
+#: apps/journals/models.py:54
 msgid "Created At"
 msgstr "Yaratilgan sana"
 
-#: apps/categories/apps.py:9 apps/categories/models.py:12
-msgid "Categories"
-msgstr "Kategoriyalar"
+#: apps/categories/apps.py:9 apps/categories/models.py:13
+msgid "Directions"
+msgstr "Yo‘nalishlar"
 
 #: apps/categories/models.py:6
-msgid "Category Name"
-msgstr "Kategoriya nomi"
+msgid "Direction Name"
+msgstr "Yo‘nalish nomi"
 
-#: apps/categories/models.py:7 apps/journals/models.py:8
+#: apps/categories/models.py:7
+msgid "Direction Code"
+msgstr "Yo‘nalish kodi"
+
+#: apps/categories/models.py:8 apps/journals/models.py:8
 msgid "Description"
 msgstr "Tavsif"
 
-#: apps/journals/admin.py:44
+#: apps/journals/admin.py:60
 msgid "Issue Information"
 msgstr "Son haqida ma’lumot"
 
@@ -382,33 +398,33 @@ msgstr "Jurnal jildi"
 msgid "Journal Volumes"
 msgstr "Jurnal jildlari"
 
-#: apps/journals/models.py:37
-msgid "Number"
-msgstr "Raqam"
-
-#: apps/journals/models.py:38
+#: apps/journals/models.py:33 apps/journals/models.py:37
 msgid "Volume"
 msgstr "Jild"
 
-#: apps/journals/models.py:39
+#: apps/journals/models.py:38
 msgid "Issue Number"
 msgstr "Son raqami"
 
-#: apps/journals/models.py:40
+#: apps/journals/models.py:39
 msgid "Cover Image"
 msgstr "Muqova rasmi"
 
-#: apps/journals/models.py:41
+#: apps/journals/models.py:40
 msgid "Journal File"
 msgstr "Jurnal fayli"
 
-#: apps/journals/models.py:43
+#: apps/journals/models.py:51
 msgid "Is Published"
 msgstr "Nashr etilganmi"
 
-#: apps/journals/models.py:61
+#: apps/journals/models.py:60
 msgid "Journal Issues"
 msgstr "Jurnal sonlari"
+
+#: apps/journals/models.py:63
+msgid "Issue"
+msgstr "Soni"
 
 #: apps/reviews/apps.py:8
 msgid "Review"
@@ -418,14 +434,14 @@ msgstr "Taqriz"
 msgid "Reviews"
 msgstr "Taqrizlar"
 
-#: core/settings.py:147
-msgid "o‘zbekcha"
-msgstr "o‘zbekcha"
+#: core/settings.py:202
+msgid "O‘zbekcha"
+msgstr "O‘zbekcha"
 
-#: core/settings.py:148
+#: core/settings.py:203
 msgid "Ruscha"
 msgstr "Ruscha"
 
-#: core/settings.py:149
+#: core/settings.py:204
 msgid "English"
 msgstr "Inglizcha"
