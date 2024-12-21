@@ -15,6 +15,11 @@ class AuthorSerializer(serializers.ModelSerializer):
             'academic_degree', 'academic_title', 'orcid'
         ]
 
+    def validate_email(self, value):
+        if not value:
+            raise serializers.ValidationError(_("Email is required."))
+        return value.lower()
+
 
 class ArticleSubmissionSerializer(serializers.ModelSerializer):
     direction_id = serializers.IntegerField(write_only=True)

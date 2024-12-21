@@ -22,7 +22,7 @@ class Author(models.Model):
     country = models.CharField(max_length=100, verbose_name=_("Country"))
     city = models.CharField(max_length=100, verbose_name=_("City"))
     workplace = models.CharField(max_length=200, verbose_name=_("Workplace"))
-    email = models.EmailField(verbose_name=_("Email"))
+    email = models.EmailField(verbose_name=_("Email"), unique=True)
     phone = models.CharField(max_length=20, verbose_name=_("Phone Number"))
     messenger_contact = models.CharField(
         max_length=100,
