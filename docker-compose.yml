@@ -10,6 +10,8 @@ services:
       - "8480:8000"
     volumes:
       - .:/app
+      - ./staticfiles:/app/staticfiles
+      - ./media:/app/media
     depends_on:
       - journal_db
     command: >
