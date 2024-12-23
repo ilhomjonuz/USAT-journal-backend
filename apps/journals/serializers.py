@@ -13,7 +13,7 @@ class JournalIssueListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = JournalIssue
-        fields = ['id', 'journal', 'volume_number', 'issue_number', 'image']
+        fields = ['slug', 'journal', 'volume_number', 'issue_number', 'image']
 
     def read_journal(self, obj) -> str:
         return obj.volume.journal.name
@@ -28,7 +28,7 @@ class ArticleRetrieveJournalIssueSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = JournalIssue
-        fields = ['id', 'journal', 'volume_number', 'issue_number']
+        fields = ['slug', 'journal', 'volume_number', 'issue_number']
 
     def read_journal(self, obj) -> str:
         return obj.volume.journal.name
@@ -46,7 +46,7 @@ class JournalRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = JournalIssue
         fields = [
-            'id', 'journal', 'volume_number', 'issue_number', 'image', 'start_page', 'end_page', 'directions',
+            'slug', 'journal', 'volume_number', 'issue_number', 'image', 'start_page', 'end_page', 'directions',
             'views_count', 'downloads_count', 'publication_date', 'download_url'
         ]
 

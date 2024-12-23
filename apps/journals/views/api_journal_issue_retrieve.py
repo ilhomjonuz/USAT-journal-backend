@@ -10,6 +10,8 @@ class JournalIssueRetrieveAPIView(generics.RetrieveAPIView):
     queryset = JournalIssue.objects.filter(is_published=True)
     serializer_class = JournalRetrieveSerializer
 
+    lookup_field = 'slug'
+
     @swagger_auto_schema(
         operation_description="Get the detail of a journal issue",
         manual_parameters=[
