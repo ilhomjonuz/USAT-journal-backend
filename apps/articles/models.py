@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import FileExtensionValidator, MinValueValidator
 from django.utils import timezone
@@ -19,6 +20,7 @@ class Article(models.Model):
         verbose_name=_("Direction")
     )
     title = models.CharField(max_length=500, verbose_name=_("Title"))
+    slug = models.SlugField(verbose_name=_("Slug"), unique=True)
     keywords = models.TextField(
         verbose_name=_("Keywords"),
         help_text=_("Enter keywords separated by commas")
@@ -129,6 +131,20 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = self.generate_unique_slug()
+        super().save(*args, **kwargs)
+
+    def generate_unique_slug(self):
+        slug = slugify(self.title)
+        unique_slug = slug
+        num = 1
+        while Article.objects.filter(slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
 
     @property
     def is_published(self):

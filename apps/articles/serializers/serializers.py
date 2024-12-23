@@ -11,7 +11,7 @@ class LatestArticleListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ['id', 'title', 'authors']
+        fields = ['title', 'slug', 'authors']
 
 
 class AllArticleListSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class AllArticleListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ['id', 'title', 'authors', 'publication_date', 'views_count', 'downloads_count', 'start_page', 'end_page', 'download_url']
+        fields = ['title', 'slug', 'authors', 'publication_date', 'views_count', 'downloads_count', 'start_page', 'end_page', 'download_url']
 
     def get_download_url(self, obj):
         request = self.context.get('request')
@@ -38,7 +38,7 @@ class ArticleRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = [
-            'id', 'title', 'journal_issue', 'authors', 'keywords',
+            'title', 'slug', 'journal_issue', 'authors', 'keywords',
             'annotation', 'start_page', 'end_page',
             'views_count', 'downloads_count', 'download_url', 'publication_date'
         ]
@@ -62,7 +62,7 @@ class JournalIssueRetrieveArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = ['id', 'title', 'authors', 'start_page', 'end_page', 'views_count', 'downloads_count', 'download_url', 'publication_date']
+        fields = ['title', 'slug', 'authors', 'start_page', 'end_page', 'views_count', 'downloads_count', 'download_url', 'publication_date']
 
     def get_download_url(self, obj):
         request = self.context.get('request')

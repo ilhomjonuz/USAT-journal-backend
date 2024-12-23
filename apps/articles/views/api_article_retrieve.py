@@ -10,6 +10,8 @@ class ArticleRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Article.objects.filter(status='PUBLISHED', journal_issue__is_published=True)
     serializer_class = ArticleRetrieveSerializer
 
+    lookup_field = 'slug'
+
     @swagger_auto_schema(
         operation_description="Get the latest published journal issues",
         manual_parameters=[
