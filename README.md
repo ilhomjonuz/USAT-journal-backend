@@ -26,15 +26,15 @@ This project provides an API for managing journals, articles, authors, and direc
    export CSRF_TRUSTED_ORIGINS=<your-csrf-trusted-origins>
 
    # Docker Container
-   export DATABASE_URL=postgres://root:password@journal_db:5432/db_name
-   export DJANGO_SUPERUSER_USERNAME=user
-   export DJANGO_SUPERUSER_EMAIL=user@gmail.com
-   export DJANGO_SUPERUSER_PASSWORD=password
+   export DATABASE_URL=postgres://<your-username>:<your-password>@journal_db:5432/<your-database-name>
+   export DJANGO_SUPERUSER_USERNAME=<your-superuser-username>
+   export DJANGO_SUPERUSER_EMAIL=<your-superuser-email>
+   export DJANGO_SUPERUSER_PASSWORD=<your-superuser-password>
 
    # Database Parameters
-   export POSTGRES_DB=db_name
-   export POSTGRES_USER=root
-   export POSTGRES_PASSWORD=password
+   export POSTGRES_DB=<your-database-name>
+   export POSTGRES_USER=<your-username>
+   export POSTGRES_PASSWORD=<your-password>
    export POSTGRES_HOST=journal_db
    export POSTGRES_PORT=5432
 
