@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-21 23:26+0500\n"
+"POT-Creation-Date: 2024-12-23 15:39+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,77 +86,81 @@ msgstr "Statistika"
 msgid "Status and Dates"
 msgstr "Holat va sanalar"
 
-#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:13
-#: apps/journals/models.py:21
+#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:14
+#: apps/journals/models.py:22
 msgid "Journal"
 msgstr "Jurnal"
 
-#: apps/articles/admin.py:35 apps/articles/models.py:13
+#: apps/articles/admin.py:35 apps/articles/models.py:14
 msgid "Published"
 msgstr "Nashr etilgan"
 
-#: apps/articles/apps.py:8 apps/articles/models.py:121
+#: apps/articles/apps.py:8 apps/articles/models.py:123
 msgid "Article"
 msgstr "Maqola"
 
-#: apps/articles/apps.py:9 apps/articles/models.py:122
+#: apps/articles/apps.py:9 apps/articles/models.py:124
 msgid "Articles"
 msgstr "Maqolalar"
 
-#: apps/articles/models.py:9
+#: apps/articles/models.py:10
 msgid "Submitted"
 msgstr "Topshirilgan"
 
-#: apps/articles/models.py:10
+#: apps/articles/models.py:11
 msgid "Under Review"
 msgstr "Ko‘rib chiqilmoqda"
 
-#: apps/articles/models.py:11
+#: apps/articles/models.py:12
 msgid "Accepted"
 msgstr "Qabul qilingan"
 
-#: apps/articles/models.py:12
+#: apps/articles/models.py:13
 msgid "Rejected"
 msgstr "Rad etilgan"
 
-#: apps/articles/models.py:19 apps/categories/apps.py:8
+#: apps/articles/models.py:20 apps/categories/apps.py:8
 #: apps/categories/models.py:12
 msgid "Direction"
 msgstr "Yo‘nalish"
 
-#: apps/articles/models.py:21
+#: apps/articles/models.py:22
 msgid "Title"
 msgstr "Sarlavha"
 
-#: apps/articles/models.py:23
+#: apps/articles/models.py:23 apps/journals/models.py:38
+msgid "Slug"
+msgstr "Slug"
+
+#: apps/articles/models.py:25
 msgid "Keywords"
 msgstr "Kalit so‘zlar"
 
-#: apps/articles/models.py:24
+#: apps/articles/models.py:26
 msgid "Enter keywords separated by commas"
 msgstr "Kalit so‘zlarni vergul bilan ajratib kiriting"
 
-#: apps/articles/models.py:26
+#: apps/articles/models.py:28
 msgid "Annotation"
 msgstr "Annotatsiya"
 
-#: apps/articles/models.py:30 apps/authors/apps.py:9 apps/authors/models.py:52
+#: apps/articles/models.py:32 apps/authors/apps.py:9 apps/authors/models.py:52
 msgid "Authors"
 msgstr "Mualliflar"
 
-#: apps/articles/models.py:35
+#: apps/articles/models.py:37
 msgid "Original Article File"
 msgstr "Asl maqola fayli"
 
-#: apps/articles/models.py:36
+#: apps/articles/models.py:38
 msgid "Accepted file types: .txt, .doc, .docx, .odt"
 msgstr "Qabul qilinadigan fayl turlari: .txt, .doc, .docx, .odt"
 
-#: apps/articles/models.py:45
+#: apps/articles/models.py:47
 msgid "Revised Article File"
 msgstr "Qayta ko‘rib chiqilgan maqola fayli"
 
-#: apps/articles/models.py:46
+#: apps/articles/models.py:48
 msgid ""
 "Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
@@ -164,89 +168,105 @@ msgstr ""
 "Qabul qilinadigan fayl turlari: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, ."
 "xlsx, .txt, .rtf"
 
-#: apps/articles/models.py:52 apps/journals/models.py:43
+#: apps/articles/models.py:54 apps/journals/models.py:45
 msgid "Start Page"
 msgstr "Boshlang‘ich sahifa"
 
-#: apps/articles/models.py:55
+#: apps/articles/models.py:57
 msgid "Starting page in the journal"
 msgstr "Jurnaldagi boshlang‘ich sahifa"
 
-#: apps/articles/models.py:59 apps/journals/models.py:48
+#: apps/articles/models.py:61 apps/journals/models.py:50
 msgid "End Page"
 msgstr "Oxirgi sahifa"
 
-#: apps/articles/models.py:62
+#: apps/articles/models.py:64
 msgid "Ending page in the journal"
 msgstr "Jurnaldagi oxirgi sahifa"
 
-#: apps/articles/models.py:68 apps/journals/models.py:52
+#: apps/articles/models.py:70 apps/journals/models.py:54
 msgid "Views Count"
 msgstr "Ko‘rishlar soni"
 
-#: apps/articles/models.py:69
+#: apps/articles/models.py:71
 msgid "Number of times the article has been viewed"
 msgstr "Maqola necha marta ko‘rilgani"
 
-#: apps/articles/models.py:73 apps/journals/models.py:53
+#: apps/articles/models.py:75 apps/journals/models.py:55
 msgid "Downloads Count"
 msgstr "Yuklab olishlar soni"
 
-#: apps/articles/models.py:74
+#: apps/articles/models.py:76
 msgid "Number of times the article has been downloaded"
 msgstr "Maqola necha marta yuklab olingani"
 
-#: apps/articles/models.py:82
+#: apps/articles/models.py:84
 msgid "Status"
 msgstr "Holat"
 
-#: apps/articles/models.py:86
+#: apps/articles/models.py:88
 msgid "Submission Date"
 msgstr "Topshirish sanasi"
 
-#: apps/articles/models.py:91
+#: apps/articles/models.py:93
 msgid "Review Date"
 msgstr "Ko‘rib chiqish sanasi"
 
-#: apps/articles/models.py:92
+#: apps/articles/models.py:94
 msgid "Date when the article was sent for review"
 msgstr "Maqola ko‘rib chiqishga yuborilgan sana"
 
-#: apps/articles/models.py:97
+#: apps/articles/models.py:99
 msgid "Acceptance Date"
 msgstr "Qabul qilingan sana"
 
-#: apps/articles/models.py:98
+#: apps/articles/models.py:100
 msgid "Date when the article was accepted"
 msgstr "Maqola qabul qilingan sana"
 
-#: apps/articles/models.py:103 apps/journals/models.py:50
+#: apps/articles/models.py:105 apps/journals/models.py:52
 msgid "Publication Date"
 msgstr "Nashr etilgan sana"
 
-#: apps/articles/models.py:104
+#: apps/articles/models.py:106
 msgid "Date when the article was published"
 msgstr "Maqola nashr etilgan sana"
 
-#: apps/articles/models.py:108
+#: apps/articles/models.py:110
 msgid "Last Updated"
 msgstr "Oxirgi yangilanish"
 
-#: apps/articles/models.py:117 apps/journals/models.py:59
+#: apps/articles/models.py:119 apps/journals/models.py:61
 msgid "Journal Issue"
 msgstr "Jurnal soni"
 
-#: apps/articles/serializers/article_create.py:47
-msgid "Direction ID is required."
-msgstr "Yo‘nalish ID kerak."
+#: apps/articles/serializers/article_create.py:33
+msgid "Direction id is required"
+msgstr "Yo’nalish id kiritilishi kerak"
 
-#: apps/articles/serializers/article_create.py:49
-msgid "Direction not found."
-msgstr "Yo‘nalish topilmadi."
+#: apps/articles/serializers/article_create.py:36
+msgid "Invalid direction id"
+msgstr "Yo’nalish id xato"
 
-#: apps/articles/views/api_article_create.py:48
+#: apps/articles/views/api_article_create.py:99
+msgid "Media directory is not writable: "
+msgstr "Media katalogga yozish mumkin emas: "
+
+#: apps/articles/views/api_article_create.py:114
 msgid "Article submitted successfully"
 msgstr "Maqola muvaffaqiyatli yuborildi"
+
+#: apps/articles/views/api_article_download.py:30
+msgid "Error reading file"
+msgstr "Faylni o‘qishda xatolik"
+
+#: apps/articles/views/api_article_download.py:32
+msgid "File not found on server"
+msgstr "Fayl serverda topilmadi"
+
+#: apps/articles/views/api_article_download.py:34
+msgid "No revised file available for this article"
+msgstr "Bu maqolada qayta ko‘rilgan fayl mavjud emas"
 
 #: apps/authors/admin.py:12
 msgid "Personal Information"
@@ -345,8 +365,8 @@ msgid "ORCID identifier"
 msgstr "ORCID identifikatori"
 
 #: apps/authors/models.py:48 apps/categories/models.py:9
-#: apps/journals/models.py:9 apps/journals/models.py:24
-#: apps/journals/models.py:54
+#: apps/journals/models.py:10 apps/journals/models.py:25
+#: apps/journals/models.py:56
 msgid "Created At"
 msgstr "Yaratilgan sana"
 
@@ -362,67 +382,71 @@ msgstr "Yo‘nalish nomi"
 msgid "Direction Code"
 msgstr "Yo‘nalish kodi"
 
-#: apps/categories/models.py:8 apps/journals/models.py:8
+#: apps/categories/models.py:8 apps/journals/models.py:9
 msgid "Description"
 msgstr "Tavsif"
+
+#: apps/dashboard/apps.py:8 apps/dashboard/apps.py:9
+msgid "Dashboard"
+msgstr "Dashboard"
 
 #: apps/journals/admin.py:60
 msgid "Issue Information"
 msgstr "Son haqida ma’lumot"
 
-#: apps/journals/apps.py:9 apps/journals/models.py:14
+#: apps/journals/apps.py:9 apps/journals/models.py:15
 msgid "Journals"
 msgstr "Jurnallar"
 
-#: apps/journals/models.py:7
+#: apps/journals/models.py:8
 msgid "Journal Name"
 msgstr "Jurnal nomi"
 
-#: apps/journals/models.py:10
+#: apps/journals/models.py:11
 msgid "Updated At"
 msgstr "Yangilangan sana"
 
-#: apps/journals/models.py:22
+#: apps/journals/models.py:23
 msgid "Volume Number"
 msgstr "Jild raqami"
 
-#: apps/journals/models.py:23
+#: apps/journals/models.py:24
 msgid "Year"
 msgstr "Yil"
 
-#: apps/journals/models.py:29
+#: apps/journals/models.py:30
 msgid "Journal Volume"
 msgstr "Jurnal jildi"
 
-#: apps/journals/models.py:30
+#: apps/journals/models.py:31
 msgid "Journal Volumes"
 msgstr "Jurnal jildlari"
 
-#: apps/journals/models.py:33 apps/journals/models.py:37
+#: apps/journals/models.py:34 apps/journals/models.py:39
 msgid "Volume"
 msgstr "Jild"
 
-#: apps/journals/models.py:38
+#: apps/journals/models.py:40
 msgid "Issue Number"
 msgstr "Son raqami"
 
-#: apps/journals/models.py:39
+#: apps/journals/models.py:41
 msgid "Cover Image"
 msgstr "Muqova rasmi"
 
-#: apps/journals/models.py:40
+#: apps/journals/models.py:42
 msgid "Journal File"
 msgstr "Jurnal fayli"
 
-#: apps/journals/models.py:51
+#: apps/journals/models.py:53
 msgid "Is Published"
 msgstr "Nashr etilganmi"
 
-#: apps/journals/models.py:60
+#: apps/journals/models.py:62
 msgid "Journal Issues"
 msgstr "Jurnal sonlari"
 
-#: apps/journals/models.py:63
+#: apps/journals/models.py:65
 msgid "Issue"
 msgstr "Soni"
 
