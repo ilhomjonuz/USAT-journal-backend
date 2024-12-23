@@ -22,6 +22,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path('', include('apps.dashboard.urls')),
     path('api/docs/swagger<format>/', login_required(schema_view.without_ui(cache_timeout=0)), name='schema-json'),
     path('api/docs/swagger/', login_required(schema_view.with_ui('swagger', cache_timeout=0)), name='schema-swagger-ui'),
     path('api/docs/redoc/', login_required(schema_view.with_ui('redoc', cache_timeout=0)), name='schema-redoc'),

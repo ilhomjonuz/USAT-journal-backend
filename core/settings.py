@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.ArticlesConfig',
     'apps.AuthorsConfig',
     'apps.CategoriesConfig',
+    'apps.DashboardConfig',
     'apps.JournalsConfig',
     'apps.ReviewsConfig',
 ]
@@ -236,8 +237,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.User'
 
 LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/accounts/login/'
-LOGOUT_REDIRECT_URL = '/accounts/login/'
+LOGIN_URL = '/admin/login/'
+LOGOUT_REDIRECT_URL = '/admin/login/'
 
 # File upload
 DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
