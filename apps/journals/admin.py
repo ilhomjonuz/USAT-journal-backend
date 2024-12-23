@@ -32,6 +32,8 @@ class JournalAdmin(TabbedTranslationAdmin):
 class JournalIssueInline(admin.TabularInline):
     model = JournalIssue
     extra = 1
+    fields = ('issue_number', 'image', 'journal_file', 'start_page', 'end_page', 'is_published', 'publication_date')
+    readonly_fields = ('views_count',)
 
 
 class JournalVolumeAdmin(admin.ModelAdmin):
