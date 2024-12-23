@@ -105,58 +105,8 @@ This project provides an API for managing journals, articles, authors, and direc
 
 Authentication is required to access the API documentation. Use your superuser credentials to log in.
 
-## Docker Compose Configuration
-
-The `docker-compose.yml` file includes two services:
-
-### 1. Django API Service (`django_api`)
-- Builds the Django application.
-- Migrates the database, collects static files, and creates a superuser on startup.
-- Runs the application using Gunicorn.
-
-### 2. PostgreSQL Service (`journal_db`)
-- Uses the `postgres:14-alpine` image.
-- Stores data in a persistent volume `postgres_data`.
-
-Example `docker-compose.yml`:
-```yaml
-version: '3.9'
-
-services:
-  django_api:
-    build:
-      context: .
-    container_name: django_api
-    env_file: .env
-    ports:
-      - "8480:8000"
-    volumes:
-      - .:/app
-      - ./staticfiles:/app/staticfiles
-      - ./media:/app/media
-    depends_on:
-      - journal_db
-    command: >
-      sh -c "
-            python manage.py compilemessages &&
-            python manage.py migrate &&
-            python manage.py collectstatic --noinput &&
-            python manage.py createsuperuser --noinput || echo 'Superuser yaratilmadi.' &&
-            gunicorn core.wsgi:application --bind 0.0.0.0:8000"
-
-  journal_db:
-    image: postgres:14-alpine
-    container_name: journal_db
-    env_file: .env
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-volumes:
-  postgres_data:
-```
-
 ## Additional Notes
 - Replace placeholders in the `.env` file with your actual values.
 - The API uses DRF and is secured with authentication. Ensure proper credentials are set for accessing restricted endpoints.
-
-Feel free to modify this file to meet your project's needs.
+- The project is containerized using Docker for ease of deployment and scalability.
+- The database is managed using PostgreSQL.
