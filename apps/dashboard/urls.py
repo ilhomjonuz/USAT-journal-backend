@@ -1,7 +1,7 @@
 from django.urls import path
 
-from apps.dashboard.views import redirect_admin
+from apps.dashboard.views import dashboard
 
 urlpatterns = [
-    path('', redirect_admin, name='redirect-admin'),
+    path('', dashboard, name='dashboard'),
 ]

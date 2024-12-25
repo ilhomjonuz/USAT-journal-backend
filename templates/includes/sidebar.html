@@ -1,0 +1,137 @@
+{% load static %}
+{% load i18n %}
+
+<div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
+    <div class="nk-sidebar-element nk-sidebar-head">
+        <div class="nk-sidebar-brand">
+            <a href="{% url 'dashboard' %}" class="logo-link nk-sidebar-logo">
+                <img class="logo-light logo-img" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo2x.png' %} 2x" alt="logo">
+                <img class="logo-dark logo-img" src="{% static 'images/logo-dark.png' %}" srcset="{% static 'images/logo-dark2x.png' %} 2x" alt="logo-dark">
+            </a>
+        </div>
+        <div class="nk-menu-trigger me-n2">
+            <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu"><em class="icon ni ni-arrow-left"></em></a>
+        </div>
+    </div><!-- .nk-sidebar-element -->
+    <div class="nk-sidebar-element">
+        <div class="nk-sidebar-body" data-simplebar>
+            <div class="nk-sidebar-content">
+                <div class="nk-sidebar-menu">
+                    <ul class="nk-menu">
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">{% trans 'Dashboards' %}</h6>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{% url 'dashboard' %}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
+                                <span class="nk-menu-text">{% trans 'Journal dashboard' %}</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">{% trans 'Applications' %}</h6>
+                        </li><!-- .nk-menu-heading -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
+                                <span class="nk-menu-text">{% trans 'Journal' %}</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class=""></em>
+                                        <span class="nk-menu-text">{% trans 'Journals' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class=""></em>
+                                        <span class="nk-menu-text">{% trans 'Journal volumes' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class=""></em>
+                                        <span class="nk-menu-text">{% trans 'Journal issues' %}</span>
+                                    </a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-card-view"></em></span>
+                                <span class="nk-menu-text">{% trans 'Articles' %}</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class="icon ni ni-file-text"></em>
+                                        <span class="nk-menu-text">{% trans 'Submitted articles' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class="icon ni ni-eye"></em>
+                                        <span class="nk-menu-text">{% trans 'Under Review articles' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class="icon ni ni-check"></em>
+                                        <span class="nk-menu-text">{% trans 'Accepted articles' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class="icon ni ni-cross-circle"></em>
+                                        <span class="nk-menu-text">{% trans 'Rejected articles' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class="icon ni ni-check-circle"></em>
+                                        <span class="nk-menu-text">{% trans 'Published articles' %}</span>
+                                    </a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
+                                <span class="nk-menu-text">{% trans 'Users' %}</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class=""></em>
+                                        <span class="nk-menu-text">{% trans 'Authors' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="#" class="nk-menu-link">
+                                        <em class=""></em>
+                                        <span class="nk-menu-text">{% trans 'Reviewers' %}</span>
+                                    </a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="#" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-card-view"></em></span>
+                                <span class="nk-menu-text">{% trans 'Directions' %}</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">{% trans 'Authentication' %}</h6>
+                        </li><!-- .nk-menu-heading -->
+                        <li class="nk-menu-item">
+                            <a href="#" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-signout"></em></span>
+                                <span class="nk-menu-text">{% trans 'Sign out' %}</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                    </ul><!-- .nk-menu -->
+                </div><!-- .nk-sidebar-menu -->
+            </div><!-- .nk-sidebar-content -->
+        </div><!-- .nk-sidebar-body -->
+    </div><!-- .nk-sidebar-element -->
+</div>

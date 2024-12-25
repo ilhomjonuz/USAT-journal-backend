@@ -13,13 +13,13 @@ class CustomUserAdmin(UserAdmin):
         ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login', 'date_joined')}),
-        ('Role', {'fields': ('role',)}),
+        ('Role', {'fields': ('role', 'prefers_dark_mode')}),
     )
     add_fieldsets = (
         (None, {'fields': ('username', 'password1', 'password2')}),
         ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Role', {'fields': ('role',)}),
+        ('Role', {'fields': ('role', 'prefers_dark_mode')}),
     )
     filter_horizontal = ('groups', 'user_permissions')
 

@@ -1,0 +1,14 @@
+.alert{
+    &-cta{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-actions{
+        display: inline-flex;
+        align-items: center;
+        a+a{
+            margin-left: 1rem;
+        }
+    }
+}

@@ -60,11 +60,11 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'core.utils.LanguageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'core.utils.LanguageMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -194,15 +194,18 @@ TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_L10N = True
 
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+USE_TZ = True
 
 LANGUAGES = [
     ('uz', _('O‘zbekcha')),
     ('ru', _('Ruscha')),
     ('en', _('English')),
 ]
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+MODELTRANSLATION_LANGUAGES = ('uz', 'ru', 'en')
 
 LOCALE_PATHS = [
     BASE_DIR / 'locale',

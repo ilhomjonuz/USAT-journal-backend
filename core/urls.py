@@ -8,6 +8,8 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from apps.dashboard.views import redirect_dashboard
+
 schema_view = get_schema_view(
    openapi.Info(
       title="USAT journal API",
@@ -22,7 +24,8 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', include('apps.dashboard.urls')),
+    path('', redirect_dashboard, name='redirect-dashboard'),
+    path('accounts/', include('apps.accounts.urls')),
     path('api/docs/swagger<format>/', login_required(schema_view.without_ui(cache_timeout=0)), name='schema-json'),
     path('api/docs/swagger/', login_required(schema_view.with_ui('swagger', cache_timeout=0)), name='schema-swagger-ui'),
     path('api/docs/redoc/', login_required(schema_view.with_ui('redoc', cache_timeout=0)), name='schema-redoc'),
@@ -34,10 +37,16 @@ urlpatterns = [
     path('api/v1/directions/', include('apps.categories.urls')),
 ]
 
+urlpatterns += i18n_patterns(
+    path('dashboard/', include('apps.dashboard.urls')),  # Dashboard uchun
+    path('admin/', admin.site.urls),  # Admin uchun
+    prefix_default_language=False
+)
+
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-urlpatterns += i18n_patterns(
-    path('admin/', admin.site.urls),
-    prefix_default_language=False
-)
+if settings.USE_I18N:
+    urlpatterns += [
+        path('i18n/', include('django.conf.urls.i18n')),
+    ]

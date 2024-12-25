@@ -1,0 +1,89 @@
+
+.nk-stepper{
+    display: none;
+    &-nav{
+        display: flex;
+        margin: -.5rem;
+        counter-reset: step-number;
+        > *{
+            padding: .5rem;
+            .step-item{
+                display: flex;
+                align-items: center;
+                &:before{
+                    counter-increment: step-number;
+                    content: counter(step-number);
+                    display: grid;
+                    place-items: center;
+                    height:32px;
+                    width:32px;
+                    border-radius: 100px;
+                    color: $accent-color;
+                    background: rgba($accent-color,.15);
+                    margin-right: 1.125rem;
+                    flex-shrink: 0;
+                    flex-grow: 0;
+                }
+            }
+            &.done .step-item:before{
+                font-family: $nk-dashlite-font;
+                content: $ni-check-thick;
+            }
+            &.current .step-item:before{
+                color: $white;
+                background: $accent-color;
+            }
+        }
+        &.is-vr{
+            flex-direction: column;
+        }
+        &-s2{
+            > *{
+                .step-item{
+                    border-radius: $border-radius;
+                    padding: 1rem 1.25rem;
+                    background: $lighter;
+                    border-left: 2px solid transparent;
+                    height: 100%;
+                }
+                &.current .step-item{
+                    border-left-color: $accent-color;
+                }
+                &.done .step-item:before{
+                    color: $white;
+                    background: $accent-color;
+                }
+            }
+        }
+    } 
+    &-step{
+        display: none;
+        &.active{
+            display: block;
+        }
+    }
+    &-pagination{
+        display: flex;
+        li{
+            display: none;
+        }
+    }
+    &-s1[data-step-current="last"]{
+        .stepper-pagination{
+            justify-content: center;
+        }
+    }
+}
+
+@each $name, $value in $container-max-widths {
+    @include media-breakpoint-up($name){
+        .nk-stepper-nav{
+            &.is-vr-#{$name}{
+                flex-direction: column;
+            }
+            &.is-hr-#{$name}{
+                flex-direction: row;
+            }
+        }
+    }
+}
