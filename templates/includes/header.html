@@ -8,9 +8,15 @@
                 <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
             </div>
             <div class="nk-header-brand d-xl-none">
-                <a href="{% url 'dashboard' %}" class="logo-link">
-                    <img class="logo-light logo-img" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo2x.png' %} 2x" alt="logo">
-                    <img class="logo-dark logo-img" src="{% static 'images/logo-dark.png' %}" srcset="{% static 'images/logo-dark2x.png' %} 2x" alt="logo-dark">
+                <a href="{% url 'dashboard' %}" class="logo-link nk-sidebar-logo">
+                    <div class="logo-wrapper flex items-center space-x-2">
+                        <div class="logo-container">
+                            <h4 class="text-2xl font-bold">
+                                <img src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="{% trans 'JournalAdmin Logo' %}" class="logo-image w-10 h-10 object-contain">
+                                {% trans 'JournalAdmin' %}
+                            </h4>
+                        </div>
+                    </div>
                 </a>
             </div><!-- .nk-header-brand -->
             <form method="post" style="display: none;">
