@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'corsheaders',
+    'crispy_forms',
+    'crispy_bootstrap4',
 
     # local apps
     'apps.AccountsConfig',
@@ -140,6 +142,10 @@ TEMPLATES = [
         },
     },
 ]
+
+# CRISPY FORMS
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
