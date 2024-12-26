@@ -1,0 +1,88 @@
+{# templates/article-admin/article_confirm_delete.html #}
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Confirm Delete Article' %}{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between g-3">
+                    <div class="nk-block-head-content">
+                        <h2 class="nk-block-title fw-normal">{% trans 'Confirm Delete Article' %}</h2>
+                        <div class="nk-block-des text-soft">
+                            <p>{% trans 'Are you sure you want to delete this article?' %}</p>
+                        </div>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <a href="{% url 'article_detail' object.pk %}" class="btn btn-outline-light bg-white d-none d-sm-inline-flex">
+                            <em class="icon ni ni-arrow-left"></em>
+                            <span>{% trans 'Back' %}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <h3 class="title">{% trans 'Article Details' %}</h3>
+                        <table class="table table-ulogs">
+                            <tbody>
+                                <tr>
+                                    <td class="tb-col-os"><span class="overline-title">{% trans 'Title' %}</span></td>
+                                    <td class="tb-col-ip"><span class="sub-text">{{ object.title }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-col-os"><span class="overline-title">{% trans 'Category' %}</span></td>
+                                    <td class="tb-col-ip"><span class="sub-text">{{ object.category.name }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-col-os"><span class="overline-title">{% trans 'Authors' %}</span></td>
+                                    <td class="tb-col-ip"><span class="sub-text">{{ object.authors.all|join:", " }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-col-os"><span class="overline-title">{% trans 'Status' %}</span></td>
+                                    <td class="tb-col-ip">
+                                        <span class="badge badge-dot badge-{{ object.status|lower }}">
+                                            {{ object.get_status_display }}
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-col-os"><span class="overline-title">{% trans 'Submission Date' %}</span></td>
+                                    <td class="tb-col-ip"><span class="sub-text">{{ object.submission_date|date:"d M Y" }}</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="alert alert-warning mt-5">
+                            <p>{% trans 'Warning: This action cannot be undone. All data associated with this article will be permanently deleted.' %}</p>
+                        </div>
+
+                        <form method="post" class="mt-5">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger btn-lg">{% trans 'Confirm Delete' %}</button>
+                                <a href="{% url 'article_detail' object.pk %}" class="btn btn-outline-secondary btn-lg">{% trans 'Cancel' %}</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

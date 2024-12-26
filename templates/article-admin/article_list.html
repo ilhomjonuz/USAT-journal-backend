@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between g-3">
+                    <div class="nk-block-head-content">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <h3 class="nk-block-title page-title">{% trans "Articles" %}</h3>
+                        <div class="nk-block-des text-soft">
+                            <p>{% trans "You have total" %} <span class="text-base">{{ articles.count }}</span> {% trans "articles" %}.</p>
+                        </div>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <a href="{% url 'article_create' %}" class="btn btn-primary d-none d-sm-inline-flex">
+                            <em class="icon ni ni-plus"></em><span>{% trans "Add Article" %}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <!-- Search and Filter Form -->
+                        <div class="card-inner position-relative card-tools-toggle">
+                            <form method="get" id="filterForm" action="{% url 'article_list' %}">
+                                <div class="card-title-group">
+                                    <div class="card-tools">
+                                        <div class="form-inline flex-nowrap gx-3">
+                                            <div class="form-wrap w-150px">
+                                                <select name="status" class="form-select js-select2" data-search="off">
+                                                    <option value="">{% trans "Any Status" %}</option>
+                                                    {% for status, label in article_status_choices %}
+                                                        <option value="{{ status }}" {% if request.GET.status == status %}selected{% endif %}>
+                                                            {{ label }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-wrap w-150px">
+                                                <select name="category" class="form-select js-select2" data-search="off">
+                                                    <option value="">{% trans "Any Category" %}</option>
+                                                    {% for category in categories %}
+                                                        <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"i" %}selected{% endif %}>
+                                                            {{ category.name }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-wrap flex-grow-1">
+                                                <div class="form-control-wrap">
+                                                    <div class="form-icon form-icon-left">
+                                                        <em class="icon ni ni-search"></em>
+                                                    </div>
+                                                    <input type="search" name="search" class="form-control"
+                                                           value="{{ request.GET.search|default:'' }}"
+                                                           placeholder="{% trans 'Search by title or keywords' %}">
+                                                </div>
+                                            </div>
+                                            <div class="btn-wrap">
+                                                <button type="submit" class="btn btn-primary">{% trans "Filter" %}</button>
+                                                {% if request.GET.search or request.GET.status or request.GET.category %}
+                                                    <a href="{% url 'article_list' %}" class="btn btn-outline-light">{% trans "Reset" %}</a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Article List -->
+                        <div class="card-inner p-0">
+                            <div class="nk-tb-list nk-tb-ulist">
+                                <!-- Table Header -->
+                                <div class="nk-tb-item nk-tb-head">
+                                    <div class="nk-tb-col nk-tb-col-check">
+                                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                                            <input type="checkbox" class="custom-control-input" id="selectAll">
+                                            <label class="custom-control-label" for="selectAll"></label>
+                                        </div>
+                                    </div>
+                                    <div class="nk-tb-col"><span>{% trans "Title" %}</span></div>
+                                    <div class="nk-tb-col tb-col-mb"><span>{% trans "Category" %}</span></div>
+                                    <div class="nk-tb-col tb-col-md"><span>{% trans "Documents" %}</span></div>
+                                    <div class="nk-tb-col tb-col-lg"><span>{% trans "Submitted" %}</span></div>
+                                    <div class="nk-tb-col tb-col-md"><span>{% trans "Status" %}</span></div>
+                                    <div class="nk-tb-col nk-tb-col-tools">&nbsp;</div>
+                                </div>
+
+                                <!-- Table Body -->
+                                {% for article in articles %}
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col nk-tb-col-check">
+                                        <div class="custom-control custom-control-sm custom-checkbox notext">
+                                            <input type="checkbox" class="custom-control-input" id="uid{{ article.id }}" name="selected_articles" value="{{ article.id }}">
+                                            <label class="custom-control-label" for="uid{{ article.id }}"></label>
+                                        </div>
+                                    </div>
+                                    <div class="nk-tb-col">
+                                        <a href="{% url 'article_detail' article.id %}"><span class="tb-lead">{{ article.title }}</span></a>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-mb">
+                                        <span class="tb-lead-sub">{{ article.category.name }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <ul class="list-inline list-download">
+                                            {% if article.original_file %}
+                                            <li>{% trans "Original File" %} <a href="{% url 'article_download_file' article.id 'original' %}" class="popup">
+                                                <em class="icon ni ni-download"></em></a>
+                                            </li>
+                                            {% endif %}
+                                            {% if article.revised_file %}
+                                            <li>{% trans "Revised File" %} <a href="{% url 'article_download_file' article.id 'revised' %}" class="popup">
+                                                <em class="icon ni ni-download"></em></a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-lg">
+                                        <span class="tb-date">{{ article.submission_date|date:"d M, Y h:i A" }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        {% if article.status == 'PUBLISHED' %}
+                                            <span class="badge text-success bg-success-dim">{{ article.get_status_display }}</span>
+                                        {% elif article.status == 'UNDER_REVIEW' %}
+                                            <span class="badge text-info bg-info-dim">{{ article.get_status_display }}</span>
+                                        {% elif article.status == 'REJECTED' %}
+                                            <span class="badge text-danger bg-danger-dim">{{ article.get_status_display }}</span>
+                                        {% elif article.status == 'ACCEPTED' %}
+                                            <span class="badge text-primary bg-primary-dim">{{ article.get_status_display }}</span>
+                                        {% else %}
+                                            <span class="badge text-warning bg-warning-dim">{{ article.get_status_display }}</span>
+                                        {% endif %}
+                                        {% if article.review_date %}
+                                        <span data-bs-toggle="tooltip" title="{% trans 'Reviewed at' %} {{ article.review_date|date:'d M, Y h:i A' }}" data-bs-placement="top">
+                                            <em class="icon ni ni-info"></em>
+                                        </span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="nk-tb-col nk-tb-col-tools">
+                                        <ul class="nk-tb-actions gx-1">
+                                            <li class="nk-tb-action-hidden">
+                                                <a href="{% url 'article_detail' article.id %}" class="btn btn-trigger btn-icon" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Quick View' %}">
+                                                    <em class="icon ni ni-eye-fill"></em>
+                                                </a>
+                                            </li>
+                                            <li class="nk-tb-action-hidden">
+                                                <a href="#" class="btn btn-trigger btn-icon article-action" data-action="accept" data-article-id="{{ article.id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Accept' %}">
+                                                    <em class="icon ni ni-check-fill-c"></em>
+                                                </a>
+                                            </li>
+                                            <li class="nk-tb-action-hidden">
+                                                <a href="#" class="btn btn-trigger btn-icon article-action" data-action="reject" data-article-id="{{ article.id }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{% trans 'Reject' %}">
+                                                    <em class="icon ni ni-cross-fill-c"></em>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <div class="drodown">
+                                                    <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown">
+                                                        <em class="icon ni ni-more-h"></em>
+                                                    </a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <ul class="link-list-opt no-bdr">
+                                                            <li>
+                                                                <a href="{% url 'article_detail' article.id %}">
+                                                                    <em class="icon ni ni-eye"></em><span>{% trans "View Details" %}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{% url 'article_update' article.id %}">
+                                                                    <em class="icon ni ni-edit"></em><span>{% trans "Edit" %}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li class="divider"></li>
+                                                            <li>
+                                                                <a href="#" class="article-action" data-action="set_under_review" data-article-id="{{ article.id }}">
+                                                                    <em class="icon ni ni-eye"></em><span>{% trans "Set Under Review" %}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" class="article-action" data-action="accept" data-article-id="{{ article.id }}">
+                                                                    <em class="icon ni ni-check-round"></em><span>{% trans "Accept" %}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" class="article-action" data-action="reject" data-article-id="{{ article.id }}">
+                                                                    <em class="icon ni ni-na"></em><span>{% trans "Reject" %}</span>
+                                                                </a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" class="article-action" data-action="publish" data-article-id="{{ article.id }}">
+                                                                    <em class="icon ni ni-share"></em><span>{% trans "Publish" %}</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        {% if page_obj.has_other_pages %}
+                        <div class="card-inner">
+                            <div class="nk-block-between-md g-3">
+                                <div class="g">
+                                    <ul class="pagination justify-content-center justify-content-md-start">
+                                        {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="{% url 'article_list' %}?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                                                <em class="icon ni ni-chevrons-left"></em>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+
+                                        {% for num in page_obj.paginator.page_range %}
+                                            {% if page_obj.number == num %}
+                                                <li class="page-item active">
+                                                    <span class="page-link">{{ num }}</span>
+                                                </li>
+                                            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                                <li class="page-item">
+                                                    <a class="page-link" href="{% url 'article_list' %}?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                                                        {{ num }}
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+
+                                        {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="{% url 'article_list' %}?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                                                <em class="icon ni ni-chevrons-right"></em>
+                                            </a>
+                                        </li>
+                                        {% endif %}
+                                    </ul>
+                                </div>
+                                <div class="g">
+                                    <div class="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
+                                        <div>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Initialize select2
+    $('.js-select2').select2();
+
+    // Initialize tooltips
+    $('[data-bs-toggle="tooltip"]').tooltip();
+
+    // Handle select all checkbox
+    $('#selectAll').on('change', function() {
+        $('input[name="selected_articles"]').prop('checked', $(this).prop('checked'));
+    });
+
+    // Handle article actions
+    $('.article-action').on('click', function(e) {
+        e.preventDefault();
+        var action = $(this).data('action');
+        var articleId = $(this).data('article-id');
+
+        $.ajax({
+            url: '{% url "article_action" %}',
+            type: 'POST',
+            data: {
+                'action': action,
+                'article_id': articleId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                if (response.status === 'success') {
+                    location.reload();
+                } else {
+                    alert('{% trans "Error" %}: ' + response.message);
+                }
+            },
+            error: function() {
+                alert('{% trans "An error occurred. Please try again." %}');
+            }
+        });
+    });
+
+    // Auto-submit form when select changes
+    $('.js-select2').on('change', function() {
+        $('#filterForm').submit();
+    });
+});
+</script>
+{% endblock %}
