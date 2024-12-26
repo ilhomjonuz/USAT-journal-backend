@@ -1,9 +1,9 @@
 from .api_journal_issues_list import LatestJournalIssueListView, AllJournalIssueListView
 from .api_journal_issue_retrieve import JournalIssueRetrieveAPIView
 from .api_journal_download import JournalIssueFileDownloadView
-from .template_view import (JournalListView, JournalDetailView, JournalCreateView, JournalUpdateView, JournalDeleteView,
-                            JournalVolumeListView, JournalVolumeDetailView, JournalVolumeCreateView, JournalVolumeUpdateView,
-                            JournalVolumeDeleteView, JournalIssueListView, JournalIssueDetailView, JournalIssueCreateView,
+from .template_view import (JournalListView, JournalCreateView, JournalUpdateView, JournalDeleteView,
+                            JournalVolumeListView, JournalVolumeCreateView, JournalVolumeUpdateView,
+                            JournalVolumeDeleteView, JournalIssueListView, JournalIssueCreateView,
                             JournalIssueUpdateView, JournalIssueDeleteView)
 __all__ = [
     "LatestJournalIssueListView",
@@ -11,17 +11,14 @@ __all__ = [
     "JournalIssueRetrieveAPIView",
     "JournalIssueFileDownloadView",
     "JournalListView",
-    "JournalDetailView",
     "JournalCreateView",
     "JournalUpdateView",
     "JournalDeleteView",
     "JournalVolumeListView",
-    "JournalVolumeDetailView",
     "JournalVolumeCreateView",
     "JournalVolumeUpdateView",
     "JournalVolumeDeleteView",
     "JournalIssueListView",
-    "JournalIssueDetailView",
     "JournalIssueCreateView",
     "JournalIssueUpdateView",
     "JournalIssueDeleteView",

@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if object %}{% trans 'Edit Journal Volume' %}{% else %}{% trans 'Create Journal Volume' %}{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">
+                            {% if object %}
+                                {% trans 'Edit Journal Volume' %}
+                            {% else %}
+                                {% trans 'Create Journal Volume' %}
+                            {% endif %}
+                        </h3>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            {% if object %}
+                              <a href="{% url 'volume_delete' object.pk %}" class="btn btn-icon btn-danger">
+                                  <em class="icon ni ni-trash"></em>
+                              </a>
+                            {% endif %}
+                            <a href="{% url 'volume_list' %}" class="btn btn-icon btn-outline-light">
+                                <em class="icon ni ni-arrow-left"></em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <form method="post" class="form-validate">
+                            {% csrf_token %}
+                            {{ form|crispy }}
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-lg btn-primary">
+                                    {% if object %}
+                                        {% trans 'Update Volume' %}
+                                    {% else %}
+                                        {% trans 'Create Volume' %}
+                                    {% endif %}
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

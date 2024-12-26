@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if object %}{% trans 'Edit Journal Issue' %}{% else %}{% trans 'Create Journal Issue' %}{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">
+                            {% if object %}
+                                {% trans 'Edit Journal Issue' %}
+                            {% else %}
+                                {% trans 'Create Journal Issue' %}
+                            {% endif %}
+                        </h3>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            {% if object %}
+                              <a href="{% url 'issue_delete' object.pk %}" class="btn btn-icon btn-danger">
+                                  <em class="icon ni ni-trash"></em>
+                              </a>
+                            {% endif %}
+                            <a href="{% url 'issue_list' %}" class="btn btn-icon btn-outline-light">
+                                <em class="icon ni ni-arrow-left"></em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <form method="post" enctype="multipart/form-data" class="form-validate">
+                            {% csrf_token %}
+                            <div class="row g-gs">
+                                <div class="col-md-6">
+                                    {{ form.volume|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.issue_number|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.publication_date|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.is_published|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.start_page|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.end_page|as_crispy_field }}
+                                </div>
+                                <div class="col-12">
+                                    {{ form.image|as_crispy_field }}
+                                </div>
+                                <div class="col-12">
+                                    {{ form.journal_file|as_crispy_field }}
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-lg btn-primary">
+                                            {% if object %}
+                                                {% trans 'Update Issue' %}
+                                            {% else %}
+                                                {% trans 'Create Issue' %}
+                                            {% endif %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
