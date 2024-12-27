@@ -1,0 +1,123 @@
+{% extends "base_null.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<div class="nk-content">
+    <div class="nk-split nk-split-page nk-split-lg">
+        <div class="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
+            <div class="nk-block nk-block-middle nk-auth-body">
+                <div class="brand-logo pb-5">
+                    <a href="{% url 'dashboard' %}" class="logo-link">
+                        <img class="logo-light logo-img logo-img-lg" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="logo">
+                        <img class="logo-dark logo-img logo-img-lg" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="logo-dark">
+                    </a>
+                </div>
+                <div class="nk-block-head">
+                    <div class="nk-block-head-content">
+                        <h5 class="nk-block-title">{% trans "Sign In" %}</h5>
+                        <div class="nk-block-des">
+                            <p>{% trans "Access the JournalAdmin using your username and password." %}</p>
+                        </div>
+                    </div>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form action="{% url 'login' %}" method="post" class="form-validate is-alter" id="loginForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <label class="form-label" for="username">{% trans "Username" %}</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="{% trans 'Enter your username' %}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <label class="form-label" for="password">{% trans "Password" %}</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">
+                                <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                            </a>
+                            <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="{% trans 'Enter your password' %}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">{% trans "Sign in" %}</button>
+                    </div>
+                </form>
+            </div>
+            <div class="nk-block nk-auth-footer">
+                <div class="nk-block-between">
+                    <ul class="nav nav-sm">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{% trans "Terms & Condition" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{% trans "Privacy Policy" %}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{% trans "Help" %}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mt-3">
+                    <p>&copy; {% now "Y" %} {% trans "JournalAdmin. All Rights Reserved." %}</p>
+                </div>
+            </div>
+        </div>
+        <div class="nk-split-content nk-split-stretch bg-abstract"></div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Password visibility toggle
+    const passwordToggles = document.querySelectorAll('.passcode-switch');
+    passwordToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('data-target');
+            const passwordInput = document.getElementById(targetId);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.classList.add('is-shown');
+            } else {
+                passwordInput.type = 'password';
+                this.classList.remove('is-shown');
+            }
+        });
+    });
+
+    // Form validation
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', function(e) {
+        if (!this.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        this.classList.add('was-validated');
+    });
+
+    // Alert dismissal
+    const alertCloseButtons = document.querySelectorAll('.alert .close');
+    alertCloseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            this.parentElement.style.display = 'none';
+        });
+    });
+});
+</script>
+{% endblock %}

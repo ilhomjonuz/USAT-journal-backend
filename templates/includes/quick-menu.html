@@ -76,7 +76,15 @@
                 </div>
                 <div class="dropdown-inner">
                     <ul class="link-list">
-                        <li><a href="#"><em class="icon ni ni-signout"></em><span>{% trans 'Sign out' %}</span></a></li>
+                        <li class="nk-menu-item">
+                            <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                                {% csrf_token %}
+                            </form>
+                            <a href="#" class="nk-menu-link" onclick="handleLogout(event)">
+                                <span class="nk-menu-icon"><em class="icon ni ni-signout"></em></span>
+                                <span class="nk-menu-text">{% trans 'Sign out' %}</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>

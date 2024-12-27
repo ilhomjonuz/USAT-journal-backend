@@ -252,9 +252,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # User model
 AUTH_USER_MODEL = 'accounts.User'
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/admin/login/'
-LOGOUT_REDIRECT_URL = '/admin/login/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'
 
 # File upload
 DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
