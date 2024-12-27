@@ -61,10 +61,10 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-    'core.utils.LanguageMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'core.utils.LanguageMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
@@ -202,9 +202,7 @@ LANGUAGE_CODE = 'uz'
 TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
-
-USE_L10N = True
-
+# USE_L10N = True
 USE_TZ = True
 
 LANGUAGES = [

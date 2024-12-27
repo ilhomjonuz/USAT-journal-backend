@@ -1,6 +1,6 @@
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.decorators import login_required
-from django.http import FileResponse, JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import FileResponse, JsonResponse, HttpResponseRedirect
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
@@ -10,9 +10,10 @@ from django.shortcuts import redirect, get_object_or_404
 from django.db.models import Q
 import os
 
-from apps.articles.forms import ArticleFilterForm, ArticleForm
+from apps.articles.forms import ArticleForm
 from apps.articles.models import Article
 from apps.categories.models import Category
+from apps.journals.models import JournalIssue
 
 
 class ArticleListView(ListView):
@@ -43,12 +44,18 @@ class ArticleListView(ListView):
         if category:
             queryset = queryset.filter(category_id=category)
 
+        # Journal Issue filter
+        journal_issue = self.request.GET.get('journal_issue')
+        if journal_issue:
+            queryset = queryset.filter(journal_issue_id=journal_issue)
+
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['article_status_choices'] = Article.STATUS_CHOICES
+        context['journal_issues'] = JournalIssue.objects.all()
         return context
 
 
@@ -104,12 +111,12 @@ def download_file(request, pk, file_type):
     elif file_type == 'revised':
         file = article.revised_file
     else:
-        messages.error(request, _("Invalid file type"))
+        messages.error(request, _("Invalid file type"), extra_tags='danger')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
     # Check if file exists
     if not os.path.exists(file.path):
-        messages.error(request, _("File not found"))
+        messages.error(request, _("File not found"), extra_tags='danger')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
     # Increment download count

@@ -1,4 +1,3 @@
-{# templates/article-admin/article_detail.html #}
 {% extends 'base.html' %}
 {% load i18n %}
 {% load static %}
@@ -10,21 +9,18 @@
     <div class="container-xl wide-lg">
         <div class="nk-content-body">
             {% if messages %}
-            {% for message in messages %}
-            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible">
-                <button type="button" class="close" data-dismiss="alert">×</button>
-                {{ message }}
-            </div>
-            {% endfor %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
             {% endif %}
 
-            <div class="nk-block-head nk-block-head-sm">
+            <div class="nk-block-head nk-block-head-lg">
                 <div class="nk-block-between g-3">
                     <div class="nk-block-head-content">
-                        <h3 class="nk-block-title page-title">{% trans 'Article Details' %}</h3>
-                        <div class="nk-block-des text-soft">
-                            <p>{{ object.title }}</p>
-                        </div>
+                        <h2 class="nk-block-title fw-normal">{% trans 'Article Details' %}</h2>
                     </div>
                     <div class="nk-block-head-content">
                         <div class="toggle-wrap nk-block-tools-toggle">
@@ -64,66 +60,72 @@
                                     <div class="nk-block-head">
                                         <h5 class="title">{% trans 'Article Information' %}</h5>
                                     </div>
-                                    <div class="profile-ud-list">
-                                        <div class="profile-ud-item">
-                                            <div class="profile-ud wider">
-                                                <span class="profile-ud-label">{% trans 'Title' %}</span>
-                                                <span class="profile-ud-value">{{ object.title }}</span>
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="title">{% trans 'Title' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control form-control-lg" id="title" value="{{ object.title }}" readonly>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="profile-ud-item">
-                                            <div class="profile-ud wider">
-                                                <span class="profile-ud-label">{% trans 'Category' %}</span>
-                                                <span class="profile-ud-value">{{ object.category.name }}</span>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{% trans 'Category' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" value="{{ object.category.name }}" readonly>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="profile-ud-item">
-                                            <div class="profile-ud wider">
-                                                <span class="profile-ud-label">{% trans 'Authors' %}</span>
-                                                <span class="profile-ud-value">{{ object.authors.all|join:", " }}</span>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{% trans 'Authors' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" value="{{ object.authors.all|join:", " }}" readonly>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="profile-ud-item">
-                                            <div class="profile-ud wider">
-                                                <span class="profile-ud-label">{% trans 'Keywords' %}</span>
-                                                <span class="profile-ud-value">{{ object.keywords }}</span>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="keywords">{% trans 'Keywords' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <textarea class="form-control form-control-lg" id="keywords" rows="2" readonly>{{ object.keywords }}</textarea>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="profile-ud-item">
-                                            <div class="profile-ud wider">
-                                                <span class="profile-ud-label">{% trans 'Status' %}</span>
-                                                <span class="profile-ud-value">
-                                                    <span class="badge badge-dot badge-{{ object.status|lower }}">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{% trans 'Status' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <span class="badge badge-dot badge-{{ object.status|lower }} badge-lg">
                                                         {{ object.get_status_display }}
                                                     </span>
-                                                </span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="profile-ud-item">
-                                            <div class="profile-ud wider">
-                                                <span class="profile-ud-label">{% trans 'Page Range' %}</span>
-                                                <span class="profile-ud-value">
-                                                    {% if object.page_range %}
-                                                        {{ object.page_range }} ({{ object.total_pages }} {% trans 'pages' %})
-                                                    {% else %}
-                                                        {% trans 'Not set' %}
-                                                    {% endif %}
-                                                </span>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{% trans 'Page Range' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" value="{% if object.page_range %}{{ object.page_range }} ({{ object.total_pages }} {% trans 'pages' %}){% else %}{% trans 'Not set' %}{% endif %}" readonly>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="nk-block">
+                                <div class="nk-block mt-5">
                                     <div class="nk-block-head">
                                         <h5 class="title">{% trans 'Annotation' %}</h5>
                                     </div>
-                                    <div class="card-text">
-                                        <p>{{ object.annotation }}</p>
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <textarea class="form-control form-control-lg" rows="5" readonly>{{ object.annotation }}</textarea>
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div class="nk-block">
+                                <div class="nk-block mt-5">
                                     <div class="nk-block-head">
                                         <h5 class="title">{% trans 'Documents' %}</h5>
                                     </div>
@@ -214,7 +216,53 @@
                                     </div>
                                 </div>
                                 <div class="card-inner">
-                                    <h6 class="overline-title mb-2">{% trans 'Status Actions' %}</h6>
+                                    <div class="nk-block-head-content mb-3">
+                                        <h6 class="title">{% trans 'Status Information' %}</h6>
+                                    </div>
+                                    <div class="profile-ud-list">
+                                        <div class="profile-ud-item border-bottom py-3">
+                                            <div class="profile-ud">
+                                                <span class="profile-ud-label text-muted">{% trans 'Status' %}</span>
+                                                <span class="profile-ud-value">
+                                                    <span class="badge bg-{{ object.status|lower }} text-white rounded-pill px-3">
+                                                        {{ object.get_status_display }}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-ud-item border-bottom py-3">
+                                            <div class="profile-ud">
+                                                <span class="profile-ud-label text-muted">{% trans 'Status Date' %}</span>
+                                                <span class="profile-ud-value text-primary">
+                                                    {% if object.status == 'SUBMITTED' %}
+                                                        {{ object.submission_date|date:"d M Y H:i" }}
+                                                    {% elif object.status == 'UNDER_REVIEW' %}
+                                                        {{ object.review_date|date:"d M Y H:i" }}
+                                                    {% elif object.status == 'ACCEPTED' %}
+                                                        {{ object.acceptance_date|date:"d M Y H:i" }}
+                                                    {% elif object.status == 'PUBLISHED' %}
+                                                        {{ object.publication_date|date:"d M Y H:i" }}
+                                                    {% else %}
+                                                        <span class="text-muted">{% trans 'N/A' %}</span>
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-ud-item py-3">
+                                            <div class="profile-ud">
+                                                <span class="profile-ud-label text-muted">{% trans 'Journal Issue' %}</span>
+                                                <span class="profile-ud-value">
+                                                    {% if object.journal_issue %}
+                                                        <span class="text-primary">{{ object.journal_issue }}</span>
+                                                    {% else %}
+                                                        <span class="badge bg-gray text-white rounded-pill px-3">{% trans 'Not assigned' %}</span>
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-inner">
                                     <form method="post">
                                         {% csrf_token %}
                                         {% if object.status == 'SUBMITTED' %}

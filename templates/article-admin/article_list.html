@@ -59,6 +59,16 @@
                                                     {% endfor %}
                                                 </select>
                                             </div>
+                                            <div class="form-wrap w-150px">
+                                                <select name="journal_issue" class="form-select js-select2" data-search="on">
+                                                    <option value="">{% trans "Any Journal Issue" %}</option>
+                                                    {% for issue in journal_issues %}
+                                                        <option value="{{ issue.id }}" {% if request.GET.journal_issue == issue.id|stringformat:"i" %}selected{% endif %}>
+                                                            {{ issue }}
+                                                        </option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
                                             <div class="form-wrap flex-grow-1">
                                                 <div class="form-control-wrap">
                                                     <div class="form-icon form-icon-left">
@@ -71,7 +81,7 @@
                                             </div>
                                             <div class="btn-wrap">
                                                 <button type="submit" class="btn btn-primary">{% trans "Filter" %}</button>
-                                                {% if request.GET.search or request.GET.status or request.GET.category %}
+                                                {% if request.GET.search or request.GET.status or request.GET.category or request.GET.journal_issue %}
                                                     <a href="{% url 'article_list' %}" class="btn btn-outline-light">{% trans "Reset" %}</a>
                                                 {% endif %}
                                             </div>
@@ -94,6 +104,7 @@
                                     </div>
                                     <div class="nk-tb-col"><span>{% trans "Title" %}</span></div>
                                     <div class="nk-tb-col tb-col-mb"><span>{% trans "Category" %}</span></div>
+                                    <div class="nk-tb-col tb-col-md"><span>{% trans "Journal Issue" %}</span></div>
                                     <div class="nk-tb-col tb-col-md"><span>{% trans "Documents" %}</span></div>
                                     <div class="nk-tb-col tb-col-lg"><span>{% trans "Submitted" %}</span></div>
                                     <div class="nk-tb-col tb-col-md"><span>{% trans "Status" %}</span></div>
@@ -110,10 +121,13 @@
                                         </div>
                                     </div>
                                     <div class="nk-tb-col">
-                                        <a href="{% url 'article_detail' article.id %}"><span class="tb-lead">{{ article.title }}</span></a>
+                                        <a href="{% url 'article_detail' article.id %}"><span class="tb-lead">{{ article.title|truncatewords:5 }}</span></a>
                                     </div>
                                     <div class="nk-tb-col tb-col-mb">
                                         <span class="tb-lead-sub">{{ article.category.name }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span class="tb-lead-sub">{{ article.journal_issue|default_if_none:_("Not assigned") }}</span>
                                     </div>
                                     <div class="nk-tb-col tb-col-md">
                                         <ul class="list-inline list-download">
@@ -224,7 +238,7 @@
                                     <ul class="pagination justify-content-center justify-content-md-start">
                                         {% if page_obj.has_previous %}
                                         <li class="page-item">
-                                            <a class="page-link" href="{% url 'article_list' %}?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                                            <a class="page-link" href="{% url 'article_list' %}?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.journal_issue %}&journal_issue={{ request.GET.journal_issue }}{% endif %}">
                                                 <em class="icon ni ni-chevrons-left"></em>
                                             </a>
                                         </li>
@@ -237,7 +251,7 @@
                                                 </li>
                                             {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
                                                 <li class="page-item">
-                                                    <a class="page-link" href="{% url 'article_list' %}?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                                                    <a class="page-link" href="{% url 'article_list' %}?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.journal_issue %}&journal_issue={{ request.GET.journal_issue }}{% endif %}">
                                                         {{ num }}
                                                     </a>
                                                 </li>
@@ -246,7 +260,7 @@
 
                                         {% if page_obj.has_next %}
                                         <li class="page-item">
-                                            <a class="page-link" href="{% url 'article_list' %}?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">
+                                            <a class="page-link" href="{% url 'article_list' %}?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}{% if request.GET.status %}&status={{ request.GET.status }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.journal_issue %}&journal_issue={{ request.GET.journal_issue }}{% endif %}">
                                                 <em class="icon ni ni-chevrons-right"></em>
                                             </a>
                                         </li>
