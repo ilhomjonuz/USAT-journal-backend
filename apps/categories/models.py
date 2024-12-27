@@ -8,6 +8,8 @@ class Category(models.Model):
     description = models.TextField(verbose_name=_("Description"), blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = _("Direction")
         verbose_name_plural = _("Directions")

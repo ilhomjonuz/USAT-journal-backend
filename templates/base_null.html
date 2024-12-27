@@ -1,0 +1,45 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en" class="js">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="USAT">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+    <!-- Page Title  -->
+    <title>{% block title %}{% trans 'Blank' %}{% endblock %}</title>
+    <!-- StyleSheets  -->
+    {% include 'includes/external_css.html' %}
+    <link rel="stylesheet" href="{% static 'assets/css/dashlite.css?ver=3.1.2' %}">
+    <link id="skin-default" rel="stylesheet" href="{% static 'assets/css/theme.css?ver=3.1.2' %}">
+</head>
+
+
+<body class="nk-body bg-white npc-general pg-auth">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- wrap @s -->
+            <div class="nk-wrap nk-wrap-nosidebar">
+                <!-- content @s -->
+                {% block content %}
+                {% endblock %}
+                <!-- wrap @e -->
+            </div>
+            <!-- content @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+    <!-- JavaScript -->
+    {% include 'includes/external_js.html' %}
+    <script src="{% static 'assets/js/bundle.js?ver=3.1.2' %}"></script>
+    <script src="{% static 'assets/js/scripts.js?ver=3.1.2' %}"></script>
+    {% block extra_js %}{% endblock %}
+    <!-- select region modal -->
+
+</html>

@@ -1,0 +1,51 @@
+@use "sass:math";
+
+@each $size, $length in $spacers {
+    .g-#{$size}:not(.row) {
+        margin: math.div(- $length, 2);
+        > li,> div{
+            padding: math.div($length, 2);
+        }
+    }
+    .gx-#{$size}:not(.row) {
+        margin-left: math.div(- $length, 2);
+        margin-right: math.div(- $length, 2);
+        > li,> div{
+            padding-left: math.div($length, 2);
+            padding-right: math.div($length, 2);
+        }
+    }
+    .gy-#{$size}:not(.row) {
+        margin-top: math.div(- $length, 2);
+        margin-bottom: math.div(- $length, 2);
+        > li,> div{
+            padding-top: math.div($length, 2);
+            padding-bottom: math.div($length, 2);
+        }
+    }
+}
+
+.gap {
+    width: 100%;
+    display: block;
+    height: $gutter-width;
+}
+@each $size, $length in $spacers {
+    .gap-#{$size} {
+        height: $length;
+    }
+}
+
+$gaps: sm 0.75rem, md 1.25rem, lg 2rem, xl 2.5rem;
+@each $gap, $size in $gaps {
+    .gap-#{$gap} {
+        height: $size;
+    }
+}
+
+$px-gaps: 10, 20, 30, 40, 50, 60, 70, 80, 90, 100;
+@each $gap in $px-gaps {
+    .gap-#{$gap}px {
+        height: #{$gap}px;
+    }
+}

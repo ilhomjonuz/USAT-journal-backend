@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Journal Issues' %}{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <h3 class="nk-block-title page-title">{% trans 'Journal Issues' %}</h3>
+                        <div class="nk-block-des text-soft">
+                            <p>{% blocktrans with count=issues|length %}You have total {{ count }} journal issues.{% endblocktrans %}</p>
+                        </div>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <a href="{% url 'issue_create' %}" class="btn btn-icon btn-primary">
+                                <em class="icon ni ni-plus"></em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <div class="card-inner p-0">
+                            <div class="nk-tb-list nk-tb-ulist">
+                                <div class="nk-tb-item nk-tb-head">
+                                    <div class="nk-tb-col"><span class="sub-text">{% trans 'Journal' %}</span></div>
+                                    <div class="nk-tb-col tb-col-mb"><span class="sub-text">{% trans 'Volume' %}</span></div>
+                                    <div class="nk-tb-col tb-col-md"><span class="sub-text">{% trans 'Issue Number' %}</span></div>
+                                    <div class="nk-tb-col tb-col-lg"><span class="sub-text">{% trans 'Publication Date' %}</span></div>
+                                    <div class="nk-tb-col tb-col-md"><span class="sub-text">{% trans 'Status' %}</span></div>
+                                    <div class="nk-tb-col nk-tb-col-tools text-end"></div>
+                                </div>
+                                {% for issue in issues %}
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col">
+                                        <a href="{% url 'issue_update' issue.pk %}">
+                                            <span class="tb-lead">{{ issue.volume.journal.name }}</span>
+                                        </a>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-mb">
+                                        <span class="tb-amount">{{ issue.volume.volume_number }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ issue.issue_number }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-lg">
+                                        <span>{{ issue.publication_date }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span class="tb-status text-{% if issue.is_published %}success{% else %}warning{% endif %}">
+                                            {% if issue.is_published %}{% trans 'Published' %}{% else %}{% trans 'Draft' %}{% endif %}
+                                        </span>
+                                    </div>
+                                    <div class="nk-tb-col nk-tb-col-tools">
+                                        <ul class="nk-tb-actions gx-1">
+                                            <li>
+                                                <div class="drodown">
+                                                    <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <ul class="link-list-opt no-bdr">
+                                                            <li><a href="{% url 'issue_update' issue.pk %}"><em class="icon ni ni-edit"></em><span>{% trans 'Edit' %}</span></a></li>
+                                                            <li><a href="{% url 'issue_delete' issue.pk %}"><em class="icon ni ni-trash"></em><span>{% trans 'Delete' %}</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col" colspan="6">
+                                        <span class="tb-lead">{% trans 'No issues found.' %}</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% include 'includes/pagination.html' with page_obj=page_obj %}
+        </div>
+    </div>
+</div>
+{% endblock %}

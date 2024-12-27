@@ -8,6 +8,8 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+from apps.dashboard.views import redirect_dashboard
+
 schema_view = get_schema_view(
    openapi.Info(
       title="USAT journal API",
@@ -22,22 +24,34 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', include('apps.dashboard.urls')),
+    path('', redirect_dashboard, name='redirect-dashboard'),
+    path('accounts/', include('apps.accounts.urls.other_urls')),
     path('api/docs/swagger<format>/', login_required(schema_view.without_ui(cache_timeout=0)), name='schema-json'),
     path('api/docs/swagger/', login_required(schema_view.with_ui('swagger', cache_timeout=0)), name='schema-swagger-ui'),
     path('api/docs/redoc/', login_required(schema_view.with_ui('redoc', cache_timeout=0)), name='schema-redoc'),
     path('api-auth/', include('rest_framework.urls')),
 
-    path('api/v1/journals/', include('apps.journals.urls')),
-    path('api/v1/articles/', include('apps.articles.urls')),
-    path('api/v1/authors/', include('apps.authors.urls')),
-    path('api/v1/directions/', include('apps.categories.urls')),
+    path('api/v1/journals/', include('apps.journals.urls.api_urls')),
+    path('api/v1/articles/', include('apps.articles.urls.api_urls')),
+    path('api/v1/authors/', include('apps.authors.urls.api_urls')),
+    path('api/v1/directions/', include('apps.categories.urls.api_urls')),
 ]
+
+urlpatterns += i18n_patterns(
+    path('dashboard/', include('apps.dashboard.urls')),  # Dashboard uchun
+    path('accounts/', include('apps.accounts.urls.auth_urls')),
+    path('admin/', admin.site.urls),  # Admin uchun
+    path('journal-admin/', include('apps.journals.urls.admin_urls')),
+    path('article-admin/', include('apps.articles.urls.admin_urls')),
+    path('category-admin/', include('apps.categories.urls.admin_urls')),
+    path('author-admin/', include('apps.authors.urls.admin_urls'))
+    # prefix_default_language=False
+)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-urlpatterns += i18n_patterns(
-    path('admin/', admin.site.urls),
-    prefix_default_language=False
-)
+if settings.USE_I18N:
+    urlpatterns += [
+        path('i18n/', include('django.conf.urls.i18n')),
+    ]

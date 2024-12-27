@@ -1,0 +1,28 @@
+{% load static %}
+{% load i18n %}
+
+<div class="nk-header nk-header-fixed is-light">
+    <div class="container-fluid">
+        <div class="nk-header-wrap">
+            <div class="nk-menu-trigger d-xl-none ms-n1">
+                <a href="#" class="nk-nav-toggle nk-quick-nav-icon" data-target="sidebarMenu"><em class="icon ni ni-menu"></em></a>
+            </div>
+            <div class="nk-header-brand d-xl-none">
+                <a href="{% url 'dashboard' %}" class="logo-link nk-sidebar-logo">
+                    <div class="logo-wrapper flex items-center space-x-2">
+                        <div class="logo-container">
+                            <h4 class="text-2xl font-bold">
+                                <img src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="{% trans 'JournalAdmin Logo' %}" class="logo-image w-10 h-10 object-contain">
+                                {% trans 'JournalAdmin' %}
+                            </h4>
+                        </div>
+                    </div>
+                </a>
+            </div><!-- .nk-header-brand -->
+            <form method="post" style="display: none;">
+                {% csrf_token %}
+            </form>
+            {% include 'includes/quick-menu.html' %}
+        </div><!-- .nk-header-wrap -->
+    </div><!-- .container-fliud -->
+</div>

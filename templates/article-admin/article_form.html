@@ -1,0 +1,169 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if object %}{% trans 'Edit Article' %}{% else %}{% trans 'Create Article' %}{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert">×</button>
+                {{ message }}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        <h3 class="nk-block-title page-title">
+                            {% if object %}
+                                {% trans 'Edit Article' %}
+                            {% else %}
+                                {% trans 'Create Article' %}
+                            {% endif %}
+                        </h3>
+                        <div class="nk-block-des text-soft">
+                            <p>{% trans 'Fill in the article information below' %}</p>
+                        </div>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            {% if object %}
+                              <a href="{% url 'article_delete' object.pk %}" class="btn btn-icon btn-danger">
+                                  <em class="icon ni ni-trash"></em>
+                              </a>
+                            {% endif %}
+                            <a href="{% url 'article_list' %}" class="btn btn-icon btn-outline-light">
+                                <em class="icon ni ni-arrow-left"></em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <form method="post" enctype="multipart/form-data" class="form-validate">
+                            {% csrf_token %}
+                            <div class="row g-gs">
+                                <div class="col-md-12">
+                                    {{ form.category|as_crispy_field }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ form.title|as_crispy_field }}
+                                </div>
+                                <div class="col-12">
+                                    {{ form.keywords|as_crispy_field }}
+                                </div>
+                                <div class="col-12">
+                                    {{ form.annotation|as_crispy_field }}
+                                </div>
+                                <div class="col-12">
+                                    {{ form.authors|as_crispy_field }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ form.original_file|as_crispy_field }}
+                                    {% if object and object.original_file %}
+                                    <div class="form-note">
+                                        {% trans "Current file" %}:
+                                        <a href="{% url 'article_download_file' object.id 'original' %}">
+                                            {{ object.original_file.name|cut:"article_submissions/" }}
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ form.revised_file|as_crispy_field }}
+                                    {% if object and object.revised_file %}
+                                    <div class="form-note">
+                                        {% trans "Current file" %}:
+                                        <a href="{% url 'article_download_file' object.id 'revised' %}">
+                                            {{ object.revised_file.name|cut:"article_revisions/" }}
+                                        </a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.start_page|as_crispy_field }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ form.end_page|as_crispy_field }}
+                                </div>
+                                <div class="col-md-12">
+                                    {{ form.journal_issue|as_crispy_field }}
+                                </div>
+                                {% if object %}
+                                <div class="col-md-12">
+                                    {{ form.status|as_crispy_field }}
+                                </div>
+                                {% endif %}
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-lg btn-primary">
+                                            {% if object %}
+                                                {% trans 'Update Article' %}
+                                            {% else %}
+                                                {% trans 'Create Article' %}
+                                            {% endif %}
+                                        </button>
+                                        <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-lg btn-outline-light">{% trans "Cancel" %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Initialize select2 for multiple select
+    $('.select2').select2({
+        placeholder: "{% trans 'Select authors' %}",
+        allowClear: true
+    });
+
+    // Initialize select2 for journal issue
+    $('#id_journal_issue').select2({
+        placeholder: "{% trans 'Select journal issue' %}",
+        allowClear: true
+    });
+
+    // Initialize select2 for status
+    $('#id_status').select2({
+        placeholder: "{% trans 'Select status' %}",
+        allowClear: false
+    });
+
+    // File input enhancement
+    $('.custom-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').html(fileName);
+    });
+
+    // Page number validation
+    $('#id_end_page').on('change', function() {
+        let startPage = parseInt($('#id_start_page').val()) || 0;
+        let endPage = parseInt($(this).val()) || 0;
+
+        if (endPage < startPage) {
+            alert("{% trans 'End page cannot be less than start page' %}");
+            $(this).val('');
+        }
+    });
+});
+</script>
+{% endblock %}

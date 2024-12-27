@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% if object %}{% trans 'Edit Journal' %}{% else %}{% trans 'Create Journal' %}{% endif %}{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between g-3">
+                    <div class="nk-block-head-content">
+                        <h2 class="nk-block-title fw-normal">
+                            {% if object %}
+                                {% trans 'Edit Journal' %}
+                            {% else %}
+                                {% trans 'Create Journal' %}
+                            {% endif %}
+                        </h2>
+                        <div class="nk-block-des">
+                            <p>{% if object %}{% trans 'Edit existing journal' %}{% else %}{% trans 'Create a new journal' %}{% endif %}</p>
+                        </div>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <ul class="nk-block-tools gx-3">
+                            <li>
+                                <a href="{% url 'journal_list' %}" class="btn btn-icon btn-outline-light">
+                                    <em class="icon ni ni-list"></em>
+                                    <span class="pe-3">{% trans 'Journal List' %}</span>
+                                </a>
+                            </li>
+                            {% if object %}
+                            <li>
+                                <a href="{% url 'journal_delete' object.pk %}" class="btn btn-icon btn-danger">
+                                    <em class="icon ni ni-trash"></em>
+                                    <span class="pe-3">{% trans 'Delete' %}</span>
+                                </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <form method="post" class="form-validate">
+                            {% csrf_token %}
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    <ul>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                            <div class="row g-gs">
+                                <!-- Journal Name Section -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-label">{% trans 'Journal Name' %}</label>
+                                        <div class="form-control-wrap">
+                                            <ul class="nav nav-tabs">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#name-uz">UZ</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#name-ru">RU</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#name-en">EN</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="name-uz">
+                                                    {{ form.name_uz|as_crispy_field }}
+                                                </div>
+                                                <div class="tab-pane" id="name-ru">
+                                                    {{ form.name_ru|as_crispy_field }}
+                                                </div>
+                                                <div class="tab-pane" id="name-en">
+                                                    {{ form.name_en|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Journal Description Section -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label class="form-label">{% trans 'Description' %}</label>
+                                        <div class="form-control-wrap">
+                                            <ul class="nav nav-tabs">
+                                                <li class="nav-item">
+                                                    <a class="nav-link active" data-bs-toggle="tab" href="#desc-uz">UZ</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#desc-ru">RU</a>
+                                                </li>
+                                                <li class="nav-item">
+                                                    <a class="nav-link" data-bs-toggle="tab" href="#desc-en">EN</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="desc-uz">
+                                                    {{ form.description_uz|as_crispy_field }}
+                                                </div>
+                                                <div class="tab-pane" id="desc-ru">
+                                                    {{ form.description_ru|as_crispy_field }}
+                                                </div>
+                                                <div class="tab-pane" id="desc-en">
+                                                    {{ form.description_en|as_crispy_field }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-lg btn-primary">
+                                            {% if object %}
+                                                {% trans 'Update Journal' %}
+                                            {% else %}
+                                                {% trans 'Create Journal' %}
+                                            {% endif %}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Show tab with error if exists
+    const tabsWithErrors = document.querySelectorAll('.tab-pane .invalid-feedback')
+    if (tabsWithErrors.length > 0) {
+        const firstErrorTab = tabsWithErrors[0].closest('.tab-pane')
+        const tabId = firstErrorTab.id
+        const tab = document.querySelector(`a[href="#${tabId}"]`)
+        const tabTrigger = new bootstrap.Tab(tab)
+        tabTrigger.show()
+    }
+
+    // Initialize Bootstrap tabs
+    var triggerTabList = [].slice.call(document.querySelectorAll('.nav-tabs a'))
+    triggerTabList.forEach(function (triggerEl) {
+        var tabTrigger = new bootstrap.Tab(triggerEl)
+        triggerEl.addEventListener('click', function (event) {
+            event.preventDefault()
+            tabTrigger.show()
+        })
+    })
+})
+</script>
+{% endblock %}

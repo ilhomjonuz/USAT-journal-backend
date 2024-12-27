@@ -1,0 +1,102 @@
+.table {
+    &-striped tbody tr:nth-of-type(odd) {
+        background-color: $lighter;
+    }
+    > :not(caption) > * > *{
+        border-top: 1px solid $table-border-color;
+        border-bottom: 0;
+    }
+    &-hover tbody tr:hover {
+        color: $secondary-light;
+        background-color: $lighter;
+    }
+    &-head{
+        background: $lighter;
+    }
+    > :not(:first-child) {
+        border-top: none; 
+    }
+    thead tr:last-child{
+        th{
+            border-bottom: $table-border-width solid $table-border-color;
+        }
+    }
+    &-dark thead tr:last-child th, thead.table-dark tr:last-child th {
+        border-color: $table-dark-border-color;
+    }
+    td,th{
+        &:first-child{
+            padding-left: $table-cell-padding-x-sm;
+        }
+        &:last-child{
+            padding-right: $table-cell-padding-x-sm;
+        }
+    }
+
+    th {
+        line-height: 1.1;
+        &.overline-title {
+            line-height: 1.25rem;
+            font-weight: $fw-medium;
+        }
+    }
+    caption {
+        font-style: italic;
+        padding-left: $table-cell-padding-x-sm;
+    }
+    &-bordered {
+        td, th {
+            padding-left: $table-cell-padding-bordered;
+            padding-right: $table-cell-padding-bordered;
+        }
+    }
+    &-plain {
+        td, th{
+            &:first-child{
+                padding-left: 0;
+            }
+            &:last-child{
+                padding-right: 0;
+            }
+        }
+    }
+    &-lg {
+        td {
+            padding-top: ($table-cell-padding * 2);
+            padding-bottom: ($table-cell-padding * 2);
+        }
+        th {
+            padding-top: ($table-cell-padding * 1.5);
+            padding-bottom: ($table-cell-padding * 1.5);
+        }
+    }
+    &-vm td, &-vm th, td.vm, th.vm{
+        vertical-align: middle;
+    }
+}
+@include media-breakpoint-up(sm){
+    .table {
+        &-lg td, &-lg th {
+            &:first-child{
+                padding-left: ($table-cell-padding-sm + $table-cell-padding-x-sm);
+            }
+            &:last-child{
+                padding-right: ($table-cell-padding-sm + $table-cell-padding-x-sm);
+            }
+        }
+    }
+}
+.table-borderless th, .table-borderless td, .table-borderless thead th, .table-borderless tbody + tbody {
+    border: 0;
+}
+.table > :not(caption) > * > *{
+    box-shadow: none;
+}
+.table-sm th, .table-sm td{
+    padding: 0.25rem;
+}
+.table .table-light th {
+    color: $base-color !important;
+    background-color: $lighter;
+    border: $light-300;
+}

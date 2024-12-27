@@ -1,0 +1,51 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en" class="js">
+
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="author" content="USAT">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="{% trans 'Dashboard' %}">
+    <!-- Fav Icon  -->
+    <link rel="shortcut icon" href="{% static 'images/logo.png' %}">
+    <!-- Page Title  -->
+    <title>{% block title %}{% trans 'Dashboard' %}{% endblock %}</title>
+    <!-- StyleSheets  -->
+    {% include 'includes/external_css.html' %}
+</head>
+
+{% if user.is_authenticated %}
+<body class="nk-body bg-white has-sidebar {% if user.prefers_dark_mode %}dark-mode{% endif %}">
+    <div class="nk-app-root">
+        <!-- main @s -->
+        <div class="nk-main ">
+            <!-- sidebar @s -->
+            {% include 'includes/sidebar.html' %}
+            <!-- sidebar @e -->
+            <!-- wrap @s -->
+            <div class="nk-wrap ">
+                <!-- main header @s -->
+                {% include 'includes/header.html' %}
+                <!-- main header @e -->
+                <!-- content @s -->
+                {% block content %}{% endblock %}
+                <!-- content @e -->
+                <!-- footer @s -->
+                {% include 'includes/footer.html' %}
+                <!-- footer @e -->
+            </div>
+            <!-- wrap @e -->
+        </div>
+        <!-- main @e -->
+    </div>
+    <!-- app-root @e -->
+    <!-- JavaScript -->
+    {% include 'includes/external_js.html' %}
+    {% block extra_js %}{% endblock %}
+</body>
+{% endif %}
+</html>

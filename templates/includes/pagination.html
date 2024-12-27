@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load custom_tags %}
+
+{% if page_obj.has_other_pages %}
+<div class="card-inner">
+    <div class="nk-block-between-md g-3">
+        <div class="g">
+            {% if page_obj.has_previous %}
+                <a href="{{ request.path }}{% url_replace page=page_obj.previous_page_number %}" class="btn btn-outline-light">
+                    <em class="icon ni ni-chevron-left"></em>
+                    <span>{% trans 'Previous' %}</span>
+                </a>
+            {% endif %}
+        </div>
+        <div class="g">
+            <ul class="pagination justify-content-center justify-content-md-start">
+                {% if page_obj.number > 3 %}
+                    <li class="page-item"><a class="page-link" href="{{ request.path }}{% url_replace page=1 %}">1</a></li>
+                    {% if page_obj.number > 4 %}
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    {% endif %}
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <li class="page-item"><a class="page-link" href="{{ request.path }}{% url_replace page=num %}">{{ num }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.number < page_obj.paginator.num_pages|add:'-2' %}
+                    {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
+                        <li class="page-item disabled"><span class="page-link">...</span></li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link" href="{{ request.path }}{% url_replace page=page_obj.paginator.num_pages %}">{{ page_obj.paginator.num_pages }}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="g">
+            {% if page_obj.has_next %}
+                <a href="{{ request.path }}{% url_replace page=page_obj.next_page_number %}" class="btn btn-outline-light">
+                    <span>{% trans 'Next' %}</span>
+                    <em class="icon ni ni-chevron-right"></em>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endif %}

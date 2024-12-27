@@ -1,0 +1,102 @@
+{% load static %}
+{% load i18n %}
+
+<div class="nk-sidebar nk-sidebar-fixed " data-content="sidebarMenu">
+    <div class="nk-sidebar-element nk-sidebar-head">
+        <div class="nk-sidebar-brand">
+            <a href="{% url 'dashboard' %}" class="logo-link nk-sidebar-logo">
+                <div class="logo-wrapper flex items-center space-x-2">
+                    <div class="logo-container">
+                        <h4 class="text-2xl font-bold">
+                            <img src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="{% trans 'JournalAdmin Logo' %}" class="logo-image w-10 h-10 object-contain">
+                            {% trans 'JournalAdmin' %}
+                        </h4>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="nk-menu-trigger me-n2">
+            <a href="#" class="nk-nav-toggle nk-quick-nav-icon d-xl-none" data-target="sidebarMenu">
+                <em class="icon ni ni-menu-alt-r"></em>
+            </a>
+        </div>
+    </div><!-- .nk-sidebar-element -->
+    <div class="nk-sidebar-element">
+        <div class="nk-sidebar-body" data-simplebar>
+            <div class="nk-sidebar-content">
+                <div class="nk-sidebar-menu">
+                    <ul class="nk-menu">
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">{% trans 'Dashboards' %}</h6>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{% url 'dashboard' %}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
+                                <span class="nk-menu-text">{% trans 'Journal dashboard' %}</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">{% trans 'Applications' %}</h6>
+                        </li><!-- .nk-menu-heading -->
+                        <li class="nk-menu-item has-sub">
+                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                                <span class="nk-menu-icon"><em class="icon ni ni-file-text"></em></span>
+                                <span class="nk-menu-text">{% trans 'Journal' %}</span>
+                            </a>
+                            <ul class="nk-menu-sub">
+                                <li class="nk-menu-item">
+                                    <a href="{% url 'journal_list' %}" class="nk-menu-link">
+                                        <em class="icon ni ni-book-read"></em>
+                                        <span class="nk-menu-text">{% trans 'Journals' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="{% url 'volume_list' %}" class="nk-menu-link">
+                                        <em class="icon ni ni-list-index"></em>
+                                        <span class="nk-menu-text">{% trans 'Journal volumes' %}</span>
+                                    </a>
+                                </li>
+                                <li class="nk-menu-item">
+                                    <a href="{% url 'issue_list' %}" class="nk-menu-link">
+                                        <em class="icon ni ni-list"></em>
+                                        <span class="nk-menu-text">{% trans 'Journal issues' %}</span>
+                                    </a>
+                                </li>
+                            </ul><!-- .nk-menu-sub -->
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{% url 'article_list' %}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-card-view"></em></span>
+                                <span class="nk-menu-text">{% trans 'Articles' %}</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{% url 'author_list' %}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
+                                <span class="nk-menu-text">{% trans 'Authors' %}</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-item">
+                            <a href="{% url 'category_list' %}" class="nk-menu-link">
+                                <span class="nk-menu-icon"><em class="icon ni ni-map"></em></span>
+                                <span class="nk-menu-text">{% trans 'Directions' %}</span>
+                            </a>
+                        </li><!-- .nk-menu-item -->
+                        <li class="nk-menu-heading">
+                            <h6 class="overline-title text-primary-alt">{% trans 'Authentication' %}</h6>
+                        </li><!-- .nk-menu-heading -->
+                        <li class="nk-menu-item">
+                            <form id="logout-form" action="{% url 'logout' %}" method="POST" style="display: none;">
+                                {% csrf_token %}
+                            </form>
+                            <a href="#" class="nk-menu-link" onclick="handleLogout(event)">
+                                <span class="nk-menu-icon"><em class="icon ni ni-signout"></em></span>
+                                <span class="nk-menu-text">{% trans 'Sign out' %}</span>
+                            </a>
+                        </li>
+                    </ul><!-- .nk-menu -->
+                </div><!-- .nk-sidebar-menu -->
+            </div><!-- .nk-sidebar-content -->
+        </div><!-- .nk-sidebar-body -->
+    </div><!-- .nk-sidebar-element -->
+</div>

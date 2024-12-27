@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Confirm Delete Author" %}{% endblock %}
+
+{% block content %}
+<div class="nk-content">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">{% trans "Confirm Delete Author" %}</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>{% trans "Are you sure you want to delete this author?" %}</p>
+                            </div>
+                        </div>
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <ul class="nk-block-tools g-3">
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'author_list' %}" class="btn btn-outline-light d-none d-sm-inline-flex">
+                                            <em class="icon ni ni-arrow-left"></em>
+                                            <span>{% trans "Back" %}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nk-block">
+                    <div class="card card-bordered">
+                        <div class="card-inner">
+                            <div class="nk-block">
+                                <div class="nk-block-head">
+                                    <h5 class="title">{% trans "Author Details" %}</h5>
+                                    <p class="text-danger">{% trans "This action cannot be undone." %}</p>
+                                </div>
+                                <div class="profile-ud-list">
+                                    <div class="profile-ud-item">
+                                        <div class="profile-ud wider">
+                                            <span class="profile-ud-label">{% trans "Name" %}</span>
+                                            <span class="profile-ud-value">{{ object.first_name }} {{ object.last_name }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-ud-item">
+                                        <div class="profile-ud wider">
+                                            <span class="profile-ud-label">{% trans "Email" %}</span>
+                                            <span class="profile-ud-value">{{ object.email }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-ud-item">
+                                        <div class="profile-ud wider">
+                                            <span class="profile-ud-label">{% trans "Phone" %}</span>
+                                            <span class="profile-ud-value">{{ object.phone }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-ud-item">
+                                        <div class="profile-ud wider">
+                                            <span class="profile-ud-label">{% trans "Country" %}</span>
+                                            <span class="profile-ud-value">{{ object.country }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-ud-item">
+                                        <div class="profile-ud wider">
+                                            <span class="profile-ud-label">{% trans "Academic Degree" %}</span>
+                                            <span class="profile-ud-value">{{ object.get_academic_degree_display }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="profile-ud-item">
+                                        <div class="profile-ud wider">
+                                            <span class="profile-ud-label">{% trans "Academic Title" %}</span>
+                                            <span class="profile-ud-value">{{ object.get_academic_title_display }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="nk-block">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="form-group mt-2">
+                                                <button type="submit" class="btn btn-danger btn-lg">{% trans "Confirm Delete" %}</button>
+                                                <a href="{% url 'author_list' %}" class="btn btn-light btn-lg">{% trans "Cancel" %}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

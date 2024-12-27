@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'corsheaders',
+    'crispy_forms',
+    'crispy_bootstrap4',
 
     # local apps
     'apps.AccountsConfig',
@@ -64,12 +66,12 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'core.utils.LanguageMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'core.utils.LanguageMiddleware',
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -142,9 +144,16 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries': {
+                'custom_tags': 'core.templatetags.custom_tags',
+            },
         },
     },
 ]
+
+# CRISPY FORMS
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
@@ -198,16 +207,17 @@ LANGUAGE_CODE = 'uz'
 TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
-
+# USE_L10N = True
 USE_TZ = True
-
-MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
 
 LANGUAGES = [
     ('uz', _('O‘zbekcha')),
     ('ru', _('Ruscha')),
     ('en', _('English')),
 ]
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'uz'
+MODELTRANSLATION_LANGUAGES = ('uz', 'ru', 'en')
 
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
@@ -247,9 +257,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # User model
 AUTH_USER_MODEL = 'accounts.User'
 
-LOGIN_REDIRECT_URL = '/'
-LOGIN_URL = '/admin/login/'
-LOGOUT_REDIRECT_URL = '/admin/login/'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'
 
 # File upload
 DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB

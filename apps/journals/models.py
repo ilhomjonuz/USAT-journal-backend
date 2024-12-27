@@ -10,6 +10,8 @@ class Journal(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
     updated_at = models.DateTimeField(auto_now=True, verbose_name=_("Updated At"))
 
+    objects = models.Manager()
+
     class Meta:
         verbose_name = _("Journal")
         verbose_name_plural = _("Journals")
@@ -23,6 +25,8 @@ class JournalVolume(models.Model):
     volume_number = models.PositiveIntegerField(verbose_name=_("Volume Number"))
     year = models.PositiveIntegerField(verbose_name=_("Year"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+
+    objects = models.Manager()
 
     class Meta:
         unique_together = ['journal', 'volume_number']
@@ -54,6 +58,8 @@ class JournalIssue(models.Model):
     views_count = models.PositiveIntegerField(default=0, verbose_name=_("Views Count"))
     downloads_count = models.PositiveIntegerField(default=0, verbose_name=_("Downloads Count"))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_("Created At"))
+
+    objects = models.Manager()
 
     class Meta:
         unique_together = ['volume', 'issue_number']

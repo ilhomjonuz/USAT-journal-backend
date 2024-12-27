@@ -1,0 +1,12 @@
+{% load static %}
+
+<script src="{% static 'assets/js/dark_mode_toggle.js' %}" defer></script>
+<script src="{% static 'assets/js/bundle.js?ver=3.1.2' %}"></script>
+<script src="{% static 'assets/js/scripts.js?ver=3.1.2' %}"></script>
+<script src="{% static 'assets/js/charts/gd-default.js?ver=3.1.2' %}"></script>
+<script>
+function handleLogout(event) {
+    event.preventDefault();
+    document.getElementById('logout-form').submit();
+}
+</script>

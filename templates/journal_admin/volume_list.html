@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Journal Volumes' %}{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between">
+                    <div class="nk-block-head-content">
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <h3 class="nk-block-title page-title">{% trans 'Journal Volumes' %}</h3>
+                        <div class="nk-block-des text-soft">
+                              <p>{% blocktrans with count=volumes|length %}You have total {{ count }} journal volumes.{% endblocktrans %}</p>
+                        </div>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <a href="{% url 'volume_create' %}" class="btn btn-icon btn-primary">
+                                <em class="icon ni ni-plus"></em>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card card-bordered card-stretch">
+                    <div class="card-inner-group">
+                        <div class="card-inner p-0">
+                            <div class="nk-tb-list nk-tb-ulist">
+                                <div class="nk-tb-item nk-tb-head">
+                                    <div class="nk-tb-col"><span class="sub-text">{% trans 'Journal' %}</span></div>
+                                    <div class="nk-tb-col tb-col-mb"><span class="sub-text">{% trans 'Volume Number' %}</span></div>
+                                    <div class="nk-tb-col tb-col-md"><span class="sub-text">{% trans 'Year' %}</span></div>
+                                    <div class="nk-tb-col nk-tb-col-tools text-end"></div>
+                                </div>
+                                {% for volume in volumes %}
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col">
+                                      <a href="{% url 'volume_update' volume.pk %}"><span class="tb-lead">{{ volume.journal.name }}</span></a>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-mb">
+                                        <span class="tb-amount">{{ volume.volume_number }}</span>
+                                    </div>
+                                    <div class="nk-tb-col tb-col-md">
+                                        <span>{{ volume.year }}</span>
+                                    </div>
+                                    <div class="nk-tb-col nk-tb-col-tools">
+                                        <ul class="nk-tb-actions gx-1">
+                                            <li>
+                                                <div class="drodown">
+                                                    <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                    <div class="dropdown-menu dropdown-menu-end">
+                                                        <ul class="link-list-opt no-bdr">
+                                                            <li><a href="{% url 'volume_update' volume.pk %}"><em class="icon ni ni-edit"></em><span>{% trans 'Edit' %}</span></a></li>
+                                                            <li><a href="{% url 'volume_delete' volume.pk %}"><em class="icon ni ni-trash"></em><span>{% trans 'Delete' %}</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <div class="nk-tb-item">
+                                    <div class="nk-tb-col" colspan="4">
+                                        <span class="tb-lead">{% trans 'No volumes found.' %}</span>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          {% include 'includes/pagination.html' with page_obj=page_obj %}
+        </div>
+    </div>
+</div>
+{% endblock %}

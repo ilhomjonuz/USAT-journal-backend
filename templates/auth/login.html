@@ -1,0 +1,216 @@
+{% extends "base_null.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
+<div class="nk-content">
+    <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+        <div class="brand-logo pb-4 text-center">
+            <a href="{% url 'dashboard' %}" class="logo-link">
+                <img class="logo-light logo-img logo-img-lg" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="logo">
+                <img class="logo-dark logo-img logo-img-lg" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="logo-dark">
+            </a>
+        </div>
+        <div class="card card-bordered">
+            <div class="card-inner card-inner-lg">
+                <div class="nk-block-head">
+                    <div class="nk-block-head-content">
+                        <h4 class="nk-block-title">{% trans "Sign In" %}</h4>
+                        <div class="nk-block-des">
+                            <p>{% trans "Access the JournalAdmin using your username and password." %}</p>
+                        </div>
+                    </div>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <form action="{% url 'login' %}" method="post" class="form-validate is-alter" id="loginForm">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <label class="form-label" for="username">{% trans "Username" %}</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="{% trans 'Enter your username' %}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label-group">
+                            <label class="form-label" for="password">{% trans "Password" %}</label>
+                        </div>
+                        <div class="form-control-wrap">
+                            <a tabindex="-1" href="#" class="form-icon form-icon-right passcode-switch lg" data-target="password">
+                                <em class="passcode-icon icon-show icon ni ni-eye"></em>
+                                <em class="passcode-icon icon-hide icon ni ni-eye-off"></em>
+                            </a>
+                            <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="{% trans 'Enter your password' %}" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary btn-block">{% trans "Sign in" %}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="nk-footer nk-auth-footer-full">
+        <div class="container wide-lg">
+            <div class="row g-3">
+                <div class="col-lg-6 order-lg-last">
+                    <ul class="nav nav-sm justify-content-center justify-content-lg-end">
+                        <li class="nav-item dropup">
+                            <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                                <div class="quick-icon border border-light">
+                                    {% with 'images/flags/'|add:LANGUAGE_CODE|add:'-sq.png' as flag_img %}
+                                        <img class="icon" src="{% static flag_img %}" alt="{{ LANGUAGE_CODE|language_name_local }}">
+                                    {% endwith %}
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-s1">
+                                <ul class="language-list">
+                                    {% for language in languages %}
+                                        <li>
+                                            <form action="{% url 'set_language' %}" method="post" class="language-item">
+                                                {% csrf_token %}
+                                                <input name="next" type="hidden" value="{{ request.path }}">
+                                                <input name="language" type="hidden" value="{{ language.code }}">
+                                                <button type="submit" class="btn btn-link p-0 w-100 text-start">
+                                                    {% with 'images/flags/'|add:language.code|add:'.png' as flag_img %}
+                                                        <img src="{% static flag_img %}" alt="{{ language.name_local }}" class="language-flag me-2" style="width: 30px; height: 20px;">
+                                                    {% endwith %}
+                                                    <span class="language-name">{{ language.name_local }}</span>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" id="dark-mode-toggle">
+                                <em class="icon ni ni-moon"></em>
+                                <span>{% trans "Dark Mode" %}</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-6">
+                    <div class="nk-block-content text-center text-lg-left">
+                        <p class="text-soft">&copy; 2024 USAT journal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Password visibility toggle
+    const passwordToggles = document.querySelectorAll('.passcode-switch');
+    passwordToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('data-target');
+            const passwordInput = document.getElementById(targetId);
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.classList.add('is-shown');
+            } else {
+                passwordInput.type = 'password';
+                this.classList.remove('is-shown');
+            }
+        });
+    });
+
+    // Form validation
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', function(e) {
+        if (!this.checkValidity()) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        this.classList.add('was-validated');
+    });
+
+    // Alert dismissal
+    const alertCloseButtons = document.querySelectorAll('.alert .close');
+    alertCloseButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            this.parentElement.style.display = 'none';
+        });
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    // Set initial dark mode state
+    if (isDarkMode) {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<em class="icon ni ni-sun"></em><span>{% trans "Light Mode" %}</span>';
+    }
+
+    darkModeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark);
+
+        if (isDark) {
+            this.innerHTML = '<em class="icon ni ni-sun"></em><span>{% trans "Light Mode" %}</span>';
+        } else {
+            this.innerHTML = '<em class="icon ni ni-moon"></em><span>{% trans "Dark Mode" %}</span>';
+        }
+    });
+
+    // Language dropdown
+    const languageDropdown = document.querySelector('.nav-item.dropup');
+    const dropdownToggle = languageDropdown.querySelector('.dropdown-toggle');
+    const dropdownMenu = languageDropdown.querySelector('.dropdown-menu');
+
+    dropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!languageDropdown.contains(e.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+
+    // Language form submission
+    const languageForms = document.querySelectorAll('.language-form');
+    languageForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'X-CSRFToken': this.querySelector('input[name="csrfmiddlewaretoken"]').value
+                }
+            }).then(() => {
+                window.location.reload();
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

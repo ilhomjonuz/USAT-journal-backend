@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Confirm Delete Journal Issue' %}{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            <div class="nk-block-head nk-block-head-sm">
+                <div class="nk-block-between g-3">
+                    <div class="nk-block-head-content">
+                        <h2 class="nk-block-title fw-normal">{% trans 'Confirm Delete Journal Issue' %}</h2>
+                        <div class="nk-block-des text-soft">
+                            <p>{% trans 'Are you sure you want to delete this journal issue?' %}</p>
+                        </div>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <a href="{% url 'issue_update' object.pk %}" class="btn btn-outline-light bg-white d-none d-sm-inline-flex">
+                            <em class="icon ni ni-arrow-left"></em>
+                            <span>{% trans 'Back' %}</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-inner">
+                        <h3 class="title">{% trans 'Issue Details' %}</h3>
+                        <table class="table table-ulogs">
+                            <tbody>
+                                <tr>
+                                    <td class="tb-col-os"><span class="overline-title">{% trans 'Journal' %}</span></td>
+                                    <td class="tb-col-ip"><span class="sub-text">{{ object.volume.journal.name }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-col-os"><span class="overline-title">{% trans 'Volume' %}</span></td>
+                                    <td class="tb-col-ip"><span class="sub-text">{{ object.volume.volume_number }}</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="tb-col-os"><span class="overline-title">{% trans 'Issue Number' %}</span></td>
+                                    <td class="tb-col-ip"><span class="sub-text">{{ object.issue_number }}</span></td>
+                </tr>
+                <tr>
+                    <td class="tb-col-os"><span class="overline-title">{% trans 'Publication Date' %}</span></td>
+                    <td class="tb-col-ip"><span class="sub-text">{{ object.publication_date }}</span></td>
+                </tr>
+                <tr>
+                    <td class="tb-col-os"><span class="overline-title">{% trans 'Status' %}</span></td>
+                    <td class="tb-col-ip"><span class="sub-text">{% if object.is_published %}{% trans 'Published' %}{% else %}{% trans 'Draft' %}{% endif %}</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        {% if has_related_objects %}
+            <h4 class="title mt-5">{% trans 'This deletion will also remove:' %}</h4>
+            {% for related_object in related_objects %}
+                {% if related_object.count > 0 %}
+                    <div class="card card-bordered mt-3">
+                        <div class="card-inner">
+                            <h5 class="card-title">{{ related_object.name }} ({{ related_object.count }})</h5>
+                            <table class="table table-ulogs">
+                                <thead class="table-light">
+                                    <tr>
+                                        {% for key in related_object.items.0.keys %}
+                                            <th><span class="overline-title">{% trans key|title %}</span></th>
+                                        {% endfor %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for item in related_object.items|slice:":5" %}
+                                        <tr>
+                                            {% for value in item.values %}
+                                                <td><span class="sub-text">{{ value }}</span></td>
+                                            {% endfor %}
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                            {% if related_object.items|length > 5 %}
+                                <p class="text-soft mt-2">{% trans 'And' %} {{ related_object.items|length|add:"-5" }} {% trans 'more...' %}</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            <div class="alert alert-warning mt-5">
+                <p>{% trans 'Warning: Deleting this issue will also delete all related articles. This action cannot be undone.' %}</p>
+            </div>
+        {% else %}
+            <div class="alert alert-info mt-5">
+                <p>{% trans 'This issue has no related objects. Deleting it will not affect any other data.' %}</p>
+            </div>
+        {% endif %}
+
+        <form method="post" class="mt-5">
+            {% csrf_token %}
+            <div class="form-group">
+                <button type="submit" class="btn btn-danger btn-lg">{% trans 'Confirm Delete' %}</button>
+                <a href="{% url 'issue_update' object.pk %}" class="btn btn-outline-secondary btn-lg">{% trans 'Cancel' %}</a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

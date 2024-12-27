@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        {% trans "Edit Author" %}
+    {% else %}
+        {% trans "Add Author" %}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="nk-content">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            <h3 class="nk-block-title page-title">
+                                {% if form.instance.pk %}
+                                    {% trans "Edit Author" %}
+                                {% else %}
+                                    {% trans "Add Author" %}
+                                {% endif %}
+                            </h3>
+                            <div class="nk-block-des text-soft">
+                                <p>{% trans "Please fill in the information below" %}</p>
+                            </div>
+                        </div>
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <ul class="nk-block-tools g-3">
+                                    <li class="nk-block-tools-opt">
+                                        <a href="{% url 'author_list' %}" class="btn btn-outline-light d-none d-sm-inline-flex">
+                                            <em class="icon ni ni-arrow-left"></em>
+                                            <span>{% trans "Back" %}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nk-block">
+                    <div class="card card-bordered">
+                        <div class="card-inner">
+                            <form method="post" class="form-validate">
+                                {% csrf_token %}
+                                {% if form.errors %}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <p>{{ field.label }}: {{ error }}</p>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                {% endif %}
+
+                                <div class="row g-gs">
+                                    <div class="col-md-6">
+                                        {{ form.first_name|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.last_name|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.email|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.phone|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.country|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.city|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-12">
+                                        {{ form.workplace|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.academic_degree|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.academic_title|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.messenger_contact|as_crispy_field }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form.orcid|as_crispy_field }}
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-lg btn-primary">
+                                                {% if form.instance.pk %}
+                                                    {% trans "Update Author" %}
+                                                {% else %}
+                                                    {% trans "Add Author" %}
+                                                {% endif %}
+                                            </button>
+                                            {% if form.instance.pk %}
+                                            <a href="{% url 'author_delete' form.instance.pk %}" class="btn btn-lg btn-danger delete-author">
+                                                {% trans "Delete Author" %}
+                                            </a>
+                                            {% endif %}
+                                            <a href="{% url 'author_list' %}" class="btn btn-lg btn-light">
+                                                {% trans "Cancel" %}
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Initialize select2 for dropdown fields
+    $('.js-select2').select2({
+        placeholder: "{% trans 'Select an option' %}",
+        allowClear: true
+    });
+
+    // Form validation
+    $('.form-validate').on('submit', function(e) {
+        var requiredFields = $(this).find('[required]');
+        var hasError = false;
+
+        requiredFields.each(function() {
+            if (!$(this).val()) {
+                $(this).addClass('is-invalid');
+                hasError = true;
+            } else {
+                $(this).removeClass('is-invalid');
+            }
+        });
+
+        if (hasError) {
+            e.preventDefault();
+            $('html, body').animate({
+                scrollTop: $('.is-invalid').first().offset().top - 100
+            }, 500);
+        }
+    });
+});
+</script>
+{% endblock %}

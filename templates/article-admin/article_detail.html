@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans 'Article Details' %}{% endblock %}
+
+{% block content %}
+<div class="nk-content nk-content-fluid">
+    <div class="container-xl wide-lg">
+        <div class="nk-content-body">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="nk-block-head nk-block-head-lg">
+                <div class="nk-block-between g-3">
+                    <div class="nk-block-head-content">
+                        <h2 class="nk-block-title fw-normal">{% trans 'Article Details' %}</h2>
+                    </div>
+                    <div class="nk-block-head-content">
+                        <div class="toggle-wrap nk-block-tools-toggle">
+                            <div class="toggle-expand-content expanded">
+                                <ul class="nk-block-tools g-3">
+                                    <li>
+                                        <a href="{% url 'article_update' object.pk %}" class="btn btn-white btn-outline-light">
+                                            <em class="icon ni ni-edit"></em>
+                                            <span>{% trans 'Edit' %}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'article_delete' object.pk %}" class="btn btn-white btn-outline-danger">
+                                            <em class="icon ni ni-trash"></em>
+                                            <span>{% trans 'Delete' %}</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="{% url 'article_list' %}" class="btn btn-outline-light">
+                                            <em class="icon ni ni-arrow-left"></em>
+                                            <span>{% trans 'Back' %}</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nk-block">
+                <div class="card card-bordered">
+                    <div class="card-aside-wrap">
+                        <div class="card-content">
+                            <div class="card-inner">
+                                <div class="nk-block">
+                                    <div class="nk-block-head">
+                                        <h5 class="title">{% trans 'Article Information' %}</h5>
+                                    </div>
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="title">{% trans 'Title' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control form-control-lg" id="title" value="{{ object.title }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{% trans 'Category' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" value="{{ object.category.name }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{% trans 'Authors' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" value="{{ object.authors.all|join:", " }}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label class="form-label" for="keywords">{% trans 'Keywords' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <textarea class="form-control form-control-lg" id="keywords" rows="2" readonly>{{ object.keywords }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{% trans 'Status' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <span class="badge badge-dot badge-{{ object.status|lower }} badge-lg">
+                                                        {{ object.get_status_display }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label class="form-label">{% trans 'Page Range' %}</label>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" value="{% if object.page_range %}{{ object.page_range }} ({{ object.total_pages }} {% trans 'pages' %}){% else %}{% trans 'Not set' %}{% endif %}" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="nk-block mt-5">
+                                    <div class="nk-block-head">
+                                        <h5 class="title">{% trans 'Annotation' %}</h5>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="form-control-wrap">
+                                            <textarea class="form-control form-control-lg" rows="5" readonly>{{ object.annotation }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="nk-block mt-5">
+                                    <div class="nk-block-head">
+                                        <h5 class="title">{% trans 'Documents' %}</h5>
+                                    </div>
+                                    <div class="nk-files nk-files-view-list">
+                                        {% if object.original_file %}
+                                        <div class="nk-file-item">
+                                            <div class="nk-file-info">
+                                                <div class="nk-file-title">
+                                                    <div class="nk-file-icon">
+                                                        <span class="nk-file-icon-type">
+                                                            <em class="icon ni ni-file-doc"></em>
+                                                        </span>
+                                                    </div>
+                                                    <div class="nk-file-name">
+                                                        <div class="nk-file-name-text">
+                                                            <span class="title">{% trans 'Original File' %}</span>
+                                                            <span class="sub-text">{{ object.original_file.name|cut:"article_submissions/" }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="nk-file-actions">
+                                                <a href="{% url 'article_download_file' object.id 'original' %}" class="btn btn-sm btn-icon btn-trigger">
+                                                    <em class="icon ni ni-download"></em>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+
+                                        {% if object.revised_file %}
+                                        <div class="nk-file-item">
+                                            <div class="nk-file-info">
+                                                <div class="nk-file-title">
+                                                    <div class="nk-file-icon">
+                                                        <span class="nk-file-icon-type">
+                                                            <em class="icon ni ni-file-doc"></em>
+                                                        </span>
+                                                    </div>
+                                                    <div class="nk-file-name">
+                                                        <div class="nk-file-name-text">
+                                                            <span class="title">{% trans 'Revised File' %}</span>
+                                                            <span class="sub-text">{{ object.revised_file.name|cut:"article_revisions/" }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="nk-file-actions">
+                                                <a href="{% url 'article_download_file' object.id 'revised' %}" class="btn btn-sm btn-icon btn-trigger">
+                                                    <em class="icon ni ni-download"></em>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-aside card-aside-right user-aside toggle-slide toggle-slide-right toggle-break-lg" data-content="userAside" data-toggle-screen="lg" data-toggle-overlay="true">
+                            <div class="card-inner-group">
+                                <div class="card-inner">
+                                    <div class="user-card user-card-s2">
+                                        <div class="user-info">
+                                            <h5>{% trans 'Statistics' %}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-inner card-inner-sm">
+                                    <ul class="btn-toolbar justify-center gx-1">
+                                        <li><a href="#" class="btn btn-trigger btn-icon"><em class="icon ni ni-download"></em></a></li>
+                                        <li><a href="#" class="btn btn-trigger btn-icon"><em class="icon ni ni-eye"></em></a></li>
+                                    </ul>
+                                </div>
+                                <div class="card-inner">
+                                    <div class="row text-center">
+                                        <div class="col-6">
+                                            <div class="profile-stats">
+                                                <span class="amount">{{ object.downloads_count }}</span>
+                                                <span class="sub-text">{% trans 'Downloads' %}</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="profile-stats">
+                                                <span class="amount">{{ object.views_count }}</span>
+                                                <span class="sub-text">{% trans 'Views' %}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-inner">
+                                    <div class="nk-block-head-content mb-3">
+                                        <h6 class="title">{% trans 'Status Information' %}</h6>
+                                    </div>
+                                    <div class="profile-ud-list">
+                                        <div class="profile-ud-item border-bottom py-3">
+                                            <div class="profile-ud">
+                                                <span class="profile-ud-label text-muted">{% trans 'Status' %}</span>
+                                                <span class="profile-ud-value">
+                                                    <span class="badge bg-{{ object.status|lower }} text-white rounded-pill px-3">
+                                                        {{ object.get_status_display }}
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-ud-item border-bottom py-3">
+                                            <div class="profile-ud">
+                                                <span class="profile-ud-label text-muted">{% trans 'Status Date' %}</span>
+                                                <span class="profile-ud-value text-primary">
+                                                    {% if object.status == 'SUBMITTED' %}
+                                                        {{ object.submission_date|date:"d M Y H:i" }}
+                                                    {% elif object.status == 'UNDER_REVIEW' %}
+                                                        {{ object.review_date|date:"d M Y H:i" }}
+                                                    {% elif object.status == 'ACCEPTED' %}
+                                                        {{ object.acceptance_date|date:"d M Y H:i" }}
+                                                    {% elif object.status == 'PUBLISHED' %}
+                                                        {{ object.publication_date|date:"d M Y H:i" }}
+                                                    {% else %}
+                                                        <span class="text-muted">{% trans 'N/A' %}</span>
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="profile-ud-item py-3">
+                                            <div class="profile-ud">
+                                                <span class="profile-ud-label text-muted">{% trans 'Journal Issue' %}</span>
+                                                <span class="profile-ud-value">
+                                                    {% if object.journal_issue %}
+                                                        <span class="text-primary">{{ object.journal_issue }}</span>
+                                                    {% else %}
+                                                        <span class="badge bg-gray text-white rounded-pill px-3">{% trans 'Not assigned' %}</span>
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-inner">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        {% if object.status == 'SUBMITTED' %}
+                                            <button type="submit" name="action" value="set_under_review" class="btn btn-block btn-outline-info">
+                                                <em class="icon ni ni-eye"></em>
+                                                <span>{% trans 'Set Under Review' %}</span>
+                                            </button>
+                                        {% elif object.status == 'UNDER_REVIEW' %}
+                                            <button type="submit" name="action" value="accept" class="btn btn-block btn-outline-success">
+                                                <em class="icon ni ni-check-round"></em>
+                                                <span>{% trans 'Accept' %}</span>
+                                            </button>
+                                            <button type="submit" name="action" value="reject" class="btn btn-block btn-outline-danger">
+                                                <em class="icon ni ni-na"></em>
+                                                <span>{% trans 'Reject' %}</span>
+                                            </button>
+                                        {% elif object.status == 'ACCEPTED' %}
+                                            <button type="submit" name="action" value="publish" class="btn btn-block btn-outline-primary">
+                                                <em class="icon ni ni-share"></em>
+                                                <span>{% trans 'Publish' %}</span>
+                                            </button>
+                                        {% endif %}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
