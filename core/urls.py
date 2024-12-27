@@ -33,7 +33,7 @@ urlpatterns = [
 
     path('api/v1/journals/', include('apps.journals.urls.api_urls')),
     path('api/v1/articles/', include('apps.articles.urls.api_urls')),
-    path('api/v1/authors/', include('apps.authors.urls')),
+    path('api/v1/authors/', include('apps.authors.urls.api_urls')),
     path('api/v1/directions/', include('apps.categories.urls.api_urls')),
 ]
 
@@ -43,6 +43,7 @@ urlpatterns += i18n_patterns(
     path('journal-admin/', include('apps.journals.urls.admin_urls')),
     path('article-admin/', include('apps.articles.urls.admin_urls')),
     path('category-admin/', include('apps.categories.urls.admin_urls')),
+    path('author-admin/', include('apps.authors.urls.admin_urls'))
     # prefix_default_language=False
 )
 

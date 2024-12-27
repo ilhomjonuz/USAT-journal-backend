@@ -64,63 +64,17 @@
                                 </li>
                             </ul><!-- .nk-menu-sub -->
                         </li><!-- .nk-menu-item -->
-                        <li class="nk-menu-item has-sub">
-                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                        <li class="nk-menu-item">
+                            <a href="{% url 'article_list' %}" class="nk-menu-link">
                                 <span class="nk-menu-icon"><em class="icon ni ni-card-view"></em></span>
                                 <span class="nk-menu-text">{% trans 'Articles' %}</span>
                             </a>
-                            <ul class="nk-menu-sub">
-                                <li class="nk-menu-item">
-                                    <a href="{% url 'article_list' %}" class="nk-menu-link">
-                                        <em class="icon ni ni-file-text"></em>
-                                        <span class="nk-menu-text">{% trans 'Article list' %}</span>
-                                    </a>
-                                </li>
-<!--                                <li class="nk-menu-item">-->
-<!--                                    <a href="#" class="nk-menu-link">-->
-<!--                                        <em class="icon ni ni-eye"></em>-->
-<!--                                        <span class="nk-menu-text">{% trans 'Under Review articles' %}</span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li class="nk-menu-item">-->
-<!--                                    <a href="#" class="nk-menu-link">-->
-<!--                                        <em class="icon ni ni-check"></em>-->
-<!--                                        <span class="nk-menu-text">{% trans 'Accepted articles' %}</span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li class="nk-menu-item">-->
-<!--                                    <a href="#" class="nk-menu-link">-->
-<!--                                        <em class="icon ni ni-cross-circle"></em>-->
-<!--                                        <span class="nk-menu-text">{% trans 'Rejected articles' %}</span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-<!--                                <li class="nk-menu-item">-->
-<!--                                    <a href="#" class="nk-menu-link">-->
-<!--                                        <em class="icon ni ni-check-circle"></em>-->
-<!--                                        <span class="nk-menu-text">{% trans 'Published articles' %}</span>-->
-<!--                                    </a>-->
-<!--                                </li>-->
-                            </ul><!-- .nk-menu-sub -->
                         </li><!-- .nk-menu-item -->
-                        <li class="nk-menu-item has-sub">
-                            <a href="#" class="nk-menu-link nk-menu-toggle">
+                        <li class="nk-menu-item">
+                            <a href="{% url 'author_list' %}" class="nk-menu-link">
                                 <span class="nk-menu-icon"><em class="icon ni ni-users"></em></span>
-                                <span class="nk-menu-text">{% trans 'Users' %}</span>
+                                <span class="nk-menu-text">{% trans 'Authors' %}</span>
                             </a>
-                            <ul class="nk-menu-sub">
-                                <li class="nk-menu-item">
-                                    <a href="#" class="nk-menu-link">
-                                        <em class="icon ni ni-user-list"></em>
-                                        <span class="nk-menu-text">{% trans 'Authors' %}</span>
-                                    </a>
-                                </li>
-                                <li class="nk-menu-item">
-                                    <a href="#" class="nk-menu-link">
-                                        <em class="icon ni ni-user-check"></em>
-                                        <span class="nk-menu-text">{% trans 'Reviewers' %}</span>
-                                    </a>
-                                </li>
-                            </ul><!-- .nk-menu-sub -->
                         </li><!-- .nk-menu-item -->
                         <li class="nk-menu-item">
                             <a href="{% url 'category_list' %}" class="nk-menu-link">

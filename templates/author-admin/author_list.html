@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{% trans "Authors" %}{% endblock %}
+
+{% block content %}
+<div class="nk-content">
+    <div class="container-fluid">
+        <div class="nk-content-inner">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between">
+                        <div class="nk-block-head-content">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <h3 class="nk-block-title page-title">{% trans "Authors" %}</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>{% trans "You have total" %} {{ page_obj.paginator.count }} {% trans "authors" %}.</p>
+                            </div>
+                        </div>
+                        <div class="nk-block-head-content">
+                            <div class="toggle-wrap nk-block-tools-toggle">
+                                <div class="toggle-expand-content" data-content="pageMenu">
+                                    <ul class="nk-block-tools g-3">
+                                        <li>
+                                            <form method="GET" action="{% url 'author_list' %}" id="search-form" class="form-inline">
+                                                <div class="form-control-wrap">
+                                                    <div class="form-icon form-icon-right">
+                                                        <em class="icon ni ni-search"></em>
+                                                    </div>
+                                                    <input type="text" class="form-control" id="search-input" name="search"
+                                                           value="{{ request.GET.search }}"
+                                                           placeholder="{% trans 'Search by name or email' %}">
+                                                </div>
+                                            </form>
+                                        </li>
+                                        <li class="nk-block-tools-opt">
+                                            <a href="{% url 'author_create' %}" class="btn btn-primary d-none d-sm-inline-flex">
+                                                <em class="icon ni ni-plus"></em>
+                                                <span>{% trans "Add Author" %}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nk-block">
+                    <div class="card card-bordered card-stretch">
+                        <div class="card-inner-group">
+                            <div class="card-inner p-0">
+                                <div class="nk-tb-list nk-tb-ulist">
+                                    <div class="nk-tb-item nk-tb-head">
+                                        <div class="nk-tb-col"><span class="sub-text">{% trans "Author" %}</span></div>
+                                        <div class="nk-tb-col tb-col-mb"><span class="sub-text">{% trans "Email" %}</span></div>
+                                        <div class="nk-tb-col tb-col-md"><span class="sub-text">{% trans "Phone" %}</span></div>
+                                        <div class="nk-tb-col tb-col-lg"><span class="sub-text">{% trans "Academic Degree" %}</span></div>
+                                        <div class="nk-tb-col tb-col-lg"><span class="sub-text">{% trans "Academic Title" %}</span></div>
+                                        <div class="nk-tb-col tb-col-md"><span class="sub-text">{% trans "Country" %}</span></div>
+                                        <div class="nk-tb-col nk-tb-col-tools text-end">
+                                            <span class="sub-text">{% trans "Actions" %}</span>
+                                        </div>
+                                    </div>
+
+                                    {% for author in authors %}
+                                    <div class="nk-tb-item" onclick="window.location='{% url 'author_update' author.pk %}'" style="cursor: pointer;">
+                                        <div class="nk-tb-col">
+                                            <div class="user-card">
+                                                <div class="user-avatar bg-primary">
+                                                    <span>{{ author.first_name|first }}{{ author.last_name|first }}</span>
+                                                </div>
+                                                <div class="user-info">
+                                                    <span class="tb-lead">{{ author.first_name }} {{ author.last_name }}</span>
+                                                    <span>{{ author.workplace }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-mb">
+                                            <span class="tb-amount">{{ author.email }}</span>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-md">
+                                            <span>{{ author.phone }}</span>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-lg">
+                                            <span>{{ author.get_academic_degree_display }}</span>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-lg">
+                                            <span>{{ author.get_academic_title_display }}</span>
+                                        </div>
+                                        <div class="nk-tb-col tb-col-md">
+                                            <span>{{ author.country }}</span>
+                                        </div>
+                                        <div class="nk-tb-col nk-tb-col-tools" onclick="event.stopPropagation();">
+                                            <ul class="nk-tb-actions gx-1">
+                                                <li>
+                                                    <div class="drodown">
+                                                        <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown">
+                                                            <em class="icon ni ni-more-h"></em>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-end">
+                                                            <ul class="link-list-opt no-bdr">
+                                                                <li>
+                                                                    <a href="{% url 'author_update' author.pk %}">
+                                                                        <em class="icon ni ni-edit"></em>
+                                                                        <span>{% trans "Edit" %}</span>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="{% url 'author_delete' author.pk %}" class="delete-author">
+                                                                        <em class="icon ni ni-trash"></em>
+                                                                        <span>{% trans "Delete" %}</span>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            {% if page_obj.has_other_pages %}
+                            <div class="card-inner">
+                                <div class="nk-block-between-md g-3">
+                                    <div class="g">
+                                        <ul class="pagination justify-content-center justify-content-md-start">
+                                            {% if page_obj.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="{% url 'author_list' %}?page={{ page_obj.previous_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                                    <em class="icon ni ni-chevrons-left"></em>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+
+                                            {% for num in page_obj.paginator.page_range %}
+                                                {% if page_obj.number == num %}
+                                                    <li class="page-item active">
+                                                        <span class="page-link">{{ num }}</span>
+                                                    </li>
+                                                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="{% url 'author_list' %}?page={{ num }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                                            {{ num }}
+                                                        </a>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            {% if page_obj.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="{% url 'author_list' %}?page={{ page_obj.next_page_number }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">
+                                                    <em class="icon ni ni-chevrons-right"></em>
+                                                </a>
+                                            </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                    <div class="g">
+                                        <div class="pagination-goto d-flex justify-content-center justify-content-md-start gx-3">
+                                            <div>{% trans "Page" %} {{ page_obj.number }} {% trans "of" %} {{ page_obj.paginator.num_pages }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+$(document).ready(function() {
+    // Initialize tooltips
+    $('[data-bs-toggle="tooltip"]').tooltip();
+
+    // Handle search form submission
+    $('#search-form').on('submit', function(e) {
+        e.preventDefault();
+        const searchQuery = $('#search-input').val();
+        window.location.href = `${window.location.pathname}?search=${encodeURIComponent(searchQuery)}`;
+    });
+
+    // Handle search on enter key
+    $('#search-input').on('keypress', function(e) {
+        if (e.which === 13) {
+            $('#search-form').submit();
+        }
+    });
+});
+</script>
+{% endblock %}
