@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.decorators import login_required
 from django.http import FileResponse, JsonResponse, HttpResponseRedirect
@@ -16,7 +17,7 @@ from apps.categories.models import Category
 from apps.journals.models import JournalIssue
 
 
-class ArticleListView(ListView):
+class ArticleListView(LoginRequiredMixin, ListView):
     model = Article
     template_name = 'article-admin/article_list.html'
     context_object_name = 'articles'
@@ -59,7 +60,7 @@ class ArticleListView(ListView):
         return context
 
 
-class ArticleCreateView(SuccessMessageMixin, CreateView):
+class ArticleCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Article
     form_class = ArticleForm
     template_name = 'article-admin/article_form.html'
@@ -67,7 +68,7 @@ class ArticleCreateView(SuccessMessageMixin, CreateView):
     success_message = _("Article was created successfully")
 
 
-class ArticleUpdateView(SuccessMessageMixin, UpdateView):
+class ArticleUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Article
     form_class = ArticleForm
     template_name = 'article-admin/article_form.html'
@@ -75,14 +76,14 @@ class ArticleUpdateView(SuccessMessageMixin, UpdateView):
     success_message = _("Article was updated successfully")
 
 
-class ArticleDeleteView(SuccessMessageMixin, DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Article
     template_name = 'article-admin/article_confirm_delete.html'
     success_url = reverse_lazy('article_list')
     success_message = _("Article was deleted successfully")
 
 
-class ArticleDetailView(DetailView):
+class ArticleDetailView(LoginRequiredMixin, DetailView):
     model = Article
     template_name = 'article-admin/article_detail.html'
 

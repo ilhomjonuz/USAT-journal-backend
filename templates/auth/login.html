@@ -2,20 +2,22 @@
 {% load static %}
 {% load i18n %}
 
+{% block title %}{% trans "Sign In" %}{% endblock %}
+
 {% block content %}
 <div class="nk-content">
-    <div class="nk-split nk-split-page nk-split-lg">
-        <div class="nk-split-content nk-block-area nk-block-area-column nk-auth-container bg-white">
-            <div class="nk-block nk-block-middle nk-auth-body">
-                <div class="brand-logo pb-5">
-                    <a href="{% url 'dashboard' %}" class="logo-link">
-                        <img class="logo-light logo-img logo-img-lg" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="logo">
-                        <img class="logo-dark logo-img logo-img-lg" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="logo-dark">
-                    </a>
-                </div>
+    <div class="nk-block nk-block-middle nk-auth-body wide-xs">
+        <div class="brand-logo pb-4 text-center">
+            <a href="{% url 'dashboard' %}" class="logo-link">
+                <img class="logo-light logo-img logo-img-lg" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="logo">
+                <img class="logo-dark logo-img logo-img-lg" src="{% static 'images/logo.png' %}" srcset="{% static 'images/logo.png' %}" alt="logo-dark">
+            </a>
+        </div>
+        <div class="card card-bordered">
+            <div class="card-inner card-inner-lg">
                 <div class="nk-block-head">
                     <div class="nk-block-head-content">
-                        <h5 class="nk-block-title">{% trans "Sign In" %}</h5>
+                        <h4 class="nk-block-title">{% trans "Sign In" %}</h4>
                         <div class="nk-block-des">
                             <p>{% trans "Access the JournalAdmin using your username and password." %}</p>
                         </div>
@@ -56,26 +58,54 @@
                     </div>
                 </form>
             </div>
-            <div class="nk-block nk-auth-footer">
-                <div class="nk-block-between">
-                    <ul class="nav nav-sm">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">{% trans "Terms & Condition" %}</a>
+        </div>
+    </div>
+    <div class="nk-footer nk-auth-footer-full">
+        <div class="container wide-lg">
+            <div class="row g-3">
+                <div class="col-lg-6 order-lg-last">
+                    <ul class="nav nav-sm justify-content-center justify-content-lg-end">
+                        <li class="nav-item dropup">
+                            <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown" data-offset="0,10">
+                                <em class="icon ni ni-globe"></em>
+                                <span>{% trans "Language" %}</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
+                                <div class="dropdown-body">
+                                    {% get_current_language as CURRENT_LANGUAGE %}
+                                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+                                    {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                        <form action="{% url 'set_language' %}" method="post" class="language-form">
+                                            {% csrf_token %}
+                                            <input name="next" type="hidden" value="{{ request.path }}">
+                                            <input name="language" type="hidden" value="{{ language.code }}">
+                                            <button type="submit" class="dropdown-item language-item {% if language.code == CURRENT_LANGUAGE %}active{% endif %}">
+                                                <span class="language-flag">
+                                                    <img src="{% static 'images/flags/'|add:language.code|add:'.png' %}" alt="{{ language.name_local }}">
+                                                </span>
+                                                <span class="language-name">{{ language.name_local }}</span>
+                                            </button>
+                                        </form>
+                                    {% endfor %}
+                                </div>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">{% trans "Privacy Policy" %}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">{% trans "Help" %}</a>
+                            <a href="#" class="nav-link" id="dark-mode-toggle">
+                                <em class="icon ni ni-moon"></em>
+                                <span>{% trans "Dark Mode" %}</span>
+                            </a>
                         </li>
                     </ul>
                 </div>
-                <div class="mt-3">
-                    <p>&copy; {% now "Y" %} {% trans "JournalAdmin. All Rights Reserved." %}</p>
+                <div class="col-lg-6">
+                    <div class="nk-block-content text-center text-lg-left">
+                        <p class="text-soft">&copy; 2024 USAT journal.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="nk-split-content nk-split-stretch bg-abstract"></div>
     </div>
 </div>
 {% endblock %}
@@ -116,6 +146,64 @@ document.addEventListener('DOMContentLoaded', function() {
     alertCloseButtons.forEach(button => {
         button.addEventListener('click', function() {
             this.parentElement.style.display = 'none';
+        });
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+    const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    // Set initial dark mode state
+    if (isDarkMode) {
+        body.classList.add('dark-mode');
+        darkModeToggle.innerHTML = '<em class="icon ni ni-sun"></em><span>{% trans "Light Mode" %}</span>';
+    }
+
+    darkModeToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        body.classList.toggle('dark-mode');
+        const isDark = body.classList.contains('dark-mode');
+        localStorage.setItem('darkMode', isDark);
+
+        if (isDark) {
+            this.innerHTML = '<em class="icon ni ni-sun"></em><span>{% trans "Light Mode" %}</span>';
+        } else {
+            this.innerHTML = '<em class="icon ni ni-moon"></em><span>{% trans "Dark Mode" %}</span>';
+        }
+    });
+
+    // Language dropdown
+    const languageDropdown = document.querySelector('.nav-item.dropup');
+    const dropdownToggle = languageDropdown.querySelector('.dropdown-toggle');
+    const dropdownMenu = languageDropdown.querySelector('.dropdown-menu');
+
+    dropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        dropdownMenu.classList.toggle('show');
+    });
+
+    document.addEventListener('click', function(e) {
+        if (!languageDropdown.contains(e.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+
+    // Language form submission
+    const languageForms = document.querySelectorAll('.language-form');
+    languageForms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch(this.action, {
+                method: 'POST',
+                body: new FormData(this),
+                headers: {
+                    'X-CSRFToken': this.querySelector('input[name="csrfmiddlewaretoken"]').value
+                }
+            }).then(() => {
+                window.location.reload();
+            });
         });
     });
 });

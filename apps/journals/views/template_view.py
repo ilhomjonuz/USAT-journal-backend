@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.core.paginator import Paginator
 from django.db.models import ProtectedError
 from django.shortcuts import redirect
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView

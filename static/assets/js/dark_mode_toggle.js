@@ -30,6 +30,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 document.body.classList.toggle('dark-mode');
             }
         })
-        .catch(error => console.error('Error:', error));
     });
 });
