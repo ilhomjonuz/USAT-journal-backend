@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-23 15:39+0500\n"
+"POT-Creation-Date: 2024-12-27 18:57+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,7 @@ msgid "Accounts"
 msgstr "Accounts"
 
 #: apps/accounts/models.py:9 apps/authors/apps.py:8 apps/authors/models.py:51
+#: templates/author-admin/author_list.html:63
 msgid "Author"
 msgstr "Author"
 
@@ -50,13 +51,33 @@ msgstr "Deputy Editor"
 msgid "Admin"
 msgstr "Admin"
 
-#: apps/accounts/models.py:22
+#: apps/accounts/models.py:16
+msgid "Role"
+msgstr "Role"
+
+#: apps/accounts/models.py:17
+msgid "Prefer Dark Mode"
+msgstr "Prefer Dark Mode"
+
+#: apps/accounts/models.py:23
 msgid "User"
 msgstr "User"
 
-#: apps/accounts/models.py:23
+#: apps/accounts/models.py:24
 msgid "Users"
 msgstr "Users"
+
+#: apps/accounts/views/auth_views.py:14
+msgid "Welcome back! You have successfully logged in."
+msgstr "Welcome back! You have successfully logged in."
+
+#: apps/accounts/views/auth_views.py:18
+msgid "Invalid username or password."
+msgstr "Invalid username or password."
+
+#: apps/accounts/views/auth_views.py:28
+msgid "You have been successfully logged out."
+msgstr "You have been successfully logged out."
 
 #: apps/archive/apps.py:8
 msgid "Archive"
@@ -66,19 +87,20 @@ msgstr "Archive"
 msgid "Archives"
 msgstr "Archives"
 
-#: apps/articles/admin.py:12
+#: apps/articles/admin.py:12 templates/article-admin/article_detail.html:61
 msgid "Article Information"
 msgstr "Article Information"
 
-#: apps/articles/admin.py:15 apps/journals/admin.py:63
+#: apps/articles/admin.py:15 apps/journals/admin.py:65
 msgid "Files"
 msgstr "Files"
 
-#: apps/articles/admin.py:18 apps/journals/admin.py:66
+#: apps/articles/admin.py:18 apps/journals/admin.py:68
 msgid "Page Information"
 msgstr "Page Information"
 
-#: apps/articles/admin.py:21 apps/journals/admin.py:69
+#: apps/articles/admin.py:21 apps/journals/admin.py:71
+#: templates/article-admin/article_detail.html:192
 msgid "Statistics"
 msgstr "Statistics"
 
@@ -86,81 +108,99 @@ msgstr "Statistics"
 msgid "Status and Dates"
 msgstr "Status and Dates"
 
-#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:14
-#: apps/journals/models.py:22
+#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:16
+#: apps/journals/models.py:24 templates/includes/sidebar.html:44
+#: templates/journal_admin/issue_confirm_delete.html:34
+#: templates/journal_admin/issue_list.html:42
+#: templates/journal_admin/volume_confirm_delete.html:34
+#: templates/journal_admin/volume_list.html:42
 msgid "Journal"
 msgstr "Journal"
 
-#: apps/articles/admin.py:35 apps/articles/models.py:14
+#: apps/articles/admin.py:35 apps/articles/models.py:15
+#: templates/journal_admin/issue_confirm_delete.html:51
+#: templates/journal_admin/issue_list.html:67
 msgid "Published"
 msgstr "Published"
 
-#: apps/articles/apps.py:8 apps/articles/models.py:123
+#: apps/articles/apps.py:8 apps/articles/models.py:125
 msgid "Article"
 msgstr "Article"
 
-#: apps/articles/apps.py:9 apps/articles/models.py:124
+#: apps/articles/apps.py:9 apps/articles/models.py:126
+#: apps/categories/views/admin_views.py:57
+#: apps/journals/views/template_view.py:204
+#: templates/article-admin/article_list.html:21
+#: templates/includes/sidebar.html:70
 msgid "Articles"
 msgstr "Articles"
 
-#: apps/articles/models.py:10
+#: apps/articles/models.py:11 templates/article-admin/article_list.html:110
 msgid "Submitted"
 msgstr "Submitted"
 
-#: apps/articles/models.py:11
+#: apps/articles/models.py:12
 msgid "Under Review"
 msgstr "Under Review"
 
-#: apps/articles/models.py:12
+#: apps/articles/models.py:13
 msgid "Accepted"
 msgstr "Accepted"
 
-#: apps/articles/models.py:13
+#: apps/articles/models.py:14
 msgid "Rejected"
 msgstr "Rejected"
 
-#: apps/articles/models.py:20 apps/categories/apps.py:8
-#: apps/categories/models.py:12
+#: apps/articles/models.py:21 apps/categories/apps.py:8
+#: apps/categories/models.py:14
 msgid "Direction"
 msgstr "Direction"
 
-#: apps/articles/models.py:22
+#: apps/articles/models.py:24
+#: templates/article-admin/article_confirm_delete.html:45
+#: templates/article-admin/article_detail.html:66
+#: templates/article-admin/article_list.html:106
 msgid "Title"
 msgstr "Title"
 
-#: apps/articles/models.py:23 apps/journals/models.py:38
+#: apps/articles/models.py:25 apps/journals/models.py:42
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/articles/models.py:25
+#: apps/articles/models.py:27 templates/article-admin/article_detail.html:90
 msgid "Keywords"
 msgstr "Keywords"
 
-#: apps/articles/models.py:26
+#: apps/articles/models.py:28
 msgid "Enter keywords separated by commas"
 msgstr "Enter keywords separated by commas"
 
-#: apps/articles/models.py:28
+#: apps/articles/models.py:30 templates/article-admin/article_detail.html:119
 msgid "Annotation"
 msgstr "Annotation"
 
-#: apps/articles/models.py:32 apps/authors/apps.py:9 apps/authors/models.py:52
+#: apps/articles/models.py:34 apps/authors/apps.py:9 apps/authors/models.py:52
+#: templates/article-admin/article_confirm_delete.html:53
+#: templates/article-admin/article_detail.html:82
+#: templates/author-admin/author_list.html:5
+#: templates/author-admin/author_list.html:23
+#: templates/includes/sidebar.html:76
 msgid "Authors"
 msgstr "Authors"
 
-#: apps/articles/models.py:37
+#: apps/articles/models.py:39
 msgid "Original Article File"
 msgstr "Original Article File"
 
-#: apps/articles/models.py:38
+#: apps/articles/models.py:40
 msgid "Accepted file types: .txt, .doc, .docx, .odt"
 msgstr "Accepted file types: .txt, .doc, .docx, .odt"
 
-#: apps/articles/models.py:47
+#: apps/articles/models.py:49
 msgid "Revised Article File"
 msgstr "Revised Article File"
 
-#: apps/articles/models.py:48
+#: apps/articles/models.py:50
 msgid ""
 "Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
@@ -168,85 +208,130 @@ msgstr ""
 "Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
 
-#: apps/articles/models.py:54 apps/journals/models.py:45
+#: apps/articles/models.py:56 apps/journals/models.py:49
 msgid "Start Page"
 msgstr "Start Page"
 
-#: apps/articles/models.py:57
+#: apps/articles/models.py:59
 msgid "Starting page in the journal"
 msgstr "Starting page in the journal"
 
-#: apps/articles/models.py:61 apps/journals/models.py:50
+#: apps/articles/models.py:63 apps/journals/models.py:54
 msgid "End Page"
 msgstr "End Page"
 
-#: apps/articles/models.py:64
+#: apps/articles/models.py:66
 msgid "Ending page in the journal"
 msgstr "Ending page in the journal"
 
-#: apps/articles/models.py:70 apps/journals/models.py:54
+#: apps/articles/models.py:72 apps/journals/models.py:58
 msgid "Views Count"
 msgstr "Views Count"
 
-#: apps/articles/models.py:71
+#: apps/articles/models.py:73
 msgid "Number of times the article has been viewed"
 msgstr "Number of times the article has been viewed"
 
-#: apps/articles/models.py:75 apps/journals/models.py:55
+#: apps/articles/models.py:77 apps/journals/models.py:59
 msgid "Downloads Count"
 msgstr "Downloads Count"
 
-#: apps/articles/models.py:76
+#: apps/articles/models.py:78
 msgid "Number of times the article has been downloaded"
 msgstr "Number of times the article has been downloaded"
 
-#: apps/articles/models.py:84
+#: apps/articles/models.py:86
+#: templates/article-admin/article_confirm_delete.html:57
+#: templates/article-admin/article_detail.html:98
+#: templates/article-admin/article_detail.html:225
+#: templates/article-admin/article_list.html:111
+#: templates/journal_admin/issue_confirm_delete.html:50
+#: templates/journal_admin/issue_list.html:46
 msgid "Status"
 msgstr "Status"
 
-#: apps/articles/models.py:88
+#: apps/articles/models.py:90
+#: templates/article-admin/article_confirm_delete.html:65
 msgid "Submission Date"
 msgstr "Submission Date"
 
-#: apps/articles/models.py:93
+#: apps/articles/models.py:95
 msgid "Review Date"
 msgstr "Review Date"
 
-#: apps/articles/models.py:94
+#: apps/articles/models.py:96
 msgid "Date when the article was sent for review"
 msgstr "Date when the article was sent for review"
 
-#: apps/articles/models.py:99
+#: apps/articles/models.py:101
 msgid "Acceptance Date"
 msgstr "Acceptance Date"
 
-#: apps/articles/models.py:100
+#: apps/articles/models.py:102
 msgid "Date when the article was accepted"
 msgstr "Date when the article was accepted"
 
-#: apps/articles/models.py:105 apps/journals/models.py:52
+#: apps/articles/models.py:107 apps/journals/models.py:56
+#: templates/journal_admin/issue_confirm_delete.html:46
+#: templates/journal_admin/issue_list.html:45
 msgid "Publication Date"
 msgstr "Publication Date"
 
-#: apps/articles/models.py:106
+#: apps/articles/models.py:108
 msgid "Date when the article was published"
 msgstr "Date when the article was published"
 
-#: apps/articles/models.py:110
+#: apps/articles/models.py:112
 msgid "Last Updated"
 msgstr "Last Updated"
 
-#: apps/articles/models.py:119 apps/journals/models.py:61
+#: apps/articles/models.py:121 apps/journals/models.py:67
+#: templates/article-admin/article_detail.html:253
+#: templates/article-admin/article_list.html:108
 msgid "Journal Issue"
 msgstr "Journal Issue"
 
 #: apps/articles/serializers/article_create.py:33
 msgid "Direction id is required"
-msgstr "Direction id is required."
+msgstr "Direction ID is required"
 
 #: apps/articles/serializers/article_create.py:36
 msgid "Invalid direction id"
-msgstr "Invalid direction id."
+msgstr "Invalid direction ID"
+
+#: apps/articles/views/admin_views.py:68
+msgid "Article was created successfully"
+msgstr "Article was created successfully"
+
+#: apps/articles/views/admin_views.py:76
+msgid "Article was updated successfully"
+msgstr "Article was updated successfully"
+
+#: apps/articles/views/admin_views.py:83
+msgid "Article was deleted successfully"
+msgstr "Article was deleted successfully"
+
+#: apps/articles/views/admin_views.py:101
+#: apps/articles/views/admin_views.py:163
+#, python-format
+msgid "Article status changed to %(status)s"
+msgstr "Article status changed to %(status)s"
+
+#: apps/articles/views/admin_views.py:115
+msgid "Invalid file type"
+msgstr "Invalid file type"
+
+#: apps/articles/views/admin_views.py:120
+msgid "File not found"
+msgstr "File not found"
+
+#: apps/articles/views/admin_views.py:141
+msgid "Missing required parameters"
+msgstr "Missing required parameters"
+
+#: apps/articles/views/admin_views.py:158
+msgid "Invalid action"
+msgstr "Invalid action"
 
 #: apps/articles/views/api_article_create.py:99
 msgid "Media directory is not writable: "
@@ -321,6 +406,8 @@ msgid "Last Name"
 msgstr "Last Name"
 
 #: apps/authors/models.py:22
+#: templates/author-admin/author_confirm_delete.html:63
+#: templates/author-admin/author_list.html:68
 msgid "Country"
 msgstr "Country"
 
@@ -333,6 +420,8 @@ msgid "Workplace"
 msgstr "Workplace"
 
 #: apps/authors/models.py:25
+#: templates/author-admin/author_confirm_delete.html:51
+#: templates/author-admin/author_list.html:64
 msgid "Email"
 msgstr "Email"
 
@@ -349,10 +438,14 @@ msgid "Telegram username or WhatsApp number"
 msgstr "Telegram username or WhatsApp number"
 
 #: apps/authors/models.py:35
+#: templates/author-admin/author_confirm_delete.html:69
+#: templates/author-admin/author_list.html:66
 msgid "Academic Degree"
 msgstr "Academic Degree"
 
 #: apps/authors/models.py:40
+#: templates/author-admin/author_confirm_delete.html:75
+#: templates/author-admin/author_list.html:67
 msgid "Academic Title"
 msgstr "Academic Title"
 
@@ -365,14 +458,39 @@ msgid "ORCID identifier"
 msgstr "ORCID identifier"
 
 #: apps/authors/models.py:48 apps/categories/models.py:9
-#: apps/journals/models.py:10 apps/journals/models.py:25
-#: apps/journals/models.py:56
+#: apps/journals/models.py:10 apps/journals/models.py:27
+#: apps/journals/models.py:60
 msgid "Created At"
 msgstr "Created At"
 
-#: apps/categories/apps.py:9 apps/categories/models.py:13
+#: apps/authors/views/admin_views.py:36
+msgid "Author created successfully."
+msgstr "Author created successfully."
+
+#: apps/authors/views/admin_views.py:52
+msgid "Author updated successfully."
+msgstr "Author updated successfully."
+
+#: apps/authors/views/admin_views.py:61
+msgid "Author deleted successfully."
+msgstr "Author deleted successfully."
+
+#: apps/categories/apps.py:9 apps/categories/models.py:15
+#: templates/includes/sidebar.html:82
 msgid "Directions"
 msgstr "Directions"
+
+#: apps/categories/forms.py:6
+msgid "Category Name (Uzbek)"
+msgstr "Category Name (Uzbek)"
+
+#: apps/categories/forms.py:7
+msgid "Category Name (Russian)"
+msgstr "Category Name (Russian)"
+
+#: apps/categories/forms.py:8
+msgid "Category Name (English)"
+msgstr "Category Name (English)"
 
 #: apps/categories/models.py:6
 msgid "Direction Name"
@@ -383,22 +501,44 @@ msgid "Direction Code"
 msgstr "Direction Code"
 
 #: apps/categories/models.py:8 apps/journals/models.py:9
+#: templates/category-admin/category_confirm_delete.html:52
+#: templates/category-admin/category_form.html:100
+#: templates/journal_admin/journal_confirm_delete.html:52
+#: templates/journal_admin/journal_form.html:100
 msgid "Description"
 msgstr "Description"
 
-#: apps/dashboard/apps.py:8 apps/dashboard/apps.py:9
+#: apps/categories/views/admin_views.py:29
+msgid "Category created successfully."
+msgstr "Category created successfully."
+
+#: apps/categories/views/admin_views.py:40
+msgid "Category updated successfully."
+msgstr "Category updated successfully."
+
+#: apps/categories/views/admin_views.py:71
+msgid ""
+"This category cannot be deleted because it is referenced by other objects."
+msgstr ""
+"This category cannot be deleted because it is referenced by other objects."
+
+#: apps/dashboard/apps.py:8 apps/dashboard/apps.py:9 templates/base.html:12
+#: templates/base.html:16
 msgid "Dashboard"
 msgstr "Dashboard"
 
-#: apps/journals/admin.py:60
+#: apps/journals/admin.py:62
 msgid "Issue Information"
 msgstr "Issue Information"
 
-#: apps/journals/apps.py:9 apps/journals/models.py:15
+#: apps/journals/apps.py:9 apps/journals/models.py:17
+#: templates/includes/sidebar.html:50
+#: templates/journal_admin/journal_list.html:6
+#: templates/journal_admin/journal_list.html:23
 msgid "Journals"
 msgstr "Journals"
 
-#: apps/journals/models.py:8
+#: apps/journals/models.py:8 templates/journal_admin/journal_form.html:70
 msgid "Journal Name"
 msgstr "Journal Name"
 
@@ -406,49 +546,104 @@ msgstr "Journal Name"
 msgid "Updated At"
 msgstr "Updated At"
 
-#: apps/journals/models.py:23
+#: apps/journals/models.py:25
+#: templates/journal_admin/volume_confirm_delete.html:38
+#: templates/journal_admin/volume_list.html:43
 msgid "Volume Number"
 msgstr "Volume Number"
 
-#: apps/journals/models.py:24
+#: apps/journals/models.py:26
+#: templates/journal_admin/volume_confirm_delete.html:42
+#: templates/journal_admin/volume_list.html:44
 msgid "Year"
 msgstr "Year"
 
-#: apps/journals/models.py:30
+#: apps/journals/models.py:34
 msgid "Journal Volume"
 msgstr "Journal Volume"
 
-#: apps/journals/models.py:31
+#: apps/journals/models.py:35 templates/journal_admin/volume_list.html:5
+#: templates/journal_admin/volume_list.html:22
 msgid "Journal Volumes"
 msgstr "Journal Volumes"
 
-#: apps/journals/models.py:34 apps/journals/models.py:39
+#: apps/journals/models.py:38 apps/journals/models.py:43
+#: templates/journal_admin/issue_confirm_delete.html:38
+#: templates/journal_admin/issue_list.html:43
 msgid "Volume"
 msgstr "Volume"
 
-#: apps/journals/models.py:40
+#: apps/journals/models.py:44
+#: templates/journal_admin/issue_confirm_delete.html:42
+#: templates/journal_admin/issue_list.html:44
 msgid "Issue Number"
 msgstr "Issue Number"
 
-#: apps/journals/models.py:41
+#: apps/journals/models.py:45
 msgid "Cover Image"
 msgstr "Cover Image"
 
-#: apps/journals/models.py:42
+#: apps/journals/models.py:46
 msgid "Journal File"
 msgstr "Journal File"
 
-#: apps/journals/models.py:53
+#: apps/journals/models.py:57
 msgid "Is Published"
 msgstr "Is Published"
 
-#: apps/journals/models.py:62
+#: apps/journals/models.py:68 templates/journal_admin/issue_list.html:5
+#: templates/journal_admin/issue_list.html:22
 msgid "Journal Issues"
 msgstr "Journal Issues"
 
-#: apps/journals/models.py:65
+#: apps/journals/models.py:71
 msgid "Issue"
 msgstr "Issue"
+
+#: apps/journals/views/template_view.py:27
+msgid "Journal created successfully."
+msgstr "Journal created successfully."
+
+#: apps/journals/views/template_view.py:39
+msgid "Journal updated successfully."
+msgstr "Journal updated successfully."
+
+#: apps/journals/views/template_view.py:89
+msgid ""
+"This journal cannot be deleted because it is referenced by other objects. {}"
+msgstr ""
+"This journal cannot be deleted because it is referenced by other objects. {}"
+
+#: apps/journals/views/template_view.py:111
+msgid "Journal Volume created successfully."
+msgstr "Journal Volume created successfully."
+
+#: apps/journals/views/template_view.py:122
+msgid "Journal Volume updated successfully."
+msgstr "Journal Volume updated successfully."
+
+#: apps/journals/views/template_view.py:138
+msgid "Issues"
+msgstr "Issues"
+
+#: apps/journals/views/template_view.py:152
+msgid ""
+"This volume cannot be deleted because it is referenced by other objects."
+msgstr ""
+"This volume cannot be deleted because it is referenced by other objects."
+
+#: apps/journals/views/template_view.py:175
+msgid "Journal Issue created successfully."
+msgstr "Journal Issue created successfully."
+
+#: apps/journals/views/template_view.py:187
+msgid "Journal Issue updated successfully."
+msgstr "Journal Issue updated successfully."
+
+#: apps/journals/views/template_view.py:218
+msgid "This issue cannot be deleted because it is referenced by other objects."
+msgstr ""
+"This issue cannot be deleted because it is referenced by other objects."
 
 #: apps/reviews/apps.py:8
 msgid "Review"
@@ -458,14 +653,816 @@ msgstr "Review"
 msgid "Reviews"
 msgstr "Reviews"
 
-#: core/settings.py:202
+#: core/settings.py:209
+#, fuzzy
+#| msgid "O'zbekcha"
 msgid "O‘zbekcha"
 msgstr "Uzbek"
 
-#: core/settings.py:203
+#: core/settings.py:210
 msgid "Ruscha"
 msgstr "Russian"
 
-#: core/settings.py:204
+#: core/settings.py:211
+#: templates/category-admin/category_confirm_delete.html:41
+#: templates/journal_admin/journal_confirm_delete.html:41
 msgid "English"
 msgstr "English"
+
+#: templates/article-admin/article_confirm_delete.html:6
+#: templates/article-admin/article_confirm_delete.html:24
+msgid "Confirm Delete Article"
+msgstr "Confirm Delete Article"
+
+#: templates/article-admin/article_confirm_delete.html:26
+msgid "Are you sure you want to delete this article?"
+msgstr "Are you sure you want to delete this article?"
+
+#: templates/article-admin/article_confirm_delete.html:32
+#: templates/article-admin/article_detail.html:44
+#: templates/author-admin/author_confirm_delete.html:25
+#: templates/author-admin/author_form.html:38
+#: templates/category-admin/category_confirm_delete.html:23
+#: templates/journal_admin/issue_confirm_delete.html:22
+#: templates/journal_admin/journal_confirm_delete.html:23
+#: templates/journal_admin/volume_confirm_delete.html:22
+msgid "Back"
+msgstr "Back"
+
+#: templates/article-admin/article_confirm_delete.html:41
+#: templates/article-admin/article_detail.html:5
+#: templates/article-admin/article_detail.html:23
+msgid "Article Details"
+msgstr "Article Details"
+
+#: templates/article-admin/article_confirm_delete.html:49
+#: templates/article-admin/article_detail.html:74
+#: templates/article-admin/article_list.html:107
+msgid "Category"
+msgstr "Category"
+
+#: templates/article-admin/article_confirm_delete.html:72
+msgid ""
+"Warning: This action cannot be undone. All data associated with this article "
+"will be permanently deleted."
+msgstr ""
+"Warning: This action cannot be undone. All data associated with this article "
+"will be permanently deleted."
+
+#: templates/article-admin/article_confirm_delete.html:78
+#: templates/author-admin/author_confirm_delete.html:87
+#: templates/category-admin/category_confirm_delete.html:109
+#: templates/journal_admin/issue_confirm_delete.html:101
+#: templates/journal_admin/journal_confirm_delete.html:105
+#: templates/journal_admin/volume_confirm_delete.html:93
+msgid "Confirm Delete"
+msgstr "Confirm Delete"
+
+#: templates/article-admin/article_confirm_delete.html:79
+#: templates/article-admin/article_form.html:117
+#: templates/author-admin/author_confirm_delete.html:88
+#: templates/author-admin/author_form.html:115
+#: templates/category-admin/category_confirm_delete.html:110
+#: templates/journal_admin/issue_confirm_delete.html:102
+#: templates/journal_admin/journal_confirm_delete.html:106
+#: templates/journal_admin/volume_confirm_delete.html:94
+msgid "Cancel"
+msgstr "Cancel"
+
+#: templates/article-admin/article_detail.html:32
+#: templates/article-admin/article_list.html:199
+#: templates/author-admin/author_list.html:114
+#: templates/category-admin/category_list.html:83
+#: templates/journal_admin/issue_list.html:77
+#: templates/journal_admin/journal_list.html:83
+#: templates/journal_admin/volume_list.html:65
+msgid "Edit"
+msgstr "Edit"
+
+#: templates/article-admin/article_detail.html:38
+#: templates/author-admin/author_list.html:120
+#: templates/category-admin/category_form.html:39
+#: templates/journal_admin/issue_list.html:78
+#: templates/journal_admin/journal_form.html:39
+#: templates/journal_admin/volume_list.html:66
+msgid "Delete"
+msgstr "Delete"
+
+#: templates/article-admin/article_detail.html:108
+msgid "Page Range"
+msgstr "Page Range"
+
+#: templates/article-admin/article_detail.html:110
+msgid "pages"
+msgstr "pages"
+
+#: templates/article-admin/article_detail.html:110
+msgid "Not set"
+msgstr "Not set"
+
+#: templates/article-admin/article_detail.html:130
+#: templates/article-admin/article_list.html:109
+msgid "Documents"
+msgstr "Documents"
+
+#: templates/article-admin/article_detail.html:144
+#: templates/article-admin/article_list.html:136
+msgid "Original File"
+msgstr "Original File"
+
+#: templates/article-admin/article_detail.html:169
+#: templates/article-admin/article_list.html:141
+msgid "Revised File"
+msgstr "Revised File"
+
+#: templates/article-admin/article_detail.html:207
+msgid "Downloads"
+msgstr "Downloads"
+
+#: templates/article-admin/article_detail.html:213
+msgid "Views"
+msgstr "Views"
+
+#: templates/article-admin/article_detail.html:220
+msgid "Status Information"
+msgstr "Status Information"
+
+#: templates/article-admin/article_detail.html:235
+msgid "Status Date"
+msgstr "Status Date"
+
+#: templates/article-admin/article_detail.html:246
+msgid "N/A"
+msgstr "N/A"
+
+#: templates/article-admin/article_detail.html:258
+#: templates/article-admin/article_list.html:131
+msgid "Not assigned"
+msgstr "Not assigned"
+
+#: templates/article-admin/article_detail.html:271
+#: templates/article-admin/article_list.html:205
+msgid "Set Under Review"
+msgstr "Set Under Review"
+
+#: templates/article-admin/article_detail.html:276
+#: templates/article-admin/article_list.html:176
+#: templates/article-admin/article_list.html:210
+msgid "Accept"
+msgstr "Accept"
+
+#: templates/article-admin/article_detail.html:280
+#: templates/article-admin/article_list.html:181
+#: templates/article-admin/article_list.html:215
+msgid "Reject"
+msgstr "Reject"
+
+#: templates/article-admin/article_detail.html:285
+#: templates/article-admin/article_list.html:220
+msgid "Publish"
+msgstr "Publish"
+
+#: templates/article-admin/article_form.html:6
+#: templates/article-admin/article_form.html:27
+msgid "Edit Article"
+msgstr "Edit Article"
+
+#: templates/article-admin/article_form.html:6
+#: templates/article-admin/article_form.html:29
+#: templates/article-admin/article_form.html:114
+msgid "Create Article"
+msgstr "Create Article"
+
+#: templates/article-admin/article_form.html:33
+msgid "Fill in the article information below"
+msgstr "Fill in the article information below"
+
+#: templates/article-admin/article_form.html:76
+#: templates/article-admin/article_form.html:87
+msgid "Current file"
+msgstr "Current file"
+
+#: templates/article-admin/article_form.html:112
+msgid "Update Article"
+msgstr "Update Article"
+
+#: templates/article-admin/article_form.html:135
+msgid "Select authors"
+msgstr "Select authors"
+
+#: templates/article-admin/article_form.html:141
+msgid "Select journal issue"
+msgstr "Select journal issue"
+
+#: templates/article-admin/article_form.html:147
+msgid "Select status"
+msgstr "Select status"
+
+#: templates/article-admin/article_form.html:163
+msgid "End page cannot be less than start page"
+msgstr "End page cannot be less than start page"
+
+#: templates/article-admin/article_list.html:23
+#: templates/author-admin/author_list.html:25
+msgid "You have total"
+msgstr "You have total"
+
+#: templates/article-admin/article_list.html:23
+msgid "articles"
+msgstr "articles"
+
+#: templates/article-admin/article_list.html:28
+msgid "Add Article"
+msgstr "Add Article"
+
+#: templates/article-admin/article_list.html:45
+msgid "Any Status"
+msgstr "Any Status"
+
+#: templates/article-admin/article_list.html:55
+msgid "Any Category"
+msgstr "Any Category"
+
+#: templates/article-admin/article_list.html:65
+msgid "Any Journal Issue"
+msgstr "Any Journal Issue"
+
+#: templates/article-admin/article_list.html:80
+msgid "Search by title or keywords"
+msgstr "Search by title or keywords"
+
+#: templates/article-admin/article_list.html:84
+msgid "Filter"
+msgstr "Filter"
+
+#: templates/article-admin/article_list.html:86
+msgid "Reset"
+msgstr "Reset"
+
+#: templates/article-admin/article_list.html:163
+msgid "Reviewed at"
+msgstr "Reviewed at"
+
+#: templates/article-admin/article_list.html:171
+msgid "Quick View"
+msgstr "Quick View"
+
+#: templates/article-admin/article_list.html:194
+msgid "View Details"
+msgstr "View Details"
+
+#: templates/article-admin/article_list.html:273
+#: templates/author-admin/author_list.html:172
+msgid "Page"
+msgstr "Page"
+
+#: templates/article-admin/article_list.html:273
+#: templates/author-admin/author_list.html:172
+msgid "of"
+msgstr "of"
+
+#: templates/article-admin/article_list.html:320
+msgid "Error"
+msgstr "Error"
+
+#: templates/article-admin/article_list.html:324
+msgid "An error occurred. Please try again."
+msgstr "An error occurred. Please try again."
+
+#: templates/auth/login.html:5 templates/auth/login.html:20
+msgid "Sign In"
+msgstr "Sign In"
+
+#: templates/auth/login.html:22
+msgid "Access the JournalAdmin using your username and password."
+msgstr "Access the JournalAdmin using your username and password."
+
+#: templates/auth/login.html:38
+msgid "Username"
+msgstr "Username"
+
+#: templates/auth/login.html:41
+msgid "Enter your username"
+msgstr "Enter your username"
+
+#: templates/auth/login.html:46
+msgid "Password"
+msgstr "Password"
+
+#: templates/auth/login.html:53
+msgid "Enter your password"
+msgstr "Enter your password"
+
+#: templates/auth/login.html:57
+msgid "Sign in"
+msgstr "Sign in"
+
+#: templates/auth/login.html:71
+msgid "Language"
+msgstr "Language"
+
+#: templates/auth/login.html:97 templates/auth/login.html:172
+#: templates/includes/quick-menu.html:72
+msgid "Dark Mode"
+msgstr "Dark Mode"
+
+#: templates/auth/login.html:160 templates/auth/login.html:170
+#: templates/includes/quick-menu.html:72
+msgid "Light Mode"
+msgstr "Light Mode"
+
+#: templates/author-admin/author_confirm_delete.html:4
+#: templates/author-admin/author_confirm_delete.html:14
+msgid "Confirm Delete Author"
+msgstr "Confirm Delete Author"
+
+#: templates/author-admin/author_confirm_delete.html:16
+msgid "Are you sure you want to delete this author?"
+msgstr "Are you sure you want to delete this author?"
+
+#: templates/author-admin/author_confirm_delete.html:39
+msgid "Author Details"
+msgstr "Author Details"
+
+#: templates/author-admin/author_confirm_delete.html:40
+msgid "This action cannot be undone."
+msgstr "This action cannot be undone."
+
+#: templates/author-admin/author_confirm_delete.html:45
+#: templates/category-admin/category_confirm_delete.html:46
+#: templates/journal_admin/journal_confirm_delete.html:46
+msgid "Name"
+msgstr "Name"
+
+#: templates/author-admin/author_confirm_delete.html:57
+#: templates/author-admin/author_list.html:65
+msgid "Phone"
+msgstr "Phone"
+
+#: templates/author-admin/author_form.html:7
+#: templates/author-admin/author_form.html:23
+msgid "Edit Author"
+msgstr "Edit Author"
+
+#: templates/author-admin/author_form.html:9
+#: templates/author-admin/author_form.html:25
+#: templates/author-admin/author_form.html:106
+#: templates/author-admin/author_list.html:47
+msgid "Add Author"
+msgstr "Add Author"
+
+#: templates/author-admin/author_form.html:29
+msgid "Please fill in the information below"
+msgstr "Please fill in the information below"
+
+#: templates/author-admin/author_form.html:104
+msgid "Update Author"
+msgstr "Update Author"
+
+#: templates/author-admin/author_form.html:111
+msgid "Delete Author"
+msgstr "Delete Author"
+
+#: templates/author-admin/author_form.html:135
+msgid "Select an option"
+msgstr "Select an option"
+
+#: templates/author-admin/author_list.html:25
+msgid "authors"
+msgstr "authors"
+
+#: templates/author-admin/author_list.html:40
+msgid "Search by name or email"
+msgstr "Search by name or email"
+
+#: templates/author-admin/author_list.html:70
+msgid "Actions"
+msgstr "Actions"
+
+#: templates/base_null.html:14
+msgid "Blank"
+msgstr "Blank"
+
+#: templates/category-admin/category_confirm_delete.html:6
+#: templates/category-admin/category_confirm_delete.html:15
+msgid "Confirm Delete Category"
+msgstr "Confirm Delete Category"
+
+#: templates/category-admin/category_confirm_delete.html:17
+msgid "Are you sure you want to delete this category?"
+msgstr "Are you sure you want to delete this category?"
+
+#: templates/category-admin/category_confirm_delete.html:34
+msgid "Category Details"
+msgstr "Category Details"
+
+#: templates/category-admin/category_confirm_delete.html:38
+#: templates/journal_admin/journal_confirm_delete.html:38
+msgid "Field"
+msgstr "Field"
+
+#: templates/category-admin/category_confirm_delete.html:39
+#: templates/journal_admin/journal_confirm_delete.html:39
+msgid "Uzbek"
+msgstr "Uzbek"
+
+#: templates/category-admin/category_confirm_delete.html:40
+#: templates/journal_admin/journal_confirm_delete.html:40
+msgid "Russian"
+msgstr "Russian"
+
+#: templates/category-admin/category_confirm_delete.html:58
+#: templates/category-admin/category_list.html:53
+msgid "Code"
+msgstr "Code"
+
+#: templates/category-admin/category_confirm_delete.html:65
+#: templates/journal_admin/issue_confirm_delete.html:57
+#: templates/journal_admin/journal_confirm_delete.html:61
+#: templates/journal_admin/volume_confirm_delete.html:49
+msgid "This deletion will also remove:"
+msgstr "This deletion will also remove:"
+
+#: templates/category-admin/category_confirm_delete.html:90
+#: templates/journal_admin/issue_confirm_delete.html:82
+#: templates/journal_admin/journal_confirm_delete.html:86
+#: templates/journal_admin/volume_confirm_delete.html:74
+msgid "And"
+msgstr "And"
+
+#: templates/category-admin/category_confirm_delete.html:90
+#: templates/journal_admin/issue_confirm_delete.html:82
+#: templates/journal_admin/journal_confirm_delete.html:86
+#: templates/journal_admin/volume_confirm_delete.html:74
+msgid "more..."
+msgstr "more..."
+
+#: templates/category-admin/category_confirm_delete.html:98
+msgid ""
+"Warning: Deleting this category will also delete all related articles. This "
+"action cannot be undone."
+msgstr ""
+"Warning: Deleting this category will also delete all related articles. This "
+"action cannot be undone."
+
+#: templates/category-admin/category_confirm_delete.html:102
+msgid ""
+"This category has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"This category has no related objects. Deleting it will not affect any other "
+"data."
+
+#: templates/category-admin/category_form.html:7
+#: templates/category-admin/category_form.html:18
+msgid "Edit Category"
+msgstr "Edit Category"
+
+#: templates/category-admin/category_form.html:7
+#: templates/category-admin/category_form.html:20
+#: templates/category-admin/category_form.html:141
+msgid "Create Category"
+msgstr "Create Category"
+
+#: templates/category-admin/category_form.html:24
+msgid "Edit existing category"
+msgstr "Edit existing category"
+
+#: templates/category-admin/category_form.html:24
+msgid "Create a new category"
+msgstr "Create a new category"
+
+#: templates/category-admin/category_form.html:32
+msgid "Category List"
+msgstr "Category List"
+
+#: templates/category-admin/category_form.html:70
+msgid "Category Name"
+msgstr "Category Name"
+
+#: templates/category-admin/category_form.html:130
+msgid "Category Code"
+msgstr "Category Code"
+
+#: templates/category-admin/category_form.html:139
+msgid "Update Category"
+msgstr "Update Category"
+
+#: templates/category-admin/category_list.html:6
+#: templates/category-admin/category_list.html:23
+msgid "Categories"
+msgstr "Categories"
+
+#: templates/category-admin/category_list.html:25
+#, python-format
+msgid "You have total %(count)s categories."
+msgstr "You have total %(count)s categories."
+
+#: templates/category-admin/category_list.html:49
+msgid "Category name"
+msgstr "Category name"
+
+#: templates/category-admin/category_list.html:54
+#: templates/journal_admin/journal_list.html:53
+msgid "Created Date"
+msgstr "Created Date"
+
+#: templates/category-admin/category_list.html:84
+#: templates/journal_admin/journal_list.html:84
+msgid "Remove"
+msgstr "Remove"
+
+#: templates/dashboard/dashboard.html:21
+msgid "USAT journal Dashboard"
+msgstr "USAT journal Dashboard"
+
+#: templates/dashboard/dashboard.html:31
+msgid "Export"
+msgstr "Export"
+
+#: templates/dashboard/dashboard.html:32
+msgid "Reports"
+msgstr "Reports"
+
+#: templates/dashboard/dashboard.html:38
+msgid "Add User"
+msgstr "Add User"
+
+#: templates/includes/footer.html:6
+msgid "USAT journal"
+msgstr "USAT journal"
+
+#: templates/includes/header.html:15 templates/includes/sidebar.html:11
+msgid "JournalAdmin Logo"
+msgstr "JournalAdmin Logo"
+
+#: templates/includes/header.html:16 templates/includes/sidebar.html:12
+msgid "JournalAdmin"
+msgstr "JournalAdmin"
+
+#: templates/includes/pagination.html:11
+msgid "Previous"
+msgstr "Previous"
+
+#: templates/includes/pagination.html:43
+msgid "Next"
+msgstr "Next"
+
+#: templates/includes/quick-menu.html:67
+msgid "View Profile"
+msgstr "View Profile"
+
+#: templates/includes/quick-menu.html:68
+msgid "Account Setting"
+msgstr "Account Setting"
+
+#: templates/includes/quick-menu.html:85 templates/includes/sidebar.html:94
+msgid "Sign out"
+msgstr "Sign out"
+
+#: templates/includes/quick-menu.html:98
+msgid "Notifications"
+msgstr "Notifications"
+
+#: templates/includes/quick-menu.html:99
+msgid "Mark All as Read"
+msgstr "Mark All as Read"
+
+#: templates/includes/quick-menu.html:108
+msgid "You have requested to"
+msgstr "You have requested to"
+
+#: templates/includes/quick-menu.html:108
+msgid "Widthdrawl"
+msgstr "Withdrawal"
+
+#: templates/includes/quick-menu.html:109
+#: templates/includes/quick-menu.html:118
+msgid "2 hrs ago"
+msgstr "2 hrs ago"
+
+#: templates/includes/quick-menu.html:117
+msgid "Your"
+msgstr "Your"
+
+#: templates/includes/quick-menu.html:117
+msgid "Deposit Order"
+msgstr "Deposit Order"
+
+#: templates/includes/quick-menu.html:117
+msgid "is placed"
+msgstr "is placed"
+
+#: templates/includes/quick-menu.html:125
+msgid "View All"
+msgstr "View All"
+
+#: templates/includes/sidebar.html:30
+msgid "Dashboards"
+msgstr "Dashboards"
+
+#: templates/includes/sidebar.html:35
+msgid "Journal dashboard"
+msgstr "Journal dashboard"
+
+#: templates/includes/sidebar.html:39
+msgid "Applications"
+msgstr "Applications"
+
+#: templates/includes/sidebar.html:56
+msgid "Journal volumes"
+msgstr "Journal volumes"
+
+#: templates/includes/sidebar.html:62
+msgid "Journal issues"
+msgstr "Journal issues"
+
+#: templates/includes/sidebar.html:86
+msgid "Authentication"
+msgstr "Authentication"
+
+#: templates/journal_admin/issue_confirm_delete.html:5
+#: templates/journal_admin/issue_confirm_delete.html:14
+msgid "Confirm Delete Journal Issue"
+msgstr "Confirm Delete Journal Issue"
+
+#: templates/journal_admin/issue_confirm_delete.html:16
+msgid "Are you sure you want to delete this journal issue?"
+msgstr "Are you sure you want to delete this journal issue?"
+
+#: templates/journal_admin/issue_confirm_delete.html:30
+msgid "Issue Details"
+msgstr "Issue Details"
+
+#: templates/journal_admin/issue_confirm_delete.html:51
+#: templates/journal_admin/issue_list.html:67
+msgid "Draft"
+msgstr "Draft"
+
+#: templates/journal_admin/issue_confirm_delete.html:90
+msgid ""
+"Warning: Deleting this issue will also delete all related articles. This "
+"action cannot be undone."
+msgstr ""
+"Warning: Deleting this issue will also delete all related articles. This "
+"action cannot be undone."
+
+#: templates/journal_admin/issue_confirm_delete.html:94
+msgid ""
+"This issue has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"This issue has no related objects. Deleting it will not affect any other "
+"data."
+
+#: templates/journal_admin/issue_form.html:6
+#: templates/journal_admin/issue_form.html:18
+msgid "Edit Journal Issue"
+msgstr "Edit Journal Issue"
+
+#: templates/journal_admin/issue_form.html:6
+#: templates/journal_admin/issue_form.html:20
+msgid "Create Journal Issue"
+msgstr "Create Journal Issue"
+
+#: templates/journal_admin/issue_form.html:72
+msgid "Update Issue"
+msgstr "Update Issue"
+
+#: templates/journal_admin/issue_form.html:74
+msgid "Create Issue"
+msgstr "Create Issue"
+
+#: templates/journal_admin/issue_list.html:24
+#, python-format
+msgid "You have total %(count)s journal issues."
+msgstr "You have total %(count)s journal issues."
+
+#: templates/journal_admin/issue_list.html:89
+msgid "No issues found."
+msgstr "No issues found."
+
+#: templates/journal_admin/journal_confirm_delete.html:6
+#: templates/journal_admin/journal_confirm_delete.html:15
+msgid "Confirm Delete Journal"
+msgstr "Confirm Delete Journal"
+
+#: templates/journal_admin/journal_confirm_delete.html:17
+msgid "Are you sure you want to delete this journal?"
+msgstr "Are you sure you want to delete this journal?"
+
+#: templates/journal_admin/journal_confirm_delete.html:34
+msgid "Journal Details"
+msgstr "Journal Details"
+
+#: templates/journal_admin/journal_confirm_delete.html:94
+msgid ""
+"Warning: Deleting this journal will also delete all related volumes, issues, "
+"and articles. This action cannot be undone."
+msgstr ""
+"Warning: Deleting this journal will also delete all related volumes, issues, "
+"and articles. This action cannot be undone."
+
+#: templates/journal_admin/journal_confirm_delete.html:98
+msgid ""
+"This journal has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"This journal has no related objects. Deleting it will not affect any other "
+"data."
+
+#: templates/journal_admin/journal_form.html:7
+#: templates/journal_admin/journal_form.html:18
+msgid "Edit Journal"
+msgstr "Edit Journal"
+
+#: templates/journal_admin/journal_form.html:7
+#: templates/journal_admin/journal_form.html:20
+#: templates/journal_admin/journal_form.html:134
+msgid "Create Journal"
+msgstr "Create Journal"
+
+#: templates/journal_admin/journal_form.html:24
+msgid "Edit existing journal"
+msgstr "Edit existing journal"
+
+#: templates/journal_admin/journal_form.html:24
+msgid "Create a new journal"
+msgstr "Create a new journal"
+
+#: templates/journal_admin/journal_form.html:32
+msgid "Journal List"
+msgstr "Journal List"
+
+#: templates/journal_admin/journal_form.html:132
+msgid "Update Journal"
+msgstr "Update Journal"
+
+#: templates/journal_admin/journal_list.html:25
+#, python-format
+msgid "You have total %(count)s journals."
+msgstr "You have total %(count)s journals."
+
+#: templates/journal_admin/journal_list.html:49
+msgid "Journal name"
+msgstr "Journal name"
+
+#: templates/journal_admin/journal_list.html:54
+msgid "Updated Date"
+msgstr "Updated Date"
+
+#: templates/journal_admin/volume_confirm_delete.html:5
+#: templates/journal_admin/volume_confirm_delete.html:14
+msgid "Confirm Delete Journal Volume"
+msgstr "Confirm Delete Journal Volume"
+
+#: templates/journal_admin/volume_confirm_delete.html:16
+msgid "Are you sure you want to delete this journal volume?"
+msgstr "Are you sure you want to delete this journal volume?"
+
+#: templates/journal_admin/volume_confirm_delete.html:30
+msgid "Volume Details"
+msgstr "Volume Details"
+
+#: templates/journal_admin/volume_confirm_delete.html:82
+msgid ""
+"Warning: Deleting this volume will also delete all related issues and "
+"articles. This action cannot be undone."
+msgstr ""
+"Warning: Deleting this volume will also delete all related issues and "
+"articles. This action cannot be undone."
+
+#: templates/journal_admin/volume_confirm_delete.html:86
+msgid ""
+"This volume has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"This volume has no related objects. Deleting it will not affect any other "
+"data."
+
+#: templates/journal_admin/volume_form.html:6
+#: templates/journal_admin/volume_form.html:18
+msgid "Edit Journal Volume"
+msgstr "Edit Journal Volume"
+
+#: templates/journal_admin/volume_form.html:6
+#: templates/journal_admin/volume_form.html:20
+msgid "Create Journal Volume"
+msgstr "Create Journal Volume"
+
+#: templates/journal_admin/volume_form.html:47
+msgid "Update Volume"
+msgstr "Update Volume"
+
+#: templates/journal_admin/volume_form.html:49
+msgid "Create Volume"
+msgstr "Create Volume"
+
+#: templates/journal_admin/volume_list.html:24
+#, python-format
+msgid "You have total %(count)s journal volumes."
+msgstr "You have total %(count)s journal volumes."
+
+#: templates/journal_admin/volume_list.html:77
+msgid "No volumes found."
+msgstr "No volumes found."

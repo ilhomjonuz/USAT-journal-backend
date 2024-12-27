@@ -5,6 +5,9 @@
 {% block title %}{% trans "Sign In" %}{% endblock %}
 
 {% block content %}
+{% get_current_language as LANGUAGE_CODE %}
+{% get_available_languages as LANGUAGES %}
+{% get_language_info_list for LANGUAGES as languages %}
 <div class="nk-content">
     <div class="nk-block nk-block-middle nk-auth-body wide-xs">
         <div class="brand-logo pb-4 text-center">
@@ -66,29 +69,31 @@
                 <div class="col-lg-6 order-lg-last">
                     <ul class="nav nav-sm justify-content-center justify-content-lg-end">
                         <li class="nav-item dropup">
-                            <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown" data-offset="0,10">
-                                <em class="icon ni ni-globe"></em>
-                                <span>{% trans "Language" %}</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-sm dropdown-menu-end">
-                                <div class="dropdown-body">
-                                    {% get_current_language as CURRENT_LANGUAGE %}
-                                    {% get_available_languages as AVAILABLE_LANGUAGES %}
-                                    {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
-                                    {% for language in languages %}
-                                        <form action="{% url 'set_language' %}" method="post" class="language-form">
-                                            {% csrf_token %}
-                                            <input name="next" type="hidden" value="{{ request.path }}">
-                                            <input name="language" type="hidden" value="{{ language.code }}">
-                                            <button type="submit" class="dropdown-item language-item {% if language.code == CURRENT_LANGUAGE %}active{% endif %}">
-                                                <span class="language-flag">
-                                                    <img src="{% static 'images/flags/'|add:language.code|add:'.png' %}" alt="{{ language.name_local }}">
-                                                </span>
-                                                <span class="language-name">{{ language.name_local }}</span>
-                                            </button>
-                                        </form>
-                                    {% endfor %}
+                            <a href="#" class="dropdown-toggle nk-quick-nav-icon" data-bs-toggle="dropdown">
+                                <div class="quick-icon border border-light">
+                                    {% with 'images/flags/'|add:LANGUAGE_CODE|add:'-sq.png' as flag_img %}
+                                        <img class="icon" src="{% static flag_img %}" alt="{{ LANGUAGE_CODE|language_name_local }}">
+                                    {% endwith %}
                                 </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-s1">
+                                <ul class="language-list">
+                                    {% for language in languages %}
+                                        <li>
+                                            <form action="{% url 'set_language' %}" method="post" class="language-item">
+                                                {% csrf_token %}
+                                                <input name="next" type="hidden" value="{{ request.path }}">
+                                                <input name="language" type="hidden" value="{{ language.code }}">
+                                                <button type="submit" class="btn btn-link p-0 w-100 text-start">
+                                                    {% with 'images/flags/'|add:language.code|add:'.png' as flag_img %}
+                                                        <img src="{% static flag_img %}" alt="{{ language.name_local }}" class="language-flag me-2" style="width: 30px; height: 20px;">
+                                                    {% endwith %}
+                                                    <span class="language-name">{{ language.name_local }}</span>
+                                                </button>
+                                            </form>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
                             </div>
                         </li>
                         <li class="nav-item">

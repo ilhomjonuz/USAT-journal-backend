@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-23 15:39+0500\n"
+"POT-Creation-Date: 2024-12-27 18:57+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,6 +29,7 @@ msgid "Accounts"
 msgstr "Аккаунты"
 
 #: apps/accounts/models.py:9 apps/authors/apps.py:8 apps/authors/models.py:51
+#: templates/author-admin/author_list.html:63
 msgid "Author"
 msgstr "Автор"
 
@@ -52,13 +53,33 @@ msgstr "Заместитель редактора"
 msgid "Admin"
 msgstr "Администратор"
 
-#: apps/accounts/models.py:22
+#: apps/accounts/models.py:16
+msgid "Role"
+msgstr "Роль"
+
+#: apps/accounts/models.py:17
+msgid "Prefer Dark Mode"
+msgstr "Предпочитать темный режим"
+
+#: apps/accounts/models.py:23
 msgid "User"
 msgstr "Пользователь"
 
-#: apps/accounts/models.py:23
+#: apps/accounts/models.py:24
 msgid "Users"
 msgstr "Пользователи"
+
+#: apps/accounts/views/auth_views.py:14
+msgid "Welcome back! You have successfully logged in."
+msgstr "Добро пожаловать! Вы успешно вошли в систему."
+
+#: apps/accounts/views/auth_views.py:18
+msgid "Invalid username or password."
+msgstr "Неверное имя пользователя или пароль."
+
+#: apps/accounts/views/auth_views.py:28
+msgid "You have been successfully logged out."
+msgstr "Вы успешно вышли из системы."
 
 #: apps/archive/apps.py:8
 msgid "Archive"
@@ -68,19 +89,20 @@ msgstr "Архив"
 msgid "Archives"
 msgstr "Архивы"
 
-#: apps/articles/admin.py:12
+#: apps/articles/admin.py:12 templates/article-admin/article_detail.html:61
 msgid "Article Information"
 msgstr "Информация о статье"
 
-#: apps/articles/admin.py:15 apps/journals/admin.py:63
+#: apps/articles/admin.py:15 apps/journals/admin.py:65
 msgid "Files"
 msgstr "Файлы"
 
-#: apps/articles/admin.py:18 apps/journals/admin.py:66
+#: apps/articles/admin.py:18 apps/journals/admin.py:68
 msgid "Page Information"
 msgstr "Информация о странице"
 
-#: apps/articles/admin.py:21 apps/journals/admin.py:69
+#: apps/articles/admin.py:21 apps/journals/admin.py:71
+#: templates/article-admin/article_detail.html:192
 msgid "Statistics"
 msgstr "Статистика"
 
@@ -88,157 +110,186 @@ msgstr "Статистика"
 msgid "Status and Dates"
 msgstr "Статус и даты"
 
-#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:14
-#: apps/journals/models.py:22
+#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:16
+#: apps/journals/models.py:24 templates/includes/sidebar.html:44
+#: templates/journal_admin/issue_confirm_delete.html:34
+#: templates/journal_admin/issue_list.html:42
+#: templates/journal_admin/volume_confirm_delete.html:34
+#: templates/journal_admin/volume_list.html:42
 msgid "Journal"
 msgstr "Журнал"
 
-#: apps/articles/admin.py:35 apps/articles/models.py:14
+#: apps/articles/admin.py:35 apps/articles/models.py:15
+#: templates/journal_admin/issue_confirm_delete.html:51
+#: templates/journal_admin/issue_list.html:67
 msgid "Published"
 msgstr "Опубликовано"
 
-#: apps/articles/apps.py:8 apps/articles/models.py:123
+#: apps/articles/apps.py:8 apps/articles/models.py:125
 msgid "Article"
 msgstr "Статья"
 
-#: apps/articles/apps.py:9 apps/articles/models.py:124
+#: apps/articles/apps.py:9 apps/articles/models.py:126
+#: apps/categories/views/admin_views.py:57
+#: apps/journals/views/template_view.py:204
+#: templates/article-admin/article_list.html:21
+#: templates/includes/sidebar.html:70
 msgid "Articles"
 msgstr "Статьи"
 
-#: apps/articles/models.py:10
+#: apps/articles/models.py:11 templates/article-admin/article_list.html:110
 msgid "Submitted"
 msgstr "Отправлено"
 
-#: apps/articles/models.py:11
+#: apps/articles/models.py:12
 msgid "Under Review"
 msgstr "На рассмотрении"
 
-#: apps/articles/models.py:12
+#: apps/articles/models.py:13
 msgid "Accepted"
 msgstr "Принято"
 
-#: apps/articles/models.py:13
+#: apps/articles/models.py:14
 msgid "Rejected"
 msgstr "Отклонено"
 
-#: apps/articles/models.py:20 apps/categories/apps.py:8
-#: apps/categories/models.py:12
+#: apps/articles/models.py:21 apps/categories/apps.py:8
+#: apps/categories/models.py:14
 msgid "Direction"
 msgstr "Направление"
 
-#: apps/articles/models.py:22
+#: apps/articles/models.py:24
+#: templates/article-admin/article_confirm_delete.html:45
+#: templates/article-admin/article_detail.html:66
+#: templates/article-admin/article_list.html:106
 msgid "Title"
 msgstr "Заголовок"
 
-#: apps/articles/models.py:23 apps/journals/models.py:38
+#: apps/articles/models.py:25 apps/journals/models.py:42
 msgid "Slug"
 msgstr "Слаг"
 
-#: apps/articles/models.py:25
+#: apps/articles/models.py:27 templates/article-admin/article_detail.html:90
 msgid "Keywords"
 msgstr "Ключевые слова"
 
-#: apps/articles/models.py:26
+#: apps/articles/models.py:28
 msgid "Enter keywords separated by commas"
 msgstr "Введите ключевые слова, разделенные запятыми"
 
-#: apps/articles/models.py:28
+#: apps/articles/models.py:30 templates/article-admin/article_detail.html:119
 msgid "Annotation"
 msgstr "Аннотация"
 
-#: apps/articles/models.py:32 apps/authors/apps.py:9 apps/authors/models.py:52
+#: apps/articles/models.py:34 apps/authors/apps.py:9 apps/authors/models.py:52
+#: templates/article-admin/article_confirm_delete.html:53
+#: templates/article-admin/article_detail.html:82
+#: templates/author-admin/author_list.html:5
+#: templates/author-admin/author_list.html:23
+#: templates/includes/sidebar.html:76
 msgid "Authors"
 msgstr "Авторы"
 
-#: apps/articles/models.py:37
+#: apps/articles/models.py:39
 msgid "Original Article File"
 msgstr "Оригинальный файл статьи"
 
-#: apps/articles/models.py:38
+#: apps/articles/models.py:40
 msgid "Accepted file types: .txt, .doc, .docx, .odt"
-msgstr "Принимаемые типы файлов: .txt, .doc, .docx, .odt"
+msgstr "Допустимые типы файлов: .txt, .doc, .docx, .odt"
 
-#: apps/articles/models.py:47
+#: apps/articles/models.py:49
 msgid "Revised Article File"
 msgstr "Пересмотренный файл статьи"
 
-#: apps/articles/models.py:48
+#: apps/articles/models.py:50
 msgid ""
 "Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
 msgstr ""
-"Принимаемые типы файлов: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
+"Допустимые типы файлов: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
 
-#: apps/articles/models.py:54 apps/journals/models.py:45
+#: apps/articles/models.py:56 apps/journals/models.py:49
 msgid "Start Page"
 msgstr "Начальная страница"
 
-#: apps/articles/models.py:57
+#: apps/articles/models.py:59
 msgid "Starting page in the journal"
 msgstr "Начальная страница в журнале"
 
-#: apps/articles/models.py:61 apps/journals/models.py:50
+#: apps/articles/models.py:63 apps/journals/models.py:54
 msgid "End Page"
 msgstr "Конечная страница"
 
-#: apps/articles/models.py:64
+#: apps/articles/models.py:66
 msgid "Ending page in the journal"
 msgstr "Конечная страница в журнале"
 
-#: apps/articles/models.py:70 apps/journals/models.py:54
+#: apps/articles/models.py:72 apps/journals/models.py:58
 msgid "Views Count"
 msgstr "Количество просмотров"
 
-#: apps/articles/models.py:71
+#: apps/articles/models.py:73
 msgid "Number of times the article has been viewed"
 msgstr "Количество просмотров статьи"
 
-#: apps/articles/models.py:75 apps/journals/models.py:55
+#: apps/articles/models.py:77 apps/journals/models.py:59
 msgid "Downloads Count"
 msgstr "Количество загрузок"
 
-#: apps/articles/models.py:76
+#: apps/articles/models.py:78
 msgid "Number of times the article has been downloaded"
 msgstr "Количество загрузок статьи"
 
-#: apps/articles/models.py:84
+#: apps/articles/models.py:86
+#: templates/article-admin/article_confirm_delete.html:57
+#: templates/article-admin/article_detail.html:98
+#: templates/article-admin/article_detail.html:225
+#: templates/article-admin/article_list.html:111
+#: templates/journal_admin/issue_confirm_delete.html:50
+#: templates/journal_admin/issue_list.html:46
 msgid "Status"
 msgstr "Статус"
 
-#: apps/articles/models.py:88
+#: apps/articles/models.py:90
+#: templates/article-admin/article_confirm_delete.html:65
 msgid "Submission Date"
 msgstr "Дата подачи"
 
-#: apps/articles/models.py:93
+#: apps/articles/models.py:95
 msgid "Review Date"
 msgstr "Дата рецензирования"
 
-#: apps/articles/models.py:94
+#: apps/articles/models.py:96
 msgid "Date when the article was sent for review"
 msgstr "Дата отправки статьи на рецензирование"
 
-#: apps/articles/models.py:99
+#: apps/articles/models.py:101
 msgid "Acceptance Date"
 msgstr "Дата принятия"
 
-#: apps/articles/models.py:100
+#: apps/articles/models.py:102
 msgid "Date when the article was accepted"
 msgstr "Дата принятия статьи"
 
-#: apps/articles/models.py:105 apps/journals/models.py:52
+#: apps/articles/models.py:107 apps/journals/models.py:56
+#: templates/journal_admin/issue_confirm_delete.html:46
+#: templates/journal_admin/issue_list.html:45
 msgid "Publication Date"
 msgstr "Дата публикации"
 
-#: apps/articles/models.py:106
+#: apps/articles/models.py:108
 msgid "Date when the article was published"
 msgstr "Дата публикации статьи"
 
-#: apps/articles/models.py:110
+#: apps/articles/models.py:112
 msgid "Last Updated"
 msgstr "Последнее обновление"
 
-#: apps/articles/models.py:119 apps/journals/models.py:61
+#: apps/articles/models.py:121 apps/journals/models.py:67
+#: templates/article-admin/article_detail.html:253
+#: templates/article-admin/article_list.html:108
 msgid "Journal Issue"
 msgstr "Выпуск журнала"
 
@@ -250,9 +301,43 @@ msgstr "Требуется идентификатор направления"
 msgid "Invalid direction id"
 msgstr "Неверный идентификатор направления"
 
+#: apps/articles/views/admin_views.py:68
+msgid "Article was created successfully"
+msgstr "Статья успешно создана"
+
+#: apps/articles/views/admin_views.py:76
+msgid "Article was updated successfully"
+msgstr "Статья успешно обновлена"
+
+#: apps/articles/views/admin_views.py:83
+msgid "Article was deleted successfully"
+msgstr "Статья успешно удалена"
+
+#: apps/articles/views/admin_views.py:101
+#: apps/articles/views/admin_views.py:163
+#, python-format
+msgid "Article status changed to %(status)s"
+msgstr "Статус статьи изменен на %(status)s"
+
+#: apps/articles/views/admin_views.py:115
+msgid "Invalid file type"
+msgstr "Недопустимый тип файла"
+
+#: apps/articles/views/admin_views.py:120
+msgid "File not found"
+msgstr "Файл не найден"
+
+#: apps/articles/views/admin_views.py:141
+msgid "Missing required parameters"
+msgstr "Отсутствуют необходимые параметры"
+
+#: apps/articles/views/admin_views.py:158
+msgid "Invalid action"
+msgstr "Недопустимое действие"
+
 #: apps/articles/views/api_article_create.py:99
 msgid "Media directory is not writable: "
-msgstr "Директория медиа не доступна для записи: "
+msgstr "Директория медиа недоступна для записи: "
 
 #: apps/articles/views/api_article_create.py:114
 msgid "Article submitted successfully"
@@ -264,11 +349,11 @@ msgstr "Ошибка чтения файла"
 
 #: apps/articles/views/api_article_download.py:32
 msgid "File not found on server"
-msgstr "Файл не на сервере"
+msgstr "Файл не найден на сервере"
 
 #: apps/articles/views/api_article_download.py:34
 msgid "No revised file available for this article"
-msgstr "Нет пересмотренного файла для данной статьи"
+msgstr "Для этой статьи нет доступного пересмотренного файла"
 
 #: apps/authors/admin.py:12
 msgid "Personal Information"
@@ -323,6 +408,8 @@ msgid "Last Name"
 msgstr "Фамилия"
 
 #: apps/authors/models.py:22
+#: templates/author-admin/author_confirm_delete.html:63
+#: templates/author-admin/author_list.html:68
 msgid "Country"
 msgstr "Страна"
 
@@ -335,6 +422,8 @@ msgid "Workplace"
 msgstr "Место работы"
 
 #: apps/authors/models.py:25
+#: templates/author-admin/author_confirm_delete.html:51
+#: templates/author-admin/author_list.html:64
 msgid "Email"
 msgstr "Электронная почта"
 
@@ -351,10 +440,14 @@ msgid "Telegram username or WhatsApp number"
 msgstr "Имя пользователя Telegram или номер WhatsApp"
 
 #: apps/authors/models.py:35
+#: templates/author-admin/author_confirm_delete.html:69
+#: templates/author-admin/author_list.html:66
 msgid "Academic Degree"
 msgstr "Ученая степень"
 
 #: apps/authors/models.py:40
+#: templates/author-admin/author_confirm_delete.html:75
+#: templates/author-admin/author_list.html:67
 msgid "Academic Title"
 msgstr "Ученое звание"
 
@@ -367,14 +460,39 @@ msgid "ORCID identifier"
 msgstr "Идентификатор ORCID"
 
 #: apps/authors/models.py:48 apps/categories/models.py:9
-#: apps/journals/models.py:10 apps/journals/models.py:25
-#: apps/journals/models.py:56
+#: apps/journals/models.py:10 apps/journals/models.py:27
+#: apps/journals/models.py:60
 msgid "Created At"
 msgstr "Создано"
 
-#: apps/categories/apps.py:9 apps/categories/models.py:13
+#: apps/authors/views/admin_views.py:36
+msgid "Author created successfully."
+msgstr "Автор успешно создан."
+
+#: apps/authors/views/admin_views.py:52
+msgid "Author updated successfully."
+msgstr "Автор успешно обновлен."
+
+#: apps/authors/views/admin_views.py:61
+msgid "Author deleted successfully."
+msgstr "Автор успешно удален."
+
+#: apps/categories/apps.py:9 apps/categories/models.py:15
+#: templates/includes/sidebar.html:82
 msgid "Directions"
 msgstr "Направления"
+
+#: apps/categories/forms.py:6
+msgid "Category Name (Uzbek)"
+msgstr "Название категории (узбекский)"
+
+#: apps/categories/forms.py:7
+msgid "Category Name (Russian)"
+msgstr "Название категории (русский)"
+
+#: apps/categories/forms.py:8
+msgid "Category Name (English)"
+msgstr "Название категории (английский)"
 
 #: apps/categories/models.py:6
 msgid "Direction Name"
@@ -385,22 +503,43 @@ msgid "Direction Code"
 msgstr "Код направления"
 
 #: apps/categories/models.py:8 apps/journals/models.py:9
+#: templates/category-admin/category_confirm_delete.html:52
+#: templates/category-admin/category_form.html:100
+#: templates/journal_admin/journal_confirm_delete.html:52
+#: templates/journal_admin/journal_form.html:100
 msgid "Description"
 msgstr "Описание"
 
-#: apps/dashboard/apps.py:8 apps/dashboard/apps.py:9
+#: apps/categories/views/admin_views.py:29
+msgid "Category created successfully."
+msgstr "Категория успешно создана."
+
+#: apps/categories/views/admin_views.py:40
+msgid "Category updated successfully."
+msgstr "Категория успешно обновлена."
+
+#: apps/categories/views/admin_views.py:71
+msgid ""
+"This category cannot be deleted because it is referenced by other objects."
+msgstr "Эту категорию нельзя удалить, так как на нее ссылаются другие объекты."
+
+#: apps/dashboard/apps.py:8 apps/dashboard/apps.py:9 templates/base.html:12
+#: templates/base.html:16
 msgid "Dashboard"
 msgstr "Панель управления"
 
-#: apps/journals/admin.py:60
+#: apps/journals/admin.py:62
 msgid "Issue Information"
 msgstr "Информация о выпуске"
 
-#: apps/journals/apps.py:9 apps/journals/models.py:15
+#: apps/journals/apps.py:9 apps/journals/models.py:17
+#: templates/includes/sidebar.html:50
+#: templates/journal_admin/journal_list.html:6
+#: templates/journal_admin/journal_list.html:23
 msgid "Journals"
 msgstr "Журналы"
 
-#: apps/journals/models.py:8
+#: apps/journals/models.py:8 templates/journal_admin/journal_form.html:70
 msgid "Journal Name"
 msgstr "Название журнала"
 
@@ -408,49 +547,102 @@ msgstr "Название журнала"
 msgid "Updated At"
 msgstr "Обновлено"
 
-#: apps/journals/models.py:23
+#: apps/journals/models.py:25
+#: templates/journal_admin/volume_confirm_delete.html:38
+#: templates/journal_admin/volume_list.html:43
 msgid "Volume Number"
 msgstr "Номер тома"
 
-#: apps/journals/models.py:24
+#: apps/journals/models.py:26
+#: templates/journal_admin/volume_confirm_delete.html:42
+#: templates/journal_admin/volume_list.html:44
 msgid "Year"
 msgstr "Год"
 
-#: apps/journals/models.py:30
+#: apps/journals/models.py:34
 msgid "Journal Volume"
 msgstr "Том журнала"
 
-#: apps/journals/models.py:31
+#: apps/journals/models.py:35 templates/journal_admin/volume_list.html:5
+#: templates/journal_admin/volume_list.html:22
 msgid "Journal Volumes"
 msgstr "Тома журнала"
 
-#: apps/journals/models.py:34 apps/journals/models.py:39
+#: apps/journals/models.py:38 apps/journals/models.py:43
+#: templates/journal_admin/issue_confirm_delete.html:38
+#: templates/journal_admin/issue_list.html:43
 msgid "Volume"
 msgstr "Том"
 
-#: apps/journals/models.py:40
+#: apps/journals/models.py:44
+#: templates/journal_admin/issue_confirm_delete.html:42
+#: templates/journal_admin/issue_list.html:44
 msgid "Issue Number"
 msgstr "Номер выпуска"
 
-#: apps/journals/models.py:41
+#: apps/journals/models.py:45
 msgid "Cover Image"
 msgstr "Изображение обложки"
 
-#: apps/journals/models.py:42
+#: apps/journals/models.py:46
 msgid "Journal File"
 msgstr "Файл журнала"
 
-#: apps/journals/models.py:53
+#: apps/journals/models.py:57
 msgid "Is Published"
 msgstr "Опубликовано"
 
-#: apps/journals/models.py:62
+#: apps/journals/models.py:68 templates/journal_admin/issue_list.html:5
+#: templates/journal_admin/issue_list.html:22
 msgid "Journal Issues"
 msgstr "Выпуски журнала"
 
-#: apps/journals/models.py:65
+#: apps/journals/models.py:71
 msgid "Issue"
 msgstr "Выпуск"
+
+#: apps/journals/views/template_view.py:27
+msgid "Journal created successfully."
+msgstr "Журнал успешно создан."
+
+#: apps/journals/views/template_view.py:39
+msgid "Journal updated successfully."
+msgstr "Журнал успешно обновлен."
+
+#: apps/journals/views/template_view.py:89
+msgid ""
+"This journal cannot be deleted because it is referenced by other objects. {}"
+msgstr ""
+"Этот журнал нельзя удалить, так как на него ссылаются другие объекты. {}"
+
+#: apps/journals/views/template_view.py:111
+msgid "Journal Volume created successfully."
+msgstr "Том журнала успешно создан."
+
+#: apps/journals/views/template_view.py:122
+msgid "Journal Volume updated successfully."
+msgstr "Том журнала успешно обновлен."
+
+#: apps/journals/views/template_view.py:138
+msgid "Issues"
+msgstr "Выпуски"
+
+#: apps/journals/views/template_view.py:152
+msgid ""
+"This volume cannot be deleted because it is referenced by other objects."
+msgstr "Этот том нельзя удалить, так как на него ссылаются другие объекты."
+
+#: apps/journals/views/template_view.py:175
+msgid "Journal Issue created successfully."
+msgstr "Выпуск журнала успешно создан."
+
+#: apps/journals/views/template_view.py:187
+msgid "Journal Issue updated successfully."
+msgstr "Выпуск журнала успешно обновлен."
+
+#: apps/journals/views/template_view.py:218
+msgid "This issue cannot be deleted because it is referenced by other objects."
+msgstr "Этот выпуск нельзя удалить, так как на него ссылаются другие объекты."
 
 #: apps/reviews/apps.py:8
 msgid "Review"
@@ -460,14 +652,816 @@ msgstr "Рецензия"
 msgid "Reviews"
 msgstr "Рецензии"
 
-#: core/settings.py:202
+#: core/settings.py:209
+#, fuzzy
+#| msgid "O'zbekcha"
 msgid "O‘zbekcha"
 msgstr "Узбекский"
 
-#: core/settings.py:203
+#: core/settings.py:210
 msgid "Ruscha"
 msgstr "Русский"
 
-#: core/settings.py:204
+#: core/settings.py:211
+#: templates/category-admin/category_confirm_delete.html:41
+#: templates/journal_admin/journal_confirm_delete.html:41
 msgid "English"
 msgstr "Английский"
+
+#: templates/article-admin/article_confirm_delete.html:6
+#: templates/article-admin/article_confirm_delete.html:24
+msgid "Confirm Delete Article"
+msgstr "Подтвердить удаление статьи"
+
+#: templates/article-admin/article_confirm_delete.html:26
+msgid "Are you sure you want to delete this article?"
+msgstr "Вы уверены, что хотите удалить эту статью?"
+
+#: templates/article-admin/article_confirm_delete.html:32
+#: templates/article-admin/article_detail.html:44
+#: templates/author-admin/author_confirm_delete.html:25
+#: templates/author-admin/author_form.html:38
+#: templates/category-admin/category_confirm_delete.html:23
+#: templates/journal_admin/issue_confirm_delete.html:22
+#: templates/journal_admin/journal_confirm_delete.html:23
+#: templates/journal_admin/volume_confirm_delete.html:22
+msgid "Back"
+msgstr "Назад"
+
+#: templates/article-admin/article_confirm_delete.html:41
+#: templates/article-admin/article_detail.html:5
+#: templates/article-admin/article_detail.html:23
+msgid "Article Details"
+msgstr "Детали статьи"
+
+#: templates/article-admin/article_confirm_delete.html:49
+#: templates/article-admin/article_detail.html:74
+#: templates/article-admin/article_list.html:107
+msgid "Category"
+msgstr "Категория"
+
+#: templates/article-admin/article_confirm_delete.html:72
+msgid ""
+"Warning: This action cannot be undone. All data associated with this article "
+"will be permanently deleted."
+msgstr ""
+"Внимание: Это действие нельзя отменить. Все данные, связанные с этой "
+"статьей, будут удалены безвозвратно."
+
+#: templates/article-admin/article_confirm_delete.html:78
+#: templates/author-admin/author_confirm_delete.html:87
+#: templates/category-admin/category_confirm_delete.html:109
+#: templates/journal_admin/issue_confirm_delete.html:101
+#: templates/journal_admin/journal_confirm_delete.html:105
+#: templates/journal_admin/volume_confirm_delete.html:93
+msgid "Confirm Delete"
+msgstr "Подтвердить удаление"
+
+#: templates/article-admin/article_confirm_delete.html:79
+#: templates/article-admin/article_form.html:117
+#: templates/author-admin/author_confirm_delete.html:88
+#: templates/author-admin/author_form.html:115
+#: templates/category-admin/category_confirm_delete.html:110
+#: templates/journal_admin/issue_confirm_delete.html:102
+#: templates/journal_admin/journal_confirm_delete.html:106
+#: templates/journal_admin/volume_confirm_delete.html:94
+msgid "Cancel"
+msgstr "Отмена"
+
+#: templates/article-admin/article_detail.html:32
+#: templates/article-admin/article_list.html:199
+#: templates/author-admin/author_list.html:114
+#: templates/category-admin/category_list.html:83
+#: templates/journal_admin/issue_list.html:77
+#: templates/journal_admin/journal_list.html:83
+#: templates/journal_admin/volume_list.html:65
+msgid "Edit"
+msgstr "Редактировать"
+
+#: templates/article-admin/article_detail.html:38
+#: templates/author-admin/author_list.html:120
+#: templates/category-admin/category_form.html:39
+#: templates/journal_admin/issue_list.html:78
+#: templates/journal_admin/journal_form.html:39
+#: templates/journal_admin/volume_list.html:66
+msgid "Delete"
+msgstr "Удалить"
+
+#: templates/article-admin/article_detail.html:108
+msgid "Page Range"
+msgstr "Диапазон страниц"
+
+#: templates/article-admin/article_detail.html:110
+msgid "pages"
+msgstr "страниц"
+
+#: templates/article-admin/article_detail.html:110
+msgid "Not set"
+msgstr "Не установлено"
+
+#: templates/article-admin/article_detail.html:130
+#: templates/article-admin/article_list.html:109
+msgid "Documents"
+msgstr "Документы"
+
+#: templates/article-admin/article_detail.html:144
+#: templates/article-admin/article_list.html:136
+msgid "Original File"
+msgstr "Оригинальный файл"
+
+#: templates/article-admin/article_detail.html:169
+#: templates/article-admin/article_list.html:141
+msgid "Revised File"
+msgstr "Пересмотренный файл"
+
+#: templates/article-admin/article_detail.html:207
+msgid "Downloads"
+msgstr "Загрузки"
+
+#: templates/article-admin/article_detail.html:213
+msgid "Views"
+msgstr "Просмотры"
+
+#: templates/article-admin/article_detail.html:220
+msgid "Status Information"
+msgstr "Информация о статусе"
+
+#: templates/article-admin/article_detail.html:235
+msgid "Status Date"
+msgstr "Дата статуса"
+
+#: templates/article-admin/article_detail.html:246
+msgid "N/A"
+msgstr "Н/Д"
+
+#: templates/article-admin/article_detail.html:258
+#: templates/article-admin/article_list.html:131
+msgid "Not assigned"
+msgstr "Не назначено"
+
+#: templates/article-admin/article_detail.html:271
+#: templates/article-admin/article_list.html:205
+msgid "Set Under Review"
+msgstr "Установить на рассмотрение"
+
+#: templates/article-admin/article_detail.html:276
+#: templates/article-admin/article_list.html:176
+#: templates/article-admin/article_list.html:210
+msgid "Accept"
+msgstr "Принять"
+
+#: templates/article-admin/article_detail.html:280
+#: templates/article-admin/article_list.html:181
+#: templates/article-admin/article_list.html:215
+msgid "Reject"
+msgstr "Отклонить"
+
+#: templates/article-admin/article_detail.html:285
+#: templates/article-admin/article_list.html:220
+msgid "Publish"
+msgstr "Опубликовать"
+
+#: templates/article-admin/article_form.html:6
+#: templates/article-admin/article_form.html:27
+msgid "Edit Article"
+msgstr "Редактировать статью"
+
+#: templates/article-admin/article_form.html:6
+#: templates/article-admin/article_form.html:29
+#: templates/article-admin/article_form.html:114
+msgid "Create Article"
+msgstr "Создать статью"
+
+#: templates/article-admin/article_form.html:33
+msgid "Fill in the article information below"
+msgstr "Заполните информацию о статье ниже"
+
+#: templates/article-admin/article_form.html:76
+#: templates/article-admin/article_form.html:87
+msgid "Current file"
+msgstr "Текущий файл"
+
+#: templates/article-admin/article_form.html:112
+msgid "Update Article"
+msgstr "Обновить статью"
+
+#: templates/article-admin/article_form.html:135
+msgid "Select authors"
+msgstr "Выберите авторов"
+
+#: templates/article-admin/article_form.html:141
+msgid "Select journal issue"
+msgstr "Выберите выпуск журнала"
+
+#: templates/article-admin/article_form.html:147
+msgid "Select status"
+msgstr "Выберите статус"
+
+#: templates/article-admin/article_form.html:163
+msgid "End page cannot be less than start page"
+msgstr "Конечная страница не может быть меньше начальной страницы"
+
+#: templates/article-admin/article_list.html:23
+#: templates/author-admin/author_list.html:25
+msgid "You have total"
+msgstr "У вас всего"
+
+#: templates/article-admin/article_list.html:23
+msgid "articles"
+msgstr "статей"
+
+#: templates/article-admin/article_list.html:28
+msgid "Add Article"
+msgstr "Добавить статью"
+
+#: templates/article-admin/article_list.html:45
+msgid "Any Status"
+msgstr "Любой статус"
+
+#: templates/article-admin/article_list.html:55
+msgid "Any Category"
+msgstr "Любая категория"
+
+#: templates/article-admin/article_list.html:65
+msgid "Any Journal Issue"
+msgstr "Любой выпуск журнала"
+
+#: templates/article-admin/article_list.html:80
+msgid "Search by title or keywords"
+msgstr "Поиск по заголовку или ключевым словам"
+
+#: templates/article-admin/article_list.html:84
+msgid "Filter"
+msgstr "Фильтр"
+
+#: templates/article-admin/article_list.html:86
+msgid "Reset"
+msgstr "Сбросить"
+
+#: templates/article-admin/article_list.html:163
+msgid "Reviewed at"
+msgstr "Рассмотрено"
+
+#: templates/article-admin/article_list.html:171
+msgid "Quick View"
+msgstr "Быстрый просмотр"
+
+#: templates/article-admin/article_list.html:194
+msgid "View Details"
+msgstr "Просмотр деталей"
+
+#: templates/article-admin/article_list.html:273
+#: templates/author-admin/author_list.html:172
+msgid "Page"
+msgstr "Страница"
+
+#: templates/article-admin/article_list.html:273
+#: templates/author-admin/author_list.html:172
+msgid "of"
+msgstr "из"
+
+#: templates/article-admin/article_list.html:320
+msgid "Error"
+msgstr "Ошибка"
+
+#: templates/article-admin/article_list.html:324
+msgid "An error occurred. Please try again."
+msgstr "Произошла ошибка. Пожалуйста, попробуйте еще раз."
+
+#: templates/auth/login.html:5 templates/auth/login.html:20
+msgid "Sign In"
+msgstr "Войти"
+
+#: templates/auth/login.html:22
+msgid "Access the JournalAdmin using your username and password."
+msgstr "Войдите в JournalAdmin, используя ваше имя пользователя и пароль."
+
+#: templates/auth/login.html:38
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: templates/auth/login.html:41
+msgid "Enter your username"
+msgstr "Введите ваше имя пользователя"
+
+#: templates/auth/login.html:46
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/auth/login.html:53
+msgid "Enter your password"
+msgstr "Введите ваш пароль"
+
+#: templates/auth/login.html:57
+msgid "Sign in"
+msgstr "Войти"
+
+#: templates/auth/login.html:71
+msgid "Language"
+msgstr "Язык"
+
+#: templates/auth/login.html:97 templates/auth/login.html:172
+#: templates/includes/quick-menu.html:72
+msgid "Dark Mode"
+msgstr "Темный режим"
+
+#: templates/auth/login.html:160 templates/auth/login.html:170
+#: templates/includes/quick-menu.html:72
+msgid "Light Mode"
+msgstr "Светлый режим"
+
+#: templates/author-admin/author_confirm_delete.html:4
+#: templates/author-admin/author_confirm_delete.html:14
+msgid "Confirm Delete Author"
+msgstr "Подтвердить удаление автора"
+
+#: templates/author-admin/author_confirm_delete.html:16
+msgid "Are you sure you want to delete this author?"
+msgstr "Вы уверены, что хотите удалить этого автора?"
+
+#: templates/author-admin/author_confirm_delete.html:39
+msgid "Author Details"
+msgstr "Детали автора"
+
+#: templates/author-admin/author_confirm_delete.html:40
+msgid "This action cannot be undone."
+msgstr "Это действие нельзя отменить."
+
+#: templates/author-admin/author_confirm_delete.html:45
+#: templates/category-admin/category_confirm_delete.html:46
+#: templates/journal_admin/journal_confirm_delete.html:46
+msgid "Name"
+msgstr "Имя"
+
+#: templates/author-admin/author_confirm_delete.html:57
+#: templates/author-admin/author_list.html:65
+msgid "Phone"
+msgstr "Телефон"
+
+#: templates/author-admin/author_form.html:7
+#: templates/author-admin/author_form.html:23
+msgid "Edit Author"
+msgstr "Редактировать автора"
+
+#: templates/author-admin/author_form.html:9
+#: templates/author-admin/author_form.html:25
+#: templates/author-admin/author_form.html:106
+#: templates/author-admin/author_list.html:47
+msgid "Add Author"
+msgstr "Добавить автора"
+
+#: templates/author-admin/author_form.html:29
+msgid "Please fill in the information below"
+msgstr "Пожалуйста, заполните информацию ниже"
+
+#: templates/author-admin/author_form.html:104
+msgid "Update Author"
+msgstr "Обновить автора"
+
+#: templates/author-admin/author_form.html:111
+msgid "Delete Author"
+msgstr "Удалить автора"
+
+#: templates/author-admin/author_form.html:135
+msgid "Select an option"
+msgstr "Выберите вариант"
+
+#: templates/author-admin/author_list.html:25
+msgid "authors"
+msgstr "авторов"
+
+#: templates/author-admin/author_list.html:40
+msgid "Search by name or email"
+msgstr "Поиск по имени или email"
+
+#: templates/author-admin/author_list.html:70
+msgid "Actions"
+msgstr "Действия"
+
+#: templates/base_null.html:14
+msgid "Blank"
+msgstr "Пусто"
+
+#: templates/category-admin/category_confirm_delete.html:6
+#: templates/category-admin/category_confirm_delete.html:15
+msgid "Confirm Delete Category"
+msgstr "Подтвердить удаление категории"
+
+#: templates/category-admin/category_confirm_delete.html:17
+msgid "Are you sure you want to delete this category?"
+msgstr "Вы уверены, что хотите удалить эту категорию?"
+
+#: templates/category-admin/category_confirm_delete.html:34
+msgid "Category Details"
+msgstr "Детали категории"
+
+#: templates/category-admin/category_confirm_delete.html:38
+#: templates/journal_admin/journal_confirm_delete.html:38
+msgid "Field"
+msgstr "Поле"
+
+#: templates/category-admin/category_confirm_delete.html:39
+#: templates/journal_admin/journal_confirm_delete.html:39
+msgid "Uzbek"
+msgstr "Узбекский"
+
+#: templates/category-admin/category_confirm_delete.html:40
+#: templates/journal_admin/journal_confirm_delete.html:40
+msgid "Russian"
+msgstr "Русский"
+
+#: templates/category-admin/category_confirm_delete.html:58
+#: templates/category-admin/category_list.html:53
+msgid "Code"
+msgstr "Код"
+
+#: templates/category-admin/category_confirm_delete.html:65
+#: templates/journal_admin/issue_confirm_delete.html:57
+#: templates/journal_admin/journal_confirm_delete.html:61
+#: templates/journal_admin/volume_confirm_delete.html:49
+msgid "This deletion will also remove:"
+msgstr "Это удаление также удалит:"
+
+#: templates/category-admin/category_confirm_delete.html:90
+#: templates/journal_admin/issue_confirm_delete.html:82
+#: templates/journal_admin/journal_confirm_delete.html:86
+#: templates/journal_admin/volume_confirm_delete.html:74
+msgid "And"
+msgstr "И"
+
+#: templates/category-admin/category_confirm_delete.html:90
+#: templates/journal_admin/issue_confirm_delete.html:82
+#: templates/journal_admin/journal_confirm_delete.html:86
+#: templates/journal_admin/volume_confirm_delete.html:74
+msgid "more..."
+msgstr "еще..."
+
+#: templates/category-admin/category_confirm_delete.html:98
+msgid ""
+"Warning: Deleting this category will also delete all related articles. This "
+"action cannot be undone."
+msgstr ""
+"Внимание: Удаление этой категории также удалит все связанные статьи. Это "
+"действие нельзя отменить."
+
+#: templates/category-admin/category_confirm_delete.html:102
+msgid ""
+"This category has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"У этой категории нет связанных объектов. Ее удаление не повлияет на другие "
+"данные."
+
+#: templates/category-admin/category_form.html:7
+#: templates/category-admin/category_form.html:18
+msgid "Edit Category"
+msgstr "Редактировать категорию"
+
+#: templates/category-admin/category_form.html:7
+#: templates/category-admin/category_form.html:20
+#: templates/category-admin/category_form.html:141
+msgid "Create Category"
+msgstr "Создать категорию"
+
+#: templates/category-admin/category_form.html:24
+msgid "Edit existing category"
+msgstr "Редактировать существующую категорию"
+
+#: templates/category-admin/category_form.html:24
+msgid "Create a new category"
+msgstr "Создать новую категорию"
+
+#: templates/category-admin/category_form.html:32
+msgid "Category List"
+msgstr "Список категорий"
+
+#: templates/category-admin/category_form.html:70
+msgid "Category Name"
+msgstr "Название категории"
+
+#: templates/category-admin/category_form.html:130
+msgid "Category Code"
+msgstr "Код категории"
+
+#: templates/category-admin/category_form.html:139
+msgid "Update Category"
+msgstr "Обновить категорию"
+
+#: templates/category-admin/category_list.html:6
+#: templates/category-admin/category_list.html:23
+msgid "Categories"
+msgstr "Категории"
+
+#: templates/category-admin/category_list.html:25
+#, python-format
+msgid "You have total %(count)s categories."
+msgstr "У вас всего %(count)s категорий."
+
+#: templates/category-admin/category_list.html:49
+msgid "Category name"
+msgstr "Название категории"
+
+#: templates/category-admin/category_list.html:54
+#: templates/journal_admin/journal_list.html:53
+msgid "Created Date"
+msgstr "Дата создания"
+
+#: templates/category-admin/category_list.html:84
+#: templates/journal_admin/journal_list.html:84
+msgid "Remove"
+msgstr "Удалить"
+
+#: templates/dashboard/dashboard.html:21
+msgid "USAT journal Dashboard"
+msgstr "Панель управления журнала УСАТ"
+
+#: templates/dashboard/dashboard.html:31
+msgid "Export"
+msgstr "Экспорт"
+
+#: templates/dashboard/dashboard.html:32
+msgid "Reports"
+msgstr "Отчеты"
+
+#: templates/dashboard/dashboard.html:38
+msgid "Add User"
+msgstr "Добавить пользователя"
+
+#: templates/includes/footer.html:6
+msgid "USAT journal"
+msgstr "Журнал УСАТ"
+
+#: templates/includes/header.html:15 templates/includes/sidebar.html:11
+msgid "JournalAdmin Logo"
+msgstr "Логотип JournalAdmin"
+
+#: templates/includes/header.html:16 templates/includes/sidebar.html:12
+msgid "JournalAdmin"
+msgstr "JournalAdmin"
+
+#: templates/includes/pagination.html:11
+msgid "Previous"
+msgstr "Предыдущий"
+
+#: templates/includes/pagination.html:43
+msgid "Next"
+msgstr "Следующий"
+
+#: templates/includes/quick-menu.html:67
+msgid "View Profile"
+msgstr "Просмотр профиля"
+
+#: templates/includes/quick-menu.html:68
+msgid "Account Setting"
+msgstr "Настройки аккаунта"
+
+#: templates/includes/quick-menu.html:85 templates/includes/sidebar.html:94
+msgid "Sign out"
+msgstr "Выйти"
+
+#: templates/includes/quick-menu.html:98
+msgid "Notifications"
+msgstr "Уведомления"
+
+#: templates/includes/quick-menu.html:99
+msgid "Mark All as Read"
+msgstr "Отметить все как прочитанные"
+
+#: templates/includes/quick-menu.html:108
+msgid "You have requested to"
+msgstr "Вы запросили"
+
+#: templates/includes/quick-menu.html:108
+msgid "Widthdrawl"
+msgstr "Вывод средств"
+
+#: templates/includes/quick-menu.html:109
+#: templates/includes/quick-menu.html:118
+msgid "2 hrs ago"
+msgstr "2 часа назад"
+
+#: templates/includes/quick-menu.html:117
+msgid "Your"
+msgstr "Ваш"
+
+#: templates/includes/quick-menu.html:117
+msgid "Deposit Order"
+msgstr "Заказ на депозит"
+
+#: templates/includes/quick-menu.html:117
+msgid "is placed"
+msgstr "размещен"
+
+#: templates/includes/quick-menu.html:125
+msgid "View All"
+msgstr "Просмотреть все"
+
+#: templates/includes/sidebar.html:30
+msgid "Dashboards"
+msgstr "Панели управления"
+
+#: templates/includes/sidebar.html:35
+msgid "Journal dashboard"
+msgstr "Панель управления журнала"
+
+#: templates/includes/sidebar.html:39
+msgid "Applications"
+msgstr "Приложения"
+
+#: templates/includes/sidebar.html:56
+msgid "Journal volumes"
+msgstr "Тома журнала"
+
+#: templates/includes/sidebar.html:62
+msgid "Journal issues"
+msgstr "Выпуски журнала"
+
+#: templates/includes/sidebar.html:86
+msgid "Authentication"
+msgstr "Аутентификация"
+
+#: templates/journal_admin/issue_confirm_delete.html:5
+#: templates/journal_admin/issue_confirm_delete.html:14
+msgid "Confirm Delete Journal Issue"
+msgstr "Подтвердить удаление выпуска журнала"
+
+#: templates/journal_admin/issue_confirm_delete.html:16
+msgid "Are you sure you want to delete this journal issue?"
+msgstr "Вы уверены, что хотите удалить этот выпуск журнала?"
+
+#: templates/journal_admin/issue_confirm_delete.html:30
+msgid "Issue Details"
+msgstr "Детали выпуска"
+
+#: templates/journal_admin/issue_confirm_delete.html:51
+#: templates/journal_admin/issue_list.html:67
+msgid "Draft"
+msgstr "Черновик"
+
+#: templates/journal_admin/issue_confirm_delete.html:90
+msgid ""
+"Warning: Deleting this issue will also delete all related articles. This "
+"action cannot be undone."
+msgstr ""
+"Внимание: Удаление этого выпуска также удалит все связанные статьи. Это "
+"действие нельзя отменить."
+
+#: templates/journal_admin/issue_confirm_delete.html:94
+msgid ""
+"This issue has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"У этого выпуска нет связанных объектов. Его удаление не повлияет на другие "
+"данные."
+
+#: templates/journal_admin/issue_form.html:6
+#: templates/journal_admin/issue_form.html:18
+msgid "Edit Journal Issue"
+msgstr "Редактировать выпуск журнала"
+
+#: templates/journal_admin/issue_form.html:6
+#: templates/journal_admin/issue_form.html:20
+msgid "Create Journal Issue"
+msgstr "Создать выпуск журнала"
+
+#: templates/journal_admin/issue_form.html:72
+msgid "Update Issue"
+msgstr "Обновить выпуск"
+
+#: templates/journal_admin/issue_form.html:74
+msgid "Create Issue"
+msgstr "Создать выпуск"
+
+#: templates/journal_admin/issue_list.html:24
+#, python-format
+msgid "You have total %(count)s journal issues."
+msgstr "У вас всего %(count)s выпусков журнала."
+
+#: templates/journal_admin/issue_list.html:89
+msgid "No issues found."
+msgstr "Выпуски не найдены."
+
+#: templates/journal_admin/journal_confirm_delete.html:6
+#: templates/journal_admin/journal_confirm_delete.html:15
+msgid "Confirm Delete Journal"
+msgstr "Подтвердить удаление журнала"
+
+#: templates/journal_admin/journal_confirm_delete.html:17
+msgid "Are you sure you want to delete this journal?"
+msgstr "Вы уверены, что хотите удалить этот журнал?"
+
+#: templates/journal_admin/journal_confirm_delete.html:34
+msgid "Journal Details"
+msgstr "Детали журнала"
+
+#: templates/journal_admin/journal_confirm_delete.html:94
+msgid ""
+"Warning: Deleting this journal will also delete all related volumes, issues, "
+"and articles. This action cannot be undone."
+msgstr ""
+"Внимание: Удаление этого журнала также удалит все связанные тома, выпуски и "
+"статьи. Это действие нельзя отменить."
+
+#: templates/journal_admin/journal_confirm_delete.html:98
+msgid ""
+"This journal has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"У этого журнала нет связанных объектов. Его удаление не повлияет на другие "
+"данные."
+
+#: templates/journal_admin/journal_form.html:7
+#: templates/journal_admin/journal_form.html:18
+msgid "Edit Journal"
+msgstr "Редактировать журнал"
+
+#: templates/journal_admin/journal_form.html:7
+#: templates/journal_admin/journal_form.html:20
+#: templates/journal_admin/journal_form.html:134
+msgid "Create Journal"
+msgstr "Создать журнал"
+
+#: templates/journal_admin/journal_form.html:24
+msgid "Edit existing journal"
+msgstr "Редактировать существующий журнал"
+
+#: templates/journal_admin/journal_form.html:24
+msgid "Create a new journal"
+msgstr "Создать новый журнал"
+
+#: templates/journal_admin/journal_form.html:32
+msgid "Journal List"
+msgstr "Список журналов"
+
+#: templates/journal_admin/journal_form.html:132
+msgid "Update Journal"
+msgstr "Обновить журнал"
+
+#: templates/journal_admin/journal_list.html:25
+#, python-format
+msgid "You have total %(count)s journals."
+msgstr "У вас всего %(count)s журналов."
+
+#: templates/journal_admin/journal_list.html:49
+msgid "Journal name"
+msgstr "Название журнала"
+
+#: templates/journal_admin/journal_list.html:54
+msgid "Updated Date"
+msgstr "Дата обновления"
+
+#: templates/journal_admin/volume_confirm_delete.html:5
+#: templates/journal_admin/volume_confirm_delete.html:14
+msgid "Confirm Delete Journal Volume"
+msgstr "Подтвердить удаление тома журнала"
+
+#: templates/journal_admin/volume_confirm_delete.html:16
+msgid "Are you sure you want to delete this journal volume?"
+msgstr "Вы уверены, что хотите удалить этот том журнала?"
+
+#: templates/journal_admin/volume_confirm_delete.html:30
+msgid "Volume Details"
+msgstr "Детали тома"
+
+#: templates/journal_admin/volume_confirm_delete.html:82
+msgid ""
+"Warning: Deleting this volume will also delete all related issues and "
+"articles. This action cannot be undone."
+msgstr ""
+"Внимание: Удаление этого тома также удалит все связанные выпуски и статьи. "
+"Это действие нельзя отменить."
+
+#: templates/journal_admin/volume_confirm_delete.html:86
+msgid ""
+"This volume has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"У этого тома нет связанных объектов. Его удаление не повлияет на другие "
+"данные."
+
+#: templates/journal_admin/volume_form.html:6
+#: templates/journal_admin/volume_form.html:18
+msgid "Edit Journal Volume"
+msgstr "Редактировать том журнала"
+
+#: templates/journal_admin/volume_form.html:6
+#: templates/journal_admin/volume_form.html:20
+msgid "Create Journal Volume"
+msgstr "Создать том журнала"
+
+#: templates/journal_admin/volume_form.html:47
+msgid "Update Volume"
+msgstr "Обновить том"
+
+#: templates/journal_admin/volume_form.html:49
+msgid "Create Volume"
+msgstr "Создать том"
+
+#: templates/journal_admin/volume_list.html:24
+#, python-format
+msgid "You have total %(count)s journal volumes."
+msgstr "У вас всего %(count)s томов журнала."
+
+#: templates/journal_admin/volume_list.html:77
+msgid "No volumes found."
+msgstr "Томы не найдены."

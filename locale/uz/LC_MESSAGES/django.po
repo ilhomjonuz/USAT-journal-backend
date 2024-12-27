@@ -8,11 +8,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-12-23 15:39+0500\n"
+"POT-Creation-Date: 2024-12-27 18:57+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -27,6 +27,7 @@ msgid "Accounts"
 msgstr "Hisoblar"
 
 #: apps/accounts/models.py:9 apps/authors/apps.py:8 apps/authors/models.py:51
+#: templates/author-admin/author_list.html:63
 msgid "Author"
 msgstr "Muallif"
 
@@ -50,13 +51,34 @@ msgstr "Muharrir o‘rinbosari"
 msgid "Admin"
 msgstr "Admin"
 
-#: apps/accounts/models.py:22
+#: apps/accounts/models.py:16
+msgid "Role"
+msgstr "Rol"
+
+#: apps/accounts/models.py:17
+msgid "Prefer Dark Mode"
+msgstr "Qorongʻi rejimni afzal koʻring"
+
+#: apps/accounts/models.py:23
 msgid "User"
 msgstr "Foydalanuvchi"
 
-#: apps/accounts/models.py:23
+#: apps/accounts/models.py:24
 msgid "Users"
 msgstr "Foydalanuvchilar"
+
+#: apps/accounts/views/auth_views.py:14
+msgid "Welcome back! You have successfully logged in."
+msgstr ""
+"Qaytib kelganingizdan xursandmiz! Siz muvaffaqiyatli tizimga kirdingiz."
+
+#: apps/accounts/views/auth_views.py:18
+msgid "Invalid username or password."
+msgstr "Foydalanuvchi nomi yoki parol noto‘g‘ri."
+
+#: apps/accounts/views/auth_views.py:28
+msgid "You have been successfully logged out."
+msgstr "Siz tizimdan muvaffaqiyatli chiqdingiz."
 
 #: apps/archive/apps.py:8
 msgid "Archive"
@@ -66,19 +88,20 @@ msgstr "Arxiv"
 msgid "Archives"
 msgstr "Arxivlar"
 
-#: apps/articles/admin.py:12
+#: apps/articles/admin.py:12 templates/article-admin/article_detail.html:61
 msgid "Article Information"
 msgstr "Maqola ma’lumotlari"
 
-#: apps/articles/admin.py:15 apps/journals/admin.py:63
+#: apps/articles/admin.py:15 apps/journals/admin.py:65
 msgid "Files"
 msgstr "Fayllar"
 
-#: apps/articles/admin.py:18 apps/journals/admin.py:66
+#: apps/articles/admin.py:18 apps/journals/admin.py:68
 msgid "Page Information"
 msgstr "Sahifa ma’lumotlari"
 
-#: apps/articles/admin.py:21 apps/journals/admin.py:69
+#: apps/articles/admin.py:21 apps/journals/admin.py:71
+#: templates/article-admin/article_detail.html:192
 msgid "Statistics"
 msgstr "Statistika"
 
@@ -86,81 +109,99 @@ msgstr "Statistika"
 msgid "Status and Dates"
 msgstr "Holat va sanalar"
 
-#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:14
-#: apps/journals/models.py:22
+#: apps/articles/admin.py:27 apps/journals/apps.py:8 apps/journals/models.py:16
+#: apps/journals/models.py:24 templates/includes/sidebar.html:44
+#: templates/journal_admin/issue_confirm_delete.html:34
+#: templates/journal_admin/issue_list.html:42
+#: templates/journal_admin/volume_confirm_delete.html:34
+#: templates/journal_admin/volume_list.html:42
 msgid "Journal"
 msgstr "Jurnal"
 
-#: apps/articles/admin.py:35 apps/articles/models.py:14
+#: apps/articles/admin.py:35 apps/articles/models.py:15
+#: templates/journal_admin/issue_confirm_delete.html:51
+#: templates/journal_admin/issue_list.html:67
 msgid "Published"
 msgstr "Nashr etilgan"
 
-#: apps/articles/apps.py:8 apps/articles/models.py:123
+#: apps/articles/apps.py:8 apps/articles/models.py:125
 msgid "Article"
 msgstr "Maqola"
 
-#: apps/articles/apps.py:9 apps/articles/models.py:124
+#: apps/articles/apps.py:9 apps/articles/models.py:126
+#: apps/categories/views/admin_views.py:57
+#: apps/journals/views/template_view.py:204
+#: templates/article-admin/article_list.html:21
+#: templates/includes/sidebar.html:70
 msgid "Articles"
 msgstr "Maqolalar"
 
-#: apps/articles/models.py:10
+#: apps/articles/models.py:11 templates/article-admin/article_list.html:110
 msgid "Submitted"
 msgstr "Topshirilgan"
 
-#: apps/articles/models.py:11
+#: apps/articles/models.py:12
 msgid "Under Review"
 msgstr "Ko‘rib chiqilmoqda"
 
-#: apps/articles/models.py:12
+#: apps/articles/models.py:13
 msgid "Accepted"
 msgstr "Qabul qilingan"
 
-#: apps/articles/models.py:13
+#: apps/articles/models.py:14
 msgid "Rejected"
 msgstr "Rad etilgan"
 
-#: apps/articles/models.py:20 apps/categories/apps.py:8
-#: apps/categories/models.py:12
+#: apps/articles/models.py:21 apps/categories/apps.py:8
+#: apps/categories/models.py:14
 msgid "Direction"
 msgstr "Yo‘nalish"
 
-#: apps/articles/models.py:22
+#: apps/articles/models.py:24
+#: templates/article-admin/article_confirm_delete.html:45
+#: templates/article-admin/article_detail.html:66
+#: templates/article-admin/article_list.html:106
 msgid "Title"
 msgstr "Sarlavha"
 
-#: apps/articles/models.py:23 apps/journals/models.py:38
+#: apps/articles/models.py:25 apps/journals/models.py:42
 msgid "Slug"
 msgstr "Slug"
 
-#: apps/articles/models.py:25
+#: apps/articles/models.py:27 templates/article-admin/article_detail.html:90
 msgid "Keywords"
 msgstr "Kalit so‘zlar"
 
-#: apps/articles/models.py:26
+#: apps/articles/models.py:28
 msgid "Enter keywords separated by commas"
 msgstr "Kalit so‘zlarni vergul bilan ajratib kiriting"
 
-#: apps/articles/models.py:28
+#: apps/articles/models.py:30 templates/article-admin/article_detail.html:119
 msgid "Annotation"
 msgstr "Annotatsiya"
 
-#: apps/articles/models.py:32 apps/authors/apps.py:9 apps/authors/models.py:52
+#: apps/articles/models.py:34 apps/authors/apps.py:9 apps/authors/models.py:52
+#: templates/article-admin/article_confirm_delete.html:53
+#: templates/article-admin/article_detail.html:82
+#: templates/author-admin/author_list.html:5
+#: templates/author-admin/author_list.html:23
+#: templates/includes/sidebar.html:76
 msgid "Authors"
 msgstr "Mualliflar"
 
-#: apps/articles/models.py:37
+#: apps/articles/models.py:39
 msgid "Original Article File"
 msgstr "Asl maqola fayli"
 
-#: apps/articles/models.py:38
+#: apps/articles/models.py:40
 msgid "Accepted file types: .txt, .doc, .docx, .odt"
 msgstr "Qabul qilinadigan fayl turlari: .txt, .doc, .docx, .odt"
 
-#: apps/articles/models.py:47
+#: apps/articles/models.py:49
 msgid "Revised Article File"
 msgstr "Qayta ko‘rib chiqilgan maqola fayli"
 
-#: apps/articles/models.py:48
+#: apps/articles/models.py:50
 msgid ""
 "Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, ."
 "txt, .rtf"
@@ -168,85 +209,130 @@ msgstr ""
 "Qabul qilinadigan fayl turlari: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, ."
 "xlsx, .txt, .rtf"
 
-#: apps/articles/models.py:54 apps/journals/models.py:45
+#: apps/articles/models.py:56 apps/journals/models.py:49
 msgid "Start Page"
 msgstr "Boshlang‘ich sahifa"
 
-#: apps/articles/models.py:57
+#: apps/articles/models.py:59
 msgid "Starting page in the journal"
 msgstr "Jurnaldagi boshlang‘ich sahifa"
 
-#: apps/articles/models.py:61 apps/journals/models.py:50
+#: apps/articles/models.py:63 apps/journals/models.py:54
 msgid "End Page"
 msgstr "Oxirgi sahifa"
 
-#: apps/articles/models.py:64
+#: apps/articles/models.py:66
 msgid "Ending page in the journal"
 msgstr "Jurnaldagi oxirgi sahifa"
 
-#: apps/articles/models.py:70 apps/journals/models.py:54
+#: apps/articles/models.py:72 apps/journals/models.py:58
 msgid "Views Count"
 msgstr "Ko‘rishlar soni"
 
-#: apps/articles/models.py:71
+#: apps/articles/models.py:73
 msgid "Number of times the article has been viewed"
 msgstr "Maqola necha marta ko‘rilgani"
 
-#: apps/articles/models.py:75 apps/journals/models.py:55
+#: apps/articles/models.py:77 apps/journals/models.py:59
 msgid "Downloads Count"
 msgstr "Yuklab olishlar soni"
 
-#: apps/articles/models.py:76
+#: apps/articles/models.py:78
 msgid "Number of times the article has been downloaded"
 msgstr "Maqola necha marta yuklab olingani"
 
-#: apps/articles/models.py:84
+#: apps/articles/models.py:86
+#: templates/article-admin/article_confirm_delete.html:57
+#: templates/article-admin/article_detail.html:98
+#: templates/article-admin/article_detail.html:225
+#: templates/article-admin/article_list.html:111
+#: templates/journal_admin/issue_confirm_delete.html:50
+#: templates/journal_admin/issue_list.html:46
 msgid "Status"
 msgstr "Holat"
 
-#: apps/articles/models.py:88
+#: apps/articles/models.py:90
+#: templates/article-admin/article_confirm_delete.html:65
 msgid "Submission Date"
 msgstr "Topshirish sanasi"
 
-#: apps/articles/models.py:93
+#: apps/articles/models.py:95
 msgid "Review Date"
 msgstr "Ko‘rib chiqish sanasi"
 
-#: apps/articles/models.py:94
+#: apps/articles/models.py:96
 msgid "Date when the article was sent for review"
 msgstr "Maqola ko‘rib chiqishga yuborilgan sana"
 
-#: apps/articles/models.py:99
+#: apps/articles/models.py:101
 msgid "Acceptance Date"
 msgstr "Qabul qilingan sana"
 
-#: apps/articles/models.py:100
+#: apps/articles/models.py:102
 msgid "Date when the article was accepted"
 msgstr "Maqola qabul qilingan sana"
 
-#: apps/articles/models.py:105 apps/journals/models.py:52
+#: apps/articles/models.py:107 apps/journals/models.py:56
+#: templates/journal_admin/issue_confirm_delete.html:46
+#: templates/journal_admin/issue_list.html:45
 msgid "Publication Date"
 msgstr "Nashr etilgan sana"
 
-#: apps/articles/models.py:106
+#: apps/articles/models.py:108
 msgid "Date when the article was published"
 msgstr "Maqola nashr etilgan sana"
 
-#: apps/articles/models.py:110
+#: apps/articles/models.py:112
 msgid "Last Updated"
 msgstr "Oxirgi yangilanish"
 
-#: apps/articles/models.py:119 apps/journals/models.py:61
+#: apps/articles/models.py:121 apps/journals/models.py:67
+#: templates/article-admin/article_detail.html:253
+#: templates/article-admin/article_list.html:108
 msgid "Journal Issue"
 msgstr "Jurnal soni"
 
 #: apps/articles/serializers/article_create.py:33
 msgid "Direction id is required"
-msgstr "Yo’nalish id kiritilishi kerak"
+msgstr "Yo‘nalish id kiritilishi kerak"
 
 #: apps/articles/serializers/article_create.py:36
 msgid "Invalid direction id"
-msgstr "Yo’nalish id xato"
+msgstr "Yo‘nalish id xato"
+
+#: apps/articles/views/admin_views.py:68
+msgid "Article was created successfully"
+msgstr "Maqola muvaffaqiyatli yaratildi"
+
+#: apps/articles/views/admin_views.py:76
+msgid "Article was updated successfully"
+msgstr "Maqola muvaffaqiyatli yangilandi"
+
+#: apps/articles/views/admin_views.py:83
+msgid "Article was deleted successfully"
+msgstr "Maqola muvaffaqiyatli o‘chirildi"
+
+#: apps/articles/views/admin_views.py:101
+#: apps/articles/views/admin_views.py:163
+#, python-format
+msgid "Article status changed to %(status)s"
+msgstr "Maqola holati %(status)s ga o‘zgartirildi"
+
+#: apps/articles/views/admin_views.py:115
+msgid "Invalid file type"
+msgstr "Fayl turi yaroqsiz"
+
+#: apps/articles/views/admin_views.py:120
+msgid "File not found"
+msgstr "Fayl topilmadi"
+
+#: apps/articles/views/admin_views.py:141
+msgid "Missing required parameters"
+msgstr "Kerakli parametrlar etishmayapti"
+
+#: apps/articles/views/admin_views.py:158
+msgid "Invalid action"
+msgstr "Yaroqsiz harakat"
 
 #: apps/articles/views/api_article_create.py:99
 msgid "Media directory is not writable: "
@@ -321,6 +407,8 @@ msgid "Last Name"
 msgstr "Familiya"
 
 #: apps/authors/models.py:22
+#: templates/author-admin/author_confirm_delete.html:63
+#: templates/author-admin/author_list.html:68
 msgid "Country"
 msgstr "Mamlakat"
 
@@ -333,6 +421,8 @@ msgid "Workplace"
 msgstr "Ish joyi"
 
 #: apps/authors/models.py:25
+#: templates/author-admin/author_confirm_delete.html:51
+#: templates/author-admin/author_list.html:64
 msgid "Email"
 msgstr "Elektron pochta"
 
@@ -349,10 +439,14 @@ msgid "Telegram username or WhatsApp number"
 msgstr "Telegram foydalanuvchi nomi yoki WhatsApp raqami"
 
 #: apps/authors/models.py:35
+#: templates/author-admin/author_confirm_delete.html:69
+#: templates/author-admin/author_list.html:66
 msgid "Academic Degree"
 msgstr "Ilmiy daraja"
 
 #: apps/authors/models.py:40
+#: templates/author-admin/author_confirm_delete.html:75
+#: templates/author-admin/author_list.html:67
 msgid "Academic Title"
 msgstr "Ilmiy unvon"
 
@@ -365,14 +459,39 @@ msgid "ORCID identifier"
 msgstr "ORCID identifikatori"
 
 #: apps/authors/models.py:48 apps/categories/models.py:9
-#: apps/journals/models.py:10 apps/journals/models.py:25
-#: apps/journals/models.py:56
+#: apps/journals/models.py:10 apps/journals/models.py:27
+#: apps/journals/models.py:60
 msgid "Created At"
 msgstr "Yaratilgan sana"
 
-#: apps/categories/apps.py:9 apps/categories/models.py:13
+#: apps/authors/views/admin_views.py:36
+msgid "Author created successfully."
+msgstr "Muallif muvaffaqiyatli yaratildi"
+
+#: apps/authors/views/admin_views.py:52
+msgid "Author updated successfully."
+msgstr "Muallif muvaffaqiyatli yangilandi"
+
+#: apps/authors/views/admin_views.py:61
+msgid "Author deleted successfully."
+msgstr "Muallif muvaffaqiyatli o‘chirildi"
+
+#: apps/categories/apps.py:9 apps/categories/models.py:15
+#: templates/includes/sidebar.html:82
 msgid "Directions"
 msgstr "Yo‘nalishlar"
+
+#: apps/categories/forms.py:6
+msgid "Category Name (Uzbek)"
+msgstr "Yo‘nalish nomi (o‘zbek)"
+
+#: apps/categories/forms.py:7
+msgid "Category Name (Russian)"
+msgstr "Yo‘nalish nomi (rus)"
+
+#: apps/categories/forms.py:8
+msgid "Category Name (English)"
+msgstr "Yo‘nalish nomi (ingliz)"
 
 #: apps/categories/models.py:6
 msgid "Direction Name"
@@ -383,22 +502,45 @@ msgid "Direction Code"
 msgstr "Yo‘nalish kodi"
 
 #: apps/categories/models.py:8 apps/journals/models.py:9
+#: templates/category-admin/category_confirm_delete.html:52
+#: templates/category-admin/category_form.html:100
+#: templates/journal_admin/journal_confirm_delete.html:52
+#: templates/journal_admin/journal_form.html:100
 msgid "Description"
 msgstr "Tavsif"
 
-#: apps/dashboard/apps.py:8 apps/dashboard/apps.py:9
-msgid "Dashboard"
-msgstr "Dashboard"
+#: apps/categories/views/admin_views.py:29
+msgid "Category created successfully."
+msgstr "Yo‘nalish muvaffaqiyatli yaratildi"
 
-#: apps/journals/admin.py:60
+#: apps/categories/views/admin_views.py:40
+msgid "Category updated successfully."
+msgstr "Yo‘nalish muvaffaqiyatli yangilandi"
+
+#: apps/categories/views/admin_views.py:71
+msgid ""
+"This category cannot be deleted because it is referenced by other objects."
+msgstr ""
+"Bu yo‘nalishni o‘chirib bo‘lmaydi, chunki unga boshqa obyektlar havola "
+"qilingan."
+
+#: apps/dashboard/apps.py:8 apps/dashboard/apps.py:9 templates/base.html:12
+#: templates/base.html:16
+msgid "Dashboard"
+msgstr "Boshqaruv paneli"
+
+#: apps/journals/admin.py:62
 msgid "Issue Information"
 msgstr "Son haqida ma’lumot"
 
-#: apps/journals/apps.py:9 apps/journals/models.py:15
+#: apps/journals/apps.py:9 apps/journals/models.py:17
+#: templates/includes/sidebar.html:50
+#: templates/journal_admin/journal_list.html:6
+#: templates/journal_admin/journal_list.html:23
 msgid "Journals"
 msgstr "Jurnallar"
 
-#: apps/journals/models.py:8
+#: apps/journals/models.py:8 templates/journal_admin/journal_form.html:70
 msgid "Journal Name"
 msgstr "Jurnal nomi"
 
@@ -406,49 +548,105 @@ msgstr "Jurnal nomi"
 msgid "Updated At"
 msgstr "Yangilangan sana"
 
-#: apps/journals/models.py:23
+#: apps/journals/models.py:25
+#: templates/journal_admin/volume_confirm_delete.html:38
+#: templates/journal_admin/volume_list.html:43
 msgid "Volume Number"
 msgstr "Jild raqami"
 
-#: apps/journals/models.py:24
+#: apps/journals/models.py:26
+#: templates/journal_admin/volume_confirm_delete.html:42
+#: templates/journal_admin/volume_list.html:44
 msgid "Year"
 msgstr "Yil"
 
-#: apps/journals/models.py:30
+#: apps/journals/models.py:34
 msgid "Journal Volume"
 msgstr "Jurnal jildi"
 
-#: apps/journals/models.py:31
+#: apps/journals/models.py:35 templates/journal_admin/volume_list.html:5
+#: templates/journal_admin/volume_list.html:22
 msgid "Journal Volumes"
 msgstr "Jurnal jildlari"
 
-#: apps/journals/models.py:34 apps/journals/models.py:39
+#: apps/journals/models.py:38 apps/journals/models.py:43
+#: templates/journal_admin/issue_confirm_delete.html:38
+#: templates/journal_admin/issue_list.html:43
 msgid "Volume"
 msgstr "Jild"
 
-#: apps/journals/models.py:40
+#: apps/journals/models.py:44
+#: templates/journal_admin/issue_confirm_delete.html:42
+#: templates/journal_admin/issue_list.html:44
 msgid "Issue Number"
 msgstr "Son raqami"
 
-#: apps/journals/models.py:41
+#: apps/journals/models.py:45
 msgid "Cover Image"
 msgstr "Muqova rasmi"
 
-#: apps/journals/models.py:42
+#: apps/journals/models.py:46
 msgid "Journal File"
 msgstr "Jurnal fayli"
 
-#: apps/journals/models.py:53
+#: apps/journals/models.py:57
 msgid "Is Published"
 msgstr "Nashr etilganmi"
 
-#: apps/journals/models.py:62
+#: apps/journals/models.py:68 templates/journal_admin/issue_list.html:5
+#: templates/journal_admin/issue_list.html:22
 msgid "Journal Issues"
 msgstr "Jurnal sonlari"
 
-#: apps/journals/models.py:65
+#: apps/journals/models.py:71
 msgid "Issue"
-msgstr "Soni"
+msgstr "Son"
+
+#: apps/journals/views/template_view.py:27
+msgid "Journal created successfully."
+msgstr "Jurnal muvaffaqiyatli yaratildi"
+
+#: apps/journals/views/template_view.py:39
+msgid "Journal updated successfully."
+msgstr "Jurnal muvaffaqiyatli yangilandi"
+
+#: apps/journals/views/template_view.py:89
+msgid ""
+"This journal cannot be deleted because it is referenced by other objects. {}"
+msgstr ""
+"Bu jurnalni o‘chirib bo‘lmaydi, chunki unga boshqa obyektlar havola "
+"qilingan. {}"
+
+#: apps/journals/views/template_view.py:111
+msgid "Journal Volume created successfully."
+msgstr "Jurnal jildi muvaffaqiyatli yaratildi"
+
+#: apps/journals/views/template_view.py:122
+msgid "Journal Volume updated successfully."
+msgstr "Jurnal jildi muvaffaqiyatli yangilandi"
+
+#: apps/journals/views/template_view.py:138
+msgid "Issues"
+msgstr "Sonlar"
+
+#: apps/journals/views/template_view.py:152
+msgid ""
+"This volume cannot be deleted because it is referenced by other objects."
+msgstr ""
+"Bu jildni o‘chirib bo‘lmaydi, chunki unga boshqa obyektlar havola qilingan."
+
+#: apps/journals/views/template_view.py:175
+msgid "Journal Issue created successfully."
+msgstr "Jurnal soni muvaffaqiyatli yaratildi"
+
+#: apps/journals/views/template_view.py:187
+msgid "Journal Issue updated successfully."
+msgstr "Jurnal soni muvaffaqiyatli yangilandi"
+
+#: apps/journals/views/template_view.py:218
+msgid "This issue cannot be deleted because it is referenced by other objects."
+msgstr ""
+"Bu sonni o‘chirib bo‘lmaydi, chunki unga boshqa obyektlar havola qilingan."
 
 #: apps/reviews/apps.py:8
 msgid "Review"
@@ -458,14 +656,816 @@ msgstr "Taqriz"
 msgid "Reviews"
 msgstr "Taqrizlar"
 
-#: core/settings.py:202
+#: core/settings.py:209
+#, fuzzy
+#| msgid "o‘zbekcha"
 msgid "O‘zbekcha"
-msgstr "O‘zbekcha"
+msgstr "o‘zbekcha"
 
-#: core/settings.py:203
+#: core/settings.py:210
 msgid "Ruscha"
 msgstr "Ruscha"
 
-#: core/settings.py:204
+#: core/settings.py:211
+#: templates/category-admin/category_confirm_delete.html:41
+#: templates/journal_admin/journal_confirm_delete.html:41
 msgid "English"
 msgstr "Inglizcha"
+
+#: templates/article-admin/article_confirm_delete.html:6
+#: templates/article-admin/article_confirm_delete.html:24
+msgid "Confirm Delete Article"
+msgstr "Maqolani o‘chirishni tasdiqlang"
+
+#: templates/article-admin/article_confirm_delete.html:26
+msgid "Are you sure you want to delete this article?"
+msgstr "Haqiqatan ham ushbu maqolani o‘chirib tashlamoqchimisiz?"
+
+#: templates/article-admin/article_confirm_delete.html:32
+#: templates/article-admin/article_detail.html:44
+#: templates/author-admin/author_confirm_delete.html:25
+#: templates/author-admin/author_form.html:38
+#: templates/category-admin/category_confirm_delete.html:23
+#: templates/journal_admin/issue_confirm_delete.html:22
+#: templates/journal_admin/journal_confirm_delete.html:23
+#: templates/journal_admin/volume_confirm_delete.html:22
+msgid "Back"
+msgstr "Orqaga"
+
+#: templates/article-admin/article_confirm_delete.html:41
+#: templates/article-admin/article_detail.html:5
+#: templates/article-admin/article_detail.html:23
+msgid "Article Details"
+msgstr "Maqola haqida ma’lumot"
+
+#: templates/article-admin/article_confirm_delete.html:49
+#: templates/article-admin/article_detail.html:74
+#: templates/article-admin/article_list.html:107
+msgid "Category"
+msgstr "Yo‘nalish"
+
+#: templates/article-admin/article_confirm_delete.html:72
+msgid ""
+"Warning: This action cannot be undone. All data associated with this article "
+"will be permanently deleted."
+msgstr ""
+"Ogohlantirish: Bu amalni bekor qilib bo‘lmaydi. Ushbu maqola bilan bog‘liq "
+"barcha ma’lumotlar butunlay o‘chiriladi."
+
+#: templates/article-admin/article_confirm_delete.html:78
+#: templates/author-admin/author_confirm_delete.html:87
+#: templates/category-admin/category_confirm_delete.html:109
+#: templates/journal_admin/issue_confirm_delete.html:101
+#: templates/journal_admin/journal_confirm_delete.html:105
+#: templates/journal_admin/volume_confirm_delete.html:93
+msgid "Confirm Delete"
+msgstr "O‘chirishni tasdiqlang"
+
+#: templates/article-admin/article_confirm_delete.html:79
+#: templates/article-admin/article_form.html:117
+#: templates/author-admin/author_confirm_delete.html:88
+#: templates/author-admin/author_form.html:115
+#: templates/category-admin/category_confirm_delete.html:110
+#: templates/journal_admin/issue_confirm_delete.html:102
+#: templates/journal_admin/journal_confirm_delete.html:106
+#: templates/journal_admin/volume_confirm_delete.html:94
+msgid "Cancel"
+msgstr "Bekor qilish"
+
+#: templates/article-admin/article_detail.html:32
+#: templates/article-admin/article_list.html:199
+#: templates/author-admin/author_list.html:114
+#: templates/category-admin/category_list.html:83
+#: templates/journal_admin/issue_list.html:77
+#: templates/journal_admin/journal_list.html:83
+#: templates/journal_admin/volume_list.html:65
+msgid "Edit"
+msgstr "Tahrirlash"
+
+#: templates/article-admin/article_detail.html:38
+#: templates/author-admin/author_list.html:120
+#: templates/category-admin/category_form.html:39
+#: templates/journal_admin/issue_list.html:78
+#: templates/journal_admin/journal_form.html:39
+#: templates/journal_admin/volume_list.html:66
+msgid "Delete"
+msgstr "O‘chirish"
+
+#: templates/article-admin/article_detail.html:108
+msgid "Page Range"
+msgstr "Sahifa diapazoni"
+
+#: templates/article-admin/article_detail.html:110
+msgid "pages"
+msgstr "sahifalar"
+
+#: templates/article-admin/article_detail.html:110
+msgid "Not set"
+msgstr "Belgilanmagan"
+
+#: templates/article-admin/article_detail.html:130
+#: templates/article-admin/article_list.html:109
+msgid "Documents"
+msgstr "Hujjatlar"
+
+#: templates/article-admin/article_detail.html:144
+#: templates/article-admin/article_list.html:136
+msgid "Original File"
+msgstr "Asl fayl"
+
+#: templates/article-admin/article_detail.html:169
+#: templates/article-admin/article_list.html:141
+msgid "Revised File"
+msgstr "Qayta ko‘rib chiqilgan fayl"
+
+#: templates/article-admin/article_detail.html:207
+msgid "Downloads"
+msgstr "Yuklab olishlar"
+
+#: templates/article-admin/article_detail.html:213
+msgid "Views"
+msgstr "Ko‘rishlar"
+
+#: templates/article-admin/article_detail.html:220
+msgid "Status Information"
+msgstr "Holat haqida ma’lumot"
+
+#: templates/article-admin/article_detail.html:235
+msgid "Status Date"
+msgstr "Holat sanasi"
+
+#: templates/article-admin/article_detail.html:246
+msgid "N/A"
+msgstr "Mavjud emas"
+
+#: templates/article-admin/article_detail.html:258
+#: templates/article-admin/article_list.html:131
+msgid "Not assigned"
+msgstr "Belgilanmagan"
+
+#: templates/article-admin/article_detail.html:271
+#: templates/article-admin/article_list.html:205
+msgid "Set Under Review"
+msgstr "Ko‘rib chiqishga o‘tkazish"
+
+#: templates/article-admin/article_detail.html:276
+#: templates/article-admin/article_list.html:176
+#: templates/article-admin/article_list.html:210
+msgid "Accept"
+msgstr "Qabul qilish"
+
+#: templates/article-admin/article_detail.html:280
+#: templates/article-admin/article_list.html:181
+#: templates/article-admin/article_list.html:215
+msgid "Reject"
+msgstr "Rad etish"
+
+#: templates/article-admin/article_detail.html:285
+#: templates/article-admin/article_list.html:220
+msgid "Publish"
+msgstr "Nashr etish"
+
+#: templates/article-admin/article_form.html:6
+#: templates/article-admin/article_form.html:27
+msgid "Edit Article"
+msgstr "Maqolani tahrirlash"
+
+#: templates/article-admin/article_form.html:6
+#: templates/article-admin/article_form.html:29
+#: templates/article-admin/article_form.html:114
+msgid "Create Article"
+msgstr "Maqola yaratish"
+
+#: templates/article-admin/article_form.html:33
+msgid "Fill in the article information below"
+msgstr "Quyidagi maqola ma’lumotlarini to‘ldiring"
+
+#: templates/article-admin/article_form.html:76
+#: templates/article-admin/article_form.html:87
+msgid "Current file"
+msgstr "Joriy fayl"
+
+#: templates/article-admin/article_form.html:112
+msgid "Update Article"
+msgstr "Maqolani yangilash"
+
+#: templates/article-admin/article_form.html:135
+msgid "Select authors"
+msgstr "Mualliflarni tanlang"
+
+#: templates/article-admin/article_form.html:141
+msgid "Select journal issue"
+msgstr "Jurnal sonini tanlang"
+
+#: templates/article-admin/article_form.html:147
+msgid "Select status"
+msgstr "Holatni tanlang"
+
+#: templates/article-admin/article_form.html:163
+msgid "End page cannot be less than start page"
+msgstr "Oxirgi sahifa boshlang‘ich sahifadan kam bo‘lmasligi kerak"
+
+#: templates/article-admin/article_list.html:23
+#: templates/author-admin/author_list.html:25
+msgid "You have total"
+msgstr "Sizda jami"
+
+#: templates/article-admin/article_list.html:23
+msgid "articles"
+msgstr "maqolalar"
+
+#: templates/article-admin/article_list.html:28
+msgid "Add Article"
+msgstr "Maqola qo‘shish"
+
+#: templates/article-admin/article_list.html:45
+msgid "Any Status"
+msgstr "Istalgan holat"
+
+#: templates/article-admin/article_list.html:55
+msgid "Any Category"
+msgstr "Istalgan yo‘nalish"
+
+#: templates/article-admin/article_list.html:65
+msgid "Any Journal Issue"
+msgstr "Istalgan jurnal soni"
+
+#: templates/article-admin/article_list.html:80
+msgid "Search by title or keywords"
+msgstr "Sarlavha yoki kalit so‘zlar bo‘yicha qidirish"
+
+#: templates/article-admin/article_list.html:84
+msgid "Filter"
+msgstr "Filtrlash"
+
+#: templates/article-admin/article_list.html:86
+msgid "Reset"
+msgstr "Qayta o‘rnatish"
+
+#: templates/article-admin/article_list.html:163
+msgid "Reviewed at"
+msgstr "Ko‘rib chiqilgan vaqt"
+
+#: templates/article-admin/article_list.html:171
+msgid "Quick View"
+msgstr "Tezkor ko‘rish"
+
+#: templates/article-admin/article_list.html:194
+msgid "View Details"
+msgstr "Tafsilotlarni ko‘rish"
+
+#: templates/article-admin/article_list.html:273
+#: templates/author-admin/author_list.html:172
+msgid "Page"
+msgstr "Sahifa"
+
+#: templates/article-admin/article_list.html:273
+#: templates/author-admin/author_list.html:172
+msgid "of"
+msgstr "dan"
+
+#: templates/article-admin/article_list.html:320
+msgid "Error"
+msgstr "Xatolik"
+
+#: templates/article-admin/article_list.html:324
+msgid "An error occurred. Please try again."
+msgstr "Xatolik yuz berdi. Iltimos, qayta urinib ko‘ring."
+
+#: templates/auth/login.html:5 templates/auth/login.html:20
+msgid "Sign In"
+msgstr "Kirish"
+
+#: templates/auth/login.html:22
+msgid "Access the JournalAdmin using your username and password."
+msgstr "Foydalanuvchi nomi va parolingiz bilan JournalAdmin-ga kiring."
+
+#: templates/auth/login.html:38
+msgid "Username"
+msgstr "Foydalanuvchi nomi"
+
+#: templates/auth/login.html:41
+msgid "Enter your username"
+msgstr "Foydalanuvchi nomingizni kiriting"
+
+#: templates/auth/login.html:46
+msgid "Password"
+msgstr "Parol"
+
+#: templates/auth/login.html:53
+msgid "Enter your password"
+msgstr "Parolingizni kiriting"
+
+#: templates/auth/login.html:57
+msgid "Sign in"
+msgstr "Kirish"
+
+#: templates/auth/login.html:71
+msgid "Language"
+msgstr "Til"
+
+#: templates/auth/login.html:97 templates/auth/login.html:172
+#: templates/includes/quick-menu.html:72
+msgid "Dark Mode"
+msgstr "Qorong‘i rejim"
+
+#: templates/auth/login.html:160 templates/auth/login.html:170
+#: templates/includes/quick-menu.html:72
+msgid "Light Mode"
+msgstr "Yorug‘ rejim"
+
+#: templates/author-admin/author_confirm_delete.html:4
+#: templates/author-admin/author_confirm_delete.html:14
+msgid "Confirm Delete Author"
+msgstr "Muallifni o‘chirishni tasdiqlang"
+
+#: templates/author-admin/author_confirm_delete.html:16
+msgid "Are you sure you want to delete this author?"
+msgstr "Haqiqatan ham ushbu muallifni o‘chirib tashlamoqchimisiz?"
+
+#: templates/author-admin/author_confirm_delete.html:39
+msgid "Author Details"
+msgstr "Muallif tafsilotlari"
+
+#: templates/author-admin/author_confirm_delete.html:40
+msgid "This action cannot be undone."
+msgstr "Bu amalni qaytarib bo‘lmaydi."
+
+#: templates/author-admin/author_confirm_delete.html:45
+#: templates/category-admin/category_confirm_delete.html:46
+#: templates/journal_admin/journal_confirm_delete.html:46
+msgid "Name"
+msgstr "Ism"
+
+#: templates/author-admin/author_confirm_delete.html:57
+#: templates/author-admin/author_list.html:65
+msgid "Phone"
+msgstr "Telefon"
+
+#: templates/author-admin/author_form.html:7
+#: templates/author-admin/author_form.html:23
+msgid "Edit Author"
+msgstr "Muallifni tahrirlash"
+
+#: templates/author-admin/author_form.html:9
+#: templates/author-admin/author_form.html:25
+#: templates/author-admin/author_form.html:106
+#: templates/author-admin/author_list.html:47
+msgid "Add Author"
+msgstr "Muallif qo‘shish"
+
+#: templates/author-admin/author_form.html:29
+msgid "Please fill in the information below"
+msgstr "Iltimos, quyidagi ma’lumotlarni to‘ldiring"
+
+#: templates/author-admin/author_form.html:104
+msgid "Update Author"
+msgstr "Muallifni yangilash"
+
+#: templates/author-admin/author_form.html:111
+msgid "Delete Author"
+msgstr "Muallifni o‘chirish"
+
+#: templates/author-admin/author_form.html:135
+msgid "Select an option"
+msgstr "Variantni tanlang"
+
+#: templates/author-admin/author_list.html:25
+msgid "authors"
+msgstr "mualliflar"
+
+#: templates/author-admin/author_list.html:40
+msgid "Search by name or email"
+msgstr "Ism yoki elektron pochta orqali qidirish"
+
+#: templates/author-admin/author_list.html:70
+msgid "Actions"
+msgstr "Harakatlar"
+
+#: templates/base_null.html:14
+msgid "Blank"
+msgstr "Bo‘sh"
+
+#: templates/category-admin/category_confirm_delete.html:6
+#: templates/category-admin/category_confirm_delete.html:15
+msgid "Confirm Delete Category"
+msgstr "Yo‘nalishni o‘chirishni tasdiqlang"
+
+#: templates/category-admin/category_confirm_delete.html:17
+msgid "Are you sure you want to delete this category?"
+msgstr "Haqiqatan ham ushbu yo‘nalishni o‘chirib tashlamoqchimisiz?"
+
+#: templates/category-admin/category_confirm_delete.html:34
+msgid "Category Details"
+msgstr "Yo‘nalish tafsilotlari"
+
+#: templates/category-admin/category_confirm_delete.html:38
+#: templates/journal_admin/journal_confirm_delete.html:38
+msgid "Field"
+msgstr "Maydon"
+
+#: templates/category-admin/category_confirm_delete.html:39
+#: templates/journal_admin/journal_confirm_delete.html:39
+msgid "Uzbek"
+msgstr "O‘zbek"
+
+#: templates/category-admin/category_confirm_delete.html:40
+#: templates/journal_admin/journal_confirm_delete.html:40
+msgid "Russian"
+msgstr "Rus"
+
+#: templates/category-admin/category_confirm_delete.html:58
+#: templates/category-admin/category_list.html:53
+msgid "Code"
+msgstr "Kod"
+
+#: templates/category-admin/category_confirm_delete.html:65
+#: templates/journal_admin/issue_confirm_delete.html:57
+#: templates/journal_admin/journal_confirm_delete.html:61
+#: templates/journal_admin/volume_confirm_delete.html:49
+msgid "This deletion will also remove:"
+msgstr "Bu o‘chirish quyidagilarni ham olib tashlaydi:"
+
+#: templates/category-admin/category_confirm_delete.html:90
+#: templates/journal_admin/issue_confirm_delete.html:82
+#: templates/journal_admin/journal_confirm_delete.html:86
+#: templates/journal_admin/volume_confirm_delete.html:74
+msgid "And"
+msgstr "Va"
+
+#: templates/category-admin/category_confirm_delete.html:90
+#: templates/journal_admin/issue_confirm_delete.html:82
+#: templates/journal_admin/journal_confirm_delete.html:86
+#: templates/journal_admin/volume_confirm_delete.html:74
+msgid "more..."
+msgstr "ko‘proq..."
+
+#: templates/category-admin/category_confirm_delete.html:98
+msgid ""
+"Warning: Deleting this category will also delete all related articles. This "
+"action cannot be undone."
+msgstr ""
+"Ogohlantirish: Ushbu yo‘nalishni o‘chirish barcha tegishli maqolalarni ham "
+"o‘chirib tashlaydi. Bu amalni qaytarib bo‘lmaydi."
+
+#: templates/category-admin/category_confirm_delete.html:102
+msgid ""
+"This category has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"Bu yo‘nalishda bog‘liq obyektlar yo‘q. Uni o‘chirish boshqa ma’lumotlarga "
+"ta’sir qilmaydi."
+
+#: templates/category-admin/category_form.html:7
+#: templates/category-admin/category_form.html:18
+msgid "Edit Category"
+msgstr "Yo‘nalishni tahrirlash"
+
+#: templates/category-admin/category_form.html:7
+#: templates/category-admin/category_form.html:20
+#: templates/category-admin/category_form.html:141
+msgid "Create Category"
+msgstr "Yo‘nalish yaratish"
+
+#: templates/category-admin/category_form.html:24
+msgid "Edit existing category"
+msgstr "Mavjud yo‘nalishni tahrirlash"
+
+#: templates/category-admin/category_form.html:24
+msgid "Create a new category"
+msgstr "Yangi yo‘nalish yaratish"
+
+#: templates/category-admin/category_form.html:32
+msgid "Category List"
+msgstr "Yo‘nalishlar ro‘yxati"
+
+#: templates/category-admin/category_form.html:70
+msgid "Category Name"
+msgstr "Yo‘nalish nomi"
+
+#: templates/category-admin/category_form.html:130
+msgid "Category Code"
+msgstr "Yo‘nalish kodi"
+
+#: templates/category-admin/category_form.html:139
+msgid "Update Category"
+msgstr "Yo‘nalishni yangilash"
+
+#: templates/category-admin/category_list.html:6
+#: templates/category-admin/category_list.html:23
+msgid "Categories"
+msgstr "Yo‘nalishlar"
+
+#: templates/category-admin/category_list.html:25
+#, python-format
+msgid "You have total %(count)s categories."
+msgstr "Sizda jami %(count)s ta yo‘nalish bor."
+
+#: templates/category-admin/category_list.html:49
+msgid "Category name"
+msgstr "Yo‘nalish nomi"
+
+#: templates/category-admin/category_list.html:54
+#: templates/journal_admin/journal_list.html:53
+msgid "Created Date"
+msgstr "Yaratilgan sana"
+
+#: templates/category-admin/category_list.html:84
+#: templates/journal_admin/journal_list.html:84
+msgid "Remove"
+msgstr "Olib tashlash"
+
+#: templates/dashboard/dashboard.html:21
+msgid "USAT journal Dashboard"
+msgstr "USAT jurnal boshqaruv paneli"
+
+#: templates/dashboard/dashboard.html:31
+msgid "Export"
+msgstr "Eksport"
+
+#: templates/dashboard/dashboard.html:32
+msgid "Reports"
+msgstr "Hisobotlar"
+
+#: templates/dashboard/dashboard.html:38
+msgid "Add User"
+msgstr "Foydalanuvchi qo‘shish"
+
+#: templates/includes/footer.html:6
+msgid "USAT journal"
+msgstr "USAT jurnali"
+
+#: templates/includes/header.html:15 templates/includes/sidebar.html:11
+msgid "JournalAdmin Logo"
+msgstr "JournalAdmin logotipi"
+
+#: templates/includes/header.html:16 templates/includes/sidebar.html:12
+msgid "JournalAdmin"
+msgstr "JournalAdmin"
+
+#: templates/includes/pagination.html:11
+msgid "Previous"
+msgstr "Oldingi"
+
+#: templates/includes/pagination.html:43
+msgid "Next"
+msgstr "Keyingi"
+
+#: templates/includes/quick-menu.html:67
+msgid "View Profile"
+msgstr "Profilni ko‘rish"
+
+#: templates/includes/quick-menu.html:68
+msgid "Account Setting"
+msgstr "Hisob sozlamalari"
+
+#: templates/includes/quick-menu.html:85 templates/includes/sidebar.html:94
+msgid "Sign out"
+msgstr "Chiqish"
+
+#: templates/includes/quick-menu.html:98
+msgid "Notifications"
+msgstr "Bildirishnomalar"
+
+#: templates/includes/quick-menu.html:99
+msgid "Mark All as Read"
+msgstr "Hammasini o‘qilgan deb belgilash"
+
+#: templates/includes/quick-menu.html:108
+msgid "You have requested to"
+msgstr "Siz so‘rov yubordingiz"
+
+#: templates/includes/quick-menu.html:108
+msgid "Widthdrawl"
+msgstr "Yechib olish"
+
+#: templates/includes/quick-menu.html:109
+#: templates/includes/quick-menu.html:118
+msgid "2 hrs ago"
+msgstr "2 soat oldin"
+
+#: templates/includes/quick-menu.html:117
+msgid "Your"
+msgstr "Sizning"
+
+#: templates/includes/quick-menu.html:117
+msgid "Deposit Order"
+msgstr "Depozit buyurtmangiz"
+
+#: templates/includes/quick-menu.html:117
+msgid "is placed"
+msgstr "joylashtirildi"
+
+#: templates/includes/quick-menu.html:125
+msgid "View All"
+msgstr "Hammasini ko‘rish"
+
+#: templates/includes/sidebar.html:30
+msgid "Dashboards"
+msgstr "Boshqaruv panellari"
+
+#: templates/includes/sidebar.html:35
+msgid "Journal dashboard"
+msgstr "Jurnal boshqaruv paneli"
+
+#: templates/includes/sidebar.html:39
+msgid "Applications"
+msgstr "Ilovalar"
+
+#: templates/includes/sidebar.html:56
+msgid "Journal volumes"
+msgstr "Jurnal jildlari"
+
+#: templates/includes/sidebar.html:62
+msgid "Journal issues"
+msgstr "Jurnal sonlari"
+
+#: templates/includes/sidebar.html:86
+msgid "Authentication"
+msgstr "Autentifikatsiya"
+
+#: templates/journal_admin/issue_confirm_delete.html:5
+#: templates/journal_admin/issue_confirm_delete.html:14
+msgid "Confirm Delete Journal Issue"
+msgstr "Jurnal sonini o‘chirishni tasdiqlang"
+
+#: templates/journal_admin/issue_confirm_delete.html:16
+msgid "Are you sure you want to delete this journal issue?"
+msgstr "Haqiqatan ham ushbu jurnal sonini o‘chirib tashlamoqchimisiz?"
+
+#: templates/journal_admin/issue_confirm_delete.html:30
+msgid "Issue Details"
+msgstr "Son tafsilotlari"
+
+#: templates/journal_admin/issue_confirm_delete.html:51
+#: templates/journal_admin/issue_list.html:67
+msgid "Draft"
+msgstr "Qoralama"
+
+#: templates/journal_admin/issue_confirm_delete.html:90
+msgid ""
+"Warning: Deleting this issue will also delete all related articles. This "
+"action cannot be undone."
+msgstr ""
+"Ogohlantirish: Ushbu sonni o‘chirish barcha tegishli maqolalarni ham "
+"o‘chirib tashlaydi. Bu amalni qaytarib bo‘lmaydi."
+
+#: templates/journal_admin/issue_confirm_delete.html:94
+msgid ""
+"This issue has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"Bu sonda bog‘liq obyektlar yo‘q. Uni o‘chirish boshqa ma’lumotlarga ta’sir "
+"qilmaydi."
+
+#: templates/journal_admin/issue_form.html:6
+#: templates/journal_admin/issue_form.html:18
+msgid "Edit Journal Issue"
+msgstr "Jurnal sonini tahrirlash"
+
+#: templates/journal_admin/issue_form.html:6
+#: templates/journal_admin/issue_form.html:20
+msgid "Create Journal Issue"
+msgstr "Jurnal soni yaratish"
+
+#: templates/journal_admin/issue_form.html:72
+msgid "Update Issue"
+msgstr "Sonni yangilash"
+
+#: templates/journal_admin/issue_form.html:74
+msgid "Create Issue"
+msgstr "Son yaratish"
+
+#: templates/journal_admin/issue_list.html:24
+#, python-format
+msgid "You have total %(count)s journal issues."
+msgstr "Sizda jami %(count)s ta jurnal soni bor."
+
+#: templates/journal_admin/issue_list.html:89
+msgid "No issues found."
+msgstr "Hech qanday son topilmadi."
+
+#: templates/journal_admin/journal_confirm_delete.html:6
+#: templates/journal_admin/journal_confirm_delete.html:15
+msgid "Confirm Delete Journal"
+msgstr "Jurnalni o‘chirishni tasdiqlang"
+
+#: templates/journal_admin/journal_confirm_delete.html:17
+msgid "Are you sure you want to delete this journal?"
+msgstr "Haqiqatan ham ushbu jurnalni o‘chirib tashlamoqchimisiz?"
+
+#: templates/journal_admin/journal_confirm_delete.html:34
+msgid "Journal Details"
+msgstr "Jurnal tafsilotlari"
+
+#: templates/journal_admin/journal_confirm_delete.html:94
+msgid ""
+"Warning: Deleting this journal will also delete all related volumes, issues, "
+"and articles. This action cannot be undone."
+msgstr ""
+"Ogohlantirish: Ushbu jurnalni o‘chirish barcha tegishli jildlar, sonlar va "
+"maqolalarni ham o‘chirib tashlaydi. Bu amalni qaytarib bo‘lmaydi."
+
+#: templates/journal_admin/journal_confirm_delete.html:98
+msgid ""
+"This journal has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"Bu jurnalda bog‘liq obyektlar yo‘q. Uni o‘chirish boshqa ma’lumotlarga "
+"ta’sir qilmaydi."
+
+#: templates/journal_admin/journal_form.html:7
+#: templates/journal_admin/journal_form.html:18
+msgid "Edit Journal"
+msgstr "Jurnalni tahrirlash"
+
+#: templates/journal_admin/journal_form.html:7
+#: templates/journal_admin/journal_form.html:20
+#: templates/journal_admin/journal_form.html:134
+msgid "Create Journal"
+msgstr "Jurnal yaratish"
+
+#: templates/journal_admin/journal_form.html:24
+msgid "Edit existing journal"
+msgstr "Mavjud jurnalni tahrirlash"
+
+#: templates/journal_admin/journal_form.html:24
+msgid "Create a new journal"
+msgstr "Yangi jurnal yaratish"
+
+#: templates/journal_admin/journal_form.html:32
+msgid "Journal List"
+msgstr "Jurnallar ro‘yxati"
+
+#: templates/journal_admin/journal_form.html:132
+msgid "Update Journal"
+msgstr "Jurnalni yangilash"
+
+#: templates/journal_admin/journal_list.html:25
+#, python-format
+msgid "You have total %(count)s journals."
+msgstr "Sizda jami %(count)s ta jurnal bor."
+
+#: templates/journal_admin/journal_list.html:49
+msgid "Journal name"
+msgstr "Jurnal nomi"
+
+#: templates/journal_admin/journal_list.html:54
+msgid "Updated Date"
+msgstr "Yangilangan sana"
+
+#: templates/journal_admin/volume_confirm_delete.html:5
+#: templates/journal_admin/volume_confirm_delete.html:14
+msgid "Confirm Delete Journal Volume"
+msgstr "Jurnal jildini o‘chirishni tasdiqlang"
+
+#: templates/journal_admin/volume_confirm_delete.html:16
+msgid "Are you sure you want to delete this journal volume?"
+msgstr "Haqiqatan ham ushbu jurnal jildini o‘chirib tashlamoqchimisiz?"
+
+#: templates/journal_admin/volume_confirm_delete.html:30
+msgid "Volume Details"
+msgstr "Jild tafsilotlari"
+
+#: templates/journal_admin/volume_confirm_delete.html:82
+msgid ""
+"Warning: Deleting this volume will also delete all related issues and "
+"articles. This action cannot be undone."
+msgstr ""
+"Ogohlantirish: Ushbu jildni o‘chirish barcha tegishli sonlar va maqolalarni "
+"ham o‘chirib tashlaydi. Bu amalni qaytarib bo‘lmaydi."
+
+#: templates/journal_admin/volume_confirm_delete.html:86
+msgid ""
+"This volume has no related objects. Deleting it will not affect any other "
+"data."
+msgstr ""
+"Bu jildda bog‘liq obyektlar yo‘q. Uni o‘chirish boshqa ma’lumotlarga ta’sir "
+"qilmaydi."
+
+#: templates/journal_admin/volume_form.html:6
+#: templates/journal_admin/volume_form.html:18
+msgid "Edit Journal Volume"
+msgstr "Jurnal jildini tahrirlash"
+
+#: templates/journal_admin/volume_form.html:6
+#: templates/journal_admin/volume_form.html:20
+msgid "Create Journal Volume"
+msgstr "Jurnal jildi yaratish"
+
+#: templates/journal_admin/volume_form.html:47
+msgid "Update Volume"
+msgstr "Jildni yangilash"
+
+#: templates/journal_admin/volume_form.html:49
+msgid "Create Volume"
+msgstr "Jild yaratish"
+
+#: templates/journal_admin/volume_list.html:24
+#, python-format
+msgid "You have total %(count)s journal volumes."
+msgstr "Sizda jami %(count)s ta jurnal jildi bor."
+
+#: templates/journal_admin/volume_list.html:77
+msgid "No volumes found."
+msgstr "Hech qanday jild topilmadi."
