@@ -2,8 +2,8 @@ from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework import generics
 
-from .models import Category
-from .serializers import CategorySerializer
+from apps.categories.models import Category
+from apps.categories.serializers import CategorySerializer
 
 
 class CategoryListView(generics.ListAPIView):

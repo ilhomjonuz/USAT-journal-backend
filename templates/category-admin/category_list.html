@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans 'Categories' %}{% endblock %}
+
+{% block content %}
+    <div class="nk-content nk-content-fluid">
+        <div class="container-xl wide-lg">
+            <div class="nk-content-body">
+                <div class="nk-block-head nk-block-head-sm">
+                    <div class="nk-block-between g-3">
+                        <div class="nk-block-head-content">
+                            {% if messages %}
+                                {% for message in messages %}
+                                    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            <h3 class="nk-block-title page-title">{% trans 'Categories' %}</h3>
+                            <div class="nk-block-des text-soft">
+                                <p>{% blocktrans with count=categories|length %}You have total {{ count }} categories.{% endblocktrans %}</p>
+                            </div>
+                        </div>
+                        <div class="nk-block-head-content">
+                            <ul class="nk-block-tools g-3">
+                                <li>
+                                    <a href="{% url 'category_create' %}" class="btn btn-icon btn-primary">
+                                        <em class="icon ni ni-plus"></em>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="nk-block">
+                    <div class="card card-bordered card-stretch">
+                        <div class="card-inner-group">
+                            <div class="card-inner p-0">
+                                <table class="table table-tranx">
+                                    <thead>
+                                        <tr class="tb-tnx-head">
+                                            <th class="tb-tnx-id"><span class="">#</span></th>
+                                            <th class="tb-tnx-info">
+                                                <span class="tb-tnx-desc d-none d-sm-inline-block">
+                                                    <span>{% trans 'Category name' %}</span>
+                                                </span>
+                                                <span class="tb-tnx-date d-md-inline-block d-none">
+                                                    <span class="d-none d-md-block">
+                                                        <span>{% trans 'Code' %}</span>
+                                                        <span>{% trans 'Created Date' %}</span>
+                                                    </span>
+                                                </span>
+                                            </th>
+                                            <th class="tb-tnx-action">
+                                                <span>&nbsp;</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for category in categories %}
+                                        <tr class="tb-tnx-item">
+                                            <td class="tb-tnx-id">
+                                                <span>{{ category.id }}</span>
+                                            </td>
+                                            <td class="tb-tnx-info">
+                                                <div class="tb-tnx-desc">
+                                                    <a href="{% url 'category_update' category.id %}"><span class="title">{{ category.name }}</span></a>
+                                                </div>
+                                                <div class="tb-tnx-date">
+                                                    <span class="date">{{ category.code }}</span>
+                                                    <span class="date">{{ category.created_at|date:"d-m-Y" }}</span>
+                                                </div>
+                                            </td>
+                                            <td class="tb-tnx-action">
+                                                <div class="dropdown">
+                                                    <a class="text-soft dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
+                                                    <div class="dropdown-menu dropdown-menu-end dropdown-menu-xs">
+                                                        <ul class="link-list-plain">
+                                                            <li><a href="{% url 'category_update' category.id %}">{% trans 'Edit' %}</a></li>
+                                                            <li><a href="{% url 'category_delete' category.id %}">{% trans 'Remove' %}</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
