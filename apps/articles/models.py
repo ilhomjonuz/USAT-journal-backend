@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import redirect
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import FileExtensionValidator, MinValueValidator
@@ -17,7 +18,8 @@ class Article(models.Model):
     category = models.ForeignKey(
         'categories.Category',
         on_delete=models.PROTECT,
-        verbose_name=_("Direction")
+        verbose_name=_("Direction"),
+        related_name='articles'
     )
     title = models.CharField(max_length=500, verbose_name=_("Title"))
     slug = models.SlugField(verbose_name=_("Slug"), unique=True)
@@ -136,6 +138,9 @@ class Article(models.Model):
         if not self.slug:
             self.slug = self.generate_unique_slug()
         super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return redirect('article_detail', kwargs={'pk': self.pk})
 
     def generate_unique_slug(self):
         slug = slugify(self.title)
