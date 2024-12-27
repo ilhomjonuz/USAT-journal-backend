@@ -24,4 +24,7 @@ class User(AbstractUser):
         verbose_name_plural = _("Users")
 
     def get_avatar(self):
-        return f"{self.first_name[0]}{self.last_name[0]}"
+        first_initial = self.first_name[0] if self.first_name else "?"
+        last_initial = self.last_name[0] if self.last_name else "?"
+        return f"{first_initial}{last_initial}"
+
