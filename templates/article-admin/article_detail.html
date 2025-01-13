@@ -142,6 +142,7 @@
                                     </div>
                                     <div class="nk-files nk-files-view-list">
 
+                                        {% if object.anti_plagiarism_certificate %}
                                         <div class="nk-file-item">
                                             <div class="nk-file-info">
                                                 <div class="nk-file-title">
@@ -164,6 +165,7 @@
                                                 </a>
                                             </div>
                                         </div>
+                                        {% endif %}
 
                                         {% if object.original_file %}
                                         <div class="nk-file-item">
