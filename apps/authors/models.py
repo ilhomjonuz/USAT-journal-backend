@@ -14,6 +14,7 @@ DEGREE_CHOICES = [
 ACADEMIC_TITLE_CHOICES = [
     ('DOCENT', _('Docent')),
     ('PROFESSOR', _('Professor')),
+    ('ACADEMIC', _('Academic'))
 ]
 
 class Author(models.Model):

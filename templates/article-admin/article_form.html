@@ -67,29 +67,19 @@
                                     {{ form.annotation|as_crispy_field }}
                                 </div>
                                 <div class="col-12">
+                                    {{ form.references|as_crispy_field }}
+                                </div>
+                                <div class="col-12">
                                     {{ form.authors|as_crispy_field }}
                                 </div>
                                 <div class="col-md-12">
+                                    {{ form.anti_plagiarism_certificate|as_crispy_field }}
+                                </div>
+                                <div class="col-md-12">
                                     {{ form.original_file|as_crispy_field }}
-                                    {% if object and object.original_file %}
-                                    <div class="form-note">
-                                        {% trans "Current file" %}:
-                                        <a href="{% url 'article_download_file' object.id 'original' %}">
-                                            {{ object.original_file.name|cut:"article_submissions/" }}
-                                        </a>
-                                    </div>
-                                    {% endif %}
                                 </div>
                                 <div class="col-md-12">
                                     {{ form.revised_file|as_crispy_field }}
-                                    {% if object and object.revised_file %}
-                                    <div class="form-note">
-                                        {% trans "Current file" %}:
-                                        <a href="{% url 'article_download_file' object.id 'revised' %}">
-                                            {{ object.revised_file.name|cut:"article_revisions/" }}
-                                        </a>
-                                    </div>
-                                    {% endif %}
                                 </div>
                                 <div class="col-md-6">
                                     {{ form.start_page|as_crispy_field }}

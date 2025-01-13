@@ -28,10 +28,19 @@ class Article(models.Model):
         help_text=_("Enter keywords separated by commas")
     )
     annotation = models.TextField(verbose_name=_("Annotation"))
+    references = models.TextField(verbose_name=_("List of references"), null=True, blank=True)
     authors = models.ManyToManyField(
         'authors.Author',
         related_name='articles',
         verbose_name=_("Authors")
+    )
+    anti_plagiarism_certificate = models.FileField(
+        upload_to='anti_plagiarism_certificates/',
+        verbose_name=_("Anti-Plagiarism Certificate"),
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
+        help_text=_("Accepted file types: .pdf"),
+        null=True,
+        blank=True
     )
     original_file = models.FileField(
         upload_to='article_submissions/',

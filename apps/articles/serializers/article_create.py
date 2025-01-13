@@ -19,13 +19,14 @@ class AuthorSerializer(serializers.ModelSerializer):
 class ArticleSubmissionSerializer(serializers.ModelSerializer):
     direction_id = serializers.IntegerField(write_only=True)
     authors_data = serializers.JSONField(write_only=True)
+    anti_plagiarism_certificate = serializers.FileField(required=True, help_text='Accepted file types: .pdf')
     original_file = serializers.FileField()
 
     class Meta:
         model = Article
         fields = [
-            'direction_id', 'title', 'keywords', 'annotation',
-            'authors_data', 'original_file'
+            'direction_id', 'title', 'keywords', 'annotation', 'references',
+            'authors_data', 'anti_plagiarism_certificate', 'original_file'
         ]
 
     def validate_direction_id(self, value):

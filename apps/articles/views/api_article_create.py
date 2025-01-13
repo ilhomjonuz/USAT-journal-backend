@@ -32,6 +32,8 @@ class ArticleSubmissionView(APIView):
                 'title': openapi.Schema(type=openapi.TYPE_STRING, description='Article title'),
                 'keywords': openapi.Schema(type=openapi.TYPE_STRING, description='Keywords separated by commas'),
                 'annotation': openapi.Schema(type=openapi.TYPE_STRING, description='Article annotation'),
+                'references': openapi.Schema(type=openapi.TYPE_STRING, description='List of references'),
+                'anti_plagiarism_certificate': openapi.Schema(type=openapi.TYPE_FILE, description='Anti-Plagiarism Certificate'),
                 'original_file': openapi.Schema(type=openapi.TYPE_FILE, description='Original article file'),
                 'authors_data': openapi.Schema(
                     type=openapi.TYPE_ARRAY,
@@ -47,7 +49,7 @@ class ArticleSubmissionView(APIView):
                             'phone': openapi.Schema(type=openapi.TYPE_STRING),
                             'messenger_contact': openapi.Schema(type=openapi.TYPE_STRING),
                             'academic_degree': openapi.Schema(type=openapi.TYPE_STRING, enum=['PHD_ECON', 'PHD_PED', 'PHD_TECH', 'DSC_ECON', 'DSC_PED', 'DSC_TECH']),
-                            'academic_title': openapi.Schema(type=openapi.TYPE_STRING, enum=['DOCENT', 'PROFESSOR']),
+                            'academic_title': openapi.Schema(type=openapi.TYPE_STRING, enum=['DOCENT', 'PROFESSOR', 'ACADEMIC']),
                             'orcid': openapi.Schema(type=openapi.TYPE_STRING),
                         }
                     ),

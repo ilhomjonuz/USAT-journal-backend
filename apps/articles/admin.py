@@ -10,10 +10,10 @@ class ArticleAdmin(admin.ModelAdmin):
     filter_horizontal = ('authors',)
     fieldsets = (
         (_('Article Information'), {
-            'fields': ('title', 'category', 'keywords', 'annotation', 'authors')
+            'fields': ('title', 'category', 'keywords', 'annotation', 'references', 'authors')
         }),
         (_('Files'), {
-            'fields': ('original_file', 'revised_file')
+            'fields': ('anti_plagiarism_certificate', 'original_file', 'revised_file')
         }),
         (_('Page Information'), {
             'fields': ('start_page', 'end_page')
