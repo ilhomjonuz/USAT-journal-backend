@@ -33,11 +33,15 @@ class Author(models.Model):
     academic_degree = models.CharField(
         max_length=20,
         choices=DEGREE_CHOICES,
+        null=True,
+        blank=True,
         verbose_name=_("Academic Degree")
     )
     academic_title = models.CharField(
         max_length = 20,
         choices = ACADEMIC_TITLE_CHOICES,
+        null=True,
+        blank=True,
         verbose_name = _("Academic Title")
     )
     orcid = models.CharField(
