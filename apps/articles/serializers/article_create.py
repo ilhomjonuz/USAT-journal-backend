@@ -10,8 +10,8 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = [
-            'first_name', 'last_name', 'country', 'city', 'workplace',
-            'email', 'phone', 'messenger_contact', 'academic_degree',
+            'first_name', 'last_name', 'country', 'city', 'workplace', 'level',
+            'email', 'phone', 'telegram_contact', 'whatsapp_contact', 'academic_degree',
             'academic_title', 'orcid'
         ]
 

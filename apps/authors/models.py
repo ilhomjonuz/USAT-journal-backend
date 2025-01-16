@@ -23,12 +23,20 @@ class Author(models.Model):
     country = models.CharField(max_length=100, verbose_name=_("Country"))
     city = models.CharField(max_length=100, verbose_name=_("City"))
     workplace = models.CharField(max_length=200, verbose_name=_("Workplace"))
+    level = models.CharField(max_length=20, null=True, blank=True, verbose_name=_("Position or level of education"))
     email = models.EmailField(verbose_name=_("Email"), unique=True)
     phone = models.CharField(max_length=20, verbose_name=_("Phone Number"))
-    messenger_contact = models.CharField(
+    telegram_contact = models.CharField(
         max_length=100,
-        verbose_name=_("Telegram/WhatsApp Contact"),
-        help_text=_("Telegram username or WhatsApp number")
+        null=True, blank=True,
+        verbose_name=_("Telegram Contact"),
+        help_text=_("Telegram username")
+    )
+    whatsapp_contact = models.CharField(
+        max_length=100,
+        null=True, blank=True,
+        verbose_name=_("WhatsApp Contact"),
+        help_text=_("WhatsApp number")
     )
     academic_degree = models.CharField(
         max_length=20,

@@ -13,10 +13,10 @@ class AuthorAdmin(admin.ModelAdmin):
             'fields': ('first_name', 'last_name', 'country', 'city')
         }),
         (_('Contact Information'), {
-            'fields': ('email', 'phone', 'messenger_contact')
+            'fields': ('email', 'phone', 'telegram_contact', 'whatsapp_contact')
         }),
         (_('Academic Information'), {
-            'fields': ('workplace', 'academic_degree', 'academic_title', 'orcid')
+            'fields': ('workplace', 'level', 'academic_degree', 'academic_title', 'orcid')
         }),
     )
 
