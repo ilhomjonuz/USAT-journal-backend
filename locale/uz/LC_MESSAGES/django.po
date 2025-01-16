@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-13 12:00+0500\n"
+"POT-Creation-Date: 2025-01-16 11:59+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,7 +26,7 @@ msgstr "Hisob"
 msgid "Accounts"
 msgstr "Hisoblar"
 
-#: apps/accounts/models.py:9 apps/authors/apps.py:8 apps/authors/models.py:52
+#: apps/accounts/models.py:9 apps/authors/apps.py:8 apps/authors/models.py:66
 #: templates/author-admin/author_list.html:63
 msgid "Author"
 msgstr "Muallif"
@@ -184,7 +184,7 @@ msgstr "Annotatsiya"
 msgid "List of references"
 msgstr "Adabiyotlar ro‘yxati"
 
-#: apps/articles/models.py:35 apps/authors/apps.py:9 apps/authors/models.py:53
+#: apps/articles/models.py:35 apps/authors/apps.py:9 apps/authors/models.py:67
 #: templates/article-admin/article_confirm_delete.html:53
 #: templates/article-admin/article_detail.html:82
 #: templates/author-admin/author_list.html:5
@@ -346,11 +346,11 @@ msgstr "Kerakli parametrlar etishmayapti"
 msgid "Invalid action"
 msgstr "Yaroqsiz harakat"
 
-#: apps/articles/views/api_article_create.py:101
+#: apps/articles/views/api_article_create.py:103
 msgid "Media directory is not writable: "
 msgstr "Media katalogga yozish mumkin emas: "
 
-#: apps/articles/views/api_article_create.py:116
+#: apps/articles/views/api_article_create.py:118
 msgid "Article submitted successfully"
 msgstr "Maqola muvaffaqiyatli yuborildi"
 
@@ -437,44 +437,56 @@ msgid "Workplace"
 msgstr "Ish joyi"
 
 #: apps/authors/models.py:26
+msgid "Position or level of education"
+msgstr "Lavozim yoki ta’lim bosqichi"
+
+#: apps/authors/models.py:27
 #: templates/author-admin/author_confirm_delete.html:51
 #: templates/author-admin/author_list.html:64
 msgid "Email"
 msgstr "Elektron pochta"
 
-#: apps/authors/models.py:27
+#: apps/authors/models.py:28
 msgid "Phone Number"
 msgstr "Telefon raqami"
 
-#: apps/authors/models.py:30
-msgid "Telegram/WhatsApp Contact"
-msgstr "Telegram/WhatsApp kontakti"
+#: apps/authors/models.py:32
+msgid "Telegram Contact"
+msgstr "Telegram kontakti"
 
-#: apps/authors/models.py:31
-msgid "Telegram username or WhatsApp number"
-msgstr "Telegram foydalanuvchi nomi yoki WhatsApp raqami"
+#: apps/authors/models.py:33
+msgid "Telegram username"
+msgstr "Telegram foydalanuvchi nomi"
 
-#: apps/authors/models.py:36
+#: apps/authors/models.py:38
+msgid "WhatsApp Contact"
+msgstr "WhatsApp kontakti"
+
+#: apps/authors/models.py:39
+msgid "WhatsApp number"
+msgstr "WhatsApp raqami"
+
+#: apps/authors/models.py:46
 #: templates/author-admin/author_confirm_delete.html:69
 #: templates/author-admin/author_list.html:66
 msgid "Academic Degree"
 msgstr "Ilmiy daraja"
 
-#: apps/authors/models.py:41
+#: apps/authors/models.py:53
 #: templates/author-admin/author_confirm_delete.html:75
 #: templates/author-admin/author_list.html:67
 msgid "Academic Title"
 msgstr "Ilmiy unvon"
 
-#: apps/authors/models.py:45
+#: apps/authors/models.py:57
 msgid "ORCID Number"
 msgstr "ORCID raqami"
 
-#: apps/authors/models.py:47
+#: apps/authors/models.py:59
 msgid "ORCID identifier"
 msgstr "ORCID identifikatori"
 
-#: apps/authors/models.py:49 apps/categories/models.py:9
+#: apps/authors/models.py:61 apps/categories/models.py:9
 #: apps/journals/models.py:10 apps/journals/models.py:27
 #: apps/journals/models.py:60
 msgid "Created At"
@@ -738,7 +750,7 @@ msgstr "O‘chirishni tasdiqlang"
 #: templates/article-admin/article_confirm_delete.html:79
 #: templates/article-admin/article_form.html:107
 #: templates/author-admin/author_confirm_delete.html:88
-#: templates/author-admin/author_form.html:115
+#: templates/author-admin/author_form.html:121
 #: templates/category-admin/category_confirm_delete.html:110
 #: templates/journal_admin/issue_confirm_delete.html:102
 #: templates/journal_admin/journal_confirm_delete.html:106
@@ -1014,7 +1026,7 @@ msgstr "Muallifni tahrirlash"
 
 #: templates/author-admin/author_form.html:9
 #: templates/author-admin/author_form.html:25
-#: templates/author-admin/author_form.html:106
+#: templates/author-admin/author_form.html:112
 #: templates/author-admin/author_list.html:47
 msgid "Add Author"
 msgstr "Muallif qo‘shish"
@@ -1023,15 +1035,15 @@ msgstr "Muallif qo‘shish"
 msgid "Please fill in the information below"
 msgstr "Iltimos, quyidagi ma’lumotlarni to‘ldiring"
 
-#: templates/author-admin/author_form.html:104
+#: templates/author-admin/author_form.html:110
 msgid "Update Author"
 msgstr "Muallifni yangilash"
 
-#: templates/author-admin/author_form.html:111
+#: templates/author-admin/author_form.html:117
 msgid "Delete Author"
 msgstr "Muallifni o‘chirish"
 
-#: templates/author-admin/author_form.html:135
+#: templates/author-admin/author_form.html:141
 msgid "Select an option"
 msgstr "Variantni tanlang"
 
