@@ -8,11 +8,11 @@ from django.utils import timezone
 
 class Article(models.Model):
     STATUS_CHOICES = [
-        ('SUBMITTED', _('Submitted')),
-        ('UNDER_REVIEW', _('Under Review')),
-        ('ACCEPTED', _('Accepted')),
-        ('REJECTED', _('Rejected')),
-        ('PUBLISHED', _('Published')),
+        ('SUBMITTED', _('Jarayonda')),           # In Process/Submitted
+        ('REVISION_REQUESTED', _('Tahrir uchun qaytarilgan')),  # Returned for revision
+        ('ACCEPTED', _('Qabul qilingan')),      # Accepted
+        ('REJECTED', _('Rad etilgan')),         # Rejected
+        ('PUBLISHED', _('Chop etilgan')),       # Published
     ]
 
     category = models.ForeignKey(
@@ -98,11 +98,11 @@ class Article(models.Model):
         auto_now_add=True,
         verbose_name=_("Submission Date")
     )
-    review_date = models.DateTimeField(
+    revision_requested_date = models.DateTimeField(
         null=True,
         blank=True,
-        verbose_name=_("Review Date"),
-        help_text=_("Date when the article was sent for review")
+        verbose_name=_("Tahrir so'ralgan sana"),
+        help_text=_("Article returned for editing date")
     )
     acceptance_date = models.DateTimeField(
         null=True,
@@ -188,10 +188,10 @@ class Article(models.Model):
         self.downloads_count += 1
         self.save(update_fields=['downloads_count'])
 
-    def set_under_review(self):
+    def set_revision_requested(self):
         """Mark article as under review"""
-        self.status = 'UNDER_REVIEW'
-        self.review_date = timezone.now()
+        self.status = 'REVISION_REQUESTED'
+        self.revision_requested_date = timezone.now()
         self.save(update_fields=['status', 'review_date'])
 
     def accept(self):

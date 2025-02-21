@@ -19,10 +19,12 @@ class ArticleAdmin(admin.ModelAdmin):
             'fields': ('start_page', 'end_page')
         }),
         (_('Statistics'), {
-            'fields': ('views_count', 'downloads_count')
+            'fields': ('views_count', 'downloads_count'),
+            'classes': ('collapse',)
         }),
         (_('Status and Dates'), {
-            'fields': ('status', 'submission_date', 'review_date', 'acceptance_date', 'publication_date', 'last_updated')
+            'fields': ('status', 'submission_date', 'revision_requested_date', 'acceptance_date', 'publication_date', 'last_updated'),
+            'classes': ('collapse',)
         }),
         (_('Journal'), {
             'fields': ('journal_issue',)

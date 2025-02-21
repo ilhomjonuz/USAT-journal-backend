@@ -90,13 +90,13 @@ class ArticleDetailView(LoginRequiredMixin, DetailView):
     def post(self, request, *args, **kwargs):
         article = self.get_object()
         action = request.POST.get('action')
-        if action == 'set_under_review':
-            article.set_under_review()
-        elif action == 'accept':
+        if action == 'REVISION_REQUESTED':
+            article.set_revision_requested()
+        elif action == 'ACCEPTED':
             article.accept()
-        elif action == 'reject':
+        elif action == 'REJECTED':
             article.reject()
-        elif action == 'publish':
+        elif action == 'PUBLISHED':
             article.publish()
         messages.success(request, _("Article status changed to %(status)s") % {'status': article.get_status_display()})
         return redirect('article_detail', pk=article.pk)
