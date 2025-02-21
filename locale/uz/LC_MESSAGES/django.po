@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-21 10:50+0500\n"
+"POT-Creation-Date: 2025-02-21 16:09+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -263,6 +263,7 @@ msgstr "Maqola necha marta yuklab olingani"
 #: .\templates\article-admin\article_confirm_delete.html:57
 #: .\templates\article-admin\article_detail.html:98
 #: .\templates\article-admin\article_detail.html:262
+#: .\templates\article-admin\article_list.html:45
 #: .\templates\article-admin\article_list.html:111
 #: .\templates\journal_admin\issue_confirm_delete.html:50
 #: .\templates\journal_admin\issue_list.html:46
@@ -306,6 +307,7 @@ msgstr "Oxirgi yangilanish"
 
 #: .\apps\articles\models.py:130 .\apps\journals\models.py:67
 #: .\templates\article-admin\article_detail.html:290
+#: .\templates\article-admin\article_list.html:65
 #: .\templates\article-admin\article_list.html:108
 msgid "Journal Issue"
 msgstr "Jurnal soni"
@@ -732,6 +734,7 @@ msgstr "Maqola haqida ma’lumot"
 
 #: .\templates\article-admin\article_confirm_delete.html:49
 #: .\templates\article-admin\article_detail.html:74
+#: .\templates\article-admin\article_list.html:55
 #: .\templates\article-admin\article_list.html:107
 msgid "Category"
 msgstr "Yo‘nalish"
@@ -904,18 +907,6 @@ msgstr "maqolalar"
 #: .\templates\article-admin\article_list.html:28
 msgid "Add Article"
 msgstr "Maqola qo‘shish"
-
-#: .\templates\article-admin\article_list.html:45
-msgid "Any Status"
-msgstr "Istalgan holat"
-
-#: .\templates\article-admin\article_list.html:55
-msgid "Any Category"
-msgstr "Istalgan yo‘nalish"
-
-#: .\templates\article-admin\article_list.html:65
-msgid "Any Journal Issue"
-msgstr "Istalgan jurnal soni"
 
 #: .\templates\article-admin\article_list.html:80
 msgid "Search by title or keywords"

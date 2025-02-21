@@ -42,7 +42,7 @@
                                             <div class="form-inline flex-nowrap gx-3">
                                                 <div class="form-wrap w-150px">
                                                     <select name="status" class="form-select js-select2" data-search="off">
-                                                        <option value="">{% trans "Any Status" %}</option>
+                                                        <option value="">{% trans "Status" %}</option>
                                                         {% for status, label in article_status_choices %}
                                                             <option value="{{ status }}" {% if request.GET.status == status %}selected{% endif %}>
                                                                 {{ label }}
@@ -52,7 +52,7 @@
                                                 </div>
                                                 <div class="form-wrap w-150px">
                                                     <select name="category" class="form-select js-select2" data-search="off">
-                                                        <option value="">{% trans "Any Category" %}</option>
+                                                        <option value="">{% trans "Category" %}</option>
                                                         {% for category in categories %}
                                                             <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"i" %}selected{% endif %}>
                                                                 {{ category.name }}
@@ -62,7 +62,7 @@
                                                 </div>
                                                 <div class="form-wrap w-150px">
                                                     <select name="journal_issue" class="form-select js-select2" data-search="on">
-                                                        <option value="">{% trans "Any Journal Issue" %}</option>
+                                                        <option value="">{% trans "Journal Issue" %}</option>
                                                         {% for issue in journal_issues %}
                                                             <option value="{{ issue.id }}" {% if request.GET.journal_issue == issue.id|stringformat:"i" %}selected{% endif %}>
                                                                 {{ issue }}
