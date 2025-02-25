@@ -1,5 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+
+
+User = get_user_model()
 
 
 DEGREE_CHOICES = [
@@ -18,11 +22,19 @@ ACADEMIC_TITLE_CHOICES = [
 ]
 
 class Author(models.Model):
-    first_name = models.CharField(max_length=100, verbose_name=_("First Name"))
-    last_name = models.CharField(max_length=100, verbose_name=_("Last Name"))
-    country = models.CharField(max_length=100, verbose_name=_("Country"))
-    city = models.CharField(max_length=100, verbose_name=_("City"))
-    workplace = models.CharField(max_length=200, verbose_name=_("Workplace"))
+    user = models.OneToOneField(
+        User,
+        on_delete=models.SET_NULL,
+        related_name='profile',
+        null=True,
+        blank=True,
+        verbose_name=_('User')
+    )
+    first_name = models.CharField(max_length=100, verbose_name=_("First Name"), blank=True)
+    last_name = models.CharField(max_length=100, verbose_name=_("Last Name"), blank=True)
+    country = models.CharField(max_length=100, verbose_name=_("Country"), blank=True)
+    city = models.CharField(max_length=100, verbose_name=_("City"), blank=True)
+    workplace = models.CharField(max_length=200, verbose_name=_("Workplace"), blank=True)
     level = models.CharField(max_length=20, null=True, blank=True, verbose_name=_("Position or level of education"))
     email = models.EmailField(verbose_name=_("Email"), unique=True)
     phone = models.CharField(max_length=20, verbose_name=_("Phone Number"))
