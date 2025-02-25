@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'crispy_forms',
     'crispy_bootstrap4',
@@ -59,6 +60,10 @@ INSTALLED_APPS = [
     'apps.DashboardConfig',
     'apps.JournalsConfig',
     'apps.ReviewsConfig',
+]
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
 ]
 
 MIDDLEWARE = [
@@ -263,3 +268,14 @@ LOGOUT_REDIRECT_URL = 'login'
 # File upload
 DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50 MB
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Email settings
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'your-email@example.com'
+EMAIL_HOST_PASSWORD = 'your-password'
+EMAIL_FROM = EMAIL_HOST_USER

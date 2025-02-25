@@ -31,6 +31,7 @@ urlpatterns = [
     path('api/docs/redoc/', login_required(schema_view.with_ui('redoc', cache_timeout=0)), name='schema-redoc'),
     path('api-auth/', include('rest_framework.urls')),
 
+    path('api/v1/auth/', include('apps.accounts.urls.api_auth_urls')),
     path('api/v1/journals/', include('apps.journals.urls.api_urls')),
     path('api/v1/articles/', include('apps.articles.urls.api_urls')),
     path('api/v1/authors/', include('apps.authors.urls.api_urls')),
