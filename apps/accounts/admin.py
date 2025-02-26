@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
+from django.utils.translation import gettext_lazy as _
 from .models import User
 
 class CustomUserAdmin(UserAdmin):
@@ -9,17 +10,17 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ['username', 'email']
     ordering = ['username']
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Important dates', {'fields': ('last_login', 'date_joined')}),
-        ('Role', {'fields': ('role', 'prefers_dark_mode')}),
+        (None, {'fields': ('username', 'email', 'is_email_verified', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (_('Role'), {'fields': ('role', 'prefers_dark_mode')}),
     )
     add_fieldsets = (
-        (None, {'fields': ('username', 'password1', 'password2')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
-        ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
-        ('Role', {'fields': ('role', 'prefers_dark_mode')}),
+        (None, {'fields': ('username', 'email', 'is_email_verified', 'password1', 'password2')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name')}),
+        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
+        (_('Role'), {'fields': ('role', 'prefers_dark_mode')}),
     )
     filter_horizontal = ('groups', 'user_permissions')
 
