@@ -5,13 +5,6 @@ from .models import User
 
 
 @receiver(post_save, sender=User)
-def create_author_profile(sender, instance, created, **kwargs):
-    """Create an Author profile only when a new User created."""
-    if created:
-        Author.objects.create(user=instance, email=instance.email)
-
-
-@receiver(post_save, sender=User)
 def sync_user_with_author(sender, instance, **kwargs):
     """User modeli o'zgartirilganda Author modelini ham yangilaydi."""
     try:
