@@ -40,9 +40,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         verification_code = ''.join(random.choices(string.digits, k=6))
         user.set_verification_code(verification_code)
 
-        # Create empty author profile
-        Author.objects.create(user=user, email=user.email)
-
         return user
 
 

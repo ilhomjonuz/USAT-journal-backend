@@ -7,3 +7,6 @@ class AuthorsConfig(AppConfig):
     name = 'apps.authors'
     verbose_name = _("Author")
     verbose_name_plural = _("Authors")
+
+    def ready(self):
+        import apps.authors.signals
