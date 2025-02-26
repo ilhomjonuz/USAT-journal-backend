@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.utils.translation import gettext_lazy as _
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
@@ -31,18 +32,18 @@ class EmailOrUsernameAuthenticationForm(AuthenticationForm):
         username_or_email = self.cleaned_data.get('username') or self.data.get('username')
         password = self.cleaned_data.get('password') or self.data.get('password')
 
-        print(f"Attempting authentication with: {username_or_email}")  # Debug
-
         if not username_or_email or not password:
             raise ValidationError(_("Both username/email and password are required."), code='required')
 
-        user = None
+        # Email yoki username ekanligini aniqlash
+        try:
+            validate_email(username_or_email)
+            is_email = True
+        except ValidationError:
+            is_email = False
 
-        # Check if input is an email
-        if '@' in username_or_email:
-            user = User.objects.filter(email=username_or_email).first()
-        else:
-            user = User.objects.filter(username=username_or_email).first()
+        # Foydalanuvchini topish
+        user = User.objects.filter(email=username_or_email).first() if is_email else User.objects.filter(username=username_or_email).first()
 
         if user:
             self.user_cache = authenticate(self.request, username=user.username, password=password)
