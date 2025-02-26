@@ -40,6 +40,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         verification_code = ''.join(random.choices(string.digits, k=6))
         user.set_verification_code(verification_code)
 
+        # 2. Author yaratishdan oldin yana bir bor tekshirish
+        author, created = Author.objects.get_or_create(user=user, email=user.email)
+
         return user
 
 

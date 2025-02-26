@@ -41,6 +41,13 @@ This project provides an API for managing journals, articles, authors, and direc
    # Python Settings
    export PYTHONDONTWRITEBYTECODE=1
    export PYTHONUNBUFFERED=1
+   
+   # Email backend Parameters
+   export EMAIL_HOST=<your-mail-host>  # example smtp.gmail.com
+   export EMAIL_PORT=<port>  # example 587
+   export EMAIL_USE_TLS=True
+   export EMAIL_HOST_USER=<your-email>  # example example@gmail.com
+   export EMAIL_HOST_PASSWORD=<your-email-password>
    ```
 
 3. Generate a `SECRET_KEY` for Django:
