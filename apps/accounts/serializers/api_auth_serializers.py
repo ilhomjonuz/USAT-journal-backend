@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model, authenticate
-from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError as DjangoValidationError
+from django.core.validators import validate_email
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 import random
@@ -91,22 +92,22 @@ class LoginSerializer(serializers.Serializer):
         email_or_username = attrs.get('email_or_username')
         password = attrs.get('password')
 
-        # Check if input is email or username
-        if '@' in email_or_username:
-            # Try to authenticate directly with email since USERNAME_FIELD is 'email'
-            user = authenticate(email=email_or_username, password=password)
-            if not user:
-                raise serializers.ValidationError(
-                    {"email_or_username": _("No user found with this email or invalid password.")})
-        else:
-            # Try to find the user by username first, then authenticate with their email
+        # Determine whether the input is an email or username
+        try:
+            validate_email(email_or_username)
+            email = email_or_username  # Valid email
+        except DjangoValidationError:
+            # If it's not an email, assume it's a username and fetch the corresponding email
             try:
-                user_obj = User.objects.get(username=email_or_username)
-                user = authenticate(email=user_obj.email, password=password)
-                if not user:
-                    raise serializers.ValidationError({"password": _("Invalid password.")})
+                user = User.objects.get(username=email_or_username)
+                email = user.email
             except User.DoesNotExist:
                 raise serializers.ValidationError({"email_or_username": _("No user found with this username.")})
+
+        # Authenticate using the determined email
+        user = authenticate(email=email, password=password)
+        if not user:
+            raise serializers.ValidationError({"password": _("Invalid credentials.")})
 
         if not user.is_active:
             raise serializers.ValidationError({"email_or_username": _("User account is disabled.")})
