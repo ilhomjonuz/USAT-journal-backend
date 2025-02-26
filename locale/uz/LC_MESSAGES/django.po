@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-21 16:09+0500\n"
+"POT-Creation-Date: 2025-02-26 17:29+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: .\apps\accounts\admin.py:14 .\apps\accounts\admin.py:21
+msgid "Personal info"
+msgstr "Shaxsiy ma’lumotlar"
+
+#: .\apps\accounts\admin.py:15 .\apps\accounts\admin.py:22
+msgid "Permissions"
+msgstr "Ruxsatlar"
+
+#: .\apps\accounts\admin.py:16
+msgid "Important dates"
+msgstr "Muhim sanalar"
+
+#: .\apps\accounts\admin.py:17 .\apps\accounts\admin.py:23
+#: .\apps\accounts\models.py:27
+msgid "Role"
+msgstr "Rol"
+
 #: .\apps\accounts\apps.py:8
 msgid "Account"
 msgstr "Hisob"
@@ -26,57 +43,274 @@ msgstr "Hisob"
 msgid "Accounts"
 msgstr "Hisoblar"
 
-#: .\apps\accounts\models.py:9 .\apps\authors\apps.py:8
-#: .\apps\authors\models.py:66 .\templates\author-admin\author_list.html:63
+#: .\apps\accounts\forms.py:16 .\templates\auth\login.html:41
+msgid "Username or Email"
+msgstr "Foydalanuvchi nomi yoki Email"
+
+#: .\apps\accounts\forms.py:19 .\templates\auth\login.html:44
+msgid "Enter your username or email"
+msgstr "Foydalanuvchi nomi yoki emailingizni kiriting"
+
+#: .\apps\accounts\forms.py:24 .\templates\auth\login.html:49
+msgid "Password"
+msgstr "Parol"
+
+#: .\apps\accounts\forms.py:27 .\templates\auth\login.html:56
+msgid "Enter your password"
+msgstr "Parolingizni kiriting"
+
+#: .\apps\accounts\forms.py:36
+msgid "Both username/email and password are required."
+msgstr "Foydalanuvchi nomi/email va parol ikkala maydon ham talab qilinadi."
+
+#: .\apps\accounts\forms.py:55
+msgid ""
+"Please enter a correct username/email and password. Note that both fields "
+"may be case-sensitive."
+msgstr "Iltimos, to‘g‘ri foydalanuvchi nomi/email va parolni kiriting. E’tibor bering, ikkala maydon ham katta-kichik harflarga sezgir bo‘lishi mumkin."
+
+#: .\apps\accounts\forms.py:60
+msgid "This account is inactive."
+msgstr "Bu hisob faol emas."
+
+#: .\apps\accounts\forms.py:63
+msgid "You don't have permission to access the admin site."
+msgstr "Sizda admin saytga kirish huquqi yo‘q."
+
+#: .\apps\accounts\models.py:11 .\apps\authors\apps.py:8
+#: .\apps\authors\models.py:78 .\templates\author-admin\author_list.html:63
 msgid "Author"
 msgstr "Muallif"
 
-#: .\apps\accounts\models.py:10
+#: .\apps\accounts\models.py:12
 msgid "Editor"
 msgstr "Muharrir"
 
-#: .\apps\accounts\models.py:11
+#: .\apps\accounts\models.py:13
 msgid "Reviewer"
 msgstr "Taqrizchi"
 
-#: .\apps\accounts\models.py:12
+#: .\apps\accounts\models.py:14
 msgid "Secretary"
 msgstr "Kotib"
 
-#: .\apps\accounts\models.py:13
+#: .\apps\accounts\models.py:15
 msgid "Deputy Editor"
 msgstr "Muharrir o‘rinbosari"
 
-#: .\apps\accounts\models.py:14
+#: .\apps\accounts\models.py:16
 msgid "Admin"
 msgstr "Admin"
 
-#: .\apps\accounts\models.py:16
-msgid "Role"
-msgstr "Rol"
+#: .\apps\accounts\models.py:19
+msgid "Initial Registration"
+msgstr "Dastlabki ro‘yxatdan o‘tish"
 
-#: .\apps\accounts\models.py:17
+#: .\apps\accounts\models.py:20 .\apps\authors\admin.py:15
+msgid "Personal Information"
+msgstr "Shaxsiy ma’lumotlar"
+
+#: .\apps\accounts\models.py:21
+msgid "Workplace Information"
+msgstr "Ish yoki o‘qish joyi ma’lumotlari"
+
+#: .\apps\accounts\models.py:22 .\apps\authors\admin.py:18
+msgid "Contact Information"
+msgstr "Aloqa ma’lumotlari"
+
+#: .\apps\accounts\models.py:23 .\apps\authors\admin.py:21
+msgid "Academic Information"
+msgstr "Akademik ma’lumotlar"
+
+#: .\apps\accounts\models.py:24
+msgid "Profile Completed"
+msgstr "Profil to‘ldirildi"
+
+#: .\apps\accounts\models.py:30
+msgid "Email address"
+msgstr "Email manzili"
+
+#: .\apps\accounts\models.py:32
+msgid "Is email verified"
+msgstr "Email tasdiqlanganmi"
+
+#: .\apps\accounts\models.py:37
+msgid "Profile Completion Step"
+msgstr "Profil to‘ldirish bosqichi"
+
+#: .\apps\accounts\models.py:42
 msgid "Prefer Dark Mode"
-msgstr "Qorongʻi rejimni afzal koʻring"
+msgstr "Qorong‘i rejimni afzal ko‘ring"
 
-#: .\apps\accounts\models.py:23
+#: .\apps\accounts\models.py:48 .\apps\authors\models.py:31
 msgid "User"
 msgstr "Foydalanuvchi"
 
-#: .\apps\accounts\models.py:24
+#: .\apps\accounts\models.py:49
 msgid "Users"
 msgstr "Foydalanuvchilar"
 
-#: .\apps\accounts\views\auth_views.py:14
+#: .\apps\accounts\serializers\api_auth_serializers.py:27
+#: .\apps\accounts\serializers\api_auth_serializers.py:143
+#: .\apps\accounts\serializers\api_auth_serializers.py:194
+msgid "Password fields didn't match."
+msgstr "Parol maydonlari mos kelmadi."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:60
+#: .\apps\accounts\serializers\api_auth_serializers.py:81
+#: .\apps\accounts\serializers\api_auth_serializers.py:159
+#: .\apps\accounts\serializers\api_auth_serializers.py:174
+msgid "User with this email does not exist."
+msgstr "Ushbu email bilan foydalanuvchi mavjud emas."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:63
+#: .\apps\accounts\serializers\api_auth_serializers.py:177
+msgid "Verification code has expired."
+msgstr "Tasdiqlash kodi muddati o‘tgan."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:66
+#: .\apps\accounts\serializers\api_auth_serializers.py:180
+msgid "Invalid verification code."
+msgstr "Noto‘g‘ri tasdiqlash kodi."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:105
+msgid "No user found with this username."
+msgstr "Ushbu foydalanuvchi nomi bilan hech qanday foydalanuvchi topilmadi."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:110
+msgid "Invalid credentials."
+msgstr "Noto‘g‘ri ma’lumotlar."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:113
+msgid "User account is disabled."
+msgstr "Foydalanuvchi akkaunti o‘chirib qo‘yilgan."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:210
+msgid "Reset token has expired."
+msgstr "Tiklash tokeni muddati o‘tgan."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:214
+msgid "Invalid reset token."
+msgstr "Noto‘g‘ri tiklash tokeni."
+
+#: .\apps\accounts\utils.py:42
+msgid "Email Verification Code"
+msgstr "Email tasdiqlash kodi."
+
+#: .\apps\accounts\utils.py:45
+#, python-brace-format
+msgid ""
+"Your verification code is: {code}\n"
+"\n"
+"Do not share this code with anyone for security reasons."
+msgstr "Sizning tasdiqlash kodingiz: {code}\n\nXavfsizlik sababli bu kodni hech kim bilan ulashmang."
+
+#: .\apps\accounts\utils.py:50
+msgid "Your verification code is:"
+msgstr "Sizning tasdiqlash kodingiz:"
+
+#: .\apps\accounts\utils.py:52 .\apps\accounts\utils.py:73
+msgid "Please do not share this code with anyone!"
+msgstr "Iltimos, bu kodni hech kim bilan ulashmang!"
+
+#: .\apps\accounts\utils.py:53 .\apps\accounts\utils.py:74
+msgid "If you did not request this, you can ignore this email."
+msgstr "Agar bu so‘rovni siz bajarmagan bo‘lsangiz, ushbu emailni e’tiborsiz qoldiring."
+
+#: .\apps\accounts\utils.py:63
+msgid "Password Reset Code"
+msgstr "Parolni tiklash kodi"
+
+#: .\apps\accounts\utils.py:66
+#, python-brace-format
+msgid ""
+"Your password reset code is: {code}\n"
+"\n"
+"Do not share this code with anyone for security reasons."
+msgstr "Sizning parolni tiklash kodingiz: {code}\n\nXavfsizlik sababli bu kodni hech kim bilan ulashmang."
+
+#: .\apps\accounts\utils.py:71
+msgid "Your password reset code is:"
+msgstr "Parolni tiklash kodi:"
+
+#: .\apps\accounts\views\api_auth_views.py:62
+msgid "Registration successful. Please verify your email."
+msgstr "Ro‘yxatdan o‘tish muvaffaqiyatli yakunlandi. Iltimos, emailingizni tasdiqlang."
+
+#: .\apps\accounts\views\api_auth_views.py:111
+msgid "Email verified successfully."
+msgstr "Email muvaffaqiyatli tasdiqlandi."
+
+#: .\apps\accounts\views\api_auth_views.py:163
+msgid "Verification code resent successfully."
+msgstr "Tasdiqlash kodi qayta yuborildi."
+
+#: .\apps\accounts\views\api_auth_views.py:233
+msgid "Email not verified. A new verification code has been sent."
+msgstr "Email tasdiqlanmagan. Yangi tasdiqlash kodi yuborildi."
+
+#: .\apps\accounts\views\api_auth_views.py:313
+msgid "Refresh token is required"
+msgstr "Yangilash tokeni talab qilinadi."
+
+#: .\apps\accounts\views\api_auth_views.py:326
+msgid "Logout successful"
+msgstr "Chiqish muvaffaqiyatli yakunlandi."
+
+#: .\apps\accounts\views\api_auth_views.py:332
+msgid "Invalid or expired token"
+msgstr "Noto‘g‘ri yoki muddati o‘tgan token."
+
+#: .\apps\accounts\views\api_auth_views.py:339
+msgid "Logout failed"
+msgstr "Chiqish muvaffaqiyatsiz yakunlandi."
+
+#: .\apps\accounts\views\api_auth_views.py:385
+msgid "Old password is incorrect."
+msgstr "Eski parol noto‘g‘ri.
+
+#: .\apps\accounts\views\api_auth_views.py:394
+msgid "Password changed successfully."
+msgstr "Parol muvaffaqiyatli o‘zgartirildi."
+
+#: .\apps\accounts\views\api_auth_views.py:446
+msgid "Password reset code sent to your email."
+msgstr "Parolni tiklash kodi emailingizga yuborildi."
+
+#: .\apps\accounts\views\api_auth_views.py:499
+msgid "Verification code is valid."
+msgstr "Tasdiqlash kodi yaroqli."
+
+#: .\apps\accounts\views\api_auth_views.py:547
+msgid "Password reset successful."
+msgstr "Parolni tiklash muvaffaqiyatli."
+
+#: .\apps\accounts\views\api_auth_views.py:604
+msgid "Personal information updated successfully."
+msgstr "Shaxsiy ma’lumotlar muvaffaqiyatli yangilandi."
+
+#: .\apps\accounts\views\api_auth_views.py:662
+msgid "Workplace information updated successfully."
+msgstr "Ish joyi ma’lumotlari muvaffaqiyatli yangilandi."
+
+#: .\apps\accounts\views\api_auth_views.py:720
+msgid "Contact information updated successfully."
+msgstr "Kontakt ma’lumotlari muvaffaqiyatli yangilandi."
+
+#: .\apps\accounts\views\api_auth_views.py:778
+msgid "Academic information updated successfully."
+msgstr "Akademik ma’lumotlar muvaffaqiyatli yangilandi."
+
+#: .\apps\accounts\views\auth_views.py:17
 msgid "Welcome back! You have successfully logged in."
 msgstr ""
 "Qaytib kelganingizdan xursandmiz! Siz muvaffaqiyatli tizimga kirdingiz."
 
-#: .\apps\accounts\views\auth_views.py:18
-msgid "Invalid username or password."
-msgstr "Foydalanuvchi nomi yoki parol noto‘g‘ri."
+#: .\apps\accounts\views\auth_views.py:21
+msgid "Invalid username/email or password."
+msgstr "Yaroqsiz foydalanuvchi nomi/elektron pochta yoki parol."
 
-#: .\apps\accounts\views\auth_views.py:28
+#: .\apps\accounts\views\auth_views.py:31
 msgid "You have been successfully logged out."
 msgstr "Siz tizimdan muvaffaqiyatli chiqdingiz."
 
@@ -105,11 +339,11 @@ msgstr "Sahifa ma’lumotlari"
 msgid "Statistics"
 msgstr "Statistika"
 
-#: .\apps\articles\admin.py:24
+#: .\apps\articles\admin.py:25
 msgid "Status and Dates"
 msgstr "Holat va sanalar"
 
-#: .\apps\articles\admin.py:27 .\apps\journals\apps.py:8
+#: .\apps\articles\admin.py:29 .\apps\journals\apps.py:8
 #: .\apps\journals\models.py:16 .\apps\journals\models.py:24
 #: .\templates\includes\sidebar.html:44
 #: .\templates\journal_admin\issue_confirm_delete.html:34
@@ -119,7 +353,7 @@ msgstr "Holat va sanalar"
 msgid "Journal"
 msgstr "Jurnal"
 
-#: .\apps\articles\admin.py:35 .\apps\articles\models.py:15
+#: .\apps\articles\admin.py:37
 #: .\templates\journal_admin\issue_confirm_delete.html:51
 #: .\templates\journal_admin\issue_list.html:67
 msgid "Published"
@@ -137,21 +371,25 @@ msgstr "Maqola"
 msgid "Articles"
 msgstr "Maqolalar"
 
-#: .\apps\articles\models.py:11 .\templates\article-admin\article_list.html:110
-msgid "Submitted"
-msgstr "Topshirilgan"
+#: .\apps\articles\models.py:11
+msgid "Jarayonda"
+msgstr "Jarayonda"
 
 #: .\apps\articles\models.py:12
-msgid "Under Review"
-msgstr "Ko‘rib chiqilmoqda"
+msgid "Tahrir uchun qaytarilgan"
+msgstr "Tahrir uchun qaytarilgan"
 
 #: .\apps\articles\models.py:13
-msgid "Accepted"
+msgid "Qabul qilingan"
 msgstr "Qabul qilingan"
 
 #: .\apps\articles\models.py:14
-msgid "Rejected"
+msgid "Rad etilgan"
 msgstr "Rad etilgan"
+
+#: .\apps\articles\models.py:15
+msgid "Chop etilgan"
+msgstr "Chop etilgan"
 
 #: .\apps\articles\models.py:21 .\apps\categories\apps.py:8
 #: .\apps\categories\models.py:14
@@ -189,7 +427,7 @@ msgid "List of references"
 msgstr "Adabiyotlar ro‘yxati"
 
 #: .\apps\articles\models.py:35 .\apps\authors\apps.py:9
-#: .\apps\authors\models.py:67
+#: .\apps\authors\models.py:79
 #: .\templates\article-admin\article_confirm_delete.html:53
 #: .\templates\article-admin\article_detail.html:82
 #: .\templates\author-admin\author_list.html:5
@@ -276,12 +514,12 @@ msgid "Submission Date"
 msgstr "Topshirish sanasi"
 
 #: .\apps\articles\models.py:104
-msgid "Review Date"
-msgstr "Ko‘rib chiqish sanasi"
+msgid "Tahrir so‘ralgan sana"
+msgstr "Tahrir so‘ralgan sana"
 
 #: .\apps\articles\models.py:105
-msgid "Date when the article was sent for review"
-msgstr "Maqola ko‘rib chiqishga yuborilgan sana"
+msgid "Article returned for editing date"
+msgstr "Tahrirga qaytarilgan sana"
 
 #: .\apps\articles\models.py:110
 msgid "Acceptance Date"
@@ -375,126 +613,118 @@ msgid "No revised file available for this article"
 msgstr "Bu maqolada qayta ko‘rilgan fayl mavjud emas"
 
 #: .\apps\authors\admin.py:12
-msgid "Personal Information"
-msgstr "Shaxsiy ma’lumotlar"
+msgid "User profile"
+msgstr "Foydalanuvchi profili"
 
-#: .\apps\authors\admin.py:15
-msgid "Contact Information"
-msgstr "Aloqa ma’lumotlari"
-
-#: .\apps\authors\admin.py:18
-msgid "Academic Information"
-msgstr "Akademik ma’lumotlar"
-
-#: .\apps\authors\models.py:6
+#: .\apps\authors\models.py:10
 msgid "(PhD), Economics"
 msgstr "(PhD), Iqtisodiyot"
 
-#: .\apps\authors\models.py:7
+#: .\apps\authors\models.py:11
 msgid "(PhD), Pedagogy"
 msgstr "(PhD), Pedagogika"
 
-#: .\apps\authors\models.py:8
+#: .\apps\authors\models.py:12
 msgid "(PhD), Technical Sciences"
 msgstr "(PhD), Texnika fanlari"
 
-#: .\apps\authors\models.py:9
+#: .\apps\authors\models.py:13
 msgid "(DSc), Economics"
 msgstr "(DSc), Iqtisodiyot"
 
-#: .\apps\authors\models.py:10
+#: .\apps\authors\models.py:14
 msgid "(DSc), Pedagogy"
 msgstr "(DSc), Pedagogika"
 
-#: .\apps\authors\models.py:11
+#: .\apps\authors\models.py:15
 msgid "(DSc), Technical Sciences"
 msgstr "(DSc), Texnika fanlari"
 
-#: .\apps\authors\models.py:15
+#: .\apps\authors\models.py:19
 msgid "Docent"
 msgstr "Dotsent"
 
-#: .\apps\authors\models.py:16
+#: .\apps\authors\models.py:20
 msgid "Professor"
 msgstr "Professor"
 
-#: .\apps\authors\models.py:17
+#: .\apps\authors\models.py:21
 msgid "Academic"
 msgstr "Akademik"
 
-#: .\apps\authors\models.py:21
+#: .\apps\authors\models.py:33
 msgid "First Name"
 msgstr "Ism"
 
-#: .\apps\authors\models.py:22
+#: .\apps\authors\models.py:34
 msgid "Last Name"
 msgstr "Familiya"
 
-#: .\apps\authors\models.py:23
+#: .\apps\authors\models.py:35
 #: .\templates\author-admin\author_confirm_delete.html:63
 #: .\templates\author-admin\author_list.html:68
 msgid "Country"
 msgstr "Mamlakat"
 
-#: .\apps\authors\models.py:24
+#: .\apps\authors\models.py:36
 msgid "City"
 msgstr "Shahar"
 
-#: .\apps\authors\models.py:25
+#: .\apps\authors\models.py:37
 msgid "Workplace"
 msgstr "Ish joyi"
 
-#: .\apps\authors\models.py:26
+#: .\apps\authors\models.py:38
 msgid "Position or level of education"
 msgstr "Lavozim yoki ta’lim bosqichi"
 
-#: .\apps\authors\models.py:27
+#: .\apps\authors\models.py:39
 #: .\templates\author-admin\author_confirm_delete.html:51
 #: .\templates\author-admin\author_list.html:64
 msgid "Email"
 msgstr "Elektron pochta"
 
-#: .\apps\authors\models.py:28
+#: .\apps\authors\models.py:40
 msgid "Phone Number"
 msgstr "Telefon raqami"
 
-#: .\apps\authors\models.py:32
+#: .\apps\authors\models.py:44
 msgid "Telegram Contact"
 msgstr "Telegram kontakti"
 
-#: .\apps\authors\models.py:33
+#: .\apps\authors\models.py:45
 msgid "Telegram username"
 msgstr "Telegram foydalanuvchi nomi"
 
-#: .\apps\authors\models.py:38
+#: .\apps\authors\models.py:50
 msgid "WhatsApp Contact"
 msgstr "WhatsApp kontakti"
 
-#: .\apps\authors\models.py:39
+#: .\apps\authors\models.py:51
 msgid "WhatsApp number"
 msgstr "WhatsApp raqami"
 
-#: .\apps\authors\models.py:46
+#: .\apps\authors\models.py:58
 #: .\templates\author-admin\author_confirm_delete.html:69
 #: .\templates\author-admin\author_list.html:66
 msgid "Academic Degree"
 msgstr "Ilmiy daraja"
 
-#: .\apps\authors\models.py:53
+#: .\apps\authors\models.py:65
 #: .\templates\author-admin\author_confirm_delete.html:75
 #: .\templates\author-admin\author_list.html:67
 msgid "Academic Title"
 msgstr "Ilmiy unvon"
 
-#: .\apps\authors\models.py:57
+#: .\apps\authors\models.py:69
 msgid "ORCID Number"
 msgstr "ORCID raqami"
 
-#: .\apps\authors\models.py:59
+#: .\apps\authors\models.py:71
 msgid "ORCID identifier"
 msgstr "ORCID identifikatori"
 
-#: .\apps\authors\models.py:61 .\apps\categories\models.py:9
+#: .\apps\authors\models.py:73 .\apps\categories\models.py:9
 #: .\apps\journals\models.py:10 .\apps\journals\models.py:27
 #: .\apps\journals\models.py:60
 msgid "Created At"
@@ -692,15 +922,15 @@ msgstr "Taqriz"
 msgid "Reviews"
 msgstr "Taqrizlar"
 
-#: .\core\settings.py:214
+#: .\core\settings.py:242
 msgid "O‘zbekcha"
 msgstr "O‘zbekcha"
 
-#: .\core\settings.py:215
+#: .\core\settings.py:243
 msgid "Ruscha"
 msgstr "Ruscha"
 
-#: .\core\settings.py:216
+#: .\core\settings.py:244
 #: .\templates\category-admin\category_confirm_delete.html:41
 #: .\templates\journal_admin\journal_confirm_delete.html:41
 msgid "English"
@@ -920,6 +1150,10 @@ msgstr "Filtrlash"
 msgid "Reset"
 msgstr "Qayta o‘rnatish"
 
+#: .\templates\article-admin\article_list.html:110
+msgid "Submitted"
+msgstr "Topshirilgan"
+
 #: .\templates\article-admin\article_list.html:163
 msgid "Reviewed at"
 msgstr "Ko‘rib chiqilgan vaqt"
@@ -955,24 +1189,8 @@ msgid "Sign In"
 msgstr "Kirish"
 
 #: .\templates\auth\login.html:25
-msgid "Access the JournalAdmin using your username and password."
-msgstr "Foydalanuvchi nomi va parolingiz bilan JournalAdmin-ga kiring."
-
-#: .\templates\auth\login.html:41
-msgid "Username"
-msgstr "Foydalanuvchi nomi"
-
-#: .\templates\auth\login.html:44
-msgid "Enter your username"
-msgstr "Foydalanuvchi nomingizni kiriting"
-
-#: .\templates\auth\login.html:49
-msgid "Password"
-msgstr "Parol"
-
-#: .\templates\auth\login.html:56
-msgid "Enter your password"
-msgstr "Parolingizni kiriting"
+msgid "Access the JournalAdmin using your username or email and password."
+msgstr "JournalAdmin-ga foydalanuvchi nomingiz yoki elektron pochtangiz va parolingiz yordamida kiring."
 
 #: .\templates\auth\login.html:60
 msgid "Sign in"

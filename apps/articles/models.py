@@ -101,7 +101,7 @@ class Article(models.Model):
     revision_requested_date = models.DateTimeField(
         null=True,
         blank=True,
-        verbose_name=_("Tahrir so'ralgan sana"),
+        verbose_name=_("Tahrir so‘ralgan sana"),
         help_text=_("Article returned for editing date")
     )
     acceptance_date = models.DateTimeField(

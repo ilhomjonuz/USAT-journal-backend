@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-21 16:09+0500\n"
+"POT-Creation-Date: 2025-02-26 17:30+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,23 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: .\apps\accounts\admin.py:14 .\apps\accounts\admin.py:21
+msgid "Personal info"
+msgstr "Личная информация"
+
+#: .\apps\accounts\admin.py:15 .\apps\accounts\admin.py:22
+msgid "Permissions"
+msgstr "Разрешения"
+
+#: .\apps\accounts\admin.py:16
+msgid "Important dates"
+msgstr "Важные даты"
+
+#: .\apps\accounts\admin.py:17 .\apps\accounts\admin.py:23
+#: .\apps\accounts\models.py:27
+msgid "Role"
+msgstr "Роль"
+
 #: .\apps\accounts\apps.py:8
 msgid "Account"
 msgstr "Аккаунт"
@@ -28,56 +45,279 @@ msgstr "Аккаунт"
 msgid "Accounts"
 msgstr "Аккаунты"
 
-#: .\apps\accounts\models.py:9 .\apps\authors\apps.py:8
-#: .\apps\authors\models.py:66 .\templates\author-admin\author_list.html:63
+#: .\apps\accounts\forms.py:16 .\templates\auth\login.html:41
+msgid "Username or Email"
+msgstr "Имя пользователя или электронная почта"
+
+#: .\apps\accounts\forms.py:19 .\templates\auth\login.html:44
+msgid "Enter your username or email"
+msgstr "Введите ваше имя пользователя или электронную почту"
+
+#: .\apps\accounts\forms.py:24 .\templates\auth\login.html:49
+msgid "Password"
+msgstr "Пароль"
+
+#: .\apps\accounts\forms.py:27 .\templates\auth\login.html:56
+msgid "Enter your password"
+msgstr "Введите ваш пароль"
+
+#: .\apps\accounts\forms.py:36
+msgid "Both username/email and password are required."
+msgstr "Необходимо указать и имя пользователя/электронную почту, и пароль."
+
+#: .\apps\accounts\forms.py:55
+msgid ""
+"Please enter a correct username/email and password. Note that both fields "
+"may be case-sensitive."
+msgstr "Пожалуйста, введите правильные имя пользователя/электронную почту и пароль. Обратите внимание, что оба поля чувствительны к регистру."
+
+#: .\apps\accounts\forms.py:60
+msgid "This account is inactive."
+msgstr "Эта учетная запись неактивна."
+
+#: .\apps\accounts\forms.py:63
+msgid "You don't have permission to access the admin site."
+msgstr "У вас нет разрешения на доступ к админ-панели."
+
+#: .\apps\accounts\models.py:11 .\apps\authors\apps.py:8
+#: .\apps\authors\models.py:78 .\templates\author-admin\author_list.html:63
 msgid "Author"
 msgstr "Автор"
 
-#: .\apps\accounts\models.py:10
+#: .\apps\accounts\models.py:12
 msgid "Editor"
 msgstr "Редактор"
 
-#: .\apps\accounts\models.py:11
+#: .\apps\accounts\models.py:13
 msgid "Reviewer"
 msgstr "Рецензент"
 
-#: .\apps\accounts\models.py:12
+#: .\apps\accounts\models.py:14
 msgid "Secretary"
 msgstr "Секретарь"
 
-#: .\apps\accounts\models.py:13
+#: .\apps\accounts\models.py:15
 msgid "Deputy Editor"
 msgstr "Заместитель редактора"
 
-#: .\apps\accounts\models.py:14
+#: .\apps\accounts\models.py:16
 msgid "Admin"
 msgstr "Администратор"
 
-#: .\apps\accounts\models.py:16
-msgid "Role"
-msgstr "Роль"
+#: .\apps\accounts\models.py:19
+msgid "Initial Registration"
+msgstr "Первичная регистрация"
 
-#: .\apps\accounts\models.py:17
+#: .\apps\accounts\models.py:20 .\apps\authors\admin.py:15
+msgid "Personal Information"
+msgstr "Личная информация"
+
+#: .\apps\accounts\models.py:21
+msgid "Workplace Information"
+msgstr "Информация о месте работы"
+
+#: .\apps\accounts\models.py:22 .\apps\authors\admin.py:18
+msgid "Contact Information"
+msgstr "Контактная информация"
+
+#: .\apps\accounts\models.py:23 .\apps\authors\admin.py:21
+msgid "Academic Information"
+msgstr "Академическая информация"
+
+#: .\apps\accounts\models.py:24
+msgid "Profile Completed"
+msgstr "Профиль завершен"
+
+#: .\apps\accounts\models.py:30
+msgid "Email address"
+msgstr "Адрес электронной почты"
+
+#: .\apps\accounts\models.py:32
+msgid "Is email verified"
+msgstr "Электронная почта подтверждена"
+
+#: .\apps\accounts\models.py:37
+msgid "Profile Completion Step"
+msgstr "Этап завершения профиля"
+
+#: .\apps\accounts\models.py:42
 msgid "Prefer Dark Mode"
 msgstr "Предпочитать темный режим"
 
-#: .\apps\accounts\models.py:23
+#: .\apps\accounts\models.py:48 .\apps\authors\models.py:31
 msgid "User"
 msgstr "Пользователь"
 
-#: .\apps\accounts\models.py:24
+#: .\apps\accounts\models.py:49
 msgid "Users"
 msgstr "Пользователи"
 
-#: .\apps\accounts\views\auth_views.py:14
+#: .\apps\accounts\serializers\api_auth_serializers.py:27
+#: .\apps\accounts\serializers\api_auth_serializers.py:143
+#: .\apps\accounts\serializers\api_auth_serializers.py:194
+msgid "Password fields didn't match."
+msgstr "Поля пароля не совпадают."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:60
+#: .\apps\accounts\serializers\api_auth_serializers.py:81
+#: .\apps\accounts\serializers\api_auth_serializers.py:159
+#: .\apps\accounts\serializers\api_auth_serializers.py:174
+msgid "User with this email does not exist."
+msgstr "Пользователь с этим email не существует."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:63
+#: .\apps\accounts\serializers\api_auth_serializers.py:177
+msgid "Verification code has expired."
+msgstr "Код подтверждения истек."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:66
+#: .\apps\accounts\serializers\api_auth_serializers.py:180
+msgid "Invalid verification code."
+msgstr "Неверный код подтверждения."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:105
+msgid "No user found with this username."
+msgstr "Пользователь с таким именем не найден."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:110
+msgid "Invalid credentials."
+msgstr "Неверные учетные данные."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:113
+msgid "User account is disabled."
+msgstr "Учетная запись пользователя отключена."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:210
+msgid "Reset token has expired."
+msgstr "Токен сброса истек."
+
+#: .\apps\accounts\serializers\api_auth_serializers.py:214
+msgid "Invalid reset token."
+msgstr "Неверный токен сброса."
+
+#: .\apps\accounts\utils.py:42
+msgid "Email Verification Code"
+msgstr "Код подтверждения email"
+
+#: .\apps\accounts\utils.py:45
+#, python-brace-format
+msgid ""
+"Your verification code is: {code}\n"
+"\n"
+"Do not share this code with anyone for security reasons."
+msgstr ""
+"Ваш код подтверждения: {code}\n"
+"\n"
+"Не сообщайте этот код никому по соображениям безопасности."
+
+#: .\apps\accounts\utils.py:50
+msgid "Your verification code is:"
+msgstr "Ваш код подтверждения:"
+
+#: .\apps\accounts\utils.py:52 .\apps\accounts\utils.py:73
+msgid "Please do not share this code with anyone!"
+msgstr "Пожалуйста, не сообщайте этот код никому!"
+
+#: .\apps\accounts\utils.py:53 .\apps\accounts\utils.py:74
+msgid "If you did not request this, you can ignore this email."
+msgstr "Если вы не запрашивали это, просто проигнорируйте это письмо."
+
+#: .\apps\accounts\utils.py:63
+msgid "Password Reset Code"
+msgstr "Код сброса пароля"
+
+#: .\apps\accounts\utils.py:66
+#, python-brace-format
+msgid ""
+"Your password reset code is: {code}\n"
+"\n"
+"Do not share this code with anyone for security reasons."
+msgstr ""
+"Ваш код сброса пароля: {code}\n"
+"\n"
+"Не сообщайте этот код никому по соображениям безопасности."
+
+#: .\apps\accounts\utils.py:71
+msgid "Your password reset code is:"
+msgstr "Ваш код сброса пароля:"
+
+#: .\apps\accounts\views\api_auth_views.py:62
+msgid "Registration successful. Please verify your email."
+msgstr "Регистрация прошла успешно. Пожалуйста, подтвердите свой email."
+
+#: .\apps\accounts\views\api_auth_views.py:111
+msgid "Email verified successfully."
+msgstr "Email успешно подтвержден."
+
+#: .\apps\accounts\views\api_auth_views.py:163
+msgid "Verification code resent successfully."
+msgstr "Код подтверждения отправлен повторно."
+
+#: .\apps\accounts\views\api_auth_views.py:233
+msgid "Email not verified. A new verification code has been sent."
+msgstr "Email не подтвержден. Новый код подтверждения был отправлен."
+
+#: .\apps\accounts\views\api_auth_views.py:313
+msgid "Refresh token is required"
+msgstr "Необходим токен обновления."
+
+#: .\apps\accounts\views\api_auth_views.py:326
+msgid "Logout successful"
+msgstr "Выход выполнен успешно."
+
+#: .\apps\accounts\views\api_auth_views.py:332
+msgid "Invalid or expired token"
+msgstr "Недействительный или истекший токен."
+
+#: .\apps\accounts\views\api_auth_views.py:339
+msgid "Logout failed"
+msgstr "Ошибка выхода."
+
+#: .\apps\accounts\views\api_auth_views.py:385
+msgid "Old password is incorrect."
+msgstr "Старый пароль введен неверно."
+
+#: .\apps\accounts\views\api_auth_views.py:394
+msgid "Password changed successfully."
+msgstr "Пароль успешно изменен."
+
+#: .\apps\accounts\views\api_auth_views.py:446
+msgid "Password reset code sent to your email."
+msgstr "Код сброса пароля отправлен на вашу почту."
+
+#: .\apps\accounts\views\api_auth_views.py:499
+msgid "Verification code is valid."
+msgstr "Код подтверждения действителен."
+
+#: .\apps\accounts\views\api_auth_views.py:547
+msgid "Password reset successful."
+msgstr "Сброс пароля выполнен успешно."
+
+#: .\apps\accounts\views\api_auth_views.py:604
+msgid "Personal information updated successfully."
+msgstr "Личная информация успешно обновлена."
+
+#: .\apps\accounts\views\api_auth_views.py:662
+msgid "Workplace information updated successfully."
+msgstr "Информация о рабочем месте успешно обновлена."
+
+#: .\apps\accounts\views\api_auth_views.py:720
+msgid "Contact information updated successfully."
+msgstr "Контактная информация успешно обновлена."
+
+#: .\apps\accounts\views\api_auth_views.py:778
+msgid "Academic information updated successfully."
+msgstr "Академическая информация успешно обновлена."
+
+#: .\apps\accounts\views\auth_views.py:17
 msgid "Welcome back! You have successfully logged in."
 msgstr "Добро пожаловать! Вы успешно вошли в систему."
 
-#: .\apps\accounts\views\auth_views.py:18
-msgid "Invalid username or password."
-msgstr "Неверное имя пользователя или пароль."
+#: .\apps\accounts\views\auth_views.py:21
+msgid "Invalid username/email or password."
+msgstr "Неверное имя пользователя/email или пароль."
 
-#: .\apps\accounts\views\auth_views.py:28
+#: .\apps\accounts\views\auth_views.py:31
 msgid "You have been successfully logged out."
 msgstr "Вы успешно вышли из системы."
 
@@ -106,11 +346,11 @@ msgstr "Информация о странице"
 msgid "Statistics"
 msgstr "Статистика"
 
-#: .\apps\articles\admin.py:24
+#: .\apps\articles\admin.py:25
 msgid "Status and Dates"
 msgstr "Статус и даты"
 
-#: .\apps\articles\admin.py:27 .\apps\journals\apps.py:8
+#: .\apps\articles\admin.py:29 .\apps\journals\apps.py:8
 #: .\apps\journals\models.py:16 .\apps\journals\models.py:24
 #: .\templates\includes\sidebar.html:44
 #: .\templates\journal_admin\issue_confirm_delete.html:34
@@ -120,7 +360,7 @@ msgstr "Статус и даты"
 msgid "Journal"
 msgstr "Журнал"
 
-#: .\apps\articles\admin.py:35 .\apps\articles\models.py:15
+#: .\apps\articles\admin.py:37
 #: .\templates\journal_admin\issue_confirm_delete.html:51
 #: .\templates\journal_admin\issue_list.html:67
 msgid "Published"
@@ -138,21 +378,25 @@ msgstr "Статья"
 msgid "Articles"
 msgstr "Статьи"
 
-#: .\apps\articles\models.py:11 .\templates\article-admin\article_list.html:110
-msgid "Submitted"
-msgstr "Отправлено"
+#: .\apps\articles\models.py:11
+msgid "Jarayonda"
+msgstr "В процессе"
 
 #: .\apps\articles\models.py:12
-msgid "Under Review"
-msgstr "На рассмотрении"
+msgid "Tahrir uchun qaytarilgan"
+msgstr "Возвращено на редактирование"
 
 #: .\apps\articles\models.py:13
-msgid "Accepted"
+msgid "Qabul qilingan"
 msgstr "Принято"
 
 #: .\apps\articles\models.py:14
-msgid "Rejected"
+msgid "Rad etilgan"
 msgstr "Отклонено"
+
+#: .\apps\articles\models.py:15
+msgid "Chop etilgan"
+msgstr "Опубликовано"
 
 #: .\apps\articles\models.py:21 .\apps\categories\apps.py:8
 #: .\apps\categories\models.py:14
@@ -190,7 +434,7 @@ msgid "List of references"
 msgstr "Список литературы"
 
 #: .\apps\articles\models.py:35 .\apps\authors\apps.py:9
-#: .\apps\authors\models.py:67
+#: .\apps\authors\models.py:79
 #: .\templates\article-admin\article_confirm_delete.html:53
 #: .\templates\article-admin\article_detail.html:82
 #: .\templates\author-admin\author_list.html:5
@@ -277,12 +521,12 @@ msgid "Submission Date"
 msgstr "Дата подачи"
 
 #: .\apps\articles\models.py:104
-msgid "Review Date"
-msgstr "Дата рецензирования"
+msgid "Tahrir so‘ralgan sana"
+msgstr "Дата запроса на редактирование"
 
 #: .\apps\articles\models.py:105
-msgid "Date when the article was sent for review"
-msgstr "Дата отправки статьи на рецензирование"
+msgid "Article returned for editing date"
+msgstr "Дата возврата статьи на редактирование"
 
 #: .\apps\articles\models.py:110
 msgid "Acceptance Date"
@@ -376,126 +620,118 @@ msgid "No revised file available for this article"
 msgstr "Для этой статьи нет доступного пересмотренного файла"
 
 #: .\apps\authors\admin.py:12
-msgid "Personal Information"
-msgstr "Личная информация"
+msgid "User profile"
+msgstr "Профиль пользователя"
 
-#: .\apps\authors\admin.py:15
-msgid "Contact Information"
-msgstr "Контактная информация"
-
-#: .\apps\authors\admin.py:18
-msgid "Academic Information"
-msgstr "Академическая информация"
-
-#: .\apps\authors\models.py:6
+#: .\apps\authors\models.py:10
 msgid "(PhD), Economics"
 msgstr "(PhD), Экономика"
 
-#: .\apps\authors\models.py:7
+#: .\apps\authors\models.py:11
 msgid "(PhD), Pedagogy"
 msgstr "(PhD), Педагогика"
 
-#: .\apps\authors\models.py:8
+#: .\apps\authors\models.py:12
 msgid "(PhD), Technical Sciences"
 msgstr "(PhD), Технические науки"
 
-#: .\apps\authors\models.py:9
+#: .\apps\authors\models.py:13
 msgid "(DSc), Economics"
 msgstr "(DSc), Экономика"
 
-#: .\apps\authors\models.py:10
+#: .\apps\authors\models.py:14
 msgid "(DSc), Pedagogy"
 msgstr "(DSc), Педагогика"
 
-#: .\apps\authors\models.py:11
+#: .\apps\authors\models.py:15
 msgid "(DSc), Technical Sciences"
 msgstr "(DSc), Технические науки"
 
-#: .\apps\authors\models.py:15
+#: .\apps\authors\models.py:19
 msgid "Docent"
 msgstr "Доцент"
 
-#: .\apps\authors\models.py:16
+#: .\apps\authors\models.py:20
 msgid "Professor"
 msgstr "Профессор"
 
-#: .\apps\authors\models.py:17
+#: .\apps\authors\models.py:21
 msgid "Academic"
 msgstr "Академик"
 
-#: .\apps\authors\models.py:21
+#: .\apps\authors\models.py:33
 msgid "First Name"
 msgstr "Имя"
 
-#: .\apps\authors\models.py:22
+#: .\apps\authors\models.py:34
 msgid "Last Name"
 msgstr "Фамилия"
 
-#: .\apps\authors\models.py:23
+#: .\apps\authors\models.py:35
 #: .\templates\author-admin\author_confirm_delete.html:63
 #: .\templates\author-admin\author_list.html:68
 msgid "Country"
 msgstr "Страна"
 
-#: .\apps\authors\models.py:24
+#: .\apps\authors\models.py:36
 msgid "City"
 msgstr "Город"
 
-#: .\apps\authors\models.py:25
+#: .\apps\authors\models.py:37
 msgid "Workplace"
 msgstr "Место работы"
 
-#: .\apps\authors\models.py:26
+#: .\apps\authors\models.py:38
 msgid "Position or level of education"
 msgstr "Должность или уровень образования"
 
-#: .\apps\authors\models.py:27
+#: .\apps\authors\models.py:39
 #: .\templates\author-admin\author_confirm_delete.html:51
 #: .\templates\author-admin\author_list.html:64
 msgid "Email"
 msgstr "Электронная почта"
 
-#: .\apps\authors\models.py:28
+#: .\apps\authors\models.py:40
 msgid "Phone Number"
 msgstr "Номер телефона"
 
-#: .\apps\authors\models.py:32
+#: .\apps\authors\models.py:44
 msgid "Telegram Contact"
 msgstr "Контакт Telegram"
 
-#: .\apps\authors\models.py:33
+#: .\apps\authors\models.py:45
 msgid "Telegram username"
 msgstr "Имя пользователя Telegram"
 
-#: .\apps\authors\models.py:38
+#: .\apps\authors\models.py:50
 msgid "WhatsApp Contact"
 msgstr "Контакт WhatsApp"
 
-#: .\apps\authors\models.py:39
+#: .\apps\authors\models.py:51
 msgid "WhatsApp number"
 msgstr "Номер WhatsApp"
 
-#: .\apps\authors\models.py:46
+#: .\apps\authors\models.py:58
 #: .\templates\author-admin\author_confirm_delete.html:69
 #: .\templates\author-admin\author_list.html:66
 msgid "Academic Degree"
 msgstr "Ученая степень"
 
-#: .\apps\authors\models.py:53
+#: .\apps\authors\models.py:65
 #: .\templates\author-admin\author_confirm_delete.html:75
 #: .\templates\author-admin\author_list.html:67
 msgid "Academic Title"
 msgstr "Ученое звание"
 
-#: .\apps\authors\models.py:57
+#: .\apps\authors\models.py:69
 msgid "ORCID Number"
 msgstr "Номер ORCID"
 
-#: .\apps\authors\models.py:59
+#: .\apps\authors\models.py:71
 msgid "ORCID identifier"
 msgstr "Идентификатор ORCID"
 
-#: .\apps\authors\models.py:61 .\apps\categories\models.py:9
+#: .\apps\authors\models.py:73 .\apps\categories\models.py:9
 #: .\apps\journals\models.py:10 .\apps\journals\models.py:27
 #: .\apps\journals\models.py:60
 msgid "Created At"
@@ -688,15 +924,15 @@ msgstr "Рецензия"
 msgid "Reviews"
 msgstr "Рецензии"
 
-#: .\core\settings.py:214
+#: .\core\settings.py:242
 msgid "O‘zbekcha"
 msgstr "Узбекский"
 
-#: .\core\settings.py:215
+#: .\core\settings.py:243
 msgid "Ruscha"
 msgstr "Русский"
 
-#: .\core\settings.py:216
+#: .\core\settings.py:244
 #: .\templates\category-admin\category_confirm_delete.html:41
 #: .\templates\journal_admin\journal_confirm_delete.html:41
 msgid "English"
@@ -916,6 +1152,10 @@ msgstr "Фильтр"
 msgid "Reset"
 msgstr "Сбросить"
 
+#: .\templates\article-admin\article_list.html:110
+msgid "Submitted"
+msgstr "Отправлено"
+
 #: .\templates\article-admin\article_list.html:163
 msgid "Reviewed at"
 msgstr "Рассмотрено"
@@ -951,24 +1191,8 @@ msgid "Sign In"
 msgstr "Войти"
 
 #: .\templates\auth\login.html:25
-msgid "Access the JournalAdmin using your username and password."
-msgstr "Войдите в JournalAdmin, используя ваше имя пользователя и пароль."
-
-#: .\templates\auth\login.html:41
-msgid "Username"
-msgstr "Имя пользователя"
-
-#: .\templates\auth\login.html:44
-msgid "Enter your username"
-msgstr "Введите ваше имя пользователя"
-
-#: .\templates\auth\login.html:49
-msgid "Password"
-msgstr "Пароль"
-
-#: .\templates\auth\login.html:56
-msgid "Enter your password"
-msgstr "Введите ваш пароль"
+msgid "Access the JournalAdmin using your username or email and password."
+msgstr "Войдите в JournalAdmin, используя ваше имя пользователя или email и пароль."
 
 #: .\templates\auth\login.html:60
 msgid "Sign in"
