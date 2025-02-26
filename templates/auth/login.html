@@ -22,7 +22,7 @@
                     <div class="nk-block-head-content">
                         <h4 class="nk-block-title">{% trans "Sign In" %}</h4>
                         <div class="nk-block-des">
-                            <p>{% trans "Access the JournalAdmin using your username and password." %}</p>
+                            <p>{% trans "Access the JournalAdmin using your username or email and password." %}</p>
                         </div>
                     </div>
                 </div>
@@ -38,10 +38,10 @@
                     {% csrf_token %}
                     <div class="form-group">
                         <div class="form-label-group">
-                            <label class="form-label" for="username">{% trans "Username" %}</label>
+                            <label class="form-label" for="username">{% trans "Username or Email" %}</label>
                         </div>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="{% trans 'Enter your username' %}" required>
+                            <input type="text" class="form-control form-control-lg" id="username" name="username" placeholder="{% trans 'Enter your username or email' %}" required>
                         </div>
                     </div>
                     <div class="form-group">

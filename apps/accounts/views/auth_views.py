@@ -4,10 +4,13 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib import messages
 from django.shortcuts import redirect
 
+from apps.accounts.forms import EmailOrUsernameAuthenticationForm
+
 
 class CustomLoginView(LoginView):
     template_name = 'auth/login.html'
     redirect_authenticated_user = True
+    form_class = EmailOrUsernameAuthenticationForm
     next_page = reverse_lazy('dashboard')
 
     def form_valid(self, form):
@@ -15,7 +18,7 @@ class CustomLoginView(LoginView):
         return super().form_valid(form)
 
     def form_invalid(self, form):
-        messages.error(self.request, _('Invalid username or password.'))
+        messages.error(self.request, _('Invalid username/email or password.'))
         return super().form_invalid(form)
 
 
