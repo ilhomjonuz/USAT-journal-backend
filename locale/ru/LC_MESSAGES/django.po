@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-27 11:31+0500\n"
+"POT-Creation-Date: 2025-02-27 18:14+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -154,46 +154,49 @@ msgstr "Пользователь"
 msgid "Users"
 msgstr "Пользователи"
 
-#: apps/accounts/serializers/api_auth_serializers.py:27
-#: apps/accounts/serializers/api_auth_serializers.py:143
-#: apps/accounts/serializers/api_auth_serializers.py:194
-msgid "Password fields didn't match."
-msgstr "Поля пароля не совпадают."
+#: apps/accounts/serializers/api_auth_serializers.py:28
+msgid "Passwords do not match."
+msgstr "Пароли не совпадают."
 
-#: apps/accounts/serializers/api_auth_serializers.py:60
-#: apps/accounts/serializers/api_auth_serializers.py:81
-#: apps/accounts/serializers/api_auth_serializers.py:159
-#: apps/accounts/serializers/api_auth_serializers.py:174
+#: apps/accounts/serializers/api_auth_serializers.py:61
+#: apps/accounts/serializers/api_auth_serializers.py:82
+#: apps/accounts/serializers/api_auth_serializers.py:160
+#: apps/accounts/serializers/api_auth_serializers.py:175
 msgid "User with this email does not exist."
 msgstr "Пользователь с этим email не существует."
 
-#: apps/accounts/serializers/api_auth_serializers.py:63
-#: apps/accounts/serializers/api_auth_serializers.py:177
+#: apps/accounts/serializers/api_auth_serializers.py:64
+#: apps/accounts/serializers/api_auth_serializers.py:178
 msgid "Verification code has expired."
 msgstr "Код подтверждения истек."
 
-#: apps/accounts/serializers/api_auth_serializers.py:66
-#: apps/accounts/serializers/api_auth_serializers.py:180
+#: apps/accounts/serializers/api_auth_serializers.py:67
+#: apps/accounts/serializers/api_auth_serializers.py:181
 msgid "Invalid verification code."
 msgstr "Неверный код подтверждения."
 
-#: apps/accounts/serializers/api_auth_serializers.py:105
+#: apps/accounts/serializers/api_auth_serializers.py:106
 msgid "No user found with this username."
 msgstr "Пользователь с таким именем не найден."
 
-#: apps/accounts/serializers/api_auth_serializers.py:110
+#: apps/accounts/serializers/api_auth_serializers.py:111
 msgid "Invalid credentials."
 msgstr "Неверные учетные данные."
 
-#: apps/accounts/serializers/api_auth_serializers.py:113
+#: apps/accounts/serializers/api_auth_serializers.py:114
 msgid "User account is disabled."
 msgstr "Учетная запись пользователя отключена."
 
-#: apps/accounts/serializers/api_auth_serializers.py:210
+#: apps/accounts/serializers/api_auth_serializers.py:144
+#: apps/accounts/serializers/api_auth_serializers.py:195
+msgid "Password fields didn't match."
+msgstr "Поля пароля не совпадают."
+
+#: apps/accounts/serializers/api_auth_serializers.py:211
 msgid "Reset token has expired."
 msgstr "Токен сброса истек."
 
-#: apps/accounts/serializers/api_auth_serializers.py:214
+#: apps/accounts/serializers/api_auth_serializers.py:215
 msgid "Invalid reset token."
 msgstr "Неверный токен сброса."
 
@@ -227,75 +230,75 @@ msgstr ""
 "\n"
 "Не сообщайте этот код никому по соображениям безопасности."
 
-#: apps/accounts/views/api_auth_views.py:62
+#: apps/accounts/views/api_auth_views.py:78
 msgid "Registration successful. Please verify your email."
 msgstr "Регистрация прошла успешно. Пожалуйста, подтвердите свой email."
 
-#: apps/accounts/views/api_auth_views.py:111
+#: apps/accounts/views/api_auth_views.py:151
 msgid "Email verified successfully."
 msgstr "Email успешно подтвержден."
 
-#: apps/accounts/views/api_auth_views.py:163
+#: apps/accounts/views/api_auth_views.py:218
 msgid "Verification code resent successfully."
 msgstr "Код подтверждения отправлен повторно."
 
-#: apps/accounts/views/api_auth_views.py:233
+#: apps/accounts/views/api_auth_views.py:302
 msgid "Email not verified. A new verification code has been sent."
 msgstr "Email не подтвержден. Новый код подтверждения был отправлен."
 
-#: apps/accounts/views/api_auth_views.py:313
+#: apps/accounts/views/api_auth_views.py:411
 msgid "Refresh token is required"
 msgstr "Необходим токен обновления."
 
-#: apps/accounts/views/api_auth_views.py:326
+#: apps/accounts/views/api_auth_views.py:424
 msgid "Logout successful"
 msgstr "Выход выполнен успешно."
 
-#: apps/accounts/views/api_auth_views.py:332
+#: apps/accounts/views/api_auth_views.py:431
 msgid "Invalid or expired token"
 msgstr "Недействительный или истекший токен."
 
-#: apps/accounts/views/api_auth_views.py:339
+#: apps/accounts/views/api_auth_views.py:439
 msgid "Logout failed"
 msgstr "Ошибка выхода."
 
-#: apps/accounts/views/api_auth_views.py:385
+#: apps/accounts/views/api_auth_views.py:522
 msgid "Old password is incorrect."
 msgstr "Старый пароль введен неверно."
 
-#: apps/accounts/views/api_auth_views.py:394
+#: apps/accounts/views/api_auth_views.py:531
 msgid "Password changed successfully."
 msgstr "Пароль успешно изменен."
 
-#: apps/accounts/views/api_auth_views.py:446
+#: apps/accounts/views/api_auth_views.py:596
 msgid "Password reset code sent to your email."
 msgstr "Код сброса пароля отправлен на вашу почту."
 
-#: apps/accounts/views/api_auth_views.py:499
+#: apps/accounts/views/api_auth_views.py:662
 msgid "Verification code is valid."
 msgstr "Код подтверждения действителен."
 
-#: apps/accounts/views/api_auth_views.py:542
+#: apps/accounts/views/api_auth_views.py:718
 msgid "Password reset verification code resent successfully"
 msgstr "Код подтверждения сброса пароля успешно отправлен повторно"
 
-#: apps/accounts/views/api_auth_views.py:591
+#: apps/accounts/views/api_auth_views.py:781
 msgid "Password reset successful."
 msgstr "Сброс пароля выполнен успешно."
 
-#: apps/accounts/views/api_auth_views.py:648
+#: apps/accounts/views/api_auth_views.py:912
 msgid "Personal information updated successfully."
 msgstr "Личная информация успешно обновлена."
 
-#: apps/accounts/views/api_auth_views.py:706
+#: apps/accounts/views/api_auth_views.py:1043
 msgid "Workplace information updated successfully."
 msgstr "Информация о рабочем месте успешно обновлена."
 
-#: apps/accounts/views/api_auth_views.py:764
+#: apps/accounts/views/api_auth_views.py:1174
 msgid "Contact information updated successfully."
 msgstr "Контактная информация успешно обновлена."
 
-#: apps/accounts/views/api_auth_views.py:822
+#: apps/accounts/views/api_auth_views.py:1305
 msgid "Academic information updated successfully."
 msgstr "Академическая информация успешно обновлена."
 
