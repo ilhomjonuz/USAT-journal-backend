@@ -33,6 +33,7 @@ class RegisterView(generics.CreateAPIView):
     @swagger_auto_schema(
         operation_summary="Register a new user",
         operation_description="Register with email, username, and password. A verification code will be sent to the email.",
+        request_body=RegisterSerializer,
         responses={
             201: openapi.Response(
                 description="User registered successfully",
@@ -41,28 +42,41 @@ class RegisterView(generics.CreateAPIView):
                     properties={
                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
                         'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        # 'verification_code': openapi.Schema(type=openapi.TYPE_STRING,
-                        #                                     description="Only in development mode"),
                     }
                 )
             ),
-            400: "Bad request"
+            400: openapi.Response(
+                description="Validation error",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Items(type=openapi.TYPE_STRING)
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        user = serializer.save()
+        if serializer.is_valid():
+            user = serializer.save()
 
-        # Send verification email in background thread
-        send_verification_email(user.email, user.verification_code)
+            # Send verification email in background thread
+            send_verification_email(user.email, user.verification_code)
 
-        return Response({
-            'success': True,
-            'message': _("Registration successful. Please verify your email."),
-            # Include verification code in response for development purposes only
-            # 'verification_code': user.verification_code
-        }, status=status.HTTP_201_CREATED)
+            return Response({
+                'success': True,
+                'message': _("Registration successful. Please verify your email."),
+            }, status=status.HTTP_201_CREATED)
+
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class VerifyEmailView(generics.GenericAPIView):

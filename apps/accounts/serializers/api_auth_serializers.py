@@ -23,8 +23,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ('email', 'username', 'password', 'confirm_password')
 
     def validate(self, attrs):
+        """Parollarni tekshirish"""
         if attrs['password'] != attrs['confirm_password']:
-            raise serializers.ValidationError({"password": _("Password fields didn't match.")})
+            raise serializers.ValidationError({"password": [_("Passwords do not match.")]})
         return attrs
 
     def create(self, validated_data):
@@ -40,7 +41,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         verification_code = ''.join(random.choices(string.digits, k=6))
         user.set_verification_code(verification_code)
 
-        # 2. Author yaratishdan oldin yana bir bor tekshirish
+        # Author yaratishdan oldin yana bir bor tekshirish
         author, created = Author.objects.get_or_create(user=user, email=user.email)
 
         return user
