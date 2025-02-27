@@ -267,7 +267,7 @@ msgstr "Chiqish muvaffaqiyatsiz yakunlandi."
 
 #: .\apps\accounts\views\api_auth_views.py:385
 msgid "Old password is incorrect."
-msgstr "Eski parol noto‘g‘ri.
+msgstr "Eski parol noto‘g‘ri."
 
 #: .\apps\accounts\views\api_auth_views.py:394
 msgid "Password changed successfully."
