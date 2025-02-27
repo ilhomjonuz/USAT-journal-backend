@@ -6,7 +6,7 @@ from apps.accounts.views.api_auth_views import (
     LoginView, LogoutView, PasswordChangeView,
     PasswordResetRequestView, PasswordResetVerifyView, PasswordResetResendVerificationCodeView,
     PasswordResetConfirmView, PersonalInfoView, WorkplaceInfoView, ContactInfoView, AcademicInfoView,
-    UserProfileView
+    UserProfileView, CustomTokenRefreshView
 )
 
 urlpatterns = [
@@ -16,7 +16,7 @@ urlpatterns = [
     path('resend-verification-code/', ResendVerificationCodeView.as_view(), name='resend-verification-code'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
+    path('token/refresh/', CustomTokenRefreshView.as_view(), name='token-refresh'),
 
     # Password management
     path('password/change/', PasswordChangeView.as_view(), name='password-change'),

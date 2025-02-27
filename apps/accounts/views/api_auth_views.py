@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.utils.translation import gettext_lazy as _
 from rest_framework import status, generics, permissions
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.exceptions import TokenError
@@ -12,6 +13,7 @@ import string
 import jwt
 from datetime import datetime, timedelta
 from django.conf import settings
+from rest_framework_simplejwt.views import TokenRefreshView
 
 from apps.accounts.serializers import (
     RegisterSerializer, VerifyEmailSerializer, ResendVerificationCodeSerializer,
@@ -46,16 +48,16 @@ class RegisterView(generics.CreateAPIView):
                 )
             ),
             400: openapi.Response(
-                description="Validation error",
+                description="Bad Request",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
                     properties={
-                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
                         'errors': openapi.Schema(
                             type=openapi.TYPE_OBJECT,
                             additional_properties=openapi.Schema(
                                 type=openapi.TYPE_ARRAY,
-                                items=openapi.Items(type=openapi.TYPE_STRING)
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
                             )
                         )
                     }
@@ -99,41 +101,68 @@ class VerifyEmailView(generics.GenericAPIView):
                             properties={
                                 'access_token': openapi.Schema(type=openapi.TYPE_STRING),
                                 'refresh_token': openapi.Schema(type=openapi.TYPE_STRING),
-                            }
+                            },
                         ),
+                        'user': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                'id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                                'email': openapi.Schema(type=openapi.TYPE_STRING),
+                                'username': openapi.Schema(type=openapi.TYPE_STRING),
+                                'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                                'profile_completion_step': openapi.Schema(type=openapi.TYPE_STRING),
+                            }
+                        )
                     }
                 )
             ),
-            400: "Bad request"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
+            user.is_email_verified = True
+            user.profile_completion_step = User.Step.PERSONAL_INFO
+            user.clear_verification_code()
+            user.save()
 
-        user = serializer.validated_data['user']
-        user.is_email_verified = True
-        user.profile_completion_step = User.Step.PERSONAL_INFO
-        user.clear_verification_code()
-        user.save()
+            # Generate tokens
+            refresh = RefreshToken.for_user(user)
 
-        # Generate tokens
-        refresh = RefreshToken.for_user(user)
+            return Response({
+                'success': True,
+                'message': _("Email verified successfully."),
+                'tokens': {
+                    'access_token': str(refresh.access_token),
+                    'refresh_token': str(refresh),
+                },
+                'user': {
+                    'id': user.id,
+                    'email': user.email,
+                    'username': user.username,
+                    'is_email_verified': user.is_email_verified,
+                    'profile_completion_step': user.profile_completion_step,
+                }
+            }, status=status.HTTP_200_OK)
 
-        return Response({
-            'success': True,
-            'message': _("Email verified successfully."),
-            'tokens': {
-                'access_token': str(refresh.access_token),
-                'refresh_token': str(refresh),
-            },
-            'user': {
-                'id': user.id,
-                'email': user.email,
-                'username': user.username,
-                'profile_completion_step': user.profile_completion_step,
-            }
-        }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ResendVerificationCodeView(generics.GenericAPIView):
@@ -150,34 +179,46 @@ class ResendVerificationCodeView(generics.GenericAPIView):
                     type=openapi.TYPE_OBJECT,
                     properties={
                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                        'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        # 'verification_code': openapi.Schema(type=openapi.TYPE_STRING,
-                        #                                     description="Only in development mode"),
+                        'message': openapi.Schema(type=openapi.TYPE_STRING)
                     }
                 )
             ),
-            400: "Bad request"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
 
-        user = serializer.validated_data['user']
+            # Generate new verification code
+            verification_code = ''.join(random.choices(string.digits, k=6))
+            user.set_verification_code(verification_code)
 
-        # Generate new verification code
-        verification_code = ''.join(random.choices(string.digits, k=6))
-        user.set_verification_code(verification_code)
+            # Send verification email in background thread
+            send_verification_email(user.email, verification_code)
 
-        # Send verification email in background thread
-        send_verification_email(user.email, verification_code)
+            return Response({
+                'success': True,
+                'message': _("Verification code resent successfully.")
+            }, status=status.HTTP_200_OK)
 
-        return Response({
-            'success': True,
-            'message': _("Verification code resent successfully."),
-            # Include verification code in response for development purposes only
-            # 'verification_code': verification_code
-        }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(generics.GenericAPIView):
@@ -223,8 +264,22 @@ class LoginView(generics.GenericAPIView):
                     }
                 )
             ),
-            400: "Bad request",
-            401: "Unauthorized"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
@@ -305,17 +360,45 @@ class LogoutView(APIView):
                 )
             ),
             400: openapi.Response(
-                description="Bad request",
+                description="Bad Request",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
                     properties={
-                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                        'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        'error': openapi.Schema(type=openapi.TYPE_STRING),
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
                     }
                 )
             ),
-            401: "Unauthorized"
+            403: openapi.Response(
+                description="Forbidden - Invalid or Expired Token",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "detail": openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+                        "code": openapi.Schema(type=openapi.TYPE_STRING, description="Error code"),
+                        "messages": openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Schema(
+                                type=openapi.TYPE_OBJECT,
+                                properties={
+                                    "token_class": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                  description="Type of token"),
+                                    "token_type": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                 description="Token category"),
+                                    "message": openapi.Schema(type=openapi.TYPE_STRING,
+                                                              description="Detailed error message")
+                                }
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request):
@@ -324,8 +407,9 @@ class LogoutView(APIView):
         if not refresh_token:
             return Response({
                 'success': False,
-                'message': _("Refresh token is required"),
-                'error': 'missing_token'
+                'errors': {
+                    'refresh_token':_("Refresh token is required")
+                }
             }, status=status.HTTP_400_BAD_REQUEST)
 
         try:
@@ -343,15 +427,17 @@ class LogoutView(APIView):
             # Handle specific token errors
             return Response({
                 'success': False,
-                'message': _("Invalid or expired token"),
-                'error': str(e)
+                'errors': {
+                    'refresh_token': _("Invalid or expired token")
+                }
             }, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             # Handle other exceptions
             return Response({
                 'success': False,
-                'message': _("Logout failed"),
-                'error': str(e)
+                'errors': {
+                    'refresh_token': _("Logout failed")
+                }
             }, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -382,31 +468,69 @@ class PasswordChangeView(generics.GenericAPIView):
                     }
                 )
             ),
-            400: "Bad request",
-            401: "Unauthorized"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            ),
+            403: openapi.Response(
+                description="Forbidden - Invalid or Expired Token",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "detail": openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+                        "code": openapi.Schema(type=openapi.TYPE_STRING, description="Error code"),
+                        "messages": openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Schema(
+                                type=openapi.TYPE_OBJECT,
+                                properties={
+                                    "token_class": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                  description="Type of token"),
+                                    "token_type": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                 description="Token category"),
+                                    "message": openapi.Schema(type=openapi.TYPE_STRING,
+                                                              description="Detailed error message")
+                                }
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            user = request.user
 
-        user = request.user
+            # Check old password
+            if not user.check_password(serializer.validated_data['old_password']):
+                return Response({
+                    'success': False,
+                    'errors': {'old_password': [_("Old password is incorrect.")]}
+                }, status=status.HTTP_400_BAD_REQUEST)
 
-        # Check old password
-        if not user.check_password(serializer.validated_data['old_password']):
+            # Set new password
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+
             return Response({
-                'success': False,
-                'message': _("Old password is incorrect.")
-            }, status=status.HTTP_400_BAD_REQUEST)
-
-        # Set new password
-        user.set_password(serializer.validated_data['new_password'])
-        user.save()
-
-        return Response({
-            'success': True,
-            'message': _("Password changed successfully.")
-        }, status=status.HTTP_200_OK)
+                'success': True,
+                'message': _("Password changed successfully.")
+            }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PasswordResetRequestView(generics.GenericAPIView):
@@ -432,35 +556,46 @@ class PasswordResetRequestView(generics.GenericAPIView):
                     type=openapi.TYPE_OBJECT,
                     properties={
                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                        'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        # 'verification_code': openapi.Schema(type=openapi.TYPE_STRING,
-                        #                                     description="Only in development mode"),
+                        'message': openapi.Schema(type=openapi.TYPE_STRING)
                     }
                 )
             ),
-            400: "Bad request"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            email = serializer.validated_data['email']
+            user = User.objects.get(email=email)
 
-        email = serializer.validated_data['email']
-        user = User.objects.get(email=email)
+            # Generate verification code
+            verification_code = ''.join(random.choices(string.digits, k=6))
+            user.set_verification_code(verification_code)
 
-        # Generate verification code
-        verification_code = ''.join(random.choices(string.digits, k=6))
-        user.set_verification_code(verification_code)
+            # Send password reset email in background thread
+            send_password_reset_email(user.email, verification_code)
 
-        # Send password reset email in background thread
-        send_password_reset_email(user.email, verification_code)
-
-        return Response({
-            'success': True,
-            'message': _("Password reset code sent to your email."),
-            # Include verification code in response for development purposes only
-            # 'verification_code': verification_code
-        }, status=status.HTTP_200_OK)
+            return Response({
+                'success': True,
+                'message': _("Password reset code sent to your email."),
+            }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PasswordResetVerifyView(generics.GenericAPIView):
@@ -491,28 +626,43 @@ class PasswordResetVerifyView(generics.GenericAPIView):
                     }
                 )
             ),
-            400: "Bad request"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
 
-        user = serializer.validated_data['user']
+            # Generate a special reset token valid for 15 minutes
+            payload = {
+                'user_id': user.id,
+                'exp': datetime.utcnow() + timedelta(minutes=15),
+                'type': 'password_reset'
+            }
+            reset_token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
 
-        # Generate a special reset token valid for 15 minutes
-        payload = {
-            'user_id': user.id,
-            'exp': datetime.utcnow() + timedelta(minutes=15),
-            'type': 'password_reset'
-        }
-        reset_token = jwt.encode(payload, settings.SECRET_KEY, algorithm='HS256')
-
-        return Response({
-            'success': True,
-            'message': _("Verification code is valid."),
-            'reset_token': reset_token
-        }, status=status.HTTP_200_OK)
+            return Response({
+                'success': True,
+                'message': _("Verification code is valid."),
+                'reset_token': reset_token
+            }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PasswordResetResendVerificationCodeView(generics.GenericAPIView):
@@ -529,34 +679,46 @@ class PasswordResetResendVerificationCodeView(generics.GenericAPIView):
                     type=openapi.TYPE_OBJECT,
                     properties={
                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
-                        'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        # 'verification_code': openapi.Schema(type=openapi.TYPE_STRING,
-                        #                                     description="Only in development mode"),
+                        'message': openapi.Schema(type=openapi.TYPE_STRING)
                     }
                 )
             ),
-            400: "Bad request"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
 
-        user = serializer.validated_data['user']
+            # Generate new verification code
+            verification_code = ''.join(random.choices(string.digits, k=6))
+            user.set_verification_code(verification_code)
 
-        # Generate new verification code
-        verification_code = ''.join(random.choices(string.digits, k=6))
-        user.set_verification_code(verification_code)
+            # Send verification email in background thread
+            send_password_reset_email(user.email, verification_code)
 
-        # Send verification email in background thread
-        send_password_reset_email(user.email, verification_code)
+            return Response({
+                'success': True,
+                'message': _("Password reset verification code resent successfully")
+            }, status=status.HTTP_200_OK)
 
-        return Response({
-            'success': True,
-            'message': _("Password reset verification code resent successfully"),
-            # Include verification code in response for development purposes only
-            # 'verification_code': verification_code
-        }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PasswordResetConfirmView(generics.GenericAPIView):
@@ -586,24 +748,40 @@ class PasswordResetConfirmView(generics.GenericAPIView):
                     }
                 )
             ),
-            400: "Bad request"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        if serializer.is_valid():
+            user = serializer.validated_data['user']
 
-        user = serializer.validated_data['user']
+            # Set new password
+            user.set_password(serializer.validated_data['new_password'])
+            user.clear_verification_code()
+            user.save()
 
-        # Set new password
-        user.set_password(serializer.validated_data['new_password'])
-        user.clear_verification_code()
-        user.save()
+            return Response({
+                'success': True,
+                'message': _("Password reset successful.")
+            }, status=status.HTTP_200_OK)
 
-        return Response({
-            'success': True,
-            'message': _("Password reset successful.")
-        }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class PersonalInfoView(generics.GenericAPIView):
@@ -630,12 +808,84 @@ class PersonalInfoView(generics.GenericAPIView):
                     properties={
                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
                         'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        'user': openapi.Schema(type=openapi.TYPE_OBJECT),
+                        'user': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                'id': openapi.Schema(type=openapi.TYPE_INTEGER, format='id'),
+                                'email': openapi.Schema(type=openapi.TYPE_STRING, format='email'),
+                                'username': openapi.Schema(type=openapi.TYPE_STRING, format='username'),
+                                'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                                'profile_completion_step': openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    enum=["registration", "personal_info", "workplace_info", "contact_info", "academic_info",
+                                          "completed"]
+                                ),
+                                'role': openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    enum=["author", "editor", "reviewer", "secretary", "deputy_editor", "admin"]
+                                ),
+                                'profile': openapi.Schema(
+                                    type=openapi.TYPE_OBJECT,
+                                    properties={
+                                        'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'country': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'city': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'workplace': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'level': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'phone': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'telegram_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'whatsapp_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'academic_degree': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'academic_title': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'orcid': openapi.Schema(type=openapi.TYPE_STRING),
+                                    }
+                                )
+                            }
+                        )
                     }
                 )
             ),
-            400: "Bad request",
-            401: "Unauthorized"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            ),
+            403: openapi.Response(
+                description="Forbidden - Invalid or Expired Token",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "detail": openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+                        "code": openapi.Schema(type=openapi.TYPE_STRING, description="Error code"),
+                        "messages": openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Schema(
+                                type=openapi.TYPE_OBJECT,
+                                properties={
+                                    "token_class": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                  description="Type of token"),
+                                    "token_type": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                 description="Token category"),
+                                    "message": openapi.Schema(type=openapi.TYPE_STRING,
+                                                              description="Detailed error message")
+                                }
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def put(self, request, *args, **kwargs):
@@ -647,21 +897,22 @@ class PersonalInfoView(generics.GenericAPIView):
             author = Author.objects.create(user=user, email=user.email)
 
         serializer = self.get_serializer(author, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        if serializer.is_valid():
+            serializer.save()
 
-        # Update user profile completion step
-        user.profile_completion_step = User.Step.WORKPLACE_INFO
-        user.save()
+            # Update user profile completion step
+            user.profile_completion_step = User.Step.WORKPLACE_INFO
+            user.save()
 
-        # Return updated user profile
-        user_serializer = UserProfileSerializer(user)
+            # Return updated user profile
+            user_serializer = UserProfileSerializer(user)
 
-        return Response({
-            'success': True,
-            'message': _("Personal information updated successfully."),
-            'user': user_serializer.data
-        }, status=status.HTTP_200_OK)
+            return Response({
+                'success': True,
+                'message': _("Personal information updated successfully."),
+                'user': user_serializer.data
+            }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class WorkplaceInfoView(generics.GenericAPIView):
@@ -688,12 +939,84 @@ class WorkplaceInfoView(generics.GenericAPIView):
                     properties={
                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
                         'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        'user': openapi.Schema(type=openapi.TYPE_OBJECT),
+                        'user': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                'id': openapi.Schema(type=openapi.TYPE_INTEGER, format='id'),
+                                'email': openapi.Schema(type=openapi.TYPE_STRING, format='email'),
+                                'username': openapi.Schema(type=openapi.TYPE_STRING, format='username'),
+                                'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                                'profile_completion_step': openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    enum=["registration", "personal_info", "workplace_info", "contact_info", "academic_info",
+                                          "completed"]
+                                ),
+                                'role': openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    enum=["author", "editor", "reviewer", "secretary", "deputy_editor", "admin"]
+                                ),
+                                'profile': openapi.Schema(
+                                    type=openapi.TYPE_OBJECT,
+                                    properties={
+                                        'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'country': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'city': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'workplace': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'level': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'phone': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'telegram_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'whatsapp_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'academic_degree': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'academic_title': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'orcid': openapi.Schema(type=openapi.TYPE_STRING),
+                                    }
+                                )
+                            }
+                        )
                     }
                 )
             ),
-            400: "Bad request",
-            401: "Unauthorized"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            ),
+            403: openapi.Response(
+                description="Forbidden - Invalid or Expired Token",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "detail": openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+                        "code": openapi.Schema(type=openapi.TYPE_STRING, description="Error code"),
+                        "messages": openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Schema(
+                                type=openapi.TYPE_OBJECT,
+                                properties={
+                                    "token_class": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                  description="Type of token"),
+                                    "token_type": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                 description="Token category"),
+                                    "message": openapi.Schema(type=openapi.TYPE_STRING,
+                                                              description="Detailed error message")
+                                }
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def put(self, request, *args, **kwargs):
@@ -705,21 +1028,22 @@ class WorkplaceInfoView(generics.GenericAPIView):
             author = Author.objects.create(user=user, email=user.email)
 
         serializer = self.get_serializer(author, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        if serializer.is_valid():
+            serializer.save()
 
-        # Update user profile completion step
-        user.profile_completion_step = User.Step.CONTACT_INFO
-        user.save()
+            # Update user profile completion step
+            user.profile_completion_step = User.Step.CONTACT_INFO
+            user.save()
 
-        # Return updated user profile
-        user_serializer = UserProfileSerializer(user)
+            # Return updated user profile
+            user_serializer = UserProfileSerializer(user)
 
-        return Response({
-            'success': True,
-            'message': _("Workplace information updated successfully."),
-            'user': user_serializer.data
-        }, status=status.HTTP_200_OK)
+            return Response({
+                'success': True,
+                'message': _("Workplace information updated successfully."),
+                'user': user_serializer.data
+            }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ContactInfoView(generics.GenericAPIView):
@@ -746,12 +1070,84 @@ class ContactInfoView(generics.GenericAPIView):
                     properties={
                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
                         'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        'user': openapi.Schema(type=openapi.TYPE_OBJECT),
+                        'user': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                'id': openapi.Schema(type=openapi.TYPE_INTEGER, format='id'),
+                                'email': openapi.Schema(type=openapi.TYPE_STRING, format='email'),
+                                'username': openapi.Schema(type=openapi.TYPE_STRING, format='username'),
+                                'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                                'profile_completion_step': openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    enum=["registration", "personal_info", "workplace_info", "contact_info", "academic_info",
+                                          "completed"]
+                                ),
+                                'role': openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    enum=["author", "editor", "reviewer", "secretary", "deputy_editor", "admin"]
+                                ),
+                                'profile': openapi.Schema(
+                                    type=openapi.TYPE_OBJECT,
+                                    properties={
+                                        'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'country': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'city': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'workplace': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'level': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'phone': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'telegram_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'whatsapp_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'academic_degree': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'academic_title': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'orcid': openapi.Schema(type=openapi.TYPE_STRING),
+                                    }
+                                )
+                            }
+                        )
                     }
                 )
             ),
-            400: "Bad request",
-            401: "Unauthorized"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            ),
+            403: openapi.Response(
+                description="Forbidden - Invalid or Expired Token",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "detail": openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+                        "code": openapi.Schema(type=openapi.TYPE_STRING, description="Error code"),
+                        "messages": openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Schema(
+                                type=openapi.TYPE_OBJECT,
+                                properties={
+                                    "token_class": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                  description="Type of token"),
+                                    "token_type": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                 description="Token category"),
+                                    "message": openapi.Schema(type=openapi.TYPE_STRING,
+                                                              description="Detailed error message")
+                                }
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def put(self, request, *args, **kwargs):
@@ -763,21 +1159,22 @@ class ContactInfoView(generics.GenericAPIView):
             author = Author.objects.create(user=user, email=user.email)
 
         serializer = self.get_serializer(author, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        if serializer.is_valid():
+            serializer.save()
 
-        # Update user profile completion step
-        user.profile_completion_step = User.Step.ACADEMIC_INFO
-        user.save()
+            # Update user profile completion step
+            user.profile_completion_step = User.Step.ACADEMIC_INFO
+            user.save()
 
-        # Return updated user profile
-        user_serializer = UserProfileSerializer(user)
+            # Return updated user profile
+            user_serializer = UserProfileSerializer(user)
 
-        return Response({
-            'success': True,
-            'message': _("Contact information updated successfully."),
-            'user': user_serializer.data
-        }, status=status.HTTP_200_OK)
+            return Response({
+                'success': True,
+                'message': _("Contact information updated successfully."),
+                'user': user_serializer.data
+            }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class AcademicInfoView(generics.GenericAPIView):
@@ -804,12 +1201,84 @@ class AcademicInfoView(generics.GenericAPIView):
                     properties={
                         'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
                         'message': openapi.Schema(type=openapi.TYPE_STRING),
-                        'user': openapi.Schema(type=openapi.TYPE_OBJECT),
+                        'user': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                'id': openapi.Schema(type=openapi.TYPE_INTEGER, format='id'),
+                                'email': openapi.Schema(type=openapi.TYPE_STRING, format='email'),
+                                'username': openapi.Schema(type=openapi.TYPE_STRING, format='username'),
+                                'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                                'profile_completion_step': openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    enum=["registration", "personal_info", "workplace_info", "contact_info", "academic_info",
+                                          "completed"]
+                                ),
+                                'role': openapi.Schema(
+                                    type=openapi.TYPE_STRING,
+                                    enum=["author", "editor", "reviewer", "secretary", "deputy_editor", "admin"]
+                                ),
+                                'profile': openapi.Schema(
+                                    type=openapi.TYPE_OBJECT,
+                                    properties={
+                                        'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'country': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'city': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'workplace': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'level': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'phone': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'telegram_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'whatsapp_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'academic_degree': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'academic_title': openapi.Schema(type=openapi.TYPE_STRING),
+                                        'orcid': openapi.Schema(type=openapi.TYPE_STRING),
+                                    }
+                                )
+                            }
+                        )
                     }
                 )
             ),
-            400: "Bad request",
-            401: "Unauthorized"
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)  # ✅ FIXED HERE
+                            )
+                        )
+                    }
+                )
+            ),
+            403: openapi.Response(
+                description="Forbidden - Invalid or Expired Token",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "detail": openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+                        "code": openapi.Schema(type=openapi.TYPE_STRING, description="Error code"),
+                        "messages": openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Schema(
+                                type=openapi.TYPE_OBJECT,
+                                properties={
+                                    "token_class": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                  description="Type of token"),
+                                    "token_type": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                 description="Token category"),
+                                    "message": openapi.Schema(type=openapi.TYPE_STRING,
+                                                              description="Detailed error message")
+                                }
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
     def put(self, request, *args, **kwargs):
@@ -821,21 +1290,22 @@ class AcademicInfoView(generics.GenericAPIView):
             author = Author.objects.create(user=user, email=user.email)
 
         serializer = self.get_serializer(author, data=request.data, partial=True)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
+        if serializer.is_valid():
+            serializer.save()
 
-        # Update user profile completion step
-        user.profile_completion_step = User.Step.COMPLETED
-        user.save()
+            # Update user profile completion step
+            user.profile_completion_step = User.Step.COMPLETED
+            user.save()
 
-        # Return updated user profile
-        user_serializer = UserProfileSerializer(user)
+            # Return updated user profile
+            user_serializer = UserProfileSerializer(user)
 
-        return Response({
-            'success': True,
-            'message': _("Academic information updated successfully."),
-            'user': user_serializer.data
-        }, status=status.HTTP_200_OK)
+            return Response({
+                'success': True,
+                'message': _("Academic information updated successfully."),
+                'user': user_serializer.data
+            }, status=status.HTTP_200_OK)
+        return Response({'success': False, 'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserProfileView(generics.RetrieveAPIView):
@@ -855,9 +1325,138 @@ class UserProfileView(generics.RetrieveAPIView):
         ],
         operation_description="Get current user's profile information",
         responses={
-            200: UserProfileSerializer,
-            401: "Unauthorized"
+            200: openapi.Response(
+                description="User profile retrieved successfully",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'id': openapi.Schema(type=openapi.TYPE_INTEGER),
+                        'email': openapi.Schema(type=openapi.TYPE_STRING, format='email'),
+                        'username': openapi.Schema(type=openapi.TYPE_STRING),
+                        'is_email_verified': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                        'profile_completion_step': openapi.Schema(
+                            type=openapi.TYPE_STRING,
+                            enum=["registration", "personal_info", "workplace_info", "contact_info", "academic_info",
+                                  "completed"]
+                        ),
+                        'role': openapi.Schema(
+                            type=openapi.TYPE_STRING,
+                            enum=["author", "editor", "reviewer", "secretary", "deputy_editor", "admin"]
+                        ),
+                        'profile': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            properties={
+                                'first_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                'last_name': openapi.Schema(type=openapi.TYPE_STRING),
+                                'country': openapi.Schema(type=openapi.TYPE_STRING),
+                                'city': openapi.Schema(type=openapi.TYPE_STRING),
+                                'workplace': openapi.Schema(type=openapi.TYPE_STRING),
+                                'level': openapi.Schema(type=openapi.TYPE_STRING),
+                                'phone': openapi.Schema(type=openapi.TYPE_STRING),
+                                'telegram_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                'whatsapp_contact': openapi.Schema(type=openapi.TYPE_STRING),
+                                'academic_degree': openapi.Schema(type=openapi.TYPE_STRING),
+                                'academic_title': openapi.Schema(type=openapi.TYPE_STRING),
+                                'orcid': openapi.Schema(type=openapi.TYPE_STRING),
+                            }
+                        )
+                    }
+                )
+            ),
+            403: openapi.Response(
+                description="Forbidden - Invalid or Expired Token",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        "detail": openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+                        "code": openapi.Schema(type=openapi.TYPE_STRING, description="Error code"),
+                        "messages": openapi.Schema(
+                            type=openapi.TYPE_ARRAY,
+                            items=openapi.Schema(
+                                type=openapi.TYPE_OBJECT,
+                                properties={
+                                    "token_class": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                  description="Type of token"),
+                                    "token_type": openapi.Schema(type=openapi.TYPE_STRING,
+                                                                 description="Token category"),
+                                    "message": openapi.Schema(type=openapi.TYPE_STRING,
+                                                              description="Detailed error message")
+                                }
+                            )
+                        )
+                    }
+                )
+            )
         }
     )
+    def get(self, request, *args, **kwargs):
+        return super().get(request, *args, **kwargs)
+
     def get_object(self):
         return self.request.user
+
+
+class CustomTokenRefreshView(TokenRefreshView):
+    """
+    Custom Token Refresh View to properly format 400 Bad Request responses.
+    """
+    @swagger_auto_schema(
+        operation_summary="Refresh JWT access token",
+        operation_description="Send the refresh token to get a new access token.",
+        request_body=openapi.Schema(
+            type=openapi.TYPE_OBJECT,
+            properties={
+                'refresh': openapi.Schema(type=openapi.TYPE_STRING, description="Valid refresh token")
+            },
+            required=['refresh']
+        ),
+        responses={
+            200: openapi.Schema(
+                type=openapi.TYPE_OBJECT,
+                properties={
+                    'access': openapi.Schema(type=openapi.TYPE_STRING, description="New access token")
+                }
+            ),
+            400: openapi.Response(
+                description="Bad Request",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN, default=False),
+                        'errors': openapi.Schema(
+                            type=openapi.TYPE_OBJECT,
+                            additional_properties=openapi.Schema(
+                                type=openapi.TYPE_ARRAY,
+                                items=openapi.Schema(type=openapi.TYPE_STRING)
+                            )
+                        )
+                    }
+                )
+            ),
+            401: openapi.Response(
+                description="Invalid or expired refresh token",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'detail': openapi.Schema(type=openapi.TYPE_STRING, description="Error message"),
+                        'code': openapi.Schema(type=openapi.TYPE_STRING, description="Error code")
+                    }
+                )
+            )
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        """
+        Handle token refresh requests with a custom error response format.
+        """
+        response = super().post(request, *args, **kwargs)
+        if response.status_code == 400:
+            # Customizing the 400 Bad Request error format
+            return Response(
+                {
+                    "success": False,
+                    "errors": response.data  # This contains the error details
+                },
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        return response
