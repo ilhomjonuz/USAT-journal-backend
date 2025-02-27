@@ -22,5 +22,5 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 # Copy the project files into the container
 COPY . /app/
 
-# Run the application
+# Default command
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "core.wsgi:application"]
