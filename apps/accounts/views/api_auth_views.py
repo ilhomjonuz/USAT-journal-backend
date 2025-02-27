@@ -501,6 +501,50 @@ class PasswordResetVerifyView(generics.GenericAPIView):
         }, status=status.HTTP_200_OK)
 
 
+class PasswordResetResendVerificationCodeView(generics.GenericAPIView):
+    serializer_class = ResendVerificationCodeSerializer
+    permission_classes = [permissions.AllowAny]
+
+    @swagger_auto_schema(
+        operation_summary="Password reset resend verification code",
+        operation_description="Password reset resend verification code to user's email",
+        responses={
+            200: openapi.Response(
+                description="Password reset verification code resent successfully",
+                schema=openapi.Schema(
+                    type=openapi.TYPE_OBJECT,
+                    properties={
+                        'success': openapi.Schema(type=openapi.TYPE_BOOLEAN),
+                        'message': openapi.Schema(type=openapi.TYPE_STRING),
+                        # 'verification_code': openapi.Schema(type=openapi.TYPE_STRING,
+                        #                                     description="Only in development mode"),
+                    }
+                )
+            ),
+            400: "Bad request"
+        }
+    )
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+
+        user = serializer.validated_data['user']
+
+        # Generate new verification code
+        verification_code = ''.join(random.choices(string.digits, k=6))
+        user.set_verification_code(verification_code)
+
+        # Send verification email in background thread
+        send_password_reset_email(user.email, verification_code)
+
+        return Response({
+            'success': True,
+            'message': _("Password reset verification code resent successfully"),
+            # Include verification code in response for development purposes only
+            # 'verification_code': verification_code
+        }, status=status.HTTP_200_OK)
+
+
 class PasswordResetConfirmView(generics.GenericAPIView):
     serializer_class = PasswordResetConfirmSerializer
     permission_classes = [permissions.AllowAny]

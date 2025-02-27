@@ -4,8 +4,8 @@ from rest_framework_simplejwt.views import TokenRefreshView
 from apps.accounts.views.api_auth_views import (
     RegisterView, VerifyEmailView, ResendVerificationCodeView,
     LoginView, LogoutView, PasswordChangeView,
-    PasswordResetRequestView, PasswordResetVerifyView, PasswordResetConfirmView,
-    PersonalInfoView, WorkplaceInfoView, ContactInfoView, AcademicInfoView,
+    PasswordResetRequestView, PasswordResetVerifyView, PasswordResetResendVerificationCodeView,
+    PasswordResetConfirmView, PersonalInfoView, WorkplaceInfoView, ContactInfoView, AcademicInfoView,
     UserProfileView
 )
 
@@ -22,6 +22,7 @@ urlpatterns = [
     path('password/change/', PasswordChangeView.as_view(), name='password-change'),
     path('password/reset/request/', PasswordResetRequestView.as_view(), name='password-reset-request'),
     path('password/reset/verify/', PasswordResetVerifyView.as_view(), name='password-reset-verify'),
+    path('password/reset/resend-verification-code/', PasswordResetResendVerificationCodeView.as_view(), name='password-reset-resend-verification-code'),
     path('password/reset/confirm/', PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
 
     # Profile completion
