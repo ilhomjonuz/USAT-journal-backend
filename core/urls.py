@@ -31,11 +31,11 @@ urlpatterns = [
     path('api/docs/redoc/', login_required(schema_view.with_ui('redoc', cache_timeout=0)), name='schema-redoc'),
     path('api-auth/', include('rest_framework.urls')),
 
-    path('api/v2/auth/', include('apps.accounts.urls.api_auth_urls')),
-    path('api/v1/journals/', include('apps.journals.urls.api_urls')),
-    path('api/v1/articles/', include('apps.articles.urls.api_urls')),
-    path('api/v1/authors/', include('apps.authors.urls.api_urls')),
-    path('api/v1/directions/', include('apps.categories.urls.api_urls')),
+    path('api/auth/v2/', include('apps.accounts.urls.api_auth_urls')),
+    path('api/journals/v1/', include('apps.journals.urls.api_urls')),
+    path('api/articles/v1/', include('apps.articles.urls.api_urls')),
+    path('api/authors/v1/', include('apps.authors.urls.api_urls')),
+    path('api/directions/v1/', include('apps.categories.urls.api_urls')),
 ]
 
 urlpatterns += i18n_patterns(
