@@ -34,6 +34,7 @@ urlpatterns = [
     path('api/auth/v2/', include('apps.accounts.urls.api_auth_urls')),
     path('api/journals/v1/', include('apps.journals.urls.api_urls')),
     path('api/articles/v1/', include('apps.articles.urls.api_urls')),
+    path('api/articles/v2/', include('apps.articles.urls.api_urls2')),
     path('api/authors/v1/', include('apps.authors.urls.api_urls')),
     path('api/directions/v1/', include('apps.categories.urls.api_urls')),
 ]
