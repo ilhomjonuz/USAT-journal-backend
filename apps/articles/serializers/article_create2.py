@@ -67,7 +67,7 @@ class ArticleSubmission2Serializer(serializers.ModelSerializer):
                         article.authors.add(author)
                     except Author.DoesNotExist:
                         # Agar Author topilmasa, transaksiya bekor qilinadi
-                        raise NotFound({"detail": _(f"Author with id {author_id} not found.")})
+                        raise NotFound({"detail":  _("Author with id {} not found.").format(author_id)})
 
                 return article
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 17:29+0500\n"
+"POT-Creation-Date: 2025-02-28 17:44+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -223,7 +223,9 @@ msgstr "Iltimos, ushbu kodni hech kim bilan baham ko‘rmang!"
 
 #: .\apps\accounts\utils.py:53 .\apps\accounts\utils.py:74
 msgid "If you did not request this, you can ignore this email."
-msgstr "Agar siz buni soʻramagan boʻlsangiz, ushbu xatni eʼtiborsiz qoldirishingiz mumkin."
+msgstr ""
+"Agar siz buni so‘ramagan bo‘lsangiz, ushbu xatni e’tiborsiz qoldirishingiz "
+"mumkin."
 
 #: .\apps\accounts\utils.py:63
 msgid "Password Reset Code"
@@ -580,6 +582,10 @@ msgstr "Yo‘nalish id xato"
 #: .\apps\articles\serializers\article_create2.py:49
 msgid "User profile does not exist. Please create a profile first."
 msgstr "Foydalanuvchi profili mavjud emas. Iltimos, avval profil yarating."
+
+#: .\apps\articles\serializers\article_create2.py:70
+msgid "Author with id {} not found."
+msgstr "{} identifikatorli muallif topilmadi."
 
 #: .\apps\articles\views\admin_views.py:68
 msgid "Article was created successfully"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 17:29+0500\n"
+"POT-Creation-Date: 2025-02-28 17:44+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -577,6 +577,10 @@ msgstr "Invalid direction ID"
 #: .\apps\articles\serializers\article_create2.py:49
 msgid "User profile does not exist. Please create a profile first."
 msgstr ""
+
+#: .\apps\articles\serializers\article_create2.py:70
+msgid "Author with id {} not found."
+msgstr "Author with id {} not found."
 
 #: .\apps\articles\views\admin_views.py:68
 msgid "Article was created successfully"
