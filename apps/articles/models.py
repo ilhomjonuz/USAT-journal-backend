@@ -46,7 +46,8 @@ class Article(models.Model):
         upload_to='article_submissions/',
         validators=[FileExtensionValidator(allowed_extensions=['txt', 'doc', 'docx', 'odt'])],
         verbose_name=_("Original Article File"),
-        help_text=_("Accepted file types: .txt, .doc, .docx, .odt")
+        help_text=_("Accepted file types: .txt, .doc, .docx, .odt"),
+        blank=True
     )
     revised_file = models.FileField(
         upload_to='article_revisions/',
