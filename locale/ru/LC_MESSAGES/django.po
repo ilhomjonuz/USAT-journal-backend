@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-28 17:27+0500\n"
+"POT-Creation-Date: 2025-02-28 17:29+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -216,18 +216,16 @@ msgstr ""
 "Не сообщайте этот код никому по соображениям безопасности."
 
 #: .\apps\accounts\utils.py:50
-#, fuzzy
-#| msgid "Verification code is valid."
 msgid "Your verification code is:"
-msgstr "Код подтверждения действителен."
+msgstr "Ваш проверочный код:"
 
 #: .\apps\accounts\utils.py:52 .\apps\accounts\utils.py:73
 msgid "Please do not share this code with anyone!"
-msgstr ""
+msgstr "Пожалуйста, никому не передавайте этот код!"
 
 #: .\apps\accounts\utils.py:53 .\apps\accounts\utils.py:74
 msgid "If you did not request this, you can ignore this email."
-msgstr ""
+msgstr "Если вы этого не запрашивали, вы можете проигнорировать это письмо."
 
 #: .\apps\accounts\utils.py:63
 msgid "Password Reset Code"
@@ -245,80 +243,78 @@ msgstr ""
 "Не сообщайте этот код никому по соображениям безопасности."
 
 #: .\apps\accounts\utils.py:71
-#, fuzzy
-#| msgid "Password Reset Code"
 msgid "Your password reset code is:"
-msgstr "Код сброса пароля"
+msgstr "Ваш код сброса пароля:"
 
-#: .\apps\accounts\views\api_auth_views.py:78
+#: .\apps\accounts\views\api_auth_views.py:77
 msgid "Registration successful. Please verify your email."
 msgstr "Регистрация прошла успешно. Пожалуйста, подтвердите свой email."
 
-#: .\apps\accounts\views\api_auth_views.py:151
+#: .\apps\accounts\views\api_auth_views.py:150
 msgid "Email verified successfully."
 msgstr "Email успешно подтвержден."
 
-#: .\apps\accounts\views\api_auth_views.py:218
+#: .\apps\accounts\views\api_auth_views.py:217
 msgid "Verification code resent successfully."
 msgstr "Код подтверждения отправлен повторно."
 
-#: .\apps\accounts\views\api_auth_views.py:313
+#: .\apps\accounts\views\api_auth_views.py:312
 msgid "Email not verified. A new verification code has been sent."
 msgstr "Email не подтвержден. Новый код подтверждения был отправлен."
 
-#: .\apps\accounts\views\api_auth_views.py:422
+#: .\apps\accounts\views\api_auth_views.py:421
 msgid "Refresh token is required"
 msgstr "Необходим токен обновления."
 
-#: .\apps\accounts\views\api_auth_views.py:435
+#: .\apps\accounts\views\api_auth_views.py:434
 msgid "Logout successful"
 msgstr "Выход выполнен успешно."
 
-#: .\apps\accounts\views\api_auth_views.py:442
+#: .\apps\accounts\views\api_auth_views.py:441
 msgid "Invalid or expired token"
 msgstr "Недействительный или истекший токен."
 
-#: .\apps\accounts\views\api_auth_views.py:450
+#: .\apps\accounts\views\api_auth_views.py:449
 msgid "Logout failed"
 msgstr "Ошибка выхода."
 
-#: .\apps\accounts\views\api_auth_views.py:533
+#: .\apps\accounts\views\api_auth_views.py:532
 msgid "Old password is incorrect."
 msgstr "Старый пароль введен неверно."
 
-#: .\apps\accounts\views\api_auth_views.py:542
+#: .\apps\accounts\views\api_auth_views.py:541
 msgid "Password changed successfully."
 msgstr "Пароль успешно изменен."
 
-#: .\apps\accounts\views\api_auth_views.py:607
+#: .\apps\accounts\views\api_auth_views.py:606
 msgid "Password reset code sent to your email."
 msgstr "Код сброса пароля отправлен на вашу почту."
 
-#: .\apps\accounts\views\api_auth_views.py:673
+#: .\apps\accounts\views\api_auth_views.py:672
 msgid "Verification code is valid."
 msgstr "Код подтверждения действителен."
 
-#: .\apps\accounts\views\api_auth_views.py:729
+#: .\apps\accounts\views\api_auth_views.py:728
 msgid "Password reset verification code resent successfully"
 msgstr "Код подтверждения сброса пароля успешно отправлен повторно"
 
-#: .\apps\accounts\views\api_auth_views.py:792
+#: .\apps\accounts\views\api_auth_views.py:791
 msgid "Password reset successful."
 msgstr "Сброс пароля выполнен успешно."
 
-#: .\apps\accounts\views\api_auth_views.py:923
+#: .\apps\accounts\views\api_auth_views.py:922
 msgid "Personal information updated successfully."
 msgstr "Личная информация успешно обновлена."
 
-#: .\apps\accounts\views\api_auth_views.py:1054
+#: .\apps\accounts\views\api_auth_views.py:1053
 msgid "Workplace information updated successfully."
 msgstr "Информация о рабочем месте успешно обновлена."
 
-#: .\apps\accounts\views\api_auth_views.py:1185
+#: .\apps\accounts\views\api_auth_views.py:1184
 msgid "Contact information updated successfully."
 msgstr "Контактная информация успешно обновлена."
 
-#: .\apps\accounts\views\api_auth_views.py:1316
+#: .\apps\accounts\views\api_auth_views.py:1315
 msgid "Academic information updated successfully."
 msgstr "Академическая информация успешно обновлена."
 
@@ -582,7 +578,7 @@ msgstr "Неверный идентификатор направления"
 
 #: .\apps\articles\serializers\article_create2.py:49
 msgid "User profile does not exist. Please create a profile first."
-msgstr ""
+msgstr "Профиль пользователя не существует. Сначала создайте профиль."
 
 #: .\apps\articles\views\admin_views.py:68
 msgid "Article was created successfully"
