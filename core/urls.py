@@ -32,6 +32,7 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
 
     path('api/auth/v2/', include('apps.accounts.urls.api_auth_urls')),
+    path('api/profile/v2/', include('apps.accounts.urls.api_profile_urls')),
     path('api/journals/v1/', include('apps.journals.urls.api_urls')),
     path('api/articles/v1/', include('apps.articles.urls.api_urls')),
     path('api/articles/v2/', include('apps.articles.urls.api_urls2')),
