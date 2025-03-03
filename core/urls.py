@@ -36,6 +36,7 @@ urlpatterns = [
     path('api/articles/v1/', include('apps.articles.urls.api_urls')),
     path('api/articles/v2/', include('apps.articles.urls.api_urls2')),
     path('api/authors/v1/', include('apps.authors.urls.api_urls')),
+    path('api/authors/v2/', include('apps.authors.urls.api_urls_2')),
     path('api/directions/v1/', include('apps.categories.urls.api_urls')),
 ]
 
