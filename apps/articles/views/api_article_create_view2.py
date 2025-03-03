@@ -1,6 +1,7 @@
 import os
 
 from django.conf import settings
+from django.template.defaultfilters import title
 from django.utils.translation import gettext_lazy as _
 from rest_framework import status, permissions
 from rest_framework.exceptions import NotFound
@@ -21,6 +22,7 @@ class ArticleSubmission2View(APIView):
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     @swagger_auto_schema(
+        operation_summary="Article submission v2",
         operation_description="Submit a new article with authors v2",
         manual_parameters=[
             openapi.Parameter(
