@@ -3,6 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from rest_framework import status, generics, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
 from drf_yasg.utils import swagger_auto_schema
@@ -279,7 +280,7 @@ class LoginView(generics.GenericAPIView):
                     }
                 )
             ),
-            401: openapi.Response(
+            403: openapi.Response(
                 description="Email not verified",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
@@ -312,7 +313,7 @@ class LoginView(generics.GenericAPIView):
                     'message': _("Email not verified. A new verification code has been sent."),
                     'requires_verification': True,
                     'email': user.email
-                }, status=status.HTTP_401_UNAUTHORIZED)
+                }, status=status.HTTP_403_FORBIDDEN)
 
             # Generate tokens
             refresh = RefreshToken.for_user(user)
@@ -338,6 +339,7 @@ class LoginView(generics.GenericAPIView):
 
 class LogoutView(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     @swagger_auto_schema(
         operation_summary="Logout user",
@@ -385,7 +387,7 @@ class LogoutView(APIView):
                     }
                 )
             ),
-            403: openapi.Response(
+            401: openapi.Response(
                 description="Forbidden - Invalid or Expired Token",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
@@ -454,6 +456,7 @@ class LogoutView(APIView):
 class PasswordChangeView(generics.GenericAPIView):
     serializer_class = PasswordChangeSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     @swagger_auto_schema(
         operation_summary="Change password",
@@ -494,7 +497,7 @@ class PasswordChangeView(generics.GenericAPIView):
                     }
                 )
             ),
-            403: openapi.Response(
+            401: openapi.Response(
                 description="Forbidden - Invalid or Expired Token",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
@@ -797,6 +800,7 @@ class PasswordResetConfirmView(generics.GenericAPIView):
 class PersonalInfoView(generics.GenericAPIView):
     serializer_class = PersonalInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     @swagger_auto_schema(
         operation_summary="Update personal information",
@@ -872,7 +876,7 @@ class PersonalInfoView(generics.GenericAPIView):
                     }
                 )
             ),
-            403: openapi.Response(
+            401: openapi.Response(
                 description="Forbidden - Invalid or Expired Token",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
@@ -928,6 +932,7 @@ class PersonalInfoView(generics.GenericAPIView):
 class WorkplaceInfoView(generics.GenericAPIView):
     serializer_class = WorkplaceInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     @swagger_auto_schema(
         operation_summary="Update workplace information",
@@ -1003,7 +1008,7 @@ class WorkplaceInfoView(generics.GenericAPIView):
                     }
                 )
             ),
-            403: openapi.Response(
+            401: openapi.Response(
                 description="Forbidden - Invalid or Expired Token",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
@@ -1059,6 +1064,7 @@ class WorkplaceInfoView(generics.GenericAPIView):
 class ContactInfoView(generics.GenericAPIView):
     serializer_class = ContactInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     @swagger_auto_schema(
         operation_summary="Update contact information",
@@ -1134,7 +1140,7 @@ class ContactInfoView(generics.GenericAPIView):
                     }
                 )
             ),
-            403: openapi.Response(
+            401: openapi.Response(
                 description="Forbidden - Invalid or Expired Token",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
@@ -1190,6 +1196,7 @@ class ContactInfoView(generics.GenericAPIView):
 class AcademicInfoView(generics.GenericAPIView):
     serializer_class = AcademicInfoSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     @swagger_auto_schema(
         operation_summary="Update academic information",
@@ -1265,7 +1272,7 @@ class AcademicInfoView(generics.GenericAPIView):
                     }
                 )
             ),
-            403: openapi.Response(
+            401: openapi.Response(
                 description="Forbidden - Invalid or Expired Token",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
@@ -1321,6 +1328,7 @@ class AcademicInfoView(generics.GenericAPIView):
 class UserProfileView(generics.RetrieveAPIView):
     serializer_class = UserProfileSerializer
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
 
     @swagger_auto_schema(
         operation_summary="Get user profile",
@@ -1373,7 +1381,7 @@ class UserProfileView(generics.RetrieveAPIView):
                     }
                 )
             ),
-            403: openapi.Response(
+            401: openapi.Response(
                 description="Forbidden - Invalid or Expired Token",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,

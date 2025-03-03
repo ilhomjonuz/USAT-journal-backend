@@ -10,11 +10,14 @@ from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from django.db import transaction
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
+from rest_framework_simplejwt.authentication import JWTAuthentication
+
 from apps.articles.serializers.article_create2 import ArticleSubmission2Serializer
 
 
 class ArticleSubmission2View(APIView):
     permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     @swagger_auto_schema(
@@ -79,7 +82,7 @@ class ArticleSubmission2View(APIView):
                     }
                 )
             ),
-            403: openapi.Response(
+            401: openapi.Response(
                 description="Forbidden - Invalid or Expired Token",
                 schema=openapi.Schema(
                     type=openapi.TYPE_OBJECT,
