@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator
@@ -103,3 +104,30 @@ class JournalIssue(models.Model):
         """Increment the download count by 1"""
         self.downloads_count += 1
         self.save(update_fields=['downloads_count'])
+
+    def publish(self):
+        """Jurnal sonini chop etish"""
+        if not self.is_published:
+            self.is_published = True
+            self.published_at = timezone.now()
+            self.save()
+
+            # Jurnal sonidagi barcha maqolalarni chop etilgan deb belgilash
+            from apps.articles.models import Article, ArticleHistory
+            articles = Article.objects.filter(journal_issue=self, status='ACCEPTED')
+            for article in articles:
+                article.status = 'PUBLISHED'
+                article.publication_date = timezone.now()
+                article.save()
+
+                # Tarix yozuvini yaratish
+                ArticleHistory.objects.create(
+                    article=article,
+                    user=article.secretary or article.deputy_chief,
+                    old_status='ACCEPTED',
+                    new_status='PUBLISHED',
+                    comment=f'Maqola chop etildi. Jurnal: {self}'
+                )
+
+            return True
+        return False

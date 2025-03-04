@@ -54,7 +54,7 @@ INSTALLED_APPS = [
 
     # local apps
     'apps.AccountsConfig',
-    'apps.ArchiveConfig',
+    'apps.NotificationConfig',
     'apps.ArticlesConfig',
     'apps.AuthorsConfig',
     'apps.CategoriesConfig',
