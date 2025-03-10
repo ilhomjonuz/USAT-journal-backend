@@ -8,7 +8,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from apps.dashboard.views import redirect_dashboard
+from apps.dashboard.views import redirect_admin
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -24,8 +24,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('', redirect_dashboard, name='redirect-dashboard'),
-    path('accounts/', include('apps.accounts.urls.other_urls')),
+    path('', redirect_admin, name='redirect_admin'),
     path('api/docs/swagger<format>/', login_required(schema_view.without_ui(cache_timeout=0)), name='schema-json'),
     path('api/docs/swagger/', login_required(schema_view.with_ui('swagger', cache_timeout=0)), name='schema-swagger-ui'),
     path('api/docs/redoc/', login_required(schema_view.with_ui('redoc', cache_timeout=0)), name='schema-redoc'),
@@ -42,14 +41,7 @@ urlpatterns = [
 ]
 
 urlpatterns += i18n_patterns(
-    path('dashboard/', include('apps.dashboard.urls')),  # Dashboard uchun
-    path('accounts/', include('apps.accounts.urls.auth_urls')),
     path('admin/', admin.site.urls),  # Admin uchun
-    path('journal-admin/', include('apps.journals.urls.admin_urls')),
-    path('article-admin/', include('apps.articles.urls.admin_urls')),
-    path('category-admin/', include('apps.categories.urls.admin_urls')),
-    path('author-admin/', include('apps.authors.urls.admin_urls'))
-    # prefix_default_language=False
 )
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

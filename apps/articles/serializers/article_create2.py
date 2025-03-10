@@ -59,6 +59,7 @@ class ArticleSubmission2Serializer(serializers.ModelSerializer):
                 article = Article.objects.create(**validated_data)
 
                 article.authors.add(author)
+                article.author = author
 
                 for author_data in authors_data:
                     author_id = author_data.get('author_id')

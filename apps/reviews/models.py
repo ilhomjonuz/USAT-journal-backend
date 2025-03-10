@@ -29,8 +29,8 @@ class Review(models.Model):
 
     # Tavsiya va izohlar
     recommendation = models.CharField(_('Tavsiya'), max_length=20, choices=RECOMMENDATION_CHOICES)
-    comments_to_author = models.TextField(_('Muallif uchun izohlar'))
-    comments_to_editor = models.TextField(_('Muharrir uchun izohlar'), blank=True)
+    comments_to_author = models.TextField(_('Muallif uchun izohlar'), null=True, blank=True)
+    comments_to_editor = models.TextField(_('Muharrir uchun izohlar'), null=True, blank=True)
 
     # Qo'shimcha ma'lumotlar
     review_file = models.FileField(_('Taqriz fayli'), upload_to='reviews/', null=True, blank=True)
@@ -58,7 +58,16 @@ class Review(models.Model):
             self.practical_value,
             self.novelty
         ]
-        return sum(scores) / len(scores)
+
+        # `None` bo'lgan qiymatlarni filtrlaymiz
+        valid_scores = [score for score in scores if score is not None]
+
+        # Agar hammasi `None` bo'lsa, `None` qaytaradi
+        if not valid_scores:
+            return None
+
+        # O'rtacha ballni hisoblaymiz
+        return sum(valid_scores) / len(valid_scores)
 
     def save(self, *args, **kwargs):
         is_new = self.pk is None
@@ -72,5 +81,5 @@ class Review(models.Model):
                 reviewer=self.reviewer,
                 is_approved=is_approved,
                 comment=f'Taqrizchi xulosasi: {self.get_recommendation_display()}',
-                file=self.review_file
+                file=self.review_file if self.review_file else None  # Agar fayl mavjud bo'lsa
             )

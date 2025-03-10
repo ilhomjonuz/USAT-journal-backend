@@ -13,20 +13,16 @@ User = get_user_model()
 class Article(models.Model):
     """Maqola modeli"""
     STATUS_CHOICES = [
-        ('DRAFT', _('Qoralama')),  # Draft
-        ('SUBMITTED', _('Yuborilgan')),  # Submitted
-        ('SECRETARY_REVIEW', _('Mas\'ul kotib tekshiruvida')),  # Secretary review
-        ('REVIEWER_REVIEW', _('Taqrizchi tekshiruvida')),  # Reviewer review
-        ('EDITOR_REVIEW', _('Muharrir tekshiruvida')),  # Editor review
-        ('DEPUTY_REVIEW', _('Bosh muharrir o\'rinbosari tekshiruvida')),  # Deputy editor review
-        ('REVISION_REQUESTED', _('Tahrir uchun qaytarilgan')),  # Returned for revision
-        ('ACCEPTED', _('Qabul qilingan')),  # Accepted
-        ('REJECTED', _('Rad etilgan')),  # Rejected
-        ('PUBLISHED', _('Chop etilgan')),  # Published
+        ('SUBMITTED', _('Submitted')),  # Yuborilgan
+        ('SECRETARY_REVIEW', _('Secretary review')),  # Mas\'ul kotib tekshiruvida
+        ('REVIEWER_REVIEW', _('Reviewer review')),  # Taqrizchi tekshiruvida
+        ('EDITOR_REVIEW', _('Editor review')),  # Muharrir tekshiruvida
+        ('DEPUTY_REVIEW', _('Deputy editor review')),  # Bosh muharrir o\'rinbosari tekshiruvida
+        ('REVISION_REQUESTED', _('Returned for revision')),  # Tahrir uchun qaytarilgan
+        ('ACCEPTED', _('Accepted')),  # Qabul qilingan
+        ('REJECTED', _('Rejected')),  # Rad etilgan
+        ('PUBLISHED', _('Published')),  # Chop etilgan
     ]
-
-    # Asosiy ma'lumotlar
-    article_id = models.CharField(_('Maqola ID'), max_length=20, null=True, blank=True)
 
     # Existing fields from the provided model
     category = models.ForeignKey(
@@ -65,13 +61,11 @@ class Article(models.Model):
     )
     revised_file = models.FileField(
         upload_to='article_revisions/',
-        validators=[FileExtensionValidator(allowed_extensions=[
-            'doc', 'docx', 'odt', 'pdf', 'ppt', 'pptx', 'xls', 'xlsx', 'txt', 'rtf'
-        ])],
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
         null=True,
         blank=True,
-        verbose_name=_("Revised Article File"),
-        help_text=_("Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, .txt, .rtf")
+        verbose_name=_("Final Article File"),
+        help_text=_("Accepted file types: .pdf")
     )
 
     # Page information
@@ -106,7 +100,7 @@ class Article(models.Model):
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
-        default='DRAFT',
+        default='SUBMITTED',
         verbose_name=_("Status")
     )
     submission_date = models.DateTimeField(
@@ -136,13 +130,6 @@ class Article(models.Model):
         verbose_name=_("Last Updated")
     )
 
-    # Review deadline
-    review_deadline = models.DateTimeField(
-        null=True,
-        blank=True,
-        verbose_name=_("Ko'rib chiqish muddati")
-    )
-
     journal_issue = models.ForeignKey(
         'journals.JournalIssue',
         on_delete=models.SET_NULL,
@@ -158,7 +145,7 @@ class Article(models.Model):
         on_delete=models.SET_NULL,
         null=True, blank=True,
         related_name='authored_articles',
-        verbose_name=_('Muallif')
+        verbose_name=_('Author')
     )
     secretary = models.ForeignKey(
         User,
@@ -189,16 +176,6 @@ class Article(models.Model):
         verbose_name=_('Bosh muharrir o\'rinbosari')
     )
 
-    # Final file
-    final_file = models.FileField(
-        upload_to='final_articles/',
-        validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
-        null=True,
-        blank=True,
-        verbose_name=_("Final Article File"),
-        help_text=_("Accepted file types: .pdf")
-    )
-
     class Meta:
         verbose_name = _("Article")
         verbose_name_plural = _("Articles")
@@ -215,11 +192,6 @@ class Article(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = self.generate_unique_slug()
-
-        if not self.article_id:
-            year = timezone.now().year
-            count = Article.objects.filter(submission_date__year=year).count() + 1
-            self.article_id = f"{year}-{count:04d}"
 
         super().save(*args, **kwargs)
 
@@ -265,6 +237,27 @@ class Article(models.Model):
     def can_be_withdrawn(self):
         return self.status not in ['PUBLISHED', 'REJECTED']
 
+    @property
+    def current_reviewer(self):
+        """Return the current reviewer based on status"""
+        if self.status == 'REVIEWER_REVIEW':
+            return self.reviewer
+        return None
+
+    @property
+    def current_editor(self):
+        """Return the current editor based on status"""
+        if self.status == 'EDITOR_REVIEW':
+            return self.editor
+        return None
+
+    @property
+    def current_deputy(self):
+        """Return the current deputy chief based on status"""
+        if self.status == 'DEPUTY_REVIEW':
+            return self.deputy_chief
+        return None
+
     def increment_view_count(self):
         """Increment the view count by 1"""
         self.views_count += 1
@@ -277,20 +270,26 @@ class Article(models.Model):
 
     def submit(self, user):
         """Maqolani yuborish"""
-        if self.status == 'DRAFT':
-            self.status = 'SUBMITTED'
-            self.save()
+        self.status = 'SUBMITTED'
+        self.save()
 
-            # Tarix yozuvini yaratish
-            ArticleHistory.objects.create(
-                article=self,
-                user=user,
-                old_status='DRAFT',
-                new_status='SUBMITTED',
-                comment='Maqola yuborildi'
-            )
-            return True
-        return False
+        # Tarix yozuvini yaratish
+        ArticleHistory.objects.create(
+            article=self,
+            user=user,
+            new_status='SUBMITTED',
+            comment=_('Maqola yuborildi')
+        )
+
+        # Bildirishnoma yuborish
+        from apps.notifications.models import Notification
+        Notification.notify_secretary(
+            self,
+            _("Yangi maqola yuborildi"),
+            _(f"Yangi maqola yuborildi: {self.title}")
+        )
+
+        return True
 
     def assign_secretary(self, secretary):
         """Mas'ul kotibni tayinlash"""
@@ -307,6 +306,15 @@ class Article(models.Model):
                 new_status='SECRETARY_REVIEW',
                 comment='Mas\'ul kotib tayinlandi'
             )
+
+            # Bildirishnoma yuborish
+            from apps.notifications.models import Notification
+            Notification.notify_author(
+                self,
+                _("Maqolangiz ko'rib chiqilmoqda"),
+                _(f"Maqolangiz mas'ul kotib tomonidan ko'rib chiqilmoqda")
+            )
+
             return True
         return False
 
@@ -315,7 +323,6 @@ class Article(models.Model):
         if self.status == 'SECRETARY_REVIEW':
             self.reviewer = reviewer
             self.status = 'REVIEWER_REVIEW'
-            self.review_deadline = timezone.now() + timezone.timedelta(days=14)  # 14 kun muddat
             self.save()
 
             # Tarix yozuvini yaratish
@@ -326,6 +333,15 @@ class Article(models.Model):
                 new_status='REVIEWER_REVIEW',
                 comment=f'Taqrizchi ({reviewer.full_name}) tayinlandi'
             )
+
+            # Bildirishnoma yuborish
+            from apps.notifications.models import Notification
+            Notification.notify_reviewer(
+                self,
+                _("Sizga yangi maqola tayinlandi"),
+                _(f"Sizga yangi maqola tayinlandi: {self.title}")
+            )
+
             return True
         return False
 
@@ -356,6 +372,21 @@ class Article(models.Model):
             file=file
         )
 
+        # Bildirishnoma yuborish
+        from apps.notifications.models import Notification
+        if is_approved:
+            Notification.notify_secretary(
+                self,
+                _("Taqrizchi maqolani tasdiqladi"),
+                _(f"Taqrizchi maqolani tasdiqladi: {self.title}")
+            )
+        else:
+            Notification.notify_secretary(
+                self,
+                _("Taqrizchi tahrir talab qildi"),
+                _(f"Taqrizchi tahrir talab qildi: {self.title}")
+            )
+
         return True
 
     def assign_editor(self, secretary, editor):
@@ -373,6 +404,15 @@ class Article(models.Model):
                 new_status='EDITOR_REVIEW',
                 comment=f'Muharrir ({editor.full_name}) tayinlandi'
             )
+
+            # Bildirishnoma yuborish
+            from apps.notifications.models import Notification
+            Notification.notify_editor(
+                self,
+                _("Sizga yangi maqola tayinlandi"),
+                _(f"Sizga yangi maqola tayinlandi: {self.title}")
+            )
+
             return True
         return False
 
@@ -384,12 +424,12 @@ class Article(models.Model):
         if is_approved:
             self.status = 'DEPUTY_REVIEW'
             new_status = 'DEPUTY_REVIEW'
-            status_comment = 'Muharrir tasdiqladi, bosh muharrir o\'rinbosariga yuborildi'
+            status_comment = _('Muharrir tasdiqladi, bosh muharrir o\'rinbosariga yuborildi')
         else:
             self.status = 'REVISION_REQUESTED'
             self.revision_requested_date = timezone.now()
             new_status = 'REVISION_REQUESTED'
-            status_comment = 'Tahrir talab qilinadi'
+            status_comment = _('Tahrir talab qilinadi')
 
         self.save()
 
@@ -402,6 +442,26 @@ class Article(models.Model):
             comment=comment or status_comment,
             file=file
         )
+
+        # Bildirishnoma yuborish
+        from apps.notifications.models import Notification
+        if is_approved:
+            Notification.notify_secretary(
+                self,
+                _("Muharrir maqolani tasdiqladi"),
+                _(f"Muharrir maqolani tasdiqladi: {self.title}")
+            )
+            Notification.notify_deputy(
+                self,
+                _("Sizga yangi maqola tayinlandi"),
+                _(f"Sizga yangi maqola tayinlandi: {self.title}")
+            )
+        else:
+            Notification.notify_secretary(
+                self,
+                _("Muharrir tahrir talab qildi"),
+                _(f"Muharrir tahrir talab qildi: {self.title}")
+            )
 
         return True
 
@@ -430,9 +490,29 @@ class Article(models.Model):
             comment=comment or status_comment
         )
 
+        # Bildirishnoma yuborish
+        from apps.notifications.models import Notification
+        if is_approved:
+            Notification.notify_secretary(
+                self,
+                _("Bosh muharrir o'rinbosari maqolani tasdiqladi"),
+                _(f"Bosh muharrir o'rinbosari maqolani tasdiqladi: {self.title}")
+            )
+            Notification.notify_author(
+                self,
+                _("Maqolangiz qabul qilindi"),
+                _(f"Maqolangiz qabul qilindi va chop etishga tayyorlanmoqda")
+            )
+        else:
+            Notification.notify_secretary(
+                self,
+                _("Bosh muharrir o'rinbosari tahrir talab qildi"),
+                _(f"Bosh muharrir o'rinbosari tahrir talab qildi: {self.title}")
+            )
+
         return True
 
-    def publish(self, user, journal_issue, start_page, end_page, final_file=None):
+    def publish(self, user, journal_issue, start_page, end_page, revised_file=None):
         """Maqolani chop etish"""
         if self.status != 'ACCEPTED':
             return False
@@ -443,8 +523,8 @@ class Article(models.Model):
         self.end_page = end_page
         self.publication_date = timezone.now()
 
-        if final_file:
-            self.final_file = final_file
+        if revised_file:
+            self.revised_file = revised_file
 
         self.save()
 
@@ -457,6 +537,14 @@ class Article(models.Model):
             comment=f'Maqola chop etildi. Jurnal: {journal_issue}, Sahifalar: {start_page}-{end_page}'
         )
 
+        # Bildirishnoma yuborish
+        from apps.notifications.models import Notification
+        Notification.notify_author(
+            self,
+            _("Maqolangiz chop etildi"),
+            _(f"Maqolangiz chop etildi. Jurnal: {journal_issue}, Sahifalar: {start_page}-{end_page}")
+        )
+
         return True
 
     def submit_revision(self, author, revised_file, comment=''):
@@ -464,6 +552,7 @@ class Article(models.Model):
         if self.status != 'REVISION_REQUESTED':
             return False
 
+        old_status = self.status
         self.revised_file = revised_file
         self.status = 'SUBMITTED'
         self.save()
@@ -472,10 +561,18 @@ class Article(models.Model):
         ArticleHistory.objects.create(
             article=self,
             user=author,
-            old_status='REVISION_REQUESTED',
+            old_status=old_status,
             new_status='SUBMITTED',
             comment=comment or 'Tahrirlangan maqola yuborildi',
             file=revised_file
+        )
+
+        # Bildirishnoma yuborish
+        from apps.notifications.models import Notification
+        Notification.notify_secretary(
+            self,
+            _("Tahrirlangan maqola yuborildi"),
+            _(f"Tahrirlangan maqola yuborildi: {self.title}")
         )
 
         return True
@@ -495,7 +592,52 @@ class Article(models.Model):
             comment=comment or 'Maqola rad etildi'
         )
 
+        # Bildirishnoma yuborish
+        from apps.notifications.models import Notification
+        Notification.notify_author(
+            self,
+            _("Maqolangiz rad etildi"),
+            _(f"Maqolangiz rad etildi: {comment or 'Maqola rad etildi'}")
+        )
+
         return True
+
+    def secretary_request_revision(self, secretary, comment='', file=None):
+        """Mas'ul kotib tahrir talab qilishi"""
+        if self.status != 'SECRETARY_REVIEW':
+            return False
+
+        old_status = self.status
+        self.status = 'REVISION_REQUESTED'
+        self.revision_requested_date = timezone.now()
+        self.save()
+
+        # Tarix yozuvini yaratish
+        ArticleHistory.objects.create(
+            article=self,
+            user=secretary,
+            old_status=old_status,
+            new_status='REVISION_REQUESTED',
+            comment=comment or 'Mas\'ul kotib tahrir talab qildi',
+            file=file
+        )
+
+        # Bildirishnoma yuborish
+        from apps.notifications.models import Notification
+        Notification.notify_author(
+            self,
+            _("Maqolangiz tahrir uchun qaytarildi"),
+            _(f"Maqolangiz tahrir uchun qaytarildi: {comment or 'Tahrir talab qilinadi'}")
+        )
+
+        return True
+
+    def secretary_reject(self, secretary, comment=''):
+        """Mas'ul kotib rad etishi"""
+        if self.status != 'SECRETARY_REVIEW':
+            return False
+
+        return self.reject(secretary, comment)
 
 
 class ArticleHistory(models.Model):
@@ -504,7 +646,7 @@ class ArticleHistory(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='article_actions',
                              verbose_name=_('Foydalanuvchi'))
 
-    old_status = models.CharField(_('Oldingi holat'), max_length=30, blank=True)
+    old_status = models.CharField(_('Oldingi holat'), max_length=30, null=True, blank=True)
     new_status = models.CharField(_('Yangi holat'), max_length=30)
 
     comment = models.TextField(_('Izoh'), blank=True)

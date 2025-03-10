@@ -1,7 +1,6 @@
 import os
 
 from django.conf import settings
-from django.template.defaultfilters import title
 from django.utils.translation import gettext_lazy as _
 from rest_framework import status, permissions
 from rest_framework.exceptions import NotFound
