@@ -58,11 +58,20 @@ class JournalRetrieveSerializer(serializers.ModelSerializer):
 
     def get_directions(self, obj):
         request = self.context.get('request')
+
+        # Maqolalar borligini tekshirish
+        if not obj.articles.exists():
+            return []
+
         categories = Category.objects.filter(
             article__journal_issue=obj,
             article__status='PUBLISHED'
         ).distinct()
-        serializer = JournalIssueRetrieveCategorySerializer(categories, many=True, context={'journal_issue': obj, 'request': request})
+
+        serializer = JournalIssueRetrieveCategorySerializer(
+            categories, many=True, context={'journal_issue': obj, 'request': request}
+        )
+
         return serializer.data
 
     def get_download_url(self, obj):
