@@ -17,10 +17,11 @@ class LatestArticleListSerializer(serializers.ModelSerializer):
 class AllArticleListSerializer(serializers.ModelSerializer):
     authors = ArticleAuthorSerializer(many=True)
     download_url = serializers.SerializerMethodField('get_download_url')
+    certificate_download_url = serializers.SerializerMethodField('get_certificate_download_url')
 
     class Meta:
         model = Article
-        fields = ['title', 'slug', 'authors', 'publication_date', 'views_count', 'downloads_count', 'start_page', 'end_page', 'download_url']
+        fields = ['title', 'slug', 'authors', 'publication_date', 'views_count', 'downloads_count', 'start_page', 'end_page', 'download_url', 'certificate_download_url']
 
     def get_download_url(self, obj):
         request = self.context.get('request')
@@ -29,18 +30,26 @@ class AllArticleListSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(url)
         return None
 
+    def get_certificate_download_url(self, obj):
+        request = self.context.get('request')
+        if request is not None and isinstance(request, Request):
+            url = reverse('article-certificate-download', kwargs={'id': obj.id})
+            return request.build_absolute_uri(url)
+        return None
+
 
 class ArticleRetrieveSerializer(serializers.ModelSerializer):
     authors = ArticleRetrieveAuthorSerializer(many=True)
     journal_issue = serializers.SerializerMethodField()
     download_url = serializers.SerializerMethodField('get_download_url')
+    certificate_download_url = serializers.SerializerMethodField('get_certificate_download_url')
 
     class Meta:
         model = Article
         fields = [
             'title', 'slug', 'journal_issue', 'authors', 'keywords',
             'annotation', 'start_page', 'end_page',
-            'views_count', 'downloads_count', 'download_url', 'publication_date'
+            'views_count', 'downloads_count', 'download_url', 'certificate_download_url', 'publication_date'
         ]
 
     def get_journal_issue(self, obj) -> dict:
@@ -55,18 +64,33 @@ class ArticleRetrieveSerializer(serializers.ModelSerializer):
             return request.build_absolute_uri(url)
         return None
 
+    def get_certificate_download_url(self, obj):
+        request = self.context.get('request')
+        if request is not None and isinstance(request, Request):
+            url = reverse('article-certificate-download', kwargs={'id': obj.id})
+            return request.build_absolute_uri(url)
+        return None
+
 
 class JournalIssueRetrieveArticleSerializer(serializers.ModelSerializer):
     authors = ArticleAuthorSerializer(many=True)
     download_url = serializers.SerializerMethodField('get_download_url')
+    certificate_download_url = serializers.SerializerMethodField('get_certificate_download_url')
 
     class Meta:
         model = Article
-        fields = ['title', 'slug', 'authors', 'start_page', 'end_page', 'views_count', 'downloads_count', 'download_url', 'publication_date']
+        fields = ['title', 'slug', 'authors', 'start_page', 'end_page', 'views_count', 'downloads_count', 'download_url', 'certificate_download_url', 'publication_date']
 
     def get_download_url(self, obj):
         request = self.context.get('request')
         if request is not None and isinstance(request, Request):
             url = reverse('article-download', kwargs={'id': obj.id})
+            return request.build_absolute_uri(url)
+        return None
+
+    def get_certificate_download_url(self, obj):
+        request = self.context.get('request')
+        if request is not None and isinstance(request, Request):
+            url = reverse('article-certificate-download', kwargs={'id': obj.id})
             return request.build_absolute_uri(url)
         return None

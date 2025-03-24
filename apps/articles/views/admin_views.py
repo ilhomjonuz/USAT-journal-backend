@@ -113,6 +113,8 @@ def download_file(request, pk, file_type):
         file = article.revised_file
     elif file_type == 'anti_plagiarism':
         file = article.anti_plagiarism_certificate
+    elif file_type == 'publication_certificate':
+        file = article.publication_certificate
     else:
         messages.error(request, _("Invalid file type"), extra_tags='danger')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

@@ -6,7 +6,7 @@ from ..categories.models import Category
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['category', 'title', 'annotation', 'keywords', 'references', 'authors', 'anti_plagiarism_certificate', 'original_file', 'revised_file', 'start_page', 'end_page', 'journal_issue', 'status']
+        fields = ['category', 'title', 'annotation', 'keywords', 'references', 'authors', 'anti_plagiarism_certificate', 'original_file', 'revised_file', 'publication_certificate', 'start_page', 'end_page', 'journal_issue', 'status']
         widgets = {
             'annotation': forms.Textarea(attrs={'rows': 4}),
             'keywords': forms.TextInput(attrs={'placeholder': 'Enter keywords separated by commas'}),

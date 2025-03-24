@@ -25,9 +25,10 @@ class Article(models.Model):
     slug = models.SlugField(verbose_name=_("Slug"), unique=True)
     keywords = models.TextField(
         verbose_name=_("Keywords"),
+        null=True, blank=True,
         help_text=_("Enter keywords separated by commas")
     )
-    annotation = models.TextField(verbose_name=_("Annotation"))
+    annotation = models.TextField(verbose_name=_("Annotation"), null=True, blank=True)
     references = models.TextField(verbose_name=_("List of references"), null=True, blank=True)
     authors = models.ManyToManyField(
         'authors.Author',
@@ -52,12 +53,22 @@ class Article(models.Model):
     revised_file = models.FileField(
         upload_to='article_revisions/',
         validators=[FileExtensionValidator(allowed_extensions=[
-            'doc', 'docx', 'odt', 'pdf', 'ppt', 'pptx', 'xls', 'xlsx', 'txt', 'rtf'
+            'pdf'
         ])],
         null=True,
         blank=True,
         verbose_name=_("Revised Article File"),
-        help_text=_("Accepted file types: .doc, .docx, .odt, .pdf, .ppt, .pptx, .xls, .xlsx, .txt, .rtf")
+        help_text=_("Accepted file types: .pdf")
+    )
+    publication_certificate = models.FileField(
+        upload_to='article_publication_certs/',
+        validators=[FileExtensionValidator(allowed_extensions=[
+            'pdf'
+        ])],
+        null=True,
+        blank=True,
+        verbose_name=_("Certificate of Article Publication"),
+        help_text=_("Accepted file types: .pdf")
     )
 
     # Page information

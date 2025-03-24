@@ -64,8 +64,8 @@ class JournalRetrieveSerializer(serializers.ModelSerializer):
             return []
 
         categories = Category.objects.filter(
-            article__journal_issue=obj,
-            article__status='PUBLISHED'
+            articles__journal_issue=obj,  # ✅ To‘g‘ri: "articles" ishlatildi
+            articles__status='PUBLISHED'  # ✅ To‘g‘ri: "articles" ishlatildi
         ).distinct()
 
         serializer = JournalIssueRetrieveCategorySerializer(

@@ -32,3 +32,24 @@ class ArticleFileDownloadView(APIView):
                 return Response({"error": _("File not found on server")}, status=status.HTTP_404_NOT_FOUND)
         else:
             return Response({"error": _("No revised file available for this article")}, status=status.HTTP_404_NOT_FOUND)
+
+
+class ArticleCertificateDownloadView(APIView):
+    def get(self, request, id):
+        article = get_object_or_404(Article, id=id)
+
+        if article.publication_certificate:
+            file_path = os.path.join(settings.MEDIA_ROOT, article.publication_certificate.name)
+
+            if os.path.exists(file_path):
+                try:
+                    # Serve the file
+                    response = FileResponse(open(file_path, 'rb'))
+                    response['Content-Disposition'] = f'attachment; filename="{os.path.basename(file_path)}"'
+                    return response
+                except IOError:
+                    return Response({"error": _("Error reading file")}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            else:
+                return Response({"error": _("File not found on server")}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({"error": _("No revised file available for this article")}, status=status.HTTP_404_NOT_FOUND)

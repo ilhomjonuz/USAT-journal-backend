@@ -216,6 +216,32 @@
                                             </div>
                                         </div>
                                         {% endif %}
+
+                                        {% if object.publication_certificate %}
+                                        <div class="nk-file-item">
+                                            <div class="nk-file-info">
+                                                <div class="nk-file-title">
+                                                    <div class="nk-file-icon">
+                                                        <span class="nk-file-icon-type">
+                                                            <em class="icon ni ni-file-doc"></em>
+                                                        </span>
+                                                    </div>
+                                                    <div class="nk-file-name">
+                                                        <div class="nk-file-name-text">
+                                                            <span class="title">{% trans 'Certificate of Article Publication' %}</span>
+                                                            <span class="sub-text">{{ object.publication_certificate.name|cut:"article_publication_certs/" }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="nk-file-actions">
+                                                <a href="{% url 'article_download_file' object.id 'publication_certificate' %}" class="btn btn-sm btn-icon btn-trigger">
+                                                    <em class="icon ni ni-download"></em>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+
                                     </div>
                                 </div>
                             </div>
