@@ -164,11 +164,11 @@ class Article(models.Model):
         return redirect('article_detail', kwargs={'pk': self.pk})
 
     def generate_unique_slug(self):
-        slug = slugify(self.title)
-        unique_slug = slug
+        base_slug = slugify(self.title)[:45]  # Asosiy slugni 45 ta belgiga cheklaymiz
+        unique_slug = base_slug
         num = 1
         while Article.objects.filter(slug=unique_slug).exists():
-            unique_slug = '{}-{}'.format(slug, num)
+            unique_slug = f"{base_slug}-{num}"[:50]  # Raqam qo‘shilganda ham 50 dan oshmasin
             num += 1
         return unique_slug
 
